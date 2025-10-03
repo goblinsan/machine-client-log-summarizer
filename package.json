@@ -6,7 +6,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "add-plan": "node scripts/add_project_plan.js",
+    "add-remaining": "node scripts/add_remaining_milestones.js"
   },
   "dependencies": {
     "react": "^18.2.0",
