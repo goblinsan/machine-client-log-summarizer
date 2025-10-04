@@ -1,6 +1,206 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
+interface LogEntry {
+  timestamp: string;
+  level: string;
+  message: string;
+}
+
+const App: React.FC = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [logData, setLogData] = useState<LogEntry[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setSelectedFile(file);
+  };
+
+  const handleIngest = () => {
+    if (!selectedFile) return;
+
+    setIsProcessing(true);
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      try {
+        const content = event.target?.result as string;
+        const parsedData: LogEntry[] = JSON.parse(content);
+        setLogData(parsedData);
+      } catch (error) {
+        console.error('Failed to parse log file:', error);
+        setLogData([]);
+      } finally {
+        setIsProcessing(false);
+      }
+    };
+
+    reader.onerror = () => {
+      console.error('Failed to read file');
+      setIsProcessing(false);
+    };
+
+    reader.readAsText(selectedFile);
+  };
+
+  const triggerFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".json"
+          style={{ display: 'none' }}
+        />
+        <button onClick={triggerFileInput} className="file-button">
+          Choose Log File
+        </button>
+
+        {selectedFile && (
+          <p className="file-info">
+            Selected file: {selectedFile.name}
+          </p>
+        )}
+
+        <button
+          onClick={handleIngest}
+          disabled={!selectedFile || isProcessing}
+          className="ingest-button"
+        >
+          {isProcessing ? 'Processing...' : 'Ingest Log'}
+        </button>
+      </div>
+
+      {logData.length > 0 && (
+        <div className="log-preview">
+          <h2>Log Preview</h2>
+          <ul className="log-list">
+            {logData.slice(0, 5).map((entry, index) => (
+              <li key={index} className="log-item">
+                <span className="timestamp">{entry.timestamp}</span>
+                <span className="level">{entry.level}</span>
+                <span className="message">{entry.message}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+/* Add new styles for file picker and log preview */
+
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-picker {
+  margin-bottom: 20px;
+}
+
+.file-button,
+.ingest-button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+}
+
+.file-button:hover,
+.ingest-button:hover {
+  background-color: #0056b3;
+}
+
+.file-button:disabled,
+.ingest-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.file-info {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.log-preview {
+  margin-top: 20px;
+}
+
+.log-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.log-item {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.timestamp {
+  font-weight: bold;
+  color: #333;
+}
+
+.level {
+  margin-left: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.message {
+  margin-left: 10px;
+  color: #666;
+}
+
+.level.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.level.warn {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.level.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.level.debug {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.level.trace {
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+.ingest-button {
+  margin-top: 10px;
+}
+
+.ingest-button:disabled {
+  opacity: 0.6;
+}
+
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isIngesting, setIsIngesting] = useState(false);
