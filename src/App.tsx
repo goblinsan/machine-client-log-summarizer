@@ -1,70 +1,58 @@
-import React, { useState, useRef } from 'react';
-import './styles.css';
-const App = () => {
-  const [file, setFile] = useState<File | null>(null);
+import { processLogFile } from './ingestion';
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [status, setStatus] = useState<string>('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [summary, setSummary] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0] || null;
-    setFile(selectedFile);
-    setStatus('');
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0]);
+    }
   };
 
-  const handleIngestion = () => {
-    if (!file) {
-      setStatus('Please select a file first.');
-      return;
-    }
+  const handleProcess = async () => {
+    if (!selectedFile) return;
 
     setIsProcessing(true);
-    setStatus('Processing file...');
-
-    // Simulate ingestion logic
-    setTimeout(() => {
+    try {
+      const result = await processLogFile(selectedFile);
+      setSummary(result);
+    } catch (error) {
+      console.error('Error processing file:', error);
+      setSummary('Error processing file');
+    } finally {
       setIsProcessing(false);
-      setStatus(`Processed ${file.name}`);
-    }, 2000);
-  };
-
-  const triggerFileInput = () => {
-    fileInputRef.current?.click();
+    }
   };
 
   return (
     <div className="app">
       <h1>Log Summarizer</h1>
 
-      <div className="file-picker-container">
+      <div className="file-picker">
+        <label htmlFor="fileInput">Choose a log file:</label>
         <input
           type="file"
-          ref={fileInputRef}
+          id="fileInput"
           onChange={handleFileChange}
-          className="file-input"
-          accept=".log,.txt"
         />
-        <button onClick={triggerFileInput} className="file-picker-button">
-          Choose File
+
+        {selectedFile && (
+          <p>Selected file: {selectedFile.name}</p>
+        )}
+
+        <button
+          onClick={handleProcess}
+          disabled={!selectedFile || isProcessing}
+        >
+          {isProcessing ? 'Processing...' : 'Process Log'}
         </button>
       </div>
 
-      {file && (
-        <div className="file-info">
-          <p>Selected file: {file.name}</p>
+      {summary && (
+        <div className="summary">
+          <h2>Summary:</h2>
+          <pre>{summary}</pre>
         </div>
       )}
-
-      <button
-        onClick={handleIngestion}
-        disabled={isProcessing}
-        className="ingestion-button"
-      >
-        {isProcessing ? 'Processing...' : 'Ingest File'}
-      </button>
-
-      {status && <p className="status">{status}</p>}
     </div>
   );
-};
-export default App;
