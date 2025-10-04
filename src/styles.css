@@ -1,27 +1,165 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-interface LogFile {
-  name: string;
-  content: string;
-}
+// Define a type for the file content
+type FileContent = string | null;
+
+// Define a type for the ingestion status
+type IngestionStatus = 'idle' | 'processing' | 'success' | 'error';
+
+// Mock ingestion function (simulates file processing)
+const mockIngestFile = async (file: File): Promise<FileContent> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(`Processed content from ${file.name}`);
+    }, 1000);
+  });
+};
+
+// Mock ingestion status update function
+const mockUpdateStatus = (status: IngestionStatus): void => {
+  console.log(`Ingestion status updated to: ${status}`);
+};
+
+// Mock file content handler
+const handleFileContent = (content: FileContent): void => {
+  console.log('File content received:', content);
+};
 
 const App = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [logContent, setLogContent] = useState<string>('');
-  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [status, setStatus] = useState<IngestionStatus>('idle');
+  const [content, setContent] = useState<FileContent>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setSelectedFile(file);
+    const selectedFile = e.target.files?.[0] || null;
+    setFile(selectedFile);
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const content = event.target?.result as string;
-        setLogContent(content);
-      };
+    if (selectedFile) {
+      setStatus('processing');
+      mockUpdateStatus('processing');
+
+      mockIngestFile(selectedFile).then((result) => {
+        setContent(result);
+        setStatus('success');
+        mockUpdateStatus('success');
+        handleFileContent(result);
+      }).catch((error) => {
+        console.error('Ingestion error:', error);
+        setStatus('error');
+        mockUpdateStatus('error');
+      });
+    }
+  };
+
+  const handleFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Log Summarizer</h1>
+
+        <div className="file-picker-container">
+          <button className="file-picker-button" onClick={handleFileSelect}>
+            Select Log File
+          </button>
+
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="file-input"
+            style={{ display: 'none' }}
+          />
+
+          {file && (
+            <p className="selected-file">
+              Selected file: {file.name}
+/* Add your styles here */
+
+.file-picker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 15px;
+}
+
+.file-picker-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-picker-button:hover {
+  background-color: #0056b3;
+}
+
+.selected-file {
+  font-size: 14px;
+  color: #333;
+}
+
+.ingestion-status {
+  font-size: 14px;
+  color: #007bff;
+}
+
+.ingestion-error {
+  font-size: 14px;
+  color: #dc3545;
+}
+
+.ingestion-result {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.file-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: monospace;
+  background-color: #e9ecef;
+  padding: 10px;
+  border-radius: 4px;
+}
+          )}
+
+          {status === 'processing' && (
+            <p className="ingestion-status">Processing file...</p>
+          )}
+
+          {status === 'success' && content && (
+            <div className="ingestion-result">
+              <h2>File Processed Successfully</h2>
+              <pre className="file-content">{content}</pre>
+            </div>
+          )}
+
+          {status === 'error' && (
+            <p className="ingestion-error">Error processing file</p>
+          )}
+        </div>
+      </header>
+    </div>
+  );
+};
+
+export default App;
       reader.readAsText(file);
     }
   };
