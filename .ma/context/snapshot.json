@@ -1,26 +1,26 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-04T05:23:44.320Z",
+  "generated_at": "2025-10-04T05:39:55.228Z",
   "totals": {
     "files": 3,
-    "bytes": 8521,
-    "lines": 330
+    "bytes": 9187,
+    "lines": 398
   },
   "components": [
     {
       "component": ".",
       "totals": {
         "files": 3,
-        "bytes": 8521,
-        "lines": 330
+        "bytes": 9187,
+        "lines": 398
       },
       "largest": [
         {
           "path": "src/App.tsx",
-          "bytes": 6642,
-          "mtime": 1759551947142.3823,
-          "lines": 211,
-          "sha1": "b1ae8285a15fb534c6dd8a9e6e44382d4f091b98"
+          "bytes": 7308,
+          "mtime": 1759556395134.3435,
+          "lines": 279,
+          "sha1": "3ee30e60563eba07380c76d5164985e06c06cf0c"
         },
         {
           "path": "src/styles.css",
@@ -40,10 +40,10 @@
       "longest": [
         {
           "path": "src/App.tsx",
-          "bytes": 6642,
-          "mtime": 1759551947142.3823,
-          "lines": 211,
-          "sha1": "b1ae8285a15fb534c6dd8a9e6e44382d4f091b98"
+          "bytes": 7308,
+          "mtime": 1759556395134.3435,
+          "lines": 279,
+          "sha1": "3ee30e60563eba07380c76d5164985e06c06cf0c"
         },
         {
           "path": "src/styles.css",
@@ -66,10 +66,10 @@
     "largest_files": [
       {
         "path": "src/App.tsx",
-        "bytes": 6642,
-        "mtime": 1759551947142.3823,
-        "lines": 211,
-        "sha1": "b1ae8285a15fb534c6dd8a9e6e44382d4f091b98"
+        "bytes": 7308,
+        "mtime": 1759556395134.3435,
+        "lines": 279,
+        "sha1": "3ee30e60563eba07380c76d5164985e06c06cf0c"
       },
       {
         "path": "src/styles.css",
@@ -89,10 +89,10 @@
     "longest_files": [
       {
         "path": "src/App.tsx",
-        "bytes": 6642,
-        "mtime": 1759551947142.3823,
-        "lines": 211,
-        "sha1": "b1ae8285a15fb534c6dd8a9e6e44382d4f091b98"
+        "bytes": 7308,
+        "mtime": 1759556395134.3435,
+        "lines": 279,
+        "sha1": "3ee30e60563eba07380c76d5164985e06c06cf0c"
       },
       {
         "path": "src/styles.css",
