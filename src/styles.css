@@ -1,7 +1,145 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-const App = () => {
+interface FileData {
+  name: string;
+  content: string;
+}
+
+const App: React.FC = () => {
+  const [fileData, setFileData] = useState<FileData | null>(null);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setFileData({ name: file.name, content });
+    };
+    reader.readAsText(file);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setFileData({ name: file.name, content });
+    };
+    reader.readAsText(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleIngest = () => {
+    if (!fileData) return;
+    setIsProcessing(true);
+
+    // Simulate ingestion and summarization
+    setTimeout(() => {
+      setIsProcessing(false);
+      alert(`Processed file: ${fileData.name}`);
+    }, 2000);
+  };
+
+  return (
+    <div className="app-container">
+      <h1>Log Summarizer</h1>
+
+      <div
+        className="file-drop-zone"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+      >
+        <p>Drag & drop a log file here or click to browse</p>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".json"
+          style={{ display: 'none' }}
+        />
+        <button onClick={() => fileInputRef.current?.click()}>
+          Select File
+        </button>
+      </div>
+
+      {fileData && (
+        <div className="file-info">
+          <h2>Selected File: {fileData.name}</h2>
+          <p>Content preview:</p>
+          <pre>{fileData.content.substring(0, 200)}...</pre>
+        </div>
+      )}
+
+      {fileData && (
+        <button
+          className="ingest-button"
+          onClick={handleIngest}
+          disabled={isProcessing}
+        >
+          {isProcessing ? 'Processing...' : 'Ingest & Summarize'}
+        </button>
+      )}
+
+      {isProcessing && (
+        <div className="progress-bar">
+          <div className="progress-fill"></div>
+        </div>
+      )}
+    </div>
+  );
+.app-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.file-drop-zone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.ingest-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ingest-button:disabled {
+  background-color: #cccccc;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 20px;
+  background-color: #4CAF50;
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
