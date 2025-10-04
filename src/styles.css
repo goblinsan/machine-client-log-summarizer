@@ -3,13 +3,54 @@ import './styles.css';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
     }
   };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div className="file-picker">
+        <input
+          type="file"
+          id="fileInput"
+          onChange={handleFileChange}
+.app {
+  text-align: center;
+  padding: 2rem;
+}
+
+.file-picker {
+  margin-top: 1rem;
+}
+
+.file-picker input[type="file"] {
+  display: none;
+}
+
+.file-picker label {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-picker label:hover {
+  background-color: #0056b3;
+}
+        {selectedFile && (
+          <p>Selected file: {selectedFile.name}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
 
   const handleIngest = () => {
     if (!selectedFile) return;
