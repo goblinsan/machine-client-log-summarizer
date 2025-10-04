@@ -1,14 +1,94 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './styles.css';
 
 const App = () => {
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setSelectedFiles(Array.from(e.target.files));
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
     }
   };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setSelectedFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  return (
+    <div className="app">
+      <div className="file-upload-container">
+        <h1>Log Summarizer</h1>
+
+        <div
+          className={`file-drop-area ${isDragging ? 'dragging' : ''}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="file-input"
+            accept=".json"
+          />
+          <p>Drag & drop a JSON log file here or click to browse</p>
+        </div>
+
+.app {
+  padding: 20px;
+}
+
+.file-upload-container {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.file-drop-area {
+  border: 2px dashed #ccc;
+  padding: 40px;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.file-drop-area.dragging {
+  border-color: #007bff;
+  background-color: #f0f8ff;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-info {
+  margin-top: 20px;
+  font-weight: bold;
+}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
 
   const processFiles = () => {
     // TODO: Implement ingestion logic here
