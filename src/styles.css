@@ -1,15 +1,147 @@
 import React, { useState, useRef } from 'react';
+import './styles.css';
 
-const App: React.FC = () => {
+const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
-  const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // Validate file type and size
+    if (file.type !== 'text/plain' && !file.name.endsWith('.log') && !file.name.endsWith('.txt')) {
+      setStatusMessage('Invalid file type. Please select a .log or .txt file.');
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      setStatusMessage('File too large. Maximum size is 10MB.');
+      return;
+    }
+
+    setSelectedFile(file);
+    setStatusMessage('');
+  };
+
+  const handleIngest = () => {
+    if (!selectedFile) return;
+
+    setIsProcessing(true);
+    setStatusMessage('Ingesting file...');
+
+    // Simulate ingestion process
+    setTimeout(() => {
+      setIsProcessing(false);
+      setStatusMessage(`Successfully ingested ${selectedFile.name}`);
+    }, 2000);
+  };
+
+  const handleReset = () => {
+    setSelectedFile(null);
+    setStatusMessage('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log,.txt"
+        />
+        <button
+          onClick={handleIngest}
+          disabled={!selectedFile || isProcessing}
+          className="ingest-button"
+        >
+          {isProcessing ? 'Ingesting...' : 'Ingest File'}
+        </button>
+        <button onClick={handleReset} className="reset-button">
+          Reset
+        </button>
+      </div>
+
+      {selectedFile && (
+        <p className="file-name">Selected file: {selectedFile.name}</p>
+/* Existing styles... */
+
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-picker {
+  margin-bottom: 20px;
+}
+
+.file-picker input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.ingest-button,
+.reset-button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ingest-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.ingest-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.reset-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.file-name {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.status-message {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.status-message.processing {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-message:not(.processing) {
+  background-color: #d4edda;
+  color: #155724;
+}
+      {statusMessage && (
+        <p className={`status-message ${isProcessing ? 'processing' : ''}`}>
+          {statusMessage}
+        </p>
+      )}
+    </div>
+  );
+};
+
+export default App;
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
