@@ -3,10 +3,65 @@ import './styles.css';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
+    }
+  };
+
+  const handleIngest = () => {
+    if (!selectedFile) return;
+    setIsProcessing(true);
+    // TODO: Implement ingestion logic here
+    console.log('Ingesting file:', selectedFile.name);
+    setIsProcessing(false);
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div className="file-picker">
+        <input
+          type="file"
+          accept=".json"
+.app {
+  text-align: center;
+  padding: 2rem;
+}
+
+.file-picker {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-picker input {
+  padding: 0.5rem;
+}
+
+.file-picker button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-picker button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+          {isProcessing ? 'Processing...' : 'Ingest Log'}
+        </button>
+      </div>
+    </div>
+  );
+}
     }
   };
 
