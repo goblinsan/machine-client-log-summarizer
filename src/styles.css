@@ -1,8 +1,63 @@
 import React, { useState } from 'react';
 import './styles.css';
 
-function App() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+const App = () => {
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setSelectedFiles(Array.from(e.target.files));
+    }
+  };
+
+  const processFiles = () => {
+    // TODO: Implement ingestion logic here
+    console.log('Processing files:', selectedFiles);
+  };
+
+  return (
+    <div className="app-container">
+      <h1>Log Summarizer</h1>
+      <input
+        type="file"
+        multiple
+        onChange={handleFileChange}
+        className="file-picker"
+      />
+      <button onClick={processFiles} className="process-button">
+        Process Logs
+      </button>
+    </div>
+  );
+};
+/* Add basic styling for file picker and button */
+.app-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-picker {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.process-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.process-button:hover {
+  background-color: #0056b3;
+}
+const root = ReactDOM.createRoot(
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
