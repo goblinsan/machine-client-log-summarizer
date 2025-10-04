@@ -2,14 +2,77 @@ import React, { useState, useRef } from 'react';
 import './styles.css';
 
 const App = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+      setSelectedFile(e.target.files[0]);
     }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setSelectedFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleUpload = () => {
+    if (selectedFile) {
+      setIsProcessing(true);
+      // TODO: Implement ingestion logic here
+      setTimeout(() => setIsProcessing(false), 1000);
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div
+        className="file-drop-zone"
+        onDrop={handleDrop}
+        onDragOver={(e) => e.preventDefault()}
+      >
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".json"
+          style={{ display: 'none' }}
+        />
+        <button onClick={() => fileInputRef.current?.click()}>
+          {selectedFile ? selectedFile.name : 'Select or Drop JSON File'}
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-drop-zone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.file-drop-zone:hover {
+  border-color: #007bff;
+}
+
+.file-drop-zone.drag-over {
+  border-color: #28a745;
+}
+            {isProcessing ? 'Processing...' : 'Process File'}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
   };
 
   const handleDragOver = (e: React.DragEvent) => {
