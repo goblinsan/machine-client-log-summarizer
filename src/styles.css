@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-const App = () => {
+const App: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -11,6 +11,45 @@ const App = () => {
       setFile(e.target.files[0]);
     }
   };
+
+  const handleIngest = () => {
+    if (file) {
+      setIsProcessing(true);
+      // Simulate ingestion process
+      setTimeout(() => {
+        setIsProcessing(false);
+        setFile(null);
+      }, 2000);
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+      <div className="file-picker">
+        <input
+/* Add basic styles for the file picker and ingestion UI */
+.app {
+  padding: 20px;
+  text-align: center;
+}
+
+.file-picker {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+        />
+        <button onClick={handleIngest} disabled={!file || isProcessing}>
+          {isProcessing ? 'Processing...' : 'Ingest Log'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 
   const handleIngest = () => {
     if (!file) return;
