@@ -16,6 +16,33 @@ function App() {
       <div className="file-picker">
         <input
           type="file"
+          accept=".json"
+.app {
+  text-align: center;
+  padding: 2rem;
+}
+
+.file-picker {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+}
+          <p>Selected file: {selectedFile.name}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div className="file-picker">
+        <input
+          type="file"
           id="fileInput"
           onChange={handleFileChange}
 .app {
