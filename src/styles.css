@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -12,7 +11,7 @@ const App = () => {
     }
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(true);
   };
@@ -21,8 +20,59 @@ const App = () => {
     setIsDragging(false);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setSelectedFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  return (
+    <div className="app">
+/* Add basic styles for file picker */
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  transition: border-color 0.3s ease;
+}
+
+.file-drop-area.dragging {
+  border-color: #007bff;
+}
+
+.file-input {
+  display: none;
+}
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+        onDrop={handleDrop}
+      >
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="file-input"
+        />
+        <p>Drag & drop a file here or click to select</p>
+      </div>
+
+      {selectedFile && (
+        <div>
+          <p>Selected file: {selectedFile.name}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
     setIsDragging(false);
 
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
