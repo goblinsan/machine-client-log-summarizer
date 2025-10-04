@@ -1,15 +1,116 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import './styles.css';
 
-const App = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [processedData, setProcessedData] = useState<any>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+interface LogLine {
+  timestamp: string;
+  level: string;
+  message: string;
+}
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
+const App = () => {
+  const [fileContent, setFileContent] = useState<LogLine[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setIsLoading(true);
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target?.result as string;
+      const lines = content.split('\n');
+
+      // Simple log line parsing (assumes format: [timestamp] [level] message)
+      const parsedLines: LogLine[] = lines
+        .filter(line => line.trim() !== '')
+        .map(line => {
+          const match = line.match(/^\[(.*?)\]\s*\[(.*?)\]\s*(.*)$/);
+          if (match) {
+            return {
+              timestamp: match[1],
+              level: match[2],
+              message: match[3]
+            };
+          }
+          return {
+            timestamp: '',
+            level: 'unknown',
+            message: line
+          };
+        });
+
+      setFileContent(parsedLines);
+      setIsLoading(false);
+    };
+
+    reader.readAsText(file);
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          accept=".log"
+          onChange={handleFileChange}
+          disabled={isLoading}
+        />
+        {isLoading && <p>Processing file...</p>}
+      </div>
+
+      {fileContent.length > 0 && (
+        <div className="log-display">
+          <h2>Processed Log Lines</h2>
+          <ul>
+            {fileContent.map((line, index) => (
+              <li key={index} className="log-line">
+                <span className="timestamp">{line.timestamp}</span>
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+.file-picker {
+  margin-bottom: 20px;
+}
+
+.log-display ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.log-line {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.timestamp {
+  font-weight: bold;
+  color: #333;
+}
+
+.level {
+  color: #666;
+  margin-left: 10px;
+}
+
+.message {
+  color: #999;
+  margin-left: 10px;
+}
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
       setSelectedFile(file);
       processFile(file);
     }
