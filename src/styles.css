@@ -36,6 +36,120 @@ const App = () => {
     }
   };
 
+  const handleFileSubmit = () => {
+    if (file) {
+      console.log('Selected file:', file.name);
+      // TODO: Implement ingestion pipeline here
+    }
+  };
+
+  return (
+    <div className="app">
+      <div className="file-upload-container">
+        <h1>Log Summarizer</h1>
+
+        <div
+          className={`file-drop-area ${isDragging ? 'drag-over' : ''}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          onClick={triggerFileSelect}
+        >
+          <p>Drag & drop your log file here or click to browse</p>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="file-input"
+            accept=".json"
+          />
+        </div>
+
+        {file && (
+/* Add file picker and local ingestion pipeline UI styles */
+
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-upload-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.file-drop-area {
+  border: 2px dashed #ccc;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.file-drop-area.drag-over {
+  border-color: #007bff;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-info {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+              Ingest File
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const triggerFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
     <div className="app">
       <div className="file-upload-container">
