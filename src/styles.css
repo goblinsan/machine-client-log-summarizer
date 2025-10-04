@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles.css';
 
-const App = () => {
+function App() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,6 +10,25 @@ const App = () => {
     }
   };
 
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-picker {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
+}
+        <input type="file" onChange={handleFileChange} />
+        {selectedFile && <p>Selected file: {selectedFile.name}</p>}
+      </div>
+    </div>
+  );
+}
+
+export default App;
   const handleIngest = () => {
     if (selectedFile) {
       console.log('Ingesting file:', selectedFile.name);
