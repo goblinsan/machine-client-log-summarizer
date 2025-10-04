@@ -3,13 +3,145 @@ import './styles.css';
 
 interface LogFile {
   name: string;
-  size: number;
   content: string;
 }
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [logContent, setLogContent] = useState<string>('');
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setSelectedFile(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target?.result as string;
+        setLogContent(content);
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  const handleFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleProcessLog = () => {
+    if (selectedFile && logContent) {
+      setIsProcessing(true);
+      // Simulate processing logic here
+      console.log('Processing log file:', selectedFile.name);
+      // In a real app, this would involve actual parsing and summarization logic
+      setTimeout(() => {
+        setIsProcessing(false);
+        alert(`Log file "${selectedFile.name}" processed successfully.`);
+      }, 1000);
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker-container">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log"
+          className="file-input"
+        />
+        <button onClick={handleFileSelect} className="file-picker-button">
+          Select Log File
+        </button>
+      </div>
+
+      {selectedFile && (
+        <div className="file-info">
+          <p>Selected file: {selectedFile.name}</p>
+          <p>Size: {selectedFile.size} bytes</p>
+        </div>
+      )}
+
+      <div className="log-content">
+        {logContent ? (
+          <pre>{logContent.substring(0, 500)}...</pre>
+        ) : (
+          <p>No log content to display</p>
+        )}
+      </div>
+
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-picker-container {
+  margin-bottom: 20px;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-picker-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.file-picker-button:hover {
+  background-color: #0056b3;
+}
+
+.file-info {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.log-content {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.process-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.process-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.process-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+        {isProcessing ? 'Processing...' : 'Process Log'}
+      </button>
+    </div>
+  );
+};
+
+export default App;
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
