@@ -1,5 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { marked } from 'marked';
+// Define types for log entries
+interface LogEntry {
+  timestamp?: string;
+  level?: string;
+  message?: string;
+}
 
 const App: React.FC = () => {
   const [logContent, setLogContent] = useState<string>('');
@@ -8,39 +14,56 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isFileSelected, setIsFileSelected] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string>('');
+  const [logEntries, setLogEntries] = useState<LogEntry[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-
     setFileName(file.name);
-
     // Validate file type
     if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
       setError('Please select a valid JSON file.');
       return;
     }
-
     setIsFileSelected(true);
-
     // Clear previous error
     setError(null);
-
     const reader = new FileReader();
     reader.onload = (e) => {
       const content = e.target?.result as string;
       setLogContent(content);
+      // Parse and store log entries
+      try {
+        const parsedLogs = JSON.parse(content);
+        let entries: LogEntry[] = [];
+
+        if (Array.isArray(parsedLogs)) {
+          entries = parsedLogs.map((entry: any, index: number) => ({
+            timestamp: entry.timestamp || new Date().toISOString(),
+            level: entry.level || 'INFO',
+            message: entry.message || `Processed entry ${index + 1}`
+          }));
+        } else {
+          entries = [{
+            timestamp: new Date().toISOString(),
+            level: 'INFO',
+            message: `Processed ${Object.keys(parsedLogs).length} entries`
+          }];
+        }
+
+        setLogEntries(entries);
+      } catch (e) {
+        setError('Failed to parse log content.');
+        setLogEntries([]);
+      }
     };
     reader.onerror = () => {
       setError('Failed to read file. Please try again.');
     };
     reader.readAsText(file);
   };
-
   const handleProcessLogs = () => {
     if (!logContent) return;
-
     // Validate content is valid JSON
     try {
       JSON.parse(logContent);
@@ -48,64 +71,33 @@ const App: React.FC = () => {
       setError('Invalid JSON content. Please check your file.');
       return;
     }
-
     // Reset any previous summary
     setSummary('');
-
     setIsProcessing(true);
-
     // Simulate processing and summarization
     setTimeout(() => {
-      let processedContent = [];
-
-      try {
-        const parsedLogs = JSON.parse(logContent);
-
-        if (Array.isArray(parsedLogs)) {
-          processedContent = parsedLogs.map((entry: any, index: number) => ({
-            timestamp: entry.timestamp || new Date().toISOString(),
-            level: entry.level || 'INFO',
-            message: entry.message || `Processed entry ${index + 1}`
-          }));
-        } else {
-          processedContent = [{
-            timestamp: new Date().toISOString(),
-            level: 'INFO',
-            message: `Processed ${Object.keys(parsedLogs).length} entries`
-          }];
-        }
-
-      } catch (e) {
-        setError('Failed to parse log content.');
-        setIsProcessing(false);
-        return;
-      }
-
       // Format summary with markdown
-      const summaryText = `Summary of ${processedContent.length} log entries processed from file "${fileName}".`;
+      const summaryText = `Summary of ${logEntries.length} log entries processed from file "${fileName}".`;
       setSummary(summaryText);
       setIsProcessing(false);
     }, 1000);
   };
-
   const handleFileSelect = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
-
   const handleClear = () => {
     setLogContent('');
     setSummary('');
     setError(null);
     setIsFileSelected(false);
     setFileName('');
+    setLogEntries([]);
   };
-
   return (
     <div className="app">
       <h1>Log Summarizer</h1>
-
       <div className="file-picker">
         <input
           type="file"
@@ -114,30 +106,23 @@ const App: React.FC = () => {
           accept=".json"
           style={{ display: 'none' }}
         />
-
         <button onClick={handleFileSelect} className="file-button">
           Select Log File
         </button>
-
         {fileName && (
           <div className="file-info">
             Selected file: <strong>{fileName}</strong>
           </div>
         )}
-
         {error && <div className="error">{error}</div>}
       </div>
-
       {logContent && (
         <div className="log-preview">
           <h2>Log Preview</h2>
-
           <pre>{logContent.length > 500 ? logContent.substring(0, 500) + '...' : logContent}</pre>
-
           <button onClick={handleClear} className="clear-button">Clear</button>
         </div>
       )}
-
       <button 
         onClick={handleProcessLogs} 
         disabled={!logContent || isProcessing}
@@ -145,17 +130,13 @@ const App: React.FC = () => {
       >
         {isProcessing ? 'Processing...' : 'Process Logs'}
       </button>
-
       {summary && (
         <div className="summary">
           <h2>Summary</h2>
-
           <div dangerouslySetInnerHTML={{ __html: marked(summary) }} />
         </div>
       )}
-
     </div>
   );
 };
-
 export default App;
