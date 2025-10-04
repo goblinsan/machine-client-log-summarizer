@@ -1,15 +1,81 @@
 import React, { useState, useRef } from 'react';
+import './styles.css';
 
-interface FileData {
+interface FileContent {
   name: string;
-  size: number;
-  content: string | null;
+  content: string;
 }
 
 const App = () => {
-  const [selectedFile, setSelectedFile] = useState<FileData | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [fileContent, setFileContent] = useState<FileContent | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (!file) {
+      setError('No file selected');
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      try {
+        const content = event.target?.result as string;
+        setFileContent({ name: file.name, content });
+        setError(null);
+      } catch (err) {
+        console.error('Error reading file:', err);
+        setError('Failed to read file');
+      }
+    };
+
+    reader.onerror = () => {
+      console.error('Error reading file');
+      setError('Failed to read file');
+    };
+
+    reader.readAsText(file);
+  };
+
+  const handleFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log,.txt"
+          style={{ display: 'none' }}
+        />
+        <button onClick={handleFileSelect} className="file-button">
+          Select Log File
+        </button>
+
+        {error && <p className="error-message">{error}</p>}
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
