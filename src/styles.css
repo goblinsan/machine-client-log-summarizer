@@ -4,27 +4,139 @@ import './styles.css';
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.name.endsWith('.json')) {
-        setSelectedFile(file);
-        setError(null);
-      } else {
-        setError('Please select a valid JSON file.');
-      }
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
     }
   };
 
-  const handleFileSubmit = () => {
-    if (!selectedFile) return;
+  const handleProcess = () => {
+    if (selectedFile) {
+      setIsProcessing(true);
+      // Simulate processing
+      setTimeout(() => {
+        setIsProcessing(false);
+      }, 2000);
+    }
+  };
 
-    setIsProcessing(true);
-    setError(null);
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div className="file-picker-container">
+        <input
+          type="file"
+          id="fileInput"
+          onChange={handleFileChange}
+          className="file-input"
+        />
+        <label htmlFor="fileInput" className="file-label">
+          Choose Log File
+        </label>
+        {selectedFile && (
+          <p className="file-name">Selected: {selectedFile.name}</p>
+        )}
+        <button
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './styles.css';
 
-    const reader = new FileReader();
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// This is a placeholder for future file handling logic
+// Future implementation will include:
+// - Reading the uploaded file
+// - Parsing log content
+// - Generating summary
+// - Displaying results in UI
+/* Global Styles */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+.file-picker-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.file-label:hover {
+  background-color: #0056b3;
+}
+
+.file-name {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.process-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.process-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.process-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Additional styles can be added here */
     reader.onload = (event) => {
       try {
         const content = event.target?.result as string;
