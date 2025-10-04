@@ -1,19 +1,97 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-interface FileData {
-  name: string;
-  content: string;
-}
-
-const App: React.FC = () => {
-  const [fileData, setFileData] = useState<FileData | null>(null);
-  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+const App = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [isIngesting, setIsIngesting] = useState(false);
+  const [summary, setSummary] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const selectedFile = e.target.files?.[0] || null;
+    setFile(selectedFile);
+  };
+
+  const handleIngest = () => {
     if (!file) return;
+
+    setIsIngesting(true);
+    setSummary(null);
+
+    // Simulate ingestion and summarization
+    setTimeout(() => {
+      setSummary(`Summary for ${file.name} generated successfully.`);
+      setIsIngesting(false);
+    }, 2000);
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".json"
+        />
+        <button onClick={() => fileInputRef.current?.click()}>
+          Choose File
+        </button>
+
+        {file && (
+          <p>Selected file: {file.name}</p>
+        )}
+
+        <button
+          onClick={handleIngest}
+          disabled={!file || isIngesting}
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.file-picker {
+  margin-top: 20px;
+}
+
+.file-picker input[type="file"] {
+  display: none;
+}
+
+.file-picker button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.file-picker button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.summary {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+          <div className="summary">
+            <h2>Summary:</h2>
+            <p>{summary}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
 
     const reader = new FileReader();
     reader.onload = (event) => {
