@@ -1,26 +1,26 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-04T06:20:41.907Z",
+  "generated_at": "2025-10-04T06:32:59.462Z",
   "totals": {
     "files": 3,
-    "bytes": 15559,
-    "lines": 718
+    "bytes": 20841,
+    "lines": 1019
   },
   "components": [
     {
       "component": ".",
       "totals": {
         "files": 3,
-        "bytes": 15559,
-        "lines": 718
+        "bytes": 20841,
+        "lines": 1019
       },
       "largest": [
         {
           "path": "src/styles.css",
-          "bytes": 15177,
-          "mtime": 1759558841811.5273,
-          "lines": 699,
-          "sha1": "0e575b2992415cfccb06fd0d08e98123890d8d98"
+          "bytes": 20459,
+          "mtime": 1759559579369.272,
+          "lines": 1000,
+          "sha1": "da1cb9d84dfb1fc026695674384012969d80e661"
         },
         {
           "path": "src/App.tsx",
@@ -40,10 +40,10 @@
       "longest": [
         {
           "path": "src/styles.css",
-          "bytes": 15177,
-          "mtime": 1759558841811.5273,
-          "lines": 699,
-          "sha1": "0e575b2992415cfccb06fd0d08e98123890d8d98"
+          "bytes": 20459,
+          "mtime": 1759559579369.272,
+          "lines": 1000,
+          "sha1": "da1cb9d84dfb1fc026695674384012969d80e661"
         },
         {
           "path": "src/App.tsx",
@@ -66,10 +66,10 @@
     "largest_files": [
       {
         "path": "src/styles.css",
-        "bytes": 15177,
-        "mtime": 1759558841811.5273,
-        "lines": 699,
-        "sha1": "0e575b2992415cfccb06fd0d08e98123890d8d98"
+        "bytes": 20459,
+        "mtime": 1759559579369.272,
+        "lines": 1000,
+        "sha1": "da1cb9d84dfb1fc026695674384012969d80e661"
       },
       {
         "path": "src/App.tsx",
@@ -89,10 +89,10 @@
     "longest_files": [
       {
         "path": "src/styles.css",
-        "bytes": 15177,
-        "mtime": 1759558841811.5273,
-        "lines": 699,
-        "sha1": "0e575b2992415cfccb06fd0d08e98123890d8d98"
+        "bytes": 20459,
+        "mtime": 1759559579369.272,
+        "lines": 1000,
+        "sha1": "da1cb9d84dfb1fc026695674384012969d80e661"
       },
       {
         "path": "src/App.tsx",
