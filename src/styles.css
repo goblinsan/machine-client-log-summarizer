@@ -1,15 +1,107 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-interface LogEntry {
-  timestamp: string;
-  level: string;
-  message: string;
+const App = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [summary, setSummary] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0] || null;
+    setFile(selectedFile);
+    setSummary(null);
+  };
+
+  const handleIngest = () => {
+    if (!file) return;
+
+    setIsProcessing(true);
+
+    // Simulate file processing
+    setTimeout(() => {
+      setSummary(`Processed ${file.name} with size ${file.size} bytes`);
+      setIsProcessing(false);
+    }, 2000);
+  };
+
+  const handleReset = () => {
+    setFile(null);
+    setSummary(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log,.txt"
+        />
+        <button onClick={handleIngest} disabled={!file || isProcessing}>
+          {isProcessing ? 'Processing...' : 'Ingest File'}
+        </button>
+        <button onClick={handleReset} disabled={!file}>Reset</button>
+      </div>
+
+      {isProcessing && (
+        <div className="loading-indicator">
+          <p>Processing file...</p>
+        </div>
+      )}
+.app {
+  padding: 20px;
 }
 
-const App: React.FC = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [logData, setLogData] = useState<LogEntry[]>([]);
+.file-picker {
+  margin-bottom: 20px;
+}
+
+.file-picker input[type="file"] {
+  margin-right: 10px;
+}
+
+.file-picker button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-picker button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.loading-indicator {
+  margin-top: 20px;
+  color: #007bff;
+}
+
+.summary {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+          <h2>Summary</h2>
+          <p>{summary}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
   const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
