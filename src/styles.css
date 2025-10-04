@@ -2,15 +2,105 @@ import React, { useState, useRef } from 'react';
 import './styles.css';
 
 const App = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
+      setFile(e.target.files[0]);
     }
   };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const triggerFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="app">
+      <div className="file-upload-container">
+        <h1>Log Summarizer</h1>
+
+        <div
+          className={`file-drop-area ${isDragging ? 'drag-over' : ''}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          onClick={triggerFileSelect}
+        >
+          <p>Drag & drop your log file here or click to browse</p>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="file-input"
+            accept=".json"
+          />
+        </div>
+.app {
+  padding: 20px;
+}
+
+.file-upload-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.file-drop-area {
+  border: 2px dashed #ccc;
+  padding: 40px 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.file-drop-area.drag-over {
+  border-color: #007bff;
+  background-color: #f0f8ff;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-info {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+            <p>Selected file: {file.name}</p>
+            <p>Size: {(file.size / 1024).toFixed(2)} KB</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
