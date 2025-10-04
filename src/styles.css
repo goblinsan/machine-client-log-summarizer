@@ -2,14 +2,82 @@ import React, { useState, useRef } from 'react';
 import './styles.css';
 
 const App = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+      setSelectedFile(e.target.files[0]);
     }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setSelectedFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleProcess = () => {
+    if (selectedFile) {
+      setIsProcessing(true);
+      // TODO: Implement file processing logic here
+      setTimeout(() => setIsProcessing(false), 1000);
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div
+        className="file-drop-area"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleDrop}
+      >
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className="file-input"
+        />
+        <p>Drag & drop a file here or click to browse</p>
+      </div>
+      {selectedFile && (
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-drop-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  transition: border-color 0.3s ease;
+}
+
+.file-drop-area:hover {
+  border-color: #007bff;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-info {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
   };
 
   const handleDragOver = (e: React.DragEvent) => {
