@@ -1,17 +1,114 @@
-import React, { useState, useRef } from 'react';
-import './styles.css';
+import React, { useState } from 'react';
 
 const App = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [logs, setLogs] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-    }
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target?.result as string;
+      try {
+        const parsedLogs = parseLogContent(content);
+        setLogs(parsedLogs);
+        setError(null);
+      } catch (err) {
+        setError('Failed to parse log file');
+      }
+    };
+    reader.readAsText(file);
   };
 
+  const parseLogContent = (content: string): string[] => {
+    // Simple parsing logic - split by newlines
+    return content.split('\n').filter(line => line.trim() !== '');
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="upload-section">
+        <label htmlFor="file-upload">Upload Log File:</label>
+        <input
+          id="file-upload"
+          type="file"
+          accept=".log"
+          onChange={handleFileUpload}
+        />
+      </div>
+
+      {error && <p className="error">{error}</p>}
+
+      <div className="log-display">
+        {logs.length > 0 ? (
+          <ul>
+            {logs.map((log, index) => (
+              <li key={index}>{log}</li>
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './styles.css';
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+/* Existing styles... */
+
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.upload-section {
+  margin-bottom: 20px;
+}
+
+.upload-section label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.upload-section input[type="file"] {
+  margin-top: 5px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.log-display ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.log-display li {
+  background-color: #f5f5f5;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.log-display p {
+  color: #666;
+}
+    <App />
+  </React.StrictMode>
+);
+
+// Test file for main.tsx
+describe('main.tsx', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<App />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+});
   const handleProcessClick = () => {
     if (selectedFile) {
       setIsProcessing(true);
