@@ -3,25 +3,170 @@ import './styles.css';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [logEntries, setLogEntries] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      processFile(file);
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+      // Mock ingestion logic - in real app this would call the ingestion pipeline
+      console.log('File selected for ingestion:', e.target.files[0]);
     }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const file = e.dataTransfer.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      processFile(file);
+    setIsDragging(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setSelectedFile(e.dataTransfer.files[0]);
+      // Mock ingestion logic - in real app this would call the ingestion pipeline
+      console.log('File dropped for ingestion:', e.dataTransfer.files[0]);
     }
+  };
+
+  const triggerFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Machine Client Log Summarizer</h1>
+
+        <div 
+          className={`file-drop-zone ${isDragging ? 'drag-over' : ''}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          onClick={triggerFileInput}
+        >
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="file-input"
+            accept=".log,.txt"
+            style={{ display: 'none' }}
+          />
+
+          <div className="file-drop-content">
+            {selectedFile ? (
+              <p>Selected file: {selectedFile.name}</p>
+            ) : (
+              <>
+                <p>Drag & drop a log file here</p>
+                <p>or</p>
+                <button className="file-select-button">Select File</button>
+              </>
+            )}
+/* This file contains all the styles for the application */
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.file-drop-zone {
+  border: 2px dashed #61dafb;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  width: 300px;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.file-drop-zone.drag-over {
+  background-color: rgba(97, 218, 251, 0.1);
+  border-color: #4a9fc7;
+}
+
+.file-drop-content {
+  text-align: center;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-select-button {
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.file-select-button:hover {
+  background-color: #4a9fc7;
+}
+
+.file-info {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.ingestion-controls {
+  margin-top: 20px;
+}
+
+.ingest-button {
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.ingest-button:hover:not(:disabled) {
+  background-color: #4a9fc7;
+}
+
+.ingest-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+export default App;
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
