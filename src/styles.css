@@ -3,7 +3,6 @@ import './styles.css';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,6 +10,71 @@ const App = () => {
       setSelectedFile(e.target.files[0]);
     }
   };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setSelectedFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const triggerFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="app">
+      <div className="file-upload-container">
+        <h1>Log Summarizer</h1>
+        <div
+          className="drop-zone"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onClick={triggerFileSelect}
+        >
+          <p>Drag & drop a file here or click to browse</p>
+          <input
+            type="file"
+            ref={fileInputRef}
+/* Add basic styles for the file upload UI */
+
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-upload-container {
+  text-align: center;
+}
+
+.drop-zone {
+  border: 2px dashed #ccc;
+  padding: 40px;
+  margin: 20px auto;
+  width: 300px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.drop-zone:hover {
+  border-color: #007bff;
+}
+          />
+        </div>
+        {selectedFile && (
+          <p>Selected file: {selectedFile.name}</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
