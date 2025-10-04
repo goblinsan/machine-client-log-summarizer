@@ -1,14 +1,140 @@
 import React, { useState, useRef } from 'react';
-import './styles.css';
 
-const App = () => {
+const App: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [summary, setSummary] = useState<string | null>(null);
+  const [isIngesting, setIsIngesting] = useState(false);
+  const [ingestionResult, setIngestionResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      setError(null);
+    }
+  };
+
+  const handleIngest = () => {
+    if (!selectedFile) {
+      setError('No file selected');
+      return;
+    }
+
+    setIsIngesting(true);
+    setIngestionResult(null);
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string;
+        const parsed = JSON.parse(content);
+
+        // Simulate ingestion logic
+        setIngestionResult(`Successfully ingested file: ${selectedFile.name}`);
+        setIsIngesting(false);
+      } catch (err) {
+        setError('Failed to parse JSON file');
+        setIsIngesting(false);
+      }
+    };
+
+    reader.onerror = () => {
+      setError('Failed to read file');
+      setIsIngesting(false);
+    };
+
+    reader.readAsText(selectedFile);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type === 'application/json') {
+      setSelectedFile(file);
+      setError(null);
+    } else {
+      setError('Please drop a valid JSON file');
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className="app" onDrop={handleDrop} onDragOver={handleDragOver}>
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          accept=".json"
+          onChange={handleFileChange}
+          ref={fileInputRef}
+        />
+        <button onClick={() => fileInputRef.current?.click()}>
+          Select JSON Log File
+        </button>
+
+        {selectedFile && (
+          <p className="file-info">
+            Selected file: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(2)} KB)
+          </p>
+        )}
+
+        {isIngesting && <p className="loading">Ingesting...</p>}
+
+        {ingestionResult && (
+          <div className="success">
+            <p>{ingestionResult}</p>
+          </div>
+        )}
+
+.app {
+  text-align: center;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-picker {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 80%;
+  max-width: 500px;
+}
+
+.file-info {
+  margin-top: 10px;
+  color: #333;
+}
+
+.loading {
+  color: #007bff;
+}
+
+.success {
+  color: #28a745;
+}
+
+.error {
+  color: #dc3545;
+}
+          Ingest Log File
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default App;
     const file = e.target.files?.[0] || null;
     setSelectedFile(file);
     setSummary(null);
