@@ -1,33 +1,106 @@
-/* eslint-disable no-console */
-
-/* eslint-disable no-console */
 import React, { useState, useRef } from 'react';
-import { marked } from 'marked';
-  --muted: #9aa4b2;
-  --accent: #60a5fa;
-  --text: #e6eef6;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  --border: #1e293b;
-  --card-border: #2d3748;
-}
+import './styles.css';
 
-.drop-area {
-// Define types for log entries
 const App: React.FC = () => {
-  const [logContent, setLogContent] = useState<string>('');
-  const [summary, setSummary] = useState<string>('');
-  const [isProcessing, setIsProcessing] = useState<boolean>(false);
-/* Status indicator styles */
-.status-indicator {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 4px;
+  const [isDragging, setIsDragging] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      processFile(files[0]);
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      processFile(e.target.files[0]);
+    }
+  };
+
+  const processFile = (file: File) => {
+    setIsProcessing(true);
+    setFileName(file.name);
+
+    // Simulate file processing
+    setTimeout(() => {
+      setIsProcessing(false);
+    }, 2000);
+  };
+
+  const triggerFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+
+      <div
+        className={`file-drop-area ${isDragging ? 'dragging' : ''} ${isProcessing ? 'processing' : ''}`}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onClick={triggerFileInput}
+      >
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".json"
+          style={{ display: 'none' }}
+        />
+.app {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-:root {
-  --bg: #0f1724;
+.file-drop-area {
+  border: 2px dashed #ccc;
+  padding: 40px;
+  margin: 20px auto;
+  width: 300px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.file-drop-area.dragging {
+  border-color: #007bff;
+  background-color: #e6f7ff;
+}
+
+.file-drop-area.processing {
+  border-color: #28a745;
+  background-color: #d4edda;
+}
+
+.file-info {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
   --card: #0b1524;
 .drop-area:hover {
   background-color: rgba(96, 165, 250, 0.1);
