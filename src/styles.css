@@ -1,15 +1,89 @@
 import React, { useState, useRef } from 'react';
+import './styles.css';
 
-export const App = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
+const App = () => {
+  const [logs, setLogs] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
-    }
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const file = files[0];
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setLogs(prev => [...prev, content]);
+    };
+
+    reader.readAsText(file);
   };
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".json"
+          style={{ display: 'none' }}
+        />
+        <button onClick={triggerFileInput} className="upload-button">
+          Upload Log File
+        </button>
+      </div>
+
+      {logs.length > 0 && (
+        <div className="log-preview">
+          <h2>Uploaded Logs</h2>
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+.file-picker {
+  margin-bottom: 20px;
+}
+
+.upload-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.log-preview {
+  margin-top: 20px;
+}
+
+.log-content {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: left;
+  max-height: 300px;
+  overflow-y: auto;
+}
+              {log}
+            </pre>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
 
   const handleIngest = () => {
     if (file) {
