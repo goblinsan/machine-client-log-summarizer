@@ -1,15 +1,113 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-interface FileData {
-  name: string;
-  content: string;
-  error?: string;
+const App = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [fileContent, setFileContent] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileSelect = (file: File) => {
+    setSelectedFile(file);
+    // Simulate file reading
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setFileContent(e.target?.result as string);
+    };
+    reader.readAsText(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFileSelect(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      handleFileSelect(e.target.files[0]);
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+
+      <div
+        className={`file-drop-zone ${isDragging ? 'dragging' : ''}`}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onClick={handleClick}
+      >
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileInputChange}
+          className="hidden"
+        />
+        <p>Drag & drop your log file here or click to browse</p>
+      </div>
+
+      {selectedFile && (
+        <div className="file-info">
+          <p>Selected file: {selectedFile.name}</p>
+          <p>Size: {selectedFile.size} bytes</p>
+        </div>
+      )}
+/* Add any global styles here */
+
+.file-drop-zone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
-function App() {
-  const [fileData, setFileData] = useState<FileData | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+.file-drop-zone.dragging {
+  border-color: #007bff;
+}
+
+.file-info {
+  margin: 10px 0;
+}
+
+.file-content {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
