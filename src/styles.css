@@ -1,16 +1,169 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-interface LogEntry {
-  timestamp: string;
-  level: string;
-  message: string;
+interface FileData {
+  name: string;
+  content: string;
+  error?: string;
 }
 
-const App = () => {
-  const [fileContent, setFileContent] = useState<LogEntry[] | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+function App() {
+  const [fileData, setFileData] = useState<FileData | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setFileData({
+        name: file.name,
+        content,
+      });
+    };
+
+    reader.onerror = () => {
+      setFileData({
+        name: file.name,
+        content: '',
+        error: 'Failed to read file.',
+      });
+    };
+
+    reader.readAsText(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    const file = e.dataTransfer.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setFileData({
+        name: file.name,
+        content,
+      });
+    };
+
+    reader.onerror = () => {
+      setFileData({
+        name: file.name,
+        content: '',
+        error: 'Failed to read file.',
+      });
+    };
+
+    reader.readAsText(file);
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+      <p>Welcome to the log summarizer tool.</p>
+
+      <div
+        className={`file-drop-area ${isDragging ? 'dragging' : ''}`}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className="file-input"
+          accept=".log,.txt"
+          style={{ display: 'none' }}
+        />
+        <button onClick={triggerFileInput} className="file-button">
+          Choose File
+        </button>
+        <p>or drag and drop a file here</p>
+      </div>
+
+      {fileData && (
+        <div className="file-preview">
+          <h2>File Preview</h2>
+/* existing styles... */
+
+.file-drop-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  transition: border-color 0.3s ease;
+}
+
+.file-drop-area.dragging {
+  border-color: #007bff;
+}
+
+.file-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.file-button:hover {
+  background-color: #0056b3;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-preview h2 {
+  margin-top: 30px;
+}
+
+.content {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.error {
+  color: red;
+}
+            <p className="error">Error: {fileData.error}</p>
+          ) : (
+            <pre className="content">{fileData.content}</pre>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
