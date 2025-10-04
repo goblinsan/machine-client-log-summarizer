@@ -3,89 +3,170 @@ import './styles.css';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isIngesting, setIsIngesting] = useState(false);
-  const [ingestionStatus, setIngestionStatus] = useState<string>('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-      setIngestionStatus('');
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.name.endsWith('.json')) {
+        setSelectedFile(file);
+        setError(null);
+      } else {
+        setError('Please select a valid JSON file.');
+      }
     }
   };
 
-  const handleIngest = () => {
+  const handleFileSubmit = () => {
     if (!selectedFile) return;
 
-    setIsIngesting(true);
-    setIngestionStatus('Processing...');
+    setIsProcessing(true);
+    setError(null);
 
-    // Simulate ingestion process
-    setTimeout(() => {
-      setIsIngesting(false);
-      setIngestionStatus('Successfully processed');
-    }, 2000);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const content = event.target?.result as string;
+        const parsed = JSON.parse(content);
+
+        // Simulate processing
+        console.log('Parsed JSON:', parsed);
+        setIsProcessing(false);
+
+        // In a real app, you would pass the parsed data to a summarization function here
+      } catch (err) {
+        setError('Failed to parse JSON file.');
+        setIsProcessing(false);
+      }
+    };
+
+    reader.onerror = () => {
+      setError('Failed to read file.');
+      setIsProcessing(false);
+    };
+
+    reader.readAsText(selectedFile);
   };
 
   return (
     <div className="app">
-      <h1>Machine Client Log Summarizer</h1>
+      <h1>Log Summarizer</h1>
 
-      <div className="file-picker">
-        <label htmlFor="fileInput">Choose a file:</label>
+      <div className="file-picker-container">
+        <label htmlFor="fileInput" className="file-label">
+          Choose JSON Log File
+        </label>
         <input
-          type="file"
           id="fileInput"
+          type="file"
+          accept=".json"
           onChange={handleFileChange}
+          className="file-input"
         />
 
         {selectedFile && (
           <div className="file-info">
             <p>Selected file: {selectedFile.name}</p>
-            <p>Size: {selectedFile.size} bytes</p>
-          </div>
-        )}
-
+            <button
+              onClick={handleFileSubmit}
+              disabled={isProcessing}
+              className="submit-button"
+            >
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles.css';
 import App from './App';
+import './styles.css';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-/* Existing styles remain unchanged */
+/* Global Styles */
 
-.app {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
 }
 
-.file-picker {
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+.file-picker-container {
   margin-top: 20px;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.file-picker label {
+.file-label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
+  color: #555;
 }
 
-.file-picker input[type="file"] {
-  margin-bottom: 15px;
+.file-input {
+  margin-bottom: 10px;
   padding: 8px;
   border: 1px solid #ddd;
-  border-radius: 3px;
+  border-radius: 4px;
+  width: 200px;
 }
 
 .file-info {
-  margin-bottom: 15px;
-  padding: 10px;
+  margin-top: 10px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .file-input {
+    width: 100%;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+}
   background-color: #e9e9e9;
   border-radius: 3px;
 }
