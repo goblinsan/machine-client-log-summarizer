@@ -1,15 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './styles.css';
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
     }
   };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setSelectedFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleUpload = () => {
+    if (selectedFile) {
+      setIsProcessing(true);
+      // TODO: Implement ingestion logic here
+      setTimeout(() => setIsProcessing(false), 1000);
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div
+        className="file-drop-area"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleDrop}
+      >
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+        />
+        <button onClick={() => fileInputRef.current?.click()}>
+          {selectedFile ? selectedFile.name : 'Select or Drop File'}
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-drop-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-drop-area button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-drop-area button:hover {
+  background-color: #0056b3;
+}
+
+.file-drop-area button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
