@@ -1,15 +1,139 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
+interface LogFile {
+  name: string;
+  size: number;
+  content: string;
+}
+
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [fileContent, setFileContent] = useState<string | null>(null);
+  const [logContent, setLogContent] = useState<string>('');
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileSelect = (file: File) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
     setSelectedFile(file);
-    // Simulate file reading
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target?.result as string;
+        setLogContent(content);
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  const handleFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleIngestion = () => {
+    if (selectedFile) {
+      setIsProcessing(true);
+      // Simulate ingestion logic here
+      setTimeout(() => {
+        setIsProcessing(false);
+        alert(`Successfully ingested file: ${selectedFile.name}`);
+      }, 1000);
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker-container">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className="file-input"
+          accept=".log"
+        />
+
+        <button
+          onClick={handleFileSelect}
+          className="file-picker-button"
+        >
+          Select Log File
+        </button>
+
+        {selectedFile && (
+          <div className="file-info">
+            <p>Selected file: {selectedFile.name}</p>
+            <p>Size: {(selectedFile.size / 1024).toFixed(2)} KB</p>
+          </div>
+        )}
+
+        {logContent && (
+          <div className="log-preview">
+            <h3>Log Preview:</h3>
+            <pre>{logContent.substring(0, 500)}...</pre>
+          </div>
+        )}
+
+        <button
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+.file-picker-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-picker-button,
+.ingestion-button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.file-picker-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.ingestion-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.file-info {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.log-preview {
+  margin-top: 20px;
+  text-align: left;
+}
+        >
+          {isProcessing ? 'Processing...' : 'Ingest Log'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default App;
     const reader = new FileReader();
     reader.onload = (e) => {
       setFileContent(e.target?.result as string);
