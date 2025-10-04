@@ -2,13 +2,149 @@ import React, { useState, useRef } from 'react';
 
 const App: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isIngesting, setIsIngesting] = useState(false);
-  const [ingestionResult, setIngestionResult] = useState<string | null>(null);
+  const [fileContent, setFileContent] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      setError(null);
+      setFileContent(null);
+
+      // Validate file type (e.g., .log, .txt)
+      if (!file.name.endsWith('.log') && !file.name.endsWith('.txt')) {
+        setError('Invalid file type. Please select a .log or .txt file.');
+        return;
+      }
+
+      // Read file content
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target?.result as string;
+        setFileContent(content);
+      };
+
+      reader.onerror = () => {
+        setError('Failed to read file.');
+      };
+
+      reader.readAsText(file);
+    }
+  };
+
+  const handleIngestion = () => {
+    if (!selectedFile) {
+      setError('No file selected.');
+      return;
+    }
+
+    setIsProcessing(true);
+
+    // Simulate ingestion process
+    setTimeout(() => {
+      setIsProcessing(false);
+      alert(`Successfully ingested file: ${selectedFile.name}`);
+    }, 1500);
+  };
+
+  const handleReset = () => {
+    setSelectedFile(null);
+    setFileContent(null);
+    setError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker-container">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log,.txt"
+        />
+
+        {selectedFile && (
+          <div className="file-info">
+            <p>Selected file: {selectedFile.name}</p>
+            <p>Size: {selectedFile.size} bytes</p>
+
+            {isProcessing ? (
+              <p className="processing">Processing...</p>
+            ) : (
+              <button onClick={handleIngestion} className="ingest-button">
+                Ingest File
+              </button>
+            )}
+
+            <button onClick={handleReset} className="reset-button">
+              Reset
+            </button>
+
+            {error && <p className="error">{error}</p>}
+
+            {fileContent && (
+              <div className="file-content">
+                <h3>File Content Preview:</h3>
+.app {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.file-picker-container {
+  margin-top: 20px;
+}
+
+.file-info {
+  margin-top: 10px;
+}
+
+.processing {
+  color: #007bff;
+}
+
+.ingest-button,
+.reset-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.ingest-button:hover,
+.reset-button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.file-content {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
     if (file) {
       setSelectedFile(file);
       setError(null);
