@@ -1,33 +1,28 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-interface FileData {
-  name: string;
-  size: number;
-  content: string;
-}
-
 const App = () => {
-  const [fileData, setFileData] = useState<FileData | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [fileContent, setFileContent] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+
+    if (!file) {
+      setError('No file selected');
+      return;
+    }
 
     setIsProcessing(true);
     setError(null);
 
     const reader = new FileReader();
+
     reader.onload = (event) => {
       const content = event.target?.result as string;
-      setFileData({
-        name: file.name,
-        size: file.size,
-        content
-      });
+      setFileContent(content);
       setIsProcessing(false);
     };
 
@@ -42,14 +37,93 @@ const App = () => {
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const file = e.dataTransfer.files?.[0];
-    if (file && file.type === 'text/plain') {
-      const event = { target: { files: [file] } } as unknown as React.ChangeEvent<HTMLInputElement>;
-      handleFileChange(event);
-    } else {
-      setError('Please drop a valid text file');
+
+    if (!file) {
+      setError('No file dropped');
+      return;
     }
+
+    const event = { target: { files: [file] } } as unknown as React.ChangeEvent<HTMLInputElement>;
+    handleFileChange(event);
   };
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className="app" onDrop={handleDrop} onDragOver={handleDragOver}>
+      <h1>Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log,.txt"
+          style={{ display: 'none' }}
+        />
+
+        <button onClick={() => fileInputRef.current?.click()}>
+          Choose File
+        </button>
+
+        {isProcessing && <p>Processing file...</p>}
+
+        {error && <p className="error">{error}</p>}
+
+/* Add basic styles for the new UI elements */
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-picker {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.file-picker input[type="file"] {
+  display: none;
+}
+
+.file-picker button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.file-picker button:hover {
+  background-color: #0056b3;
+}
+
+.file-picker p {
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+}
+
+.file-content {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.file-content h2 {
+  margin-top: 0;
+}
+
+.file-content pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
