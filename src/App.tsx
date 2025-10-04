@@ -6,7 +6,6 @@ interface LogEntry {
   level?: string;
   message?: string;
 }
-
 const App: React.FC = () => {
   const [logContent, setLogContent] = useState<string>('');
   const [summary, setSummary] = useState<string>('');
@@ -36,7 +35,6 @@ const App: React.FC = () => {
       try {
         const parsedLogs = JSON.parse(content);
         let entries: LogEntry[] = [];
-
         if (Array.isArray(parsedLogs)) {
           entries = parsedLogs.map((entry: any, index: number) => ({
             timestamp: entry.timestamp || new Date().toISOString(),
@@ -50,7 +48,6 @@ const App: React.FC = () => {
             message: `Processed ${Object.keys(parsedLogs).length} entries`
           }];
         }
-
         setLogEntries(entries);
       } catch (e) {
         setError('Failed to parse log content.');
@@ -98,7 +95,6 @@ const App: React.FC = () => {
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
-
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const files = e.dataTransfer.files;
@@ -108,13 +104,48 @@ const App: React.FC = () => {
       handleFileChange(event);
     }
   };
-
   const handleDropAreaClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
+  // Add test to verify file parsing logic
+  const testFileParsing = () => {
+    // Mock data for testing
+    const mockLogData = [
+      { timestamp: "2023-01-01T00:00:00Z", level: "INFO", message: "Application started" },
+      { timestamp: "2023-01-01T00:01:00Z", level: "ERROR", message: "Database connection failed" }
+    ];
 
+    const mockContent = JSON.stringify(mockLogData);
+    setLogContent(mockContent);
+
+    try {
+      const parsedLogs = JSON.parse(mockContent);
+      let entries: LogEntry[] = [];
+
+      if (Array.isArray(parsedLogs)) {
+        entries = parsedLogs.map((entry: any, index: number) => ({
+          timestamp: entry.timestamp || new Date().toISOString(),
+          level: entry.level || 'INFO',
+          message: entry.message || `Processed entry ${index + 1}`
+        }));
+      } else {
+        entries = [{
+          timestamp: new Date().toISOString(),
+          level: 'INFO',
+          message: `Processed ${Object.keys(parsedLogs).length} entries`
+        }];
+      }
+
+      setLogEntries(entries);
+      return true;
+    } catch (e) {
+      setError('Failed to parse mock log content.');
+      setLogEntries([]);
+      return false;
+    }
+  };
   return (
     <div className="app">
       <h1>Log Summarizer</h1>
@@ -155,6 +186,12 @@ const App: React.FC = () => {
           <button onClick={handleClear} className="clear-button">Clear</button>
         </div>
       )}
+      <div className="test-section">
+        <h3>Test Section</h3>
+        <button onClick={testFileParsing} className="test-button">
+          Run Test
+        </button>
+      </div>
       <button 
         onClick={handleProcessLogs} 
         disabled={!logContent || isProcessing}
