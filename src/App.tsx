@@ -7,11 +7,14 @@ const App: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isFileSelected, setIsFileSelected] = useState<boolean>(false);
+  const [fileName, setFileName] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    setFileName(file.name);
 
     // Validate file type
     if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
@@ -79,7 +82,7 @@ const App: React.FC = () => {
       }
 
       // Format summary with markdown
-      const summaryText = `Summary of ${processedContent.length} log entries processed.`;
+      const summaryText = `Summary of ${processedContent.length} log entries processed from file "${fileName}".`;
       setSummary(summaryText);
       setIsProcessing(false);
     }, 1000);
@@ -96,6 +99,7 @@ const App: React.FC = () => {
     setSummary('');
     setError(null);
     setIsFileSelected(false);
+    setFileName('');
   };
 
   return (
@@ -115,6 +119,12 @@ const App: React.FC = () => {
           Select Log File
         </button>
 
+        {fileName && (
+          <div className="file-info">
+            Selected file: <strong>{fileName}</strong>
+          </div>
+        )}
+
         {error && <div className="error">{error}</div>}
       </div>
 
@@ -122,7 +132,7 @@ const App: React.FC = () => {
         <div className="log-preview">
           <h2>Log Preview</h2>
 
-          <pre>{logContent.substring(0, 500)}...</pre>
+          <pre>{logContent.length > 500 ? logContent.substring(0, 500) + '...' : logContent}</pre>
 
           <button onClick={handleClear} className="clear-button">Clear</button>
         </div>
