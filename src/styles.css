@@ -1,6 +1,88 @@
 import React, { useState } from 'react';
 import './styles.css';
 
+const App = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
+  const handleIngest = () => {
+    if (selectedFile) {
+      console.log('Ingesting file:', selectedFile.name);
+      // TODO: Implement ingestion logic here
+    }
+  };
+
+  return (
+    <div className="app-container">
+      <h1>Log Summarizer</h1>
+      <div className="file-picker-container">
+        <input
+          type="file"
+          id="fileInput"
+          onChange={handleFileChange}
+          accept=".json"
+        />
+        <label htmlFor="fileInput" className="file-label">
+          Choose JSON Log File
+        </label>
+        {selectedFile && (
+          <p>Selected file: {selectedFile.name}</p>
+        )}
+        <button onClick={handleIngest} className="ingest-button">
+          Ingest File
+        </button>
+      </div>
+    </div>
+  );
+};
+/* Global Styles */
+
+.app-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.file-picker-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+}
+
+.file-label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.ingest-button {
+  padding: 0.5rem 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  .file-picker-container {
+    width: 100%;
+  }
+}
 function App() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
