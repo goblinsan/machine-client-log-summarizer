@@ -1,15 +1,38 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 
-const App = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [summary, setSummary] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+function App() {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0] || null;
-    setFile(selectedFile);
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
+  const handleIngest = () => {
+    if (selectedFile) {
+      console.log('Ingesting file:', selectedFile.name);
+      // TODO: Implement ingestion logic here
+    }
+  };
+
+.app {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.file-picker {
+        Ingest
+      </button>
+    </div>
+  );
+}
+
+export default App;
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
