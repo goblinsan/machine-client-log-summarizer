@@ -1,15 +1,134 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-interface FileData {
-  name: string;
-  content: string;
-  size: number;
+const App: React.FC = () => {
+  const [fileContent, setFileContent] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsProcessing(true);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setFileContent(content);
+      setIsProcessing(false);
+    };
+
+    reader.onerror = () => {
+      console.error('Failed to read file');
+      setIsProcessing(false);
+    };
+
+    reader.readAsText(file);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files?.[0];
+    if (!file) return;
+
+    setIsProcessing(true);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setFileContent(content);
+      setIsProcessing(false);
+    };
+
+    reader.onerror = () => {
+      console.error('Failed to read file');
+      setIsProcessing(false);
+    };
+
+    reader.readAsText(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className="app" onDrop={handleDrop} onDragOver={handleDragOver}>
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker-container">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log,.txt"
+          className="file-input"
+        />
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          className="file-picker-button"
+        >
+          Choose File
+        </button>
+
+        {isProcessing && <p className="processing">Processing file...</p>}
+
+.app {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
 }
 
-function App() {
-  const [fileData, setFileData] = useState<FileData | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
+.file-picker-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-picker-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.file-picker-button:hover {
+  background-color: #0056b3;
+}
+
+.processing {
+  color: #007bff;
+}
+
+.file-content {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.file-content pre {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
