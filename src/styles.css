@@ -1,26 +1,167 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-const App = () => {
-  const [file, setFile] = useState<File | null>(null);
+interface FileData {
+  name: string;
+  content: string;
+  size: number;
+}
+
+function App() {
+  const [fileData, setFileData] = useState<FileData | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [summary, setSummary] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0] || null;
-    setFile(selectedFile);
-    setSummary(null);
-  };
+    const file = e.target.files?.[0];
 
-  const handleIngest = () => {
-    if (!file) return;
+    if (!file) {
+      setError('No file selected');
+      return;
+    }
+
+    if (!file.name.endsWith('.log')) {
+      setError('Only .log files are allowed');
+      return;
+    }
 
     setIsProcessing(true);
+    setError(null);
 
-    // Simulate file processing
-    setTimeout(() => {
-      setSummary(`Processed ${file.name} with size ${file.size} bytes`);
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+
+      setFileData({
+        name: file.name,
+        content,
+        size: file.size,
+      });
+
+      setIsProcessing(false);
+    };
+
+    reader.onerror = () => {
+      setError('Failed to read file');
+      setIsProcessing(false);
+    };
+
+    reader.readAsText(file);
+  };
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Log Summarizer</h1>
+
+        <div className="file-picker-container">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept=".log"
+            style={{ display: 'none' }}
+          />
+
+          <button onClick={handleButtonClick} className="file-picker-button">
+/* Add your styles here */
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.file-picker-container {
+  margin-top: 20px;
+}
+
+.file-picker-button {
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.file-picker-button:hover {
+  background-color: #29b6f6;
+}
+
+.processing,
+.error {
+  margin-top: 10px;
+}
+
+.error {
+  color: #ff5252;
+}
+
+.file-info {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #3a3d42;
+  border-radius: 4px;
+  max-width: 600px;
+}
+
+.content-preview {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+  max-height: 200px;
+  font-size: 14px;
+}
+
+.App-header h1 {
+  margin-bottom: 20px;
+}
+
+.App-header p {
+  margin: 5px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .App-header h1 {
+    font-size: 24px;
+  }
+
+  .file-info {
+    padding: 10px;
+  }
+
+  .content-preview {
+    font-size: 12px;
+  }
+}
+export default App;
       setIsProcessing(false);
     }, 2000);
   };
