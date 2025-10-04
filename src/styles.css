@@ -1,6 +1,8 @@
-:root {
-  --bg: #0f1724;
-  --card: #0b1524;
+/* eslint-disable no-console */
+
+/* eslint-disable no-console */
+import React, { useState, useRef } from 'react';
+import { marked } from 'marked';
   --muted: #9aa4b2;
   --accent: #60a5fa;
   --text: #e6eef6;
@@ -12,29 +14,41 @@
 }
 
 .drop-area {
-  border: 2px dashed var(--accent);
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+// Define types for log entries
+const App: React.FC = () => {
+  const [logContent, setLogContent] = useState<string>('');
+  const [summary, setSummary] = useState<string>('');
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+/* Status indicator styles */
+.status-indicator {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
 }
 
+:root {
+  --bg: #0f1724;
+  --card: #0b1524;
 .drop-area:hover {
   background-color: rgba(96, 165, 250, 0.1);
+  const [logEntries, setLogEntries] = useState<LogEntry[]>([]);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+  --border: #1e293b;
+  --card-border: #2d3748;
 }
 
-.file-drop-hint {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 0.9em;
+.processing-indicator {
+  color: var(--accent);
+  font-weight: bold;
 }
 
-.app {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
+.drop-area {
+  border: 2px dashed var(--accent);
 
 .file-picker {
   margin-bottom: 20px;
@@ -50,49 +64,49 @@
   transition: background-color 0.2s ease;
 }
 
-.file-button:hover {
-  background-color: #3b82f6;
-}
+    const reader = new FileReader();
 
-.file-info {
-  margin-top: 10px;
+    reader.onload = (e) => {
+      const content = e.target?.result as string;
+      setLogContent(content);
+
   color: var(--success);
 }
 
 .error {
   margin-top: 10px;
   color: var(--error);
-}
+      } catch (e) {
+        setError('Failed to parse log content.');
+        setLogEntries([]);
+      }
+    };
 
-.log-preview {
-  margin-bottom: 20px;
-}
-
-.process-button {
+    reader.onerror = () => {
   background-color: var(--accent);
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+  };
 
-.process-button:hover:not(:disabled) {
-  background-color: #3b82f6;
-}
+  const handleProcessLogs = () => {
+    if (!logContent) return;
 
-.process-button:disabled {
-  background-color: var(--border);
-  cursor: not-allowed;
-}
-
-.summary {
-  margin-top: 20px;
-}
-
-pre {
-  background-color: var(--card);
+    // Validate content is valid JSON
+    try {
+      JSON.parse(logContent);
+    } catch (e) {
+      setError('Invalid JSON content. Please check your file.');
+      return;
+    // Reset any previous summary
+    setSummary('');
+    setIsProcessing(true);
+    // Simulate processing and summarization
+    // Simulate processing and summarization
+    setTimeout(() => {
+      // Format summary with markdown
+      const summaryText = `Summary of ${logEntries.length} log entries processed from file "${fileName}".`;
+      setSummary(summaryText);
   padding: 10px;
   border-radius: 4px;
   overflow-x: auto;
@@ -101,13 +115,118 @@ pre {
 .clear-button {
   background-color: var(--error);
   color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-}
+  };
 
+  const handleFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
 .clear-button:hover {
   background-color: #dc2626;
 }
+
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  };
+
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+  };
+
+  const handleDropAreaClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+  // Add test to verify file parsing logic
+  const testFileParsing = () => {
+    // Mock data for testing
+    const mockLogData = [
+      { timestamp: "2023-01-01T00:00:00Z", level: "INFO", message: "Application started" },
+      { timestamp: "2023-01-01T00:01:00Z", level: "ERROR", message: "Database connection failed" }
+    ];
+      setLogEntries(entries);
+      return true;
+    } catch (e) {
+      setError('Failed to parse mock log content.');
+      setLogEntries([]);
+      return false;
+    }
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div className="status-indicator">
+      <div
+        className="file-picker"
+        onDragOver={handleDragOver}
+        <div
+          onClick={handleDropAreaClick}
+          className="drop-area"
+          style={isDragging ? { backgroundColor: 'rgba(96, 165, 250, 0.2)' } : undefined}
+        >
+
+          <button onClick={handleFileSelect} className="file-button">
+        </div>
+
+        {fileName && (
+          <div className="file-info">
+            Selected file: <strong>{fileName}</strong>
+          </div>
+        )}
+
+        {isProcessing && (
+          <div className="processing-indicator">
+            Processing logs...
+          </div>
+        )}
+
+        {error && <div className="error">{error}</div>}
+      </div>
+
+      <div className="file-drop-hint">
+        Or drag and drop a JSON file here
+      </div>
+
+      {logContent && !isProcessing && (
+        <div className="file-info">
+          Selected file: <strong>{fileName}</strong>
+        </div>
+      {error && <div className="error">{error}</div>}
+    </div>
+
+    <div className="file-drop-hint">
+      Or drag and drop a JSON file here
+    </div>
+
+    {logContent && !isProcessing && (
+      <div className="log-preview">
+        <h2>Log Preview</h2>
+      <div className="test-section">
+        <h3>Test Section</h3>
+
+        <button onClick={testFileParsing} className="test-button">
+          Run Test
+        </button>
+      </div>
+      <button
+        onClick={handleProcessLogs}
+        disabled={!logContent || isProcessing}
+        className="process-button"
+      >
+
+        {isProcessing ? 'Processing...' : 'Process Logs'}
+      {summary && (
+        <div className="summary">
+          <h2>Summary</h2>
+          <div dangerouslySetInnerHTML={{ __html: marked(summary) }} />
+        </div>
+      )}
