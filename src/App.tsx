@@ -95,10 +95,34 @@ const App: React.FC = () => {
     setFileName('');
     setLogEntries([]);
   };
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      const event = { target: { files: [file] } } as unknown as React.ChangeEvent<HTMLInputElement>;
+      handleFileChange(event);
+    }
+  };
+
+  const handleDropAreaClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
     <div className="app">
       <h1>Log Summarizer</h1>
-      <div className="file-picker">
+      <div 
+        className="file-picker"
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+      >
         <input
           type="file"
           ref={fileInputRef}
@@ -106,15 +130,23 @@ const App: React.FC = () => {
           accept=".json"
           style={{ display: 'none' }}
         />
-        <button onClick={handleFileSelect} className="file-button">
+        <div 
+          onClick={handleDropAreaClick}
+          className="drop-area"
+        >
+          <button onClick={handleFileSelect} className="file-button">
           Select Log File
         </button>
+        </div>
         {fileName && (
           <div className="file-info">
             Selected file: <strong>{fileName}</strong>
           </div>
         )}
         {error && <div className="error">{error}</div>}
+      </div>
+      <div className="file-drop-hint">
+        Or drag and drop a JSON file here
       </div>
       {logContent && (
         <div className="log-preview">

@@ -10,3 +10,104 @@
   --border: #1e293b;
   --card-border: #2d3748;
 }
+
+.drop-area {
+  border: 2px dashed var(--accent);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.drop-area:hover {
+  background-color: rgba(96, 165, 250, 0.1);
+}
+
+.file-drop-hint {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.9em;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.file-picker {
+  margin-bottom: 20px;
+}
+
+.file-button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.file-button:hover {
+  background-color: #3b82f6;
+}
+
+.file-info {
+  margin-top: 10px;
+  color: var(--success);
+}
+
+.error {
+  margin-top: 10px;
+  color: var(--error);
+}
+
+.log-preview {
+  margin-bottom: 20px;
+}
+
+.process-button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.process-button:hover:not(:disabled) {
+  background-color: #3b82f6;
+}
+
+.process-button:disabled {
+  background-color: var(--border);
+  cursor: not-allowed;
+}
+
+.summary {
+  margin-top: 20px;
+}
+
+pre {
+  background-color: var(--card);
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.clear-button {
+  background-color: var(--error);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.clear-button:hover {
+  background-color: #dc2626;
+}
