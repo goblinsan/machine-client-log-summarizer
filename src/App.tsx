@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+
+/* eslint-disable no-console */
 import React, { useState, useRef } from 'react';
 import { marked } from 'marked';
 
@@ -9,6 +11,7 @@ interface LogEntry {
   message?: string;
 }
 
+// Define types for log entries
 const App: React.FC = () => {
   const [logContent, setLogContent] = useState<string>('');
   const [summary, setSummary] = useState<string>('');
