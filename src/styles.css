@@ -1,6 +1,121 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
+interface FileData {
+  name: string;
+  content: string | null;
+}
+
+const App: React.FC = () => {
+  const [fileData, setFileData] = useState<FileData | null>(null);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsProcessing(true);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setFileData({
+        name: file.name,
+        content: content,
+      });
+      setIsProcessing(false);
+    };
+
+    reader.onerror = () => {
+      console.error('Failed to read file');
+      setIsProcessing(false);
+    };
+
+    reader.readAsText(file);
+  };
+
+  const handleFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="app-container">
+      <h1>Log Summarizer</h1>
+
+      <div className="file-picker-container">
+        <button onClick={handleFileSelect} className="file-picker-button">
+          Choose Log File
+        </button>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log,.txt"
+          className="file-input"
+        />
+
+        {isProcessing && <p className="processing-text">Processing file...</p>}
+
+        {fileData && (
+          <div className="file-info">
+            <p>Selected file: {fileData.name}</p>
+            <pre className="file-content">{fileData.content}</pre>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+/* Add your styles here */
+
+.app-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-picker-container {
+  margin-top: 20px;
+}
+
+.file-picker-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.file-picker-button:hover {
+  background-color: #0056b3;
+}
+
+.file-input {
+  display: none;
+}
+
+.processing-text {
+  color: #007bff;
+  font-style: italic;
+}
+
+.file-info {
+  margin-top: 20px;
+}
+
+.file-content {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+export default App;
+
 const App: React.FC = () => {
   const [fileContent, setFileContent] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
