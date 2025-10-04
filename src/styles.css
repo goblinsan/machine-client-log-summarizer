@@ -8,3 +8,25 @@
   --warning: #f59e0b;
   --error: #ef4444;
 }
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.file-button, .process-button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-button:hover, .process-button:hover {
+  opacity: 0.9;
+}
