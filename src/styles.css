@@ -4,13 +4,44 @@ import './styles.css';
 const App: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [fileName, setFileName] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+  const [isProcessing, setIsProcessing] = useState(false);
+      <div className="upload-area">
+        <p>Drag & drop files here or click to browse</p>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={(e) => {
+            if (e.target.files && e.target.files.length > 0) {
+              setIsProcessing(true);
+              // Simulate processing
+              setTimeout(() => setIsProcessing(false), 2000);
+            }
+          }}
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.upload-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+        </button>
+
+        {isDragging && <p className="drag-over">Drop files here</p>}
+      </div>
+
+      {isProcessing && <p>Processing...</p>}
+    </div>
+  );
+};
 
   const handleDragLeave = () => {
     setIsDragging(false);
