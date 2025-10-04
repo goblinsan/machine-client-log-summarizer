@@ -3,19 +3,105 @@ import './styles.css';
 
 const App = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [isIngesting, setIsIngesting] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [summary, setSummary] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0] || null;
-    setFile(selectedFile);
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
+      setSummary(null);
+    }
   };
 
-  const handleIngest = () => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setFile(e.dataTransfer.files[0]);
+      setSummary(null);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleSubmit = () => {
     if (!file) return;
 
-    setIsIngesting(true);
+    setIsProcessing(true);
+    // Simulate processing
+    setTimeout(() => {
+      setSummary(`Processed ${file.name} with 123 log entries.`);
+      setIsProcessing(false);
+    }, 2000);
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+
+      <div
+        className="file-drop-zone"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+      >
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".json"
+          style={{ display: 'none' }}
+        />
+        <button onClick={() => fileInputRef.current?.click()}>
+          Choose File
+        </button>
+        <p>or drag and drop a JSON log file here</p>
+      </div>
+
+      {file && (
+        <div className="file-info">
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.file-drop-zone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.file-drop-zone:hover {
+  background-color: #f0f0f0;
+}
+
+.file-info {
+  margin-top: 20px;
+}
+
+.summary {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #e9f7fe;
+  border-radius: 8px;
+}
+      )}
+
+      {summary && (
+        <div className="summary">
+          <h2>Summary</h2>
+          <p>{summary}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
     setSummary(null);
 
     // Simulate ingestion and summarization
