@@ -1,58 +1,77 @@
-import { processLogFile } from './ingestion';
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [summary, setSummary] = useState<string | null>(null);
+import React, { useState, useRef } from 'react';
+
+const App = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [ingestionResult, setIngestionResult] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedFile(e.target.files[0]);
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      processFile(selectedFile);
     }
   };
 
-  const handleProcess = async () => {
-    if (!selectedFile) return;
-
-    setIsProcessing(true);
-    try {
-      const result = await processLogFile(selectedFile);
-      setSummary(result);
-    } catch (error) {
-      console.error('Error processing file:', error);
-      setSummary('Error processing file');
-    } finally {
-      setIsProcessing(false);
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const droppedFile = e.dataTransfer.files?.[0];
+    if (droppedFile) {
+      setFile(droppedFile);
+      processFile(droppedFile);
     }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const processFile = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target?.result as string;
+      setIngestionResult(`Processed file: ${file.name}\nContent preview:\n${content.substring(0, 200)}...`);
+    };
+    reader.readAsText(file);
+  };
+
+  const triggerFileSelect = () => {
+    fileInputRef.current?.click();
   };
 
   return (
     <div className="app">
       <h1>Log Summarizer</h1>
 
-      <div className="file-picker">
-        <label htmlFor="fileInput">Choose a log file:</label>
+      <div
+        className="file-drop-zone"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onClick={triggerFileSelect}
+      >
+        <p>Drag & drop a file here or click to select</p>
         <input
           type="file"
-          id="fileInput"
+          ref={fileInputRef}
           onChange={handleFileChange}
+          style={{ display: 'none' }}
         />
-
-        {selectedFile && (
-          <p>Selected file: {selectedFile.name}</p>
-        )}
-
-        <button
-          onClick={handleProcess}
-          disabled={!selectedFile || isProcessing}
-        >
-          {isProcessing ? 'Processing...' : 'Process Log'}
-        </button>
       </div>
 
-      {summary && (
-        <div className="summary">
-          <h2>Summary:</h2>
-          <pre>{summary}</pre>
+      {file && (
+        <div className="file-info">
+          <p>Selected file: {file.name}</p>
+        </div>
+      )}
+
+      {ingestionResult && (
+        <div className="ingestion-result">
+          <h2>Ingestion Result</h2>
+          <pre>{ingestionResult}</pre>
         </div>
       )}
     </div>
   );
+};
+
+export default App;
