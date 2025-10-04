@@ -1,15 +1,142 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, useRef } from 'react';
 import './styles.css';
 
-interface LogLine {
-  timestamp: string;
-  level: string;
-  message: string;
+interface FileData {
+  name: string;
+  size: number;
+  content: string;
 }
 
 const App = () => {
-  const [fileContent, setFileContent] = useState<LogLine[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [fileData, setFileData] = useState<FileData | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsProcessing(true);
+    setError(null);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setFileData({
+        name: file.name,
+        size: file.size,
+        content
+      });
+      setIsProcessing(false);
+    };
+
+    reader.onerror = () => {
+      setError('Failed to read file');
+      setIsProcessing(false);
+    };
+
+    reader.readAsText(file);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type === 'text/plain') {
+      const event = { target: { files: [file] } } as unknown as React.ChangeEvent<HTMLInputElement>;
+      handleFileChange(event);
+    } else {
+      setError('Please drop a valid text file');
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const triggerFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="app" onDrop={handleDrop} onDragOver={handleDragOver}>
+      <h1>Log Summarizer</h1>
+
+      <div className="file-picker-container">
+        <button onClick={triggerFileInput} className="file-picker-button">
+          Select Log File
+        </button>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log,.txt"
+          className="file-input"
+        />
+      </div>
+
+      {isProcessing && <p className="status">Processing file...</p>}
+
+      {error && <p className="error">{error}</p>}
+
+      {fileData && (
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-picker-container {
+  margin-bottom: 20px;
+}
+
+.file-picker-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.file-picker-button:hover {
+  background-color: #0056b3;
+}
+
+.file-input {
+  display: none;
+}
+
+.status,
+.error {
+  margin-top: 10px;
+}
+
+.file-info {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.file-content {
+  white-space: pre-wrap;
+  max-width: 80vw;
+  overflow-x: auto;
+}
+          <p><strong>Size:</strong> {fileData.size} bytes</p>
+          <pre className="file-content">{fileData.content.substring(0, 500)}...</pre>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
