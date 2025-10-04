@@ -4,120 +4,123 @@
 
 ---
 
-### 📁 Project Tree Sketch  
+### ✅ Project Overview  
+- **Project Name**: `machine-client-log-summarizer`  
+- **Project ID**: `1808e304-fc52-49f6-9a42-71044b4cb4b5`  
+- **Project Slug**: `1808e304-fc52-49f6-9a42-71044b4cb4b5`  
+- **Milestone**: `MVP - Local ingestion + UI` (branch: `milestone/mvp-local-ingestion-ui`)  
+- **Active Task**: *"Add file picker and local ingestion pipeline"* — status: **not_started**  
+
+---
+
+### 📁 Project Tree Sketch
+
 ```
 /machine-client-log-summarizer
 ├── src/
-│   ├── main.tsx         (173 bytes)
-│   ├── App.tsx          (74 bytes)
-│   └── styles.css       (170 bytes)
+│   ├── App.tsx           (1119 bytes, 42 lines)
+│   ├── main.tsx          (173 bytes, 7 lines)
+│   └── styles.css        (170 bytes, 11 lines)
 ```
 
-> ✅ Total files: 3  
-> 🔍 Total lines of code: 21  
-> 📏 Total size: 417 bytes  
+> **Total files**: 3  
+> **Total size**: 1,462 bytes  
+> **Total lines of code**: 60  
 
 ---
 
-### 📝 File Roles & Observations
+### 🔍 File Roles & Observations
 
 | File | Size (bytes) | Lines | Role |
 |------|--------------|-------|------|
-| `src/main.tsx` | 173 | 7 | Entry point of the application. Likely initializes React app or bootstraps the UI. |
-| `src/App.tsx` | 74 | 3 | Main component rendering logic; likely defines the root UI structure. |
-| `src/styles.css` | 170 | 11 | Global styling for the application (likely includes layout, fonts, colors). |
+| `src/App.tsx` | 1119 | 42 | Primary application entry point. Likely contains UI logic, state management, and file picker integration. This is the **core component** for implementing "Add file picker and local ingestion pipeline" task. |
+| `src/main.tsx` | 173 | 7 | Entry point for React app (likely bootstraps the application). Minimal content — suggests a simple or boilerplate setup. |
+| `src/styles.css` | 170 | 11 | Global styling rules. Likely defines layout, fonts, and basic UI appearance. |
 
-> ⚠️ **Note**: All files are extremely minimal — no components, no logic, no configuration observed beyond basic structure.
-
----
-
-### 🔍 Size & Line Hotspots
-
-- **Largest by size**:
-  - `src/styles.css` → 170 bytes (largest)
-  - `src/main.tsx` → 173 bytes (second largest)
-
-- **Longest by lines**:
-  - `src/styles.css` → 11 lines (longest)
-  - `src/main.tsx` → 7 lines
-  - `src/App.tsx` → 3 lines
-
-> 📌 The styling file is both the largest and longest, suggesting it may contain more complex or repeated CSS rules.
+> ⚠️ **No additional files** such as `components/`, `utils/`, `services/`, `types/`, or migration scripts were observed in the scan.
 
 ---
 
-### 🔮 Files Likely to Be Touched Next (Rationale)
+### 📈 Size & Line Count Hotspots
 
-1. **`src/main.tsx`**  
-   ✅ *Reason*: Entry point of React app; likely where the file picker integration or ingestion pipeline logic will be implemented. The task "Add file picker and local ingestion pipeline" implies this is a core component.
+- **Top file by size**:  
+  - `src/App.tsx` — **1,119 bytes (83% of total)** → This is the dominant file and likely contains most of the logic for the current task.
+- **Longest in lines**:  
+  - `src/App.tsx` — **42 lines** → Suggests a moderately complex component, possibly including event handling or state transitions related to file selection.
 
-2. **`src/App.tsx`**  
-   ✅ *Reason*: Root UI container — will need updates to render the file picker, upload status, or ingestion progress indicators.
-
-3. **`src/styles.css`**  
-   ✅ *Reason*: May require styling for new UI elements (e.g., file input, drop zone, loading state). Given its size and line count, it's a likely candidate for visual updates.
-
-> ❌ No other files exist in the project — no `components/`, `utils/`, `services/`, or migration files observed.
+> ✅ All files are small (under 1.5 KB), indicating this is a minimal prototype or early MVP stage.
 
 ---
 
-### ⚠️ Missing Observations (Not Observed)
+### 🚀 Files Likely to Be Modified Next
 
-- 🔍 **No component structure** (e.g., `components/FilePicker.tsx`, `services/ingestion.js`)  
-- 🔍 **No backend integration, API calls, or ingestion logic**  
-- 🔍 **No Alembic migration files** — no database schema changes observed  
-- 🔍 **No test files**, configuration files (`tsconfig.json`, `.env`), or package.json details  
-- 🔍 **No file picker implementation or local ingestion pipeline code**  
-- 🔍 **No UI state management (e.g., React hooks, Redux)**  
+| File | Rationale |
+|------|---------|
+| `src/App.tsx` | **Primary target** for the task "Add file picker and local ingestion pipeline". This file will likely need updates to include: a file input element, event listeners (on change), and logic to trigger local log ingestion. It is already the central component of the app. |
+| `src/main.tsx` | May require minimal changes to integrate new components or state — but currently very simple; likely just needs a reference to App. |
+| `src/styles.css` | Could be updated with UI improvements (e.g., file picker styling) if visual design is being refined. |
 
-> 🚫 These are not present in the scan — they were not observed.
-
----
-
-### ✅ Summary
-
-This project appears to be a minimal React frontend scaffold focused on **local file ingestion and UI rendering**, aligned with the task: *"Add file picker and local ingestion pipeline"*. However:
-
-- The current codebase is extremely small (only 21 lines of code).
-- No actual implementation of file picking or ingestion logic exists.
-- No backend, state management, or component structure is visible.
-
-➡️ **Next Steps (Recommended)**:
-- Add a `FilePicker` component to `src/components/`
-- Implement event handling for file selection
-- Integrate local ingestion pipeline (e.g., read file → parse log → summarize)
-- Update `App.tsx` to render the picker and status UI
-- Style new elements in `styles.css`
-
-> 🚨 **Warning**: The current state does not support any functionality related to file ingestion or summarization. This is a foundational setup, not an active implementation.
+> ❌ **No migration files, no backend services, no config files, no test files** were observed — indicating this is a frontend-only MVP focused on local ingestion UI.
 
 ---
 
-**Final Note**:  
-The project context has been hydrated based solely on the scan summary provided. No files beyond those listed were observed — no migration history, no backend services, and no logic for ingestion or UI interaction exists in this snapshot.
+### 🚫 What Was Not Observed
+
+- 🔍 No Alembic migrations (no database schema changes)
+- 🔍 No `.gitignore`, `package.json`, or `tsconfig.json` files
+- 🔍 No backend logic, API endpoints, or services
+- 🔍 No test suite or unit tests
+- 🔍 No component structure (e.g., `components/FilePicker.tsx`)
+- 🔍 No configuration or environment variables
+
+> ⚠️ **Note**: The task "Add file picker and local ingestion pipeline" implies a feature that would require both frontend UI and backend processing. However, **no backend or ingestion logic** was observed in the scan — this may indicate either:
+> - A gap in the current codebase (missing service layer)
+> - Or that the ingestion is simulated locally via client-side logic (e.g., file reading + parsing)
+
+---
+
+### 📝 Summary & Next Steps
+
+- **Current state**: Minimal React frontend with a single main component (`App.tsx`) handling core UI.
+- **Task alignment**: The task "Add file picker and local ingestion pipeline" can be addressed by enhancing `src/App.tsx` to:
+  - Add an input field for file selection
+  - Handle file upload events
+  - Trigger parsing/ingestion logic (possibly in-memory or via mock processing)
+- **Recommendation**:
+  - Begin editing `src/App.tsx` to implement a file picker.
+  - Consider adding a new component (e.g., `FilePicker`) if modularization is desired — though not observed here, it may be needed for scalability.
+  - Add logging or console output in the ingestion pipeline to verify data flow.
+
+> 🔍 **No migration files detected** → No database changes expected at this stage.  
+> 🚨 **Warning**: The project appears to lack backend processing logic. If true local ingestion (e.g., parsing logs, storing results) is required, additional services or modules must be added — not present in current scan.
+
+---
+
+✅ **Context hydrated successfully based on available file scan data**.  
+No assumptions made beyond what was observed. All missing elements are explicitly noted.
 
 ---
 
 # Context Snapshot (Scan)
 
 Repo: /mnt/e/code/machine-client-log-summarizer
-Generated: 2025-10-04T03:58:20.760Z
+Generated: 2025-10-04T04:09:06.250Z
 
 ## Totals
 - Files: 3
-- Bytes: 417
-- Lines: 21
+- Bytes: 1462
+- Lines: 60
 
 ## Components
 ### .
 - Files: 3
-- Bytes: 417
-- Lines: 21
+- Bytes: 1462
+- Lines: 60
 - Largest (top 10):
+  - src/App.tsx (1119 bytes)
   - src/main.tsx (173 bytes)
   - src/styles.css (170 bytes)
-  - src/App.tsx (74 bytes)
 - Longest (top 10):
+  - src/App.tsx (42 lines)
   - src/styles.css (11 lines)
   - src/main.tsx (7 lines)
-  - src/App.tsx (3 lines)
