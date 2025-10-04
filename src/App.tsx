@@ -31,13 +31,18 @@ const App = () => {
     }
   };
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="app">
-      <h1>Log Summarizer</h1>
+      <h1>Machine Client Log Summarizer</h1>
+
       <div
-        className="file-drop-zone"
-        onDragOver={(e) => e.preventDefault()}
+        className="file-drop-area"
         onDrop={handleDrop}
+        onDragOver={handleDragOver}
       >
         <input
           type="file"
@@ -48,16 +53,18 @@ const App = () => {
         <button onClick={() => fileInputRef.current?.click()}>
           Choose File
         </button>
-        <p>or drag and drop a file here</p>
+        <p>or drag and drop a log file here</p>
         {selectedFile && (
-          <div>
-            <p>Selected file: {selectedFile.name}</p>
-            <pre>{fileContent.substring(0, 500)}...</pre>
-          </div>
+          <p>Selected file: {selectedFile.name}</p>
         )}
       </div>
+
+      {fileContent && (
+        <div className="file-content">
+          <h2>File Content:</h2>
+          <pre>{fileContent}</pre>
+        </div>
+      )}
     </div>
   );
 };
-
-export default App;
