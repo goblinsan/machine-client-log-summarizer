@@ -1,27 +1,136 @@
 import React, { useState, useRef } from 'react';
-import './styles.css';
 
-interface LogSummary {
-  totalLines: number;
-  errorCount: number;
-  warningCount: number;
+interface FileData {
+  name: string;
+  size: number;
+  content: string | null;
 }
 
 const App = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [ingestionStatus, setIngestionStatus] = useState<string>('');
-  const [logSummary, setLogSummary] = useState<LogSummary | null>(null);
+  const [selectedFile, setSelectedFile] = useState<FileData | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    // Validate file type (e.g., .log files)
+    if (!file.name.endsWith('.log')) {
+      setError('Only .log files are allowed.');
+      return;
+    }
+
+    // Validate file size (e.g., max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      setError('File size exceeds the limit of 10MB.');
+      return;
+    }
+
+    setError(null);
+    setIsProcessing(true);
+
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+
+      setSelectedFile({
+        name: file.name,
+        size: file.size,
+        content: content || null
+      });
+
+      setIsProcessing(false);
+    };
+
+    reader.onerror = () => {
+      setError('Failed to read file.');
+      setIsProcessing(false);
+    };
+
+    reader.readAsText(file);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files?.[0];
+
     if (file) {
-      setSelectedFile(file);
-      setIngestionStatus('Selected file: ' + file.name);
-      setError(null);
+      const event = { target: { files: [file] } } as unknown as React.ChangeEvent<HTMLInputElement>;
+      handleFileChange(event);
     }
   };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleReset = () => {
+    setSelectedFile(null);
+    setError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Log Summarizer</h1>
+
+        <div
+          className="file-drop-area"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+        >
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept=".log"
+            style={{ display: 'none' }}
+          />
+
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="file-picker-button"
+          >
+            Choose Log File
+          </button>
+
+          {selectedFile && (
+            <div className="file-info">
+              <p>Selected file: {selectedFile.name}</p>
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(<App />);
+          )}
+
+          {isProcessing && <p>Processing file...</p>}
+
+          {error && <p className="error">{error}</p>}
+
+          {selectedFile && selectedFile.content && (
+            <div className="file-content">
+              <h2>File Content Preview:</h2>
+              <pre>{selectedFile.content.substring(0, 500)}...</pre>
+            </div>
+          )}
+        </div>
+      </header>
+    </div>
+  );
+};
+
+export default App;
 
   const handleIngest = () => {
     if (!selectedFile) {
