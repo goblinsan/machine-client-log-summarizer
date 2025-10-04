@@ -8,35 +8,76 @@ const App = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
-      setSummary(null);
-    }
+    const selectedFile = e.target.files?.[0] || null;
+    setFile(selectedFile);
   };
 
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const droppedFile = e.dataTransfer.files?.[0] || null;
+    setFile(droppedFile);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
 /* Global Styles */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 .app {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
 }
 
-.upload-area {
+.file-picker-container {
+  margin-bottom: 1rem;
+}
+
+.drop-zone {
   border: 2px dashed #ccc;
-  padding: 40px;
+  border-radius: 8px;
+  padding: 2rem;
   text-align: center;
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: 500px;
   transition: border-color 0.3s ease;
 }
 
-.upload-area:hover {
+.drop-zone:hover {
+  border-color: #007bff;
+}
+
+.file-input {
+  display: none;
+}
+
+.summary {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 500px;
+}
+    </div>
+  );
+};
+
+export default App;
   border-color: #007bff;
 }
 
