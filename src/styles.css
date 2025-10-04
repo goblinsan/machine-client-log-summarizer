@@ -1,15 +1,145 @@
 import React, { useState } from 'react';
+import './styles.css';
 
 const App = () => {
-  const [logs, setLogs] = useState<string[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [ingestionStatus, setIngestionStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
+  const [results, setResults] = useState<string | null>(null);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFile(e.target.files[0]);
+      processFile(e.target.files[0]);
+    }
+  };
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      setFile(e.dataTransfer.files[0]);
+      processFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const processFile = (file: File) => {
+    setIngestionStatus('processing');
+
+    // Simulate file processing
+    setTimeout(() => {
+      setIngestionStatus('success');
+      setResults(`Processed ${file.name}`);
+    }, 2000);
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker-container">
+        <div
+          className={`file-drop-area ${isDragging ? 'dragging' : ''}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
+          <input
+            type="file"
+            id="fileInput"
+            className="file-input"
+            onChange={handleFileChange}
+            accept=".log,.txt"
+          />
+          <label htmlFor="fileInput" className="file-label">
+            {file ? file.name : 'Choose a file or drag it here'}
+          </label>
+        </div>
+
+        <div className="ingestion-status">
+          {ingestionStatus === 'idle' && <p>Ready to process logs</p>}
+          {ingestionStatus === 'processing' && <p>Processing file...</p>}
+          {ingestionStatus === 'success' && (
+            <div>
+/* ... existing styles ... */
+
+.file-picker-container {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.file-drop-area {
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.file-drop-area.dragging {
+  border-color: #007bff;
+  background-color: #e6f2ff;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  cursor: pointer;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.ingestion-status {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.ingestion-status p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.ingestion-status.processing {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.ingestion-status.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.ingestion-status.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* ... remaining styles ... */
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+export default App;
       const content = e.target?.result as string;
       try {
         const parsedLogs = parseLogContent(content);
