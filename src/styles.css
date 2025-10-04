@@ -1,15 +1,55 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 
-interface FileData {
-  name: string;
-  size: number;
-  lastModified: number;
+const App = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const handleIngest = () => {
+    if (!file) return;
+    setIsProcessing(true);
+    // Simulate ingestion logic here
+    setTimeout(() => {
+      setIsProcessing(false);
+      alert('File processed successfully!');
+    }, 2000);
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div className="file-picker">
+        <input
+          type="file"
+          ref={fileInputRef}
+/* Add basic styles for the file picker and ingestion UI */
+.app {
+  padding: 20px;
+  text-align: center;
 }
 
-function App() {
-  const [selectedFile, setSelectedFile] = useState<FileData | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+.file-picker {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+          {isProcessing ? 'Processing...' : 'Ingest Log'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default App;
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
