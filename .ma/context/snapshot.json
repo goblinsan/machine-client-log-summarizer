@@ -1,18 +1,18 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-04T21:06:58.438Z",
+  "generated_at": "2025-10-04T21:25:00.682Z",
   "totals": {
     "files": 3,
-    "bytes": 79960,
-    "lines": 3928
+    "bytes": 79738,
+    "lines": 3916
   },
   "components": [
     {
       "component": ".",
       "totals": {
         "files": 3,
-        "bytes": 79960,
-        "lines": 3928
+        "bytes": 79738,
+        "lines": 3916
       },
       "largest": [
         {
@@ -31,10 +31,10 @@
         },
         {
           "path": "src/App.tsx",
-          "bytes": 1735,
-          "mtime": 1759587845111.6438,
-          "lines": 71,
-          "sha1": "1dcccb16b864b66f6a0c203e639e060ee4eee164"
+          "bytes": 1513,
+          "mtime": 1759613100588.86,
+          "lines": 59,
+          "sha1": "89719d9ad5211bf51f377b7636a32d193573aa53"
         }
       ],
       "longest": [
@@ -54,10 +54,10 @@
         },
         {
           "path": "src/App.tsx",
-          "bytes": 1735,
-          "mtime": 1759587845111.6438,
-          "lines": 71,
-          "sha1": "1dcccb16b864b66f6a0c203e639e060ee4eee164"
+          "bytes": 1513,
+          "mtime": 1759613100588.86,
+          "lines": 59,
+          "sha1": "89719d9ad5211bf51f377b7636a32d193573aa53"
         }
       ]
     }
@@ -80,10 +80,10 @@
       },
       {
         "path": "src/App.tsx",
-        "bytes": 1735,
-        "mtime": 1759587845111.6438,
-        "lines": 71,
-        "sha1": "1dcccb16b864b66f6a0c203e639e060ee4eee164"
+        "bytes": 1513,
+        "mtime": 1759613100588.86,
+        "lines": 59,
+        "sha1": "89719d9ad5211bf51f377b7636a32d193573aa53"
       }
     ],
     "longest_files": [
@@ -103,10 +103,10 @@
       },
       {
         "path": "src/App.tsx",
-        "bytes": 1735,
-        "mtime": 1759587845111.6438,
-        "lines": 71,
-        "sha1": "1dcccb16b864b66f6a0c203e639e060ee4eee164"
+        "bytes": 1513,
+        "mtime": 1759613100588.86,
+        "lines": 59,
+        "sha1": "89719d9ad5211bf51f377b7636a32d193573aa53"
       }
     ]
   }
