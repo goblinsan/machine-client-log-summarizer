@@ -10,6 +10,40 @@ function App() {
     }
   };
 
+  return (
+    <div className="App">
+      <h1>Log Summarizer</h1>
+      <div className="file-picker-container">
+        <input
+          type="file"
+          accept=".json"
+.App {
+  text-align: center;
+}
+
+.file-picker-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.file-input {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+        {selectedFile && (
+          <p>Selected file: {selectedFile.name}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
   const handleIngest = () => {
     if (selectedFile) {
       console.log('Ingesting file:', selectedFile.name);
