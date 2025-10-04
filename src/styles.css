@@ -24,6 +24,65 @@ const App = () => {
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Log Summarizer</h1>
+      <div
+        className={`file-drop-area ${isDragging ? 'dragging' : ''}`}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
+        <input
+          type="file"
+/* Add basic styles for file picker */
+.app {
+  padding: 20px;
+  text-align: center;
+}
+
+.file-drop-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  margin: 20px auto;
+  width: 300px;
+  transition: border-color 0.3s ease;
+}
+
+.file-drop-area.dragging {
+  border-color: #007bff;
+}
+
+.file-input {
+  display: none;
+}
+        <p>Drag & drop a log file here or click to browse</p>
+      </div>
+      {file && <p>Selected file: {file.name}</p>}
+    </div>
+  );
+};
+
+export default App;
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
 
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       setFile(e.dataTransfer.files[0]);
