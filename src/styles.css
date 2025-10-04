@@ -3,13 +3,149 @@ import './styles.css';
 
 interface FileData {
   name: string;
-  size: number;
-  lastModified: number;
+  content: string;
 }
 
-interface IngestionStatus {
-  status: 'idle' | 'loading' | 'success' | 'error';
-  message?: string;
+const App = () => {
+  const [fileData, setFileData] = useState<FileData | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (!file) {
+      setError('No file selected');
+      return;
+    }
+
+    if (!file.name.endsWith('.log')) {
+      setError('Only .log files are allowed');
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+
+      setFileData({
+        name: file.name,
+        content
+      });
+
+      setError(null);
+    };
+
+    reader.onerror = () => {
+      setError('Failed to read file');
+    };
+
+    reader.readAsText(file);
+  };
+
+  const handleIngest = () => {
+    if (!fileData) {
+      setError('No file to ingest');
+      return;
+    }
+
+    setIsProcessing(true);
+
+    // Simulate ingestion logic here
+    setTimeout(() => {
+      setIsProcessing(false);
+      // In a real app, this would be replaced with actual ingestion logic
+      console.log('Ingesting file:', fileData.name);
+    }, 1000);
+  };
+
+  const handleReset = () => {
+    setFileData(null);
+    setError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+
+      <div className="file-picker">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept=".log"
+        />
+
+        {fileData && (
+          <div className="file-info">
+            <p>Selected file: {fileData.name}</p>
+            <button onClick={handleIngest} disabled={isProcessing}>
+              {isProcessing ? 'Processing...' : 'Ingest File'}
+            </button>
+          </div>
+        )}
+
+        {error && <p className="error">{error}</p>}
+
+        {fileData && !isProcessing && (
+          <button onClick={handleReset} className="reset-btn">
+            Reset
+          </button>
+        )}
+      </div>
+
+      {fileData && !isProcessing && (
+        <div className="summary">
+          <h2>Summary</h2>
+          <p>{fileData.content.substring(0, 100)}...</p>
+        </div>
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.file-picker {
+  margin-bottom: 20px;
+}
+
+.file-info {
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.reset-btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+}
+
+.summary {
+  margin-top: 20px;
+}
+
+.loading {
+  margin-top: 20px;
+}
+        <div className="loading">
+          <p>Processing file...</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
 }
 
 const App = () => {
