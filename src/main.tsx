@@ -1,18 +1,45 @@
-import React, { useState, useEffect } from 'react';
-
-interface LogEntry {
-  timestamp: string;
-  level: string;
-  message: string;
-}
+import React, { useState } from 'react';
 
 const App = () => {
-  const [logs, setLogs] = useState<LogEntry[]>([]);
-  const [summary, setSummary] = useState<string>('');
+  const [logContent, setLogContent] = useState<string>('');
 
-  useEffect(() => {
-    // Simulate loading logs from local storage or file
-    const mockLogs: LogEntry[] = [
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setLogContent(event.target?.result as string);
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  return (
+    <div className="app">
+      <h1>Machine Client Log Summarizer</h1>
+      <div className="upload-container">
+        <label htmlFor="log-file">Upload Log File:</label>
+        <input
+          type="file"
+          id="log-file"
+          accept=".log"
+          onChange={handleFileUpload}
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './styles.css';
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// Importing App here to ensure proper rendering
+import App from './App';
       { timestamp: '2023-04-01T10:00:00Z', level: 'INFO', message: 'Application started' },
       { timestamp: '2023-04-01T10:05:00Z', level: 'ERROR', message: 'Failed to connect to database' },
       { timestamp: '2023-04-01T10:10:00Z', level: 'WARN', message: 'High memory usage detected' },
