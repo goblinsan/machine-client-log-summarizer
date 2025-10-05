@@ -34,6 +34,34 @@
   font-weight: 600;
 }
 
+/* Legacy drop-zone and picker variants migrated here */
+.file-drop-zone,
+.file-drop-area,
+.file-picker-drop-zone {
+  border: 2px dashed var(--border);
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.file-drop-zone.dragging,
+.file-drop-area.dragging {
+  border-color: var(--accent);
+}
+
+.file-picker-button,
+.file-button {
+  @extend %btn;
+}
+
+.ingestion-result {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
 /* File-picker drop-zone and related items (migrated) */
 .file-picker-drop-zone {
   width: 100%;
