@@ -39,7 +39,7 @@
 .file-drop-content { text-align: center; }
 
 .file-select-button {
-  @extend %btn;
+  @include btn();
 }
 
 .file-picker-container {

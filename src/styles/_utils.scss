@@ -1,4 +1,6 @@
 /* Utilities - small, single-purpose helpers (SMACSS) */
+@forward "mixins";
+
 .u-hidden { display: none !important; }
 .u-center { text-align: center !important; }
 .u-mb-1 { margin-bottom: 0.25rem !important; }

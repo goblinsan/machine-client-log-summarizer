@@ -1,8 +1,5 @@
 @use "sass:color";
-@import "base";
-@import "layout";
-@import "components";
-@import "utils";
+@use "index" as *;
 
 /* Log list styles */
 .log-list {
@@ -13,7 +10,7 @@
 
 .log-item {
   padding: 10px;
-  border-bottom: 1px solid #eef2f7;
+  border-bottom: 1px solid var(--light-border);
   font-family: monospace;
   white-space: pre-wrap;
 }

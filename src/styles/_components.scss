@@ -1,16 +1,7 @@
 /* Components (buttons, file-picker, badges) */
-%btn {
-  display: inline-block;
-  padding: 10px 16px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  background: var(--accent);
-  color: white;
-}
-
+/* Button styles now provided by mixin in _mixins.scss */
 .btn {
-  @extend %btn;
+  @include btn();
 }
 
 .btn-secondary {
@@ -26,7 +17,7 @@
 }
 
 .file-picker-button {
-  @extend %btn;
+  @include btn();
 }
 
 .file-info {
@@ -53,7 +44,7 @@
 
 .file-picker-button,
 .file-button {
-  @extend %btn;
+  @include btn();
 }
 
 .ingestion-result {
