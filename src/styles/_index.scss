@@ -1,0 +1,7 @@
+/* Central manifest: forward commonly used partials so callers can @use "index" as *; */
+@forward "base";
+@forward "layout";
+@forward "components";
+@forward "utils";
+@forward "mixins";
+@forward "extras";

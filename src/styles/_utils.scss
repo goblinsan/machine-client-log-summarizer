@@ -1,0 +1,9 @@
+/* Utilities (single-purpose helpers and forwarded mixins) */
+@forward "mixins";
+
+.u-hidden { display: none !important; }
+.u-center { text-align: center !important; }
+.u-mb-1 { margin-bottom: 0.25rem !important; }
+.u-mt-2 { margin-top: 0.5rem !important; }
+.u-flex { display: flex !important; }
+.u-justify-between { justify-content: space-between !important; }

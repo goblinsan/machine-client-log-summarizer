@@ -1,0 +1,197 @@
+@use "mixins" as mixins;
+
+/* Consolidated styles migrated from the old styles.css
+  Cleaned, de-duplicated and converted to kebab-case where appropriate.
+  This is an intermediate aggregation — we can later split rules into
+  _components/_layout/_utils as we refine. */
+
+/* App header / top-level */
+.app-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.app-link { color: #61dafb; }
+
+/* File drop / picker */
+.file-drop-zone {
+  border: 2px dashed #61dafb;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  width: 300px;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.file-drop-zone.drag-over {
+  background-color: rgb(97 218 251 / 10%);
+  border-color: #4a9fc7;
+}
+
+.file-drop-content { text-align: center; }
+
+.file-select-button {
+  @include mixins.btn();
+}
+
+.file-picker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: 2px dashed var(--light-border);
+  border-radius: 8px;
+  margin: 1rem 0;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.file-picker-drop-zone {
+  width: 100%;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: 2px dashed var(--light-border);
+  border-radius: 8px;
+  margin: 1rem 0;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.file-picker-drop-zone:hover {
+  border-color: #007bff;
+  background-color: #f1f9ff;
+}
+
+.file-picker-log-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.file-picker-log-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.file-picker-log-item:last-child {
+  border-bottom: none;
+}
+
+.file-info {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.file-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.file-list li {
+  margin: 5px 0;
+  padding: 5px;
+  background-color: #e9e9e9;
+  border-radius: 4px;
+}
+
+/* Ingestion controls */
+
+.ingestion-pipeline-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid var(--light-border);
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.ingestion-button,
+.ingest-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ingestion-button:hover,
+.ingest-button:hover {
+  background-color: #0056b3;
+}
+
+.ingestion-button:disabled,
+.ingest-button:disabled {
+  background-color: var(--light-border);
+  cursor: not-allowed;
+}
+
+.processing-indicator {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: var(--warning-bg);
+  border: 1px solid #ffeaa7;
+  border-radius: 4px;
+}
+
+.processing-indicator p {
+  margin: 0;
+  color: #856404;
+}
+
+.ingestion-status {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.ingestion-status.processing {
+  background-color: var(--warning-bg);
+  color: #856404;
+}
+
+.ingestion-status.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.ingestion-status.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Log preview and lists */
+.log-preview {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.log-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.log-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Helpers */
+.hidden {
+  display: none !important;
+}

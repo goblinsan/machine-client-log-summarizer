@@ -1,0 +1,24 @@
+@use "mixins" as mixins;
+
+/* Extras (low-priority migrated rules kept for now)
+   - Consolidated styles from the original monolith that don't yet
+     belong in a specific component or layout partial. Keep this
+     minimal; prefer moving rules into _components or _layout over time.
+*/
+
+/* App header / top-level (kept as extras in case of edge cases) */
+.app-header {
+  background-color: var(--header-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: var(--header-text);
+}
+
+.app-link { color: var(--link); }
+
+/* Helpers kept here for migration */
+.hidden { display: none !important; }
