@@ -1,7 +1,8 @@
-/* Components (buttons, file-picker, badges) */
+/* Components (reusable UI pieces: buttons, pickers, status badges) */
+@use "mixins" as mixins;
 /* Button styles now provided by mixin in _mixins.scss */
 .btn {
-  @include btn();
+  @include mixins.btn();
 }
 
 .btn-secondary {
@@ -17,7 +18,7 @@
 }
 
 .file-picker-button {
-  @include btn();
+  @include mixins.btn();
 }
 
 .file-info {
@@ -44,7 +45,7 @@
 
 .file-picker-button,
 .file-button {
-  @include btn();
+  @include mixins.btn();
 }
 
 .ingestion-result {
@@ -80,11 +81,6 @@
   margin-top: 1rem;
 }
 
-.file-picker-log-item {
-  padding: 0.5rem;
-  border-bottom: 1px solid #eee;
-}
-
 .file-picker-log-item:last-child {
   border-bottom: none;
 }
@@ -99,6 +95,23 @@
   padding: 5px;
   background-color: var(--file-list-bg);
   border-radius: 4px;
+}
+
+/* Additional selectors migrated from _migrated.scss */
+.file-drop-content { text-align: center; }
+
+.file-select-button {
+  @include mixins.btn();
+}
+
+.file-drop-zone.drag-over {
+  background-color: var(--accent-bg-light);
+  border-color: var(--accent-variant);
+}
+
+.file-picker-log-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--light-border);
 }
 
 /* Ingestion controls */

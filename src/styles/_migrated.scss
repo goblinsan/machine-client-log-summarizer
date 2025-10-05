@@ -1,7 +1,9 @@
+@use "mixins" as mixins;
+
 /* Consolidated styles migrated from the old styles.css
-   Cleaned, de-duplicated and converted to kebab-case where appropriate.
-   This is an intermediate aggregation — we can later split rules into
-   _components/_layout/_utils as we refine. */
+  Cleaned, de-duplicated and converted to kebab-case where appropriate.
+  This is an intermediate aggregation — we can later split rules into
+  _components/_layout/_utils as we refine. */
 
 /* App header / top-level */
 .app-header {
@@ -39,7 +41,7 @@
 .file-drop-content { text-align: center; }
 
 .file-select-button {
-  @include btn();
+  @include mixins.btn();
 }
 
 .file-picker-container {
