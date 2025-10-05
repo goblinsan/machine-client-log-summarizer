@@ -1,0 +1,149 @@
+/* Components (buttons, file-picker, badges) */
+%btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: var(--accent);
+  color: white;
+}
+
+.btn {
+  @extend %btn;
+}
+
+.btn-secondary {
+  background: var(--accent-2);
+  color: var(--muted);
+}
+
+.file-picker-container {
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 18px;
+  background: var(--card);
+}
+
+.file-picker-button {
+  @extend %btn;
+}
+
+.file-info {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* File-picker drop-zone and related items (migrated) */
+.file-picker-drop-zone {
+  width: 100%;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: 2px dashed var(--light-border);
+  border-radius: 8px;
+  margin: 1rem 0;
+  background-color: var(--drop-bg);
+  transition: all 0.3s ease;
+}
+
+.file-picker-drop-zone:hover {
+  border-color: var(--accent);
+  background-color: var(--accent-bg-light);
+}
+
+.file-picker-log-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.file-picker-log-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.file-picker-log-item:last-child {
+  border-bottom: none;
+}
+
+.file-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.file-list li {
+  margin: 5px 0;
+  padding: 5px;
+  background-color: var(--file-list-bg);
+  border-radius: 4px;
+}
+
+/* Ingestion controls */
+.ingestion-pipeline-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid var(--light-border);
+  border-radius: 8px;
+  background-color: var(--drop-bg);
+}
+
+.ingestion-button,
+.ingest-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ingestion-button:hover,
+.ingest-button:hover {
+  background-color: var(--btn-hover);
+}
+
+.ingestion-button:disabled,
+.ingest-button:disabled {
+  background-color: var(--disabled);
+  cursor: not-allowed;
+}
+
+.processing-indicator {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  border-radius: 4px;
+}
+
+.processing-indicator p {
+  margin: 0;
+  color: var(--warning-text);
+}
+
+.ingestion-status {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.ingestion-status.processing {
+  background-color: var(--warning-bg);
+  color: var(--warning-text);
+}
+/* Legacy: drop zones and picker variants */
+
+.ingestion-status.success {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.ingestion-status.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
