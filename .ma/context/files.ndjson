@@ -1,5 +1,5 @@
-{"path":"src/App.test.tsx","bytes":657,"mtime":1759803468860.1704,"lines":21,"sha1":"67b4f8b62ddcb1df0fb572b6e538a6a9d82f5a0e"}
+{"path":"src/App.test.tsx","bytes":816,"mtime":1759843430848.4697,"lines":28,"sha1":"da657829545351db351c5fb329ad25b72faf9be3"}
 {"path":"src/App.tsx","bytes":578,"mtime":1759803468861.101,"lines":23,"sha1":"0dc11a01fc0152cce54a439feab2189cb41d450c"}
-{"path":"src/ingest/fileIngest.ts","bytes":662,"mtime":1759803468862.1538,"lines":26,"sha1":"d7f980a5b3a2801c44bc0b6780b4639801982990"}
+{"path":"src/ingest/fileIngest.ts","bytes":818,"mtime":1759843430849.725,"lines":34,"sha1":"2eadfcd301dbf9e92a1e22f5ebcc2468477fafe0"}
 {"path":"src/main.tsx","bytes":202,"mtime":1759613861163.0193,"lines":9,"sha1":"983ba3ef5440a072bd0a4f28ea1473a136fcf549"}
 {"path":"src/styles.css","bytes":1063,"mtime":1759803468863.1584,"lines":63,"sha1":"1f9eaba044900499ecfa47757966aa97e640eee5"}

@@ -1,18 +1,18 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-07T02:17:48.992Z",
+  "generated_at": "2025-10-07T13:23:50.973Z",
   "totals": {
     "files": 5,
-    "bytes": 3162,
-    "lines": 142
+    "bytes": 3477,
+    "lines": 157
   },
   "components": [
     {
       "component": ".",
       "totals": {
         "files": 5,
-        "bytes": 3162,
-        "lines": 142
+        "bytes": 3477,
+        "lines": 157
       },
       "largest": [
         {
@@ -24,17 +24,17 @@
         },
         {
           "path": "src/ingest/fileIngest.ts",
-          "bytes": 662,
-          "mtime": 1759803468862.1538,
-          "lines": 26,
-          "sha1": "d7f980a5b3a2801c44bc0b6780b4639801982990"
+          "bytes": 818,
+          "mtime": 1759843430849.725,
+          "lines": 34,
+          "sha1": "2eadfcd301dbf9e92a1e22f5ebcc2468477fafe0"
         },
         {
           "path": "src/App.test.tsx",
-          "bytes": 657,
-          "mtime": 1759803468860.1704,
-          "lines": 21,
-          "sha1": "67b4f8b62ddcb1df0fb572b6e538a6a9d82f5a0e"
+          "bytes": 816,
+          "mtime": 1759843430848.4697,
+          "lines": 28,
+          "sha1": "da657829545351db351c5fb329ad25b72faf9be3"
         },
         {
           "path": "src/App.tsx",
@@ -61,10 +61,17 @@
         },
         {
           "path": "src/ingest/fileIngest.ts",
-          "bytes": 662,
-          "mtime": 1759803468862.1538,
-          "lines": 26,
-          "sha1": "d7f980a5b3a2801c44bc0b6780b4639801982990"
+          "bytes": 818,
+          "mtime": 1759843430849.725,
+          "lines": 34,
+          "sha1": "2eadfcd301dbf9e92a1e22f5ebcc2468477fafe0"
+        },
+        {
+          "path": "src/App.test.tsx",
+          "bytes": 816,
+          "mtime": 1759843430848.4697,
+          "lines": 28,
+          "sha1": "da657829545351db351c5fb329ad25b72faf9be3"
         },
         {
           "path": "src/App.tsx",
@@ -72,13 +79,6 @@
           "mtime": 1759803468861.101,
           "lines": 23,
           "sha1": "0dc11a01fc0152cce54a439feab2189cb41d450c"
-        },
-        {
-          "path": "src/App.test.tsx",
-          "bytes": 657,
-          "mtime": 1759803468860.1704,
-          "lines": 21,
-          "sha1": "67b4f8b62ddcb1df0fb572b6e538a6a9d82f5a0e"
         },
         {
           "path": "src/main.tsx",
@@ -101,17 +101,17 @@
       },
       {
         "path": "src/ingest/fileIngest.ts",
-        "bytes": 662,
-        "mtime": 1759803468862.1538,
-        "lines": 26,
-        "sha1": "d7f980a5b3a2801c44bc0b6780b4639801982990"
+        "bytes": 818,
+        "mtime": 1759843430849.725,
+        "lines": 34,
+        "sha1": "2eadfcd301dbf9e92a1e22f5ebcc2468477fafe0"
       },
       {
         "path": "src/App.test.tsx",
-        "bytes": 657,
-        "mtime": 1759803468860.1704,
-        "lines": 21,
-        "sha1": "67b4f8b62ddcb1df0fb572b6e538a6a9d82f5a0e"
+        "bytes": 816,
+        "mtime": 1759843430848.4697,
+        "lines": 28,
+        "sha1": "da657829545351db351c5fb329ad25b72faf9be3"
       },
       {
         "path": "src/App.tsx",
@@ -138,10 +138,17 @@
       },
       {
         "path": "src/ingest/fileIngest.ts",
-        "bytes": 662,
-        "mtime": 1759803468862.1538,
-        "lines": 26,
-        "sha1": "d7f980a5b3a2801c44bc0b6780b4639801982990"
+        "bytes": 818,
+        "mtime": 1759843430849.725,
+        "lines": 34,
+        "sha1": "2eadfcd301dbf9e92a1e22f5ebcc2468477fafe0"
+      },
+      {
+        "path": "src/App.test.tsx",
+        "bytes": 816,
+        "mtime": 1759843430848.4697,
+        "lines": 28,
+        "sha1": "da657829545351db351c5fb329ad25b72faf9be3"
       },
       {
         "path": "src/App.tsx",
@@ -149,13 +156,6 @@
         "mtime": 1759803468861.101,
         "lines": 23,
         "sha1": "0dc11a01fc0152cce54a439feab2189cb41d450c"
-      },
-      {
-        "path": "src/App.test.tsx",
-        "bytes": 657,
-        "mtime": 1759803468860.1704,
-        "lines": 21,
-        "sha1": "67b4f8b62ddcb1df0fb572b6e538a6a9d82f5a0e"
       },
       {
         "path": "src/main.tsx",
