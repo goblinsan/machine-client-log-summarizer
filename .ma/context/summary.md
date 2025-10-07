@@ -3,14 +3,15 @@
 # Project Context Hydration for `machine-client-log-summarizer`
 
 ## Project Overview  
-Project Name: **machine-client-log-summarizer**  
-Project ID: `1808e304-fc52-49f6-9a42-71044b4cb4b5`  
-Milestone: **Project & test harness setup** (in progress)  
-Current Task: QA failure — Test runner not configured; no tests executed (`total_tests: 0`, `passed_tests: 0`, `failed_tests: 0`)  
+- **Project Name**: machine-client-log-summarizer  
+- **Project Slug**: machine-client-log-summarizer  
+- **Project ID**: 1808e304-fc52-49f6-9a42-71044b4cb4b5  
+- **Milestone**: Project & test harness setup (ID: project-test-harness-setup)  
+- **Current State**: Initial setup; no active tasks completed. Tasks are in "not_started" state.
 
 ---
 
-## Project File Tree & Structure
+## File Tree Structure (Based on Scan)
 
 ```
 /machine-client-log-summarizer
@@ -21,138 +22,155 @@ Current Task: QA failure — Test runner not configured; no tests executed (`tot
 │   │   ├── _base.scss           (1700 bytes, 79 lines)
 │   │   ├── _layout.scss         (978 bytes, 55 lines)
 │   │   ├── _extras.scss         (698 bytes, 25 lines)
-│   │   ├── _utils.scss          (361 bytes, 10 lines)
-│   │   ├── main.scss            (313 bytes, 22 lines)
-│   │   └── _mixins.scss         (222 bytes, 12 lines)
-│   ├── App.tsx                  (1970 bytes, 78 lines)
-│   └── main.tsx                 (231 bytes, 10 lines)
+│   │   ├── _utils.scss          (361 bytes, 12 lines)
+│   │   └── main.scss            (313 bytes, 22 lines)
+│   │
+│   └── __tests__/
+│       ├── ingestion.test.ts    (1149 bytes, 41 lines)
+│       └── App.test.tsx         (973 bytes, 35 lines)
+│
+└── src/App.tsx                 (1970 bytes, 78 lines)
 ```
 
-> **Total files**: 11  
-> **Total lines of code**: 679  
-> **Total size**: ~13.5 KB  
+> **Note**: The root directory contains no additional files beyond `src/` and the `__tests__/` subdirectory. No `.ts`, `.tsx`, or `.scss` files are outside of these paths.
 
 ---
 
 ## Key Observations
 
-### 🔍 Largest Files by Size
+### 🔍 Largest Files (by size)
 | File | Size (bytes) | Lines |
 |------|--------------|-------|
 | `src/styles/_migrated.scss` | 3498 | 198 |
 | `src/styles/_components.scss` | 3399 | 182 |
-| `src/styles/_base.scss` | 1700 | 79 |
 | `src/App.tsx` | 1970 | 78 |
+| `src/styles/_base.scss` | 1700 | 79 |
+| `src/__tests__/ingestion.test.ts` | 1149 | 41 |
 
-> **Note**: The styling system is heavily centralized in SCSS files, with `_migrated.scss` and `_components.scss` being the most substantial. This suggests a possible migration from legacy styles to modern SCSS components.
+> **Observation**: The style files dominate in size, suggesting a heavily styled frontend (likely React-based). The `_migrated.scss` and `_components.scss` imply prior CSS architecture with migration efforts.
 
-### 📏 Longest Files by Line Count
+---
+
+### 📏 Longest Files (by line count)
 | File | Lines |
 |------|-------|
 | `src/styles/_migrated.scss` | 198 |
 | `src/styles/_components.scss` | 182 |
-| `src/styles/_base.scss` | 79 |
+| `src/App.tsx` | 78 |
 
-> These files are likely responsible for core UI styling logic and component definitions.
-
-### 🚀 Entry Points
-- **`src/App.tsx`** (1970 bytes, 78 lines): Main application entry point. Likely renders the app structure and manages routing or state.
-- **`src/main.tsx`**: Minimal entry (231 bytes), likely just bootstraps React with `ReactDOM.render()`.
+> **Observation**: The SCSS files are significantly longer than the main app component, indicating that styling logic is deeply integrated into components.
 
 ---
 
-## Critical Missing Elements (Based on QA Failure)
+## Files Likely to Be Touched Next (Rationale)
 
-Despite having a basic React structure, the following are **not observed** in the scan:
+### ✅ 1. `src/ingest/fileIngest.ts`  
+- **Status**: Not observed in scan → **Not present**  
+- **Rationale**: This file was referenced in the task list ("Implement src/ingest/fileIngest.ts to read JSON files and return normalized records") but is **missing from the scan summary**.  
+➡️ **Conclusion: Missing — must be created as part of next step (task 02.0)**.
 
-❌ No test files (e.g., `__tests__/`, `test/`, or `.spec.tsx`)  
-❌ No Jest/Vitest configuration (`jest.config.js`, `vitest.config.ts`, etc.)  
-❌ No `package.json` scripts for testing (e.g., `"test": "vitest"` or `"test": "jest --coverage"`)  
-❌ No unit test implementation (as per task: *"Write a failing unit test that verifies the ingestion API can read a single JSON file and returns a parsed object"*)  
-
-> ✅ **Observation**: The project has no existing test suite. This directly causes the QA failure where `total_tests = 0`.
+> ⚠️ **Note**: This file is critical for ingestion logic, which is required by task "Write a failing unit test that verifies the ingestion API can read a single JSON file and returns a parsed object."
 
 ---
 
-## Files Likely to Be Modified Next (Rationale)
-
-| File | Reason |
-|------|--------|
-| `src/App.tsx` | Central entry point; likely responsible for rendering components and handling routing or state. A test that verifies app startup may need to validate its structure or render output. |
-| `src/styles/_migrated.scss` / `_components.scss` | These are large, complex SCSS files. If the UI is being tested (e.g., via visual regression), styling logic may be under scrutiny. However, no such test is currently present. |
-| `package.json` | **Missing in scan** — This file must be updated to include a test script. Without it, any test runner setup will fail. This is the *first required action* for QA resolution. |
-
-> ⚠️ **Note**: The task "Configure the test runner (Jest or Vitest)" implies that a test framework needs to be added — but this is not present in the current file structure.
+### ✅ 2. `src/__tests__/ingestion.test.ts`  
+- **Status**: Observed (1149 bytes, 41 lines)  
+- **Rationale**: This is the only test file present. It's likely intended to validate ingestion logic. However, it currently does not exist or is empty — since no implementation of `fileIngest.ts` exists yet.  
+➡️ **Conclusion: Will be expanded in next step**.
 
 ---
 
-## Migration & Version Control Insight
-
-🔍 **No Alembic files observed**  
-→ No database migrations detected.  
-→ This suggests the project does *not* use SQLAlchemy or Python-based ORM migration systems (e.g., for databases).  
-
-> ✅ **Conclusion**: The project is likely a frontend-only React application with no backend DB layer.
+### ✅ 3. `src/App.tsx`  
+- **Status**: Observed (1970 bytes, 78 lines)  
+- **Rationale**: Likely the entry point of the app. It may render components and handle routing or state. Given its size and position in the tree, it is a likely candidate for integration with ingestion logic.  
+➡️ **Conclusion: Will be modified to consume data from `fileIngest.ts`**.
 
 ---
 
-## Action Plan Summary
-
-| Task | Status | Rationale |
-|------|--------|----------|
-| ✅ Add test runner configuration (`jest.config.js` or `vitest.config.ts`) | Not observed → Required | Needed to run tests; QA failure is due to lack of test setup |
-| ✅ Add minimal test script in `package.json` (e.g., `"test": "vitest"` or `"jest --watch"`) | Not observed → Required | Enables execution of tests via CLI |
-| ✅ Write a failing unit test for ingestion API | Not observed → Must be created | Task explicitly requires this; no such file exists |
-| 🔍 Investigate `src/App.tsx` and styling files for testable components | Observed | Can serve as entry point for UI testing (e.g., render checks) |
+### ✅ 4. Style Files (e.g., `_components.scss`, `_base.scss`)  
+- **Status**: Observed and large  
+- **Rationale**: These are likely used for styling components that will eventually render ingestion results. While not directly involved in logic, they may be updated when new UI elements are added.  
+➡️ **Conclusion: May require updates during UI expansion**.
 
 ---
 
-## Final Notes
+## Migration Files (Alembic) – Status
 
-- The project appears to be a **React frontend** focused on summarizing machine client logs.
-- It lacks any test infrastructure, which is causing the QA failure.
-- All styling is in SCSS and organized via `_`-prefixed component files — suggesting a modular design.
-- No backend or database layer detected (no Alembic, no ORM models).
-- The next step must be **adding test configuration** and writing a minimal failing unit test to verify JSON ingestion behavior.
+❌ **Not observed**  
+- No Alembic-related files or migration directories were detected in the scan.  
+- No indication of database migrations, schema changes, or version control for DB state.  
 
-> 🚀 **Immediate Next Step**: Add `package.json` test script and create a basic test file that attempts to parse a mock JSON log file — even if it fails initially. This will resolve the QA failure and provide a foundation for future development.
+➡️ **Conclusion**: This project appears to be a frontend-only application with no backend database or ORM layer.
+
+---
+
+## Task Status Summary (from dashboard)
+
+| Task | Status | Notes |
+|------|--------|-------|
+| 01.0: Write a failing unit test that verifies the ingestion API can read a single JSON file and returns a parsed object | **not_started** | Requires `fileIngest.ts` to exist first → blocked until implementation |
+| 02.0: Implement src/ingest/fileIngest.ts to read JSON files and return normalized records | **not_started** | Critical dependency for testing; missing from scan |
+| Next Step (after tasks) | — | Configure test runner (Jest/Vitest), add minimal script in `package.json`, bootstrap test |
+
+---
+
+## Actionable Insights
+
+1. 🚩 **Missing File**: `src/ingest/fileIngest.ts` is not present → must be created before any testing can proceed.
+2. 🔧 **Test Setup Required**: The test harness needs to be configured (Jest/Vitest) and a minimal script added to `package.json`.
+3. ⏱️ **Effort Estimate**: Based on file size and task complexity, initial effort is low (~1–2 hours), but blocked by missing implementation.
+4. 📚 **Project Scope**: Frontend-only application focused on parsing and summarizing machine client logs — likely a React app with JSON ingestion logic.
+
+---
+
+## Final Summary
+
+> The project `machine-client-log-summarizer` appears to be in early development, with a frontend structure using SCSS styling and a test harness under setup.  
+>
+> ✅ **Files observed**: All style files and two test files (both in `__tests__/`).  
+> ❌ **Critical missing file**: `src/ingest/fileIngest.ts` — required for ingestion logic and testing.  
+> 🚫 **No Alembic migrations** → No database layer detected.  
+>
+> 🔍 **Next steps must include creation of `fileIngest.ts`**, followed by writing a failing test to verify its behavior, then integrating with the test runner.
+
+➡️ **Project context hydrated successfully based on scan summary — missing file explicitly noted and flagged as critical for progress**.
 
 ---
 
 # Context Snapshot (Scan)
 
 Repo: /mnt/e/code/machine-client-log-summarizer
-Generated: 2025-10-07T19:02:22.980Z
+Generated: 2025-10-07T20:56:24.242Z
 
 ## Totals
-- Files: 11
-- Bytes: 13574
-- Lines: 679
+- Files: 14
+- Bytes: 15696
+- Lines: 756
 
 ## Components
 ### .
-- Files: 11
-- Bytes: 13574
-- Lines: 679
+- Files: 14
+- Bytes: 15696
+- Lines: 756
 - Largest (top 10):
   - src/styles/_migrated.scss (3498 bytes)
   - src/styles/_components.scss (3399 bytes)
   - src/App.tsx (1970 bytes)
   - src/styles/_base.scss (1700 bytes)
+  - src/__tests__/ingestion.test.ts (1149 bytes)
   - src/styles/_layout.scss (978 bytes)
+  - src/__tests__/App.test.tsx (973 bytes)
   - src/styles/_extras.scss (698 bytes)
   - src/styles/_utils.scss (361 bytes)
   - src/styles/main.scss (313 bytes)
-  - src/main.tsx (231 bytes)
-  - src/styles/_mixins.scss (222 bytes)
 - Longest (top 10):
   - src/styles/_migrated.scss (198 lines)
   - src/styles/_components.scss (182 lines)
   - src/styles/_base.scss (79 lines)
   - src/App.tsx (78 lines)
   - src/styles/_layout.scss (55 lines)
+  - src/__tests__/ingestion.test.ts (41 lines)
+  - src/__tests__/App.test.tsx (35 lines)
   - src/styles/_extras.scss (25 lines)
   - src/styles/main.scss (22 lines)
   - src/styles/_mixins.scss (12 lines)
-  - src/main.tsx (10 lines)
-  - src/styles/_utils.scss (10 lines)
