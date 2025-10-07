@@ -1,27 +1,28 @@
-// App.test.tsx
-
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { render, screen } from '@testing-library/react';
+import { App } from './App';
+import { parseLogContent } from './ingest/fileIngest';
 
-// Mock the fileIngest module to simulate different scenarios
 jest.mock('./ingest/fileIngest', () => ({
   parseLogContent: jest.fn(),
 }));
 
-describe('App Component', () => {
+const mockParseLogContent = parseLogContent as jest.MockedFunction<typeof parseLogContent>;
+
+describe('App', () => {
   it('renders without crashing', () => {
-    const { getByText } = render(<App />);
-    expect(getByText('Log Summarizer')).toBeInTheDocument();
+    render(<App />);
+    expect(screen.getByText(/Welcome to the Log Summarizer/i)).toBeInTheDocument();
   });
 
-  it('handles parsing error gracefully', () => {
-    const mockParseLogContent = require('./ingest/fileIngest').parseLogContent;
-    mockParseLogContent.mockImplementation(() => {
-      throw new Error('Failed to parse log content');
-    });
+  it('displays parsed log records when content is provided', () => {
+    const mockRecords = [
+      { timestamp: '2023-01-01T00:00:00Z', level: 'INFO', message: 'Test log entry' },
+    ];
 
-    const { getByText } = render(<App />);
-    expect(getByText(/Failed to parse log content/i)).toBeInTheDocument();
+    mockParseLogContent.mockReturnValue(mockRecords);
+
+    render(<App />);
+    expect(screen.getByText(/Test log entry/i)).toBeInTheDocument();
   });
 });

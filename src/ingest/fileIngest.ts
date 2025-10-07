@@ -1,4 +1,4 @@
-// fileIngest.ts
+// src/ingest/fileIngest.ts
 
 /**
  * Represents a normalized log record.
@@ -10,23 +10,31 @@ export interface LogRecord {
 }
 
 /**
- * Reads and parses a JSON file containing log records.
- * @param fileContent - The content of the JSON file as a string.
- * @returns An array of normalized log records.
+ * Parses log content (assumed to be JSON) and returns normalized records.
+ * @param content - Raw log file content as a string
+ * @returns Array of normalized log records
  */
-export function parseLogContent(fileContent: string): LogRecord[] {
+export function parseLogContent(content: string): LogRecord[] {
   try {
-    const parsed = JSON.parse(fileContent);
+    const parsed = JSON.parse(content);
 
-    if (!Array.isArray(parsed)) {
-      throw new Error('Expected an array of log records');
+    // If the parsed content is an array, assume each item is a log record
+    if (Array.isArray(parsed)) {
+      return parsed.map((entry) => ({
+        timestamp: entry.timestamp || '',
+        level: entry.level || '',
+        message: entry.message || '',
+      }));
     }
 
-    return parsed.map((entry: any) => ({
-      timestamp: entry.timestamp || '',
-      level: entry.level || '',
-      message: entry.message || '',
-    }));
+    // If it's a single object, wrap it in an array
+    return [
+      {
+        timestamp: parsed.timestamp || '',
+        level: parsed.level || '',
+        message: parsed.message || '',
+      },
+    ];
   } catch (error) {
     throw new Error(`Failed to parse log content: ${(error as Error).message}`);
   }
