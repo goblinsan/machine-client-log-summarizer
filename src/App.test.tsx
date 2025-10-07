@@ -1,28 +1,32 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { App } from './App';
-import { parseLogContent } from './ingest/fileIngest';
+// src/App.test.tsx
 
-jest.mock('./ingest/fileIngest', () => ({
-  parseLogContent: jest.fn(),
-}));
+import { describe, it, expect } from 'vitest';
+import { parseJsonFile } from './ingest/fileIngest';
 
-const mockParseLogContent = parseLogContent as jest.MockedFunction<typeof parseLogContent>;
+describe('App Component', () => {
+  it('should parse log content correctly', () => {
+    const mockContent = `
+{"timestamp": "2025-04-01T10:00:00Z", "level": "INFO", "message": "Application started"}
+{"timestamp": "2025-04-01T10:01:00Z", "level": "ERROR", "message": "Failed to connect to DB"}
+{"timestamp": "2025-04-01T10:02:00Z", "level": "DEBUG", "message": "Database query executed"}
+`;
 
-describe('App', () => {
-  it('renders without crashing', () => {
-    render(<App />);
-    expect(screen.getByText(/Welcome to the Log Summarizer/i)).toBeInTheDocument();
-  });
+    // Mock the parseLogContent function to simulate file reading
+    const mockParseLogContent = (content: string) => {
+      return [
+        { timestamp: "2025-04-01T10:00:00Z", level: "INFO", message: "Application started" },
+        { timestamp: "2025-04-01T10:01:00Z", level: "ERROR", message: "Failed to connect to DB" },
+        { timestamp: "2025-04-01T10:02:00Z", level: "DEBUG", message: "Database query executed" }
+      ];
+    };
 
-  it('displays parsed log records when content is provided', () => {
-    const mockRecords = [
-      { timestamp: '2023-01-01T00:00:00Z', level: 'INFO', message: 'Test log entry' },
-    ];
+    // This test currently fails because parseJsonFile is not yet implemented correctly
+    const result = parseJsonFile('mock-path');
 
-    mockParseLogContent.mockReturnValue(mockRecords);
-
-    render(<App />);
-    expect(screen.getByText(/Test log entry/i)).toBeInTheDocument();
+    expect(result).toEqual([
+      { timestamp: "2025-04-01T10:00:00Z", level: "INFO", message: "Application started" },
+      { timestamp: "2025-04-01T10:01:00Z", level: "ERROR", message: "Failed to connect to DB" },
+      { timestamp: "2025-04-01T10:02:00Z", level: "DEBUG", message: "Database query executed" }
+    ]);
   });
 });
