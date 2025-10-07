@@ -1,8 +1,5 @@
 // src/ingest/fileIngest.ts
 
-/**
- * Represents a normalized log record.
- */
 export interface LogRecord {
   timestamp: string;
   level: string;
@@ -10,44 +7,41 @@ export interface LogRecord {
 }
 
 /**
- * Parses log content (as a string) into an array of normalized records.
- * @param content - Raw log content as a string (e.g., JSON lines or array).
- * @returns Array of normalized log records.
+ * Parses a JSON file and returns an array of normalized log records.
+ * Each record includes timestamp, level, and message fields.
+ * Handles malformed JSON gracefully by logging errors.
+ *
+ * @param fileContent - The content of the JSON file as a string
+ * @returns An array of parsed log records or an empty array if parsing fails
  */
-export function parseLogContent(content: string): LogRecord[] {
-  const lines = content.trim().split('\n');
-  const records: LogRecord[] = [];
+export function parseJsonFile(fileContent: string): LogRecord[] {
+  try {
+    const parsed = JSON.parse(fileContent);
 
-  for (const line of lines) {
-    try {
-      const parsed = JSON.parse(line);
-      records.push({
-        timestamp: parsed.timestamp || '',
-        level: parsed.level || '',
-        message: parsed.message || '',
-      });
-    } catch (e) {
-      // Optionally log or handle parsing errors
-      console.error('Failed to parse line:', line);
+    // If the parsed content is an array, assume it's a list of log records
+    if (Array.isArray(parsed)) {
+      return parsed.map((entry: any) => ({
+        timestamp: entry.timestamp || '',
+        level: entry.level || '',
+        message: entry.message || '',
+      }));
     }
+
+    // If it's a single object, wrap it in an array
+    if (typeof parsed === 'object' && parsed !== null) {
+      return [
+        {
+          timestamp: parsed.timestamp || '',
+          level: parsed.level || '',
+          message: parsed.message || '',
+        },
+      ];
+    }
+
+    // If parsing succeeded but content is not an object or array, return empty array
+    return [];
+  } catch (error) {
+    console.error('Failed to parse JSON file:', error);
+    return [];
   }
-
-  return records;
-}
-
-/**
- * Reads and parses a file path (mocked for now).
- * @param filePath - Path to the log file.
- * @returns Parsed records from the file.
- */
-export function parseJsonFile(filePath: string): LogRecord[] {
-  // In a real app, this would read from the filesystem.
-  // For now, we simulate reading content from a mock file.
-  const mockContent = `
-{"timestamp": "2025-04-01T10:00:00Z", "level": "INFO", "message": "Application started"}
-{"timestamp": "2025-04-01T10:01:00Z", "level": "ERROR", "message": "Failed to connect to DB"}
-{"timestamp": "2025-04-01T10:02:00Z", "level": "DEBUG", "message": "Database query executed"}
-`;
-
-  return parseLogContent(mockContent);
 }
