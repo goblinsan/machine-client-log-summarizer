@@ -1,18 +1,18 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-07T13:23:50.973Z",
+  "generated_at": "2025-10-07T14:59:13.545Z",
   "totals": {
     "files": 5,
-    "bytes": 3477,
-    "lines": 157
+    "bytes": 3754,
+    "lines": 166
   },
   "components": [
     {
       "component": ".",
       "totals": {
         "files": 5,
-        "bytes": 3477,
-        "lines": 157
+        "bytes": 3754,
+        "lines": 166
       },
       "largest": [
         {
@@ -24,17 +24,17 @@
         },
         {
           "path": "src/ingest/fileIngest.ts",
-          "bytes": 818,
-          "mtime": 1759843430849.725,
-          "lines": 34,
-          "sha1": "2eadfcd301dbf9e92a1e22f5ebcc2468477fafe0"
+          "bytes": 1049,
+          "mtime": 1759849153448.7815,
+          "lines": 42,
+          "sha1": "ee00ea8e557a097d1d4f045d883db36557d383a4"
         },
         {
           "path": "src/App.test.tsx",
-          "bytes": 816,
-          "mtime": 1759843430848.4697,
-          "lines": 28,
-          "sha1": "da657829545351db351c5fb329ad25b72faf9be3"
+          "bytes": 862,
+          "mtime": 1759849153447.5862,
+          "lines": 29,
+          "sha1": "0619008103121e9db8889ee98e528260e0d9ad0b"
         },
         {
           "path": "src/App.tsx",
@@ -61,17 +61,17 @@
         },
         {
           "path": "src/ingest/fileIngest.ts",
-          "bytes": 818,
-          "mtime": 1759843430849.725,
-          "lines": 34,
-          "sha1": "2eadfcd301dbf9e92a1e22f5ebcc2468477fafe0"
+          "bytes": 1049,
+          "mtime": 1759849153448.7815,
+          "lines": 42,
+          "sha1": "ee00ea8e557a097d1d4f045d883db36557d383a4"
         },
         {
           "path": "src/App.test.tsx",
-          "bytes": 816,
-          "mtime": 1759843430848.4697,
-          "lines": 28,
-          "sha1": "da657829545351db351c5fb329ad25b72faf9be3"
+          "bytes": 862,
+          "mtime": 1759849153447.5862,
+          "lines": 29,
+          "sha1": "0619008103121e9db8889ee98e528260e0d9ad0b"
         },
         {
           "path": "src/App.tsx",
@@ -101,17 +101,17 @@
       },
       {
         "path": "src/ingest/fileIngest.ts",
-        "bytes": 818,
-        "mtime": 1759843430849.725,
-        "lines": 34,
-        "sha1": "2eadfcd301dbf9e92a1e22f5ebcc2468477fafe0"
+        "bytes": 1049,
+        "mtime": 1759849153448.7815,
+        "lines": 42,
+        "sha1": "ee00ea8e557a097d1d4f045d883db36557d383a4"
       },
       {
         "path": "src/App.test.tsx",
-        "bytes": 816,
-        "mtime": 1759843430848.4697,
-        "lines": 28,
-        "sha1": "da657829545351db351c5fb329ad25b72faf9be3"
+        "bytes": 862,
+        "mtime": 1759849153447.5862,
+        "lines": 29,
+        "sha1": "0619008103121e9db8889ee98e528260e0d9ad0b"
       },
       {
         "path": "src/App.tsx",
@@ -138,17 +138,17 @@
       },
       {
         "path": "src/ingest/fileIngest.ts",
-        "bytes": 818,
-        "mtime": 1759843430849.725,
-        "lines": 34,
-        "sha1": "2eadfcd301dbf9e92a1e22f5ebcc2468477fafe0"
+        "bytes": 1049,
+        "mtime": 1759849153448.7815,
+        "lines": 42,
+        "sha1": "ee00ea8e557a097d1d4f045d883db36557d383a4"
       },
       {
         "path": "src/App.test.tsx",
-        "bytes": 816,
-        "mtime": 1759843430848.4697,
-        "lines": 28,
-        "sha1": "da657829545351db351c5fb329ad25b72faf9be3"
+        "bytes": 862,
+        "mtime": 1759849153447.5862,
+        "lines": 29,
+        "sha1": "0619008103121e9db8889ee98e528260e0d9ad0b"
       },
       {
         "path": "src/App.tsx",
