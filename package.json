@@ -1,5 +1,6 @@
 {
   "name": "machine-client-log-summarizer",
+<<<<<<< ours
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -28,3 +29,13 @@
     "stylelint-scss": "^6.12.1"
   }
 }
+=======
+  "version": "1.0.0",
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6"
+  }
+}
+>>>>>>> theirs
