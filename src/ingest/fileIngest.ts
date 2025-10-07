@@ -1,25 +1,33 @@
+// fileIngest.ts
+
 /**
- * Simulates ingestion and parsing of a JSON file.
- * In a real implementation, this would read from the filesystem or API.
+ * Represents a normalized log record.
  */
+export interface LogRecord {
+  timestamp: string;
+  level: string;
+  message: string;
+}
 
-export const parseJsonFile = async (filePath: string): Promise<any> => {
-  // Simulate async file reading and parsing
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      try {
-        // Simulate successful parsing
-        const parsedData = {
-          timestamp: new Date().toISOString(),
-          logs: [
-            { level: 'info', message: `Parsed file: ${filePath}` },
-          ],
-        };
+/**
+ * Reads and parses a JSON file containing log records.
+ * @param fileContent - The content of the JSON file as a string.
+ * @returns An array of normalized log records.
+ */
+export function parseLogContent(fileContent: string): LogRecord[] {
+  try {
+    const parsed = JSON.parse(fileContent);
 
-        resolve(parsedData);
-      } catch (error) {
-        reject(error);
-      }
-    }, 100);
-  });
-};
+    if (!Array.isArray(parsed)) {
+      throw new Error('Expected an array of log records');
+    }
+
+    return parsed.map((entry: any) => ({
+      timestamp: entry.timestamp || '',
+      level: entry.level || '',
+      message: entry.message || '',
+    }));
+  } catch (error) {
+    throw new Error(`Failed to parse log content: ${(error as Error).message}`);
+  }
+}
