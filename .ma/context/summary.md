@@ -10,9 +10,11 @@
 - **Repository URL**: https://github.com/goblinsan/machine-client-log-summarizer.git  
 - **Branch**: milestone/project-test-harness-setup  
 
+> ✅ *Context fully hydrated based on scan summary. No external assumptions made.*
+
 ---
 
-## File System Structure (Project Tree Sketch)
+## Project File Tree & Structure
 
 ```
 /machine-client-log-summarizer
@@ -26,120 +28,148 @@
 │   │   ├── _utils.scss          (361 bytes, 12 lines)
 │   │   └── main.scss            (313 bytes, 22 lines)
 │   │
-│   └── __tests__/
-│       ├── ingestion.test.ts    (1149 bytes, 41 lines)
-│       └── App.test.tsx         (973 bytes, 35 lines)
+│   └── App.tsx                  (1970 bytes, 78 lines)
 │
-└── [no other files or directories observed]
+├── src/__tests__/
+│   ├── ingestion.test.ts        (1149 bytes, 41 lines)
+│   └── App.test.tsx             (973 bytes, 35 lines)
 ```
 
-> ✅ Total files: **14**  
-> 🔍 Total size: **15,696 bytes** (~15.7 KB)  
-> 📏 Total lines of code: **756**
+> ⚠️ **No other files or directories observed** in the scan. Total: 14 files, 756 lines, 15.7 KB total size.
 
 ---
 
-## Key Files & Roles
+## Key Observations
 
-| File | Size (bytes) | Lines | Role |
-|------|--------------|-------|------|
-| `src/styles/_migrated.scss` | 3498 | 198 | Likely contains merged or updated styles from prior migrations; may include conditional logic or legacy CSS transformations. |
-| `src/styles/_components.scss` | 3399 | 182 | Centralized component-level styling (buttons, cards, forms, etc.). High complexity suggests reusable UI building blocks. |
-| `src/App.tsx` | 1970 | 78 | Entry point of the React application; likely renders main layout and routing logic. |
-| `src/styles/_base.scss` | 1700 | 79 | Base styles (font, spacing, colors) shared across components. |
-| `src/__tests__/ingestion.test.ts` | 1149 | 41 | Test file for ingestion API functionality — currently failing per QA feedback. |
-| `src/__tests__/App.test.tsx` | 973 | 35 | UI-level test verifying App component rendering. |
+### 🔍 Largest Files by Size (Top 5)
+| File | Size (bytes) | Lines |
+|------|--------------|-------|
+| `src/styles/_migrated.scss` | 3498 | 198 |
+| `src/styles/_components.scss` | 3399 | 182 |
+| `src/App.tsx` | 1970 | 78 |
+| `src/styles/_base.scss` | 1700 | 79 |
+| `src/styles/_layout.scss` | 978 | 55 |
 
-> ⚠️ **No `.ts`, `.tsx`, or `.js` files were observed outside of the `src/` directory** — all logic appears to be in React components and styles.
-
----
-
-## Longest Files (by line count)
-
-1. `src/styles/_migrated.scss` – 198 lines  
-   → Likely contains complex style rules, possibly including media queries or responsive design patterns from legacy systems.
-2. `src/styles/_components.scss` – 182 lines  
-   → Suggests a high degree of component abstraction and styling logic; may be central to UI consistency.
-3. `src/App.tsx` – 78 lines  
-   → Entry point, likely includes routing, state initialization, or layout setup.
-
-> 🔍 **No file exceeds 200 lines** — all files are relatively concise, indicating a lightweight application with minimal complexity.
+> 📌 The styling system is heavily centralized in SCSS files, with `_migrated.scss` and `_components.scss` being the largest. This suggests a significant effort to migrate or refactor styles.
 
 ---
 
-## Size Hotspots (Top 5 by size)
+### 🔍 Longest Files by Line Count (Top 5)
+| File | Lines |
+|------|-------|
+| `src/styles/_migrated.scss` | 198 |
+| `src/styles/_components.scss` | 182 |
+| `src/styles/_base.scss` | 79 |
+| `src/App.tsx` | 78 |
+| `src/styles/_layout.scss` | 55 |
 
-| File | Size |
-|------|------|
-| `src/styles/_migrated.scss` | 3498 bytes (~3.5 KB) |
-| `src/styles/_components.scss` | 3399 bytes (~3.4 KB) |
-| `src/styles/_base.scss` | 1700 bytes (~1.7 KB) |
-| `src/App.tsx` | 1970 bytes (~2.0 KB) |
-
-> 📌 **Style files dominate in size** — this suggests a strong emphasis on visual design and component styling, possibly indicating a UI-first development approach.
-
----
-
-## Files Likely to Be Touched Next (with Rationale)
-
-### 1. `src/__tests__/ingestion.test.ts`  
-- ✅ **Rationale**: QA failure explicitly reported: `"tests_passed": false`. This test is failing and must be fixed as part of the "Configure test runner" task.  
-- 🔧 Action needed: Implement a minimal ingestion API test that reads a JSON file and returns a parsed object (as per task description).  
-- 📌 Priority: **High** — directly tied to QA failure and milestone goal.
-
-### 2. `src/App.tsx`  
-- ✅ **Rationale**: As the entry point, it is likely responsible for initializing state or routing. If ingestion logic needs to be integrated into the app flow, this file will need updates.  
-- 🔧 Action: Add hooks or components to handle log file loading and summarization.
-
-### 3. `src/styles/_components.scss`  
-- ✅ **Rationale**: This is the most complex style file (182 lines). If UI changes are needed for test output rendering, this will be impacted.  
-- 🔧 Action: Ensure component styling supports dynamic log data display (e.g., tables, logs, summaries).
+> 📌 The SCSS files are the most complex, indicating that styling logic (especially component and migration-related styles) is deeply embedded.
 
 ---
 
-## Alembic Migration Summary
+## Files Likely to Be Modified Next (Rationale)
 
-❌ **No Alembic files observed in the scan**  
-→ No database migrations detected.  
-→ Migration count: 0  
-→ Latest migration file: Not applicable  
+### 1. `src/__tests__/ingestion.test.ts`
+- **Status**: Failing test (`tests_passed: false`)  
+- **Size**: 1149 bytes, 41 lines  
+- **Why next?**  
+  - Explicitly flagged in QA failure context as failing.  
+  - Task requirement: *"Write a failing unit test that verifies the ingestion API can read a single JSON file and returns a parsed object."*  
+  - This is a foundational test for core functionality — ingestion logic.  
+  - Must be fixed before moving to integration or end-to-end testing.
 
-> 🚫 This project does not appear to use a database or ORM with Alembic.
-
----
-
-## Observations & Gaps
-
-- ❌ **No test runner configuration** (e.g., `package.json` scripts, Jest/Vitest setup) — missing from scan.  
-  → Must be added manually per task: "Configure the test runner"  
-- ❌ **No entry point for ingestion API logic** — only a test file exists.  
-  → Likely needs implementation in `App.tsx` or a new service file (not observed).  
-- ❌ **No documentation, README, or `.gitignore` files** — not present in scan.
+> ✅ **Highest priority** due to failure state and task requirement.
 
 ---
 
-## Summary of Next Steps (Aligned with Milestone)
+### 2. `src/App.tsx`
+- **Size**: 1970 bytes, 78 lines  
+- **Why next?**  
+  - Entry point of the app; likely responsible for rendering or routing.  
+  - May be involved in ingestion logic flow (e.g., triggering file reading).  
+  - Could serve as a bridge between UI and backend ingestion API.
 
-| Task | Status | Action |
-|------|--------|--------|
-| ✅ 1. Configure test runner (Jest/Vitest) + add minimal script to `package.json` | Not Started | Add `"test": "vitest"` or `"jest"` script; ensure it runs the tests in `__tests__/`. |
-| ✅ 2. Write a failing unit test for ingestion API | Not Started | Create a test that attempts to parse a JSON log file and fails — this will be used as baseline before fixing. |
-| ⚠️ 3. Fix failing `ingestion.test.ts` | In Progress | Must pass the test by implementing real ingestion logic (file reading + parsing). |
-| 🔍 4. Review styling architecture | Pending | Evaluate if `_migrated.scss`, `_components.scss` need refactoring for maintainability. |
+> 🚀 Likely to be modified during test harness setup to integrate with test data flows.
 
 ---
 
-✅ **Project context fully hydrated based on scan summary**  
-❌ No files outside of `src/` and `__tests__/` were observed — no additional components or infrastructure detected.
+### 3. `src/styles/_migrated.scss` & `_components.scss`
+- **Size**: Both >3k bytes, high line count  
+- **Why next?**  
+  - These are the largest and most complex styling files.  
+  - The presence of "migrated" in name suggests a style refactoring effort (e.g., from legacy to modern SCSS).  
+  - May need updates to support new components or test UI rendering.
 
-> 🚀 Next action: Focus on writing a minimal, failing ingestion test to establish baseline behavior before implementing real logic.
+> ⚠️ If tests involve visual output, these styles may need alignment with expected UI behavior.
+
+---
+
+## Test Harness Setup Status
+
+| Task | Status |
+|------|--------|
+| ✅ Write a failing unit test for ingestion API (read JSON → parsed object) | **Not Started** |
+| 🔄 Configure test runner (Jest/Vitest), add to `package.json`, bootstrap test execution | **Not Started** |
+| 🔍 Fix failing `ingestion.test.ts` | **In Progress** |
+
+> ❗ The current state shows a **critical gap**: the ingestion test fails, and no working test harness is in place. This blocks progress.
+
+---
+
+## Summary of Missing or Unobserved Elements
+
+- ❌ No `package.json` file observed — cannot confirm test runner setup (Jest/Vitest)  
+- ❌ No `.gitignore`, `README.md`, or `tsconfig.json` detected  
+- ❌ No migration files (e.g., Alembic) found → **No database migrations**  
+- ❌ No API routes, services, or ingestion logic files observed  
+- ❌ No `index.tsx`, `main.ts`, or entry point files beyond `App.tsx`
+
+> ⚠️ These are **not present in the scan summary**, so cannot be assumed. All analysis is strictly based on visible files.
+
+---
+
+## Recommendations (Based on Observed Context)
+
+1. ✅ **Immediate Action**: Fix `ingestion.test.ts` to pass by implementing a minimal test that:
+   - Reads a mock JSON file
+   - Parses it into an object
+   - Asserts expected structure
+
+2. 🔧 **Next Step**: Add Jest or Vitest configuration in `package.json`, including:
+   ```json
+   "scripts": {
+     "test": "vitest"
+   }
+   ```
+   and create a test runner setup.
+
+3. 📝 **Add Documentation**:
+   - Document ingestion API behavior (input → output)
+   - Define expected JSON schema for log files
+
+4. 🔍 **Investigate App.tsx**: Determine if it calls an ingestion function or handles file input — likely key to test harness integration.
+
+5. ⚙️ **Style Refactoring**: Consider modularizing `_migrated.scss` and `_components.scss` into smaller, reusable components (if future work includes UI expansion).
+
+---
+
+## Final Note
+
+This project appears to be in early development with a focus on setting up a test harness for ingestion functionality. While the codebase is small (~15KB), it contains critical gaps:  
+- A failing test  
+- No test runner configuration  
+- Missing core logic (ingestion service)  
+
+**Next steps must prioritize fixing `ingestion.test.ts` and enabling basic test execution**, as this is a prerequisite for further development.
+
+> ✅ Project context fully hydrated using only observed files. No assumptions beyond scan data.
 
 ---
 
 # Context Snapshot (Scan)
 
 Repo: /mnt/e/code/machine-client-log-summarizer
-Generated: 2025-10-08T02:38:42.438Z
+Generated: 2025-10-08T02:55:41.086Z
 
 ## Totals
 - Files: 14
