@@ -1,72 +1,107 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import fs from 'fs';
-import { ingestFiles } from './ingestion';
+import { describe, it, expect, vi } from 'vitest'
+import { processLogFiles } from './ingestion'
 
-// Mock fs module to simulate file system operations
+// Mock file system operations
 vi.mock('fs', () => ({
-  default: {
-    readFileSync: vi.fn(),
-    existsSync: vi.fn(),
-  },
-}));
+  promises: {
+    readFile: vi.fn().mockResolvedValue('test log content'),
+    stat: vi.fn().mockResolvedValue({ size: 1024 }),
+    readdir: vi.fn().mockResolvedValue(['file1.log', 'file2.log'])
+  }
+}))
 
-describe('ingestFiles', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
+describe('processLogFiles', () => {
+  it('should process log files and return summary', async () => {
+    const result = await processLogFiles('./logs')
+    expect(result).toEqual({
+      totalFiles: 2,
+      totalSize: 2048,
+      processedFiles: [
+        {
+          fileName: 'file1.log',
+          content: 'test log content',
+          size: 1024,
+          timestamp: expect.any(Date)
+        },
+        {
+          fileName: 'file2.log',
+          content: 'test log content',
+          size: 1024,
+          timestamp: expect.any(Date)
+        }
+      ],
+      summary: expect.any(String)
+    })
+  })
 
-  it('should process a single valid JSON file', () => {
-    const mockFileContent = JSON.stringify([
-      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'Test log entry' },
-      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Another log entry' },
-    ]);
+  it('should handle empty directory', async () => {
+    const mockReaddir = vi.fn().mockResolvedValue([])
+    vi.mock('fs', () => ({
+      promises: {
+        readFile: vi.fn().mockResolvedValue('test content'),
+        stat: vi.fn().mockResolvedValue({ size: 1024 }),
+        readdir: mockReaddir
+      }
+    }))
 
-    vi.mocked(fs.readFileSync).mockReturnValue(mockFileContent);
-    vi.mocked(fs.existsSync).mockReturnValue(true);
+    const result = await processLogFiles('./empty')
+    expect(result).toEqual({
+      totalFiles: 0,
+      totalSize: 0,
+      processedFiles: [],
+      summary: expect.any(String)
+    })
+  })
 
-    const result = ingestFiles(['test.json']);
+  it('should filter out non-log files', async () => {
+    const mockReaddir = vi.fn().mockResolvedValue(['file1.txt', 'file2.log', 'file3.json'])
+    vi.mock('fs', () => ({
+      promises: {
+        readFile: vi.fn().mockResolvedValue('test content'),
+        stat: vi.fn().mockResolvedValue({ size: 1024 }),
+        readdir: mockReaddir
+      }
+    }))
 
-    expect(result).toEqual([
-      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'Test log entry' },
-      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Another log entry' },
-    ]);
-  });
+    const result = await processLogFiles('./mixed')
+    expect(result).toEqual({
+      totalFiles: 1,
+      totalSize: 1024,
+      processedFiles: [
+        {
+          fileName: 'file2.log',
+          content: 'test content',
+          size: 1024,
+          timestamp: expect.any(Date)
+        }
+      ],
+      summary: expect.any(String)
+    })
+  })
 
-  it('should handle multiple JSON files', () => {
-    const file1Content = JSON.stringify([
-      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'First log entry' },
-    ]);
+  it('should handle directory read errors', async () => {
+    const mockReaddir = vi.fn().mockRejectedValue(new Error('Directory not found'))
+    vi.mock('fs', () => ({
+      promises: {
+        readFile: vi.fn().mockResolvedValue('test content'),
+        stat: vi.fn().mockResolvedValue({ size: 1024 }),
+        readdir: mockReaddir
+      }
+    }))
 
-    const file2Content = JSON.stringify([
-      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Second log entry' },
-    ]);
+    await expect(processLogFiles('./nonexistent')).rejects.toThrow('Directory not found')
+  })
 
-    vi.mocked(fs.readFileSync).mockImplementation((path) => {
-      if (path === 'file1.json') return file1Content;
-      if (path === 'file2.json') return file2Content;
-      return '';
-    });
+  it('should handle file processing errors gracefully', async () => {
+    const mockReadFile = vi.fn().mockRejectedValue(new Error('File read error'))
+    vi.mock('fs', () => ({
+      promises: {
+        readFile: mockReadFile,
+        stat: vi.fn().mockResolvedValue({ size: 1024 }),
+        readdir: vi.fn().mockResolvedValue(['error.log'])
+      }
+    }))
 
-    vi.mocked(fs.existsSync).mockReturnValue(true);
-
-    const result = ingestFiles(['file1.json', 'file2.json']);
-
-    expect(result).toEqual([
-      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'First log entry' },
-      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Second log entry' },
-    ]);
-  });
-
-  it('should throw an error for invalid JSON content', () => {
-    vi.mocked(fs.readFileSync).mockReturnValue('invalid json');
-    vi.mocked(fs.existsSync).mockReturnValue(true);
-
-    expect(() => ingestFiles(['invalid.json'])).toThrow('Failed to parse JSON');
-  });
-
-  it('should throw an error for non-existent files', () => {
-    vi.mocked(fs.existsSync).mockReturnValue(false);
-
-    expect(() => ingestFiles(['nonexistent.json'])).toThrow('File does not exist');
-  });
-});
+    await expect(processLogFiles('./logs')).rejects.toThrow('File read error')
+  })
+})

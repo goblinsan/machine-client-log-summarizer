@@ -1,69 +1,90 @@
-import fs from 'fs/promises';
+import fs from 'fs'
+import path from 'path'
 
-// Define the expected log record structure
-export interface LogRecord {
-  timestamp: string;
-  level: 'info' | 'warn' | 'error' | 'debug';
-  message: string;
+export interface FileData {
+  fileName: string
+  content: string
+  size: number
+}
+
+export interface ProcessedFileData {
+  fileName: string
+  content: string
+  size: number
+  timestamp: Date
 }
 
 /**
- * Process a file and return normalized log records
- * @param filePath - Path to the JSON file containing log records
- * @returns Promise resolving to array of normalized LogRecord objects
+ * Process a single file by reading its content and metadata
+ * @param filePath - Path to the file to process
+ * @returns Promise resolving to processed file data
  */
-export async function processFile(filePath: string): Promise<LogRecord[]> {
+export async function processFile(filePath: string): Promise<ProcessedFileData> {
   try {
-    // Read the file content
-    const fileContent = await fs.readFile(filePath, 'utf8');
-
-    // Parse the JSON content
-    const parsedData = JSON.parse(fileContent);
-
-    // Validate that the parsed data is an array
-    if (!Array.isArray(parsedData)) {
-      throw new Error('Invalid JSON in file: Expected an array of log records');
+    // Validate file path
+    if (!filePath || typeof filePath !== 'string') {
+      throw new Error('Invalid file path provided')
     }
 
-    // Validate and normalize each record in the array
-    const normalizedRecords: LogRecord[] = [];
+    // Get file stats to determine size
+    const stats = await fs.promises.stat(filePath)
 
-    for (const record of parsedData) {
-      // Validate that each record is an object
-      if (typeof record !== 'object' || record === null) {
-        throw new Error('Invalid JSON in file: Array contains non-object elements');
-      }
+    // Read file content
+    const content = await fs.promises.readFile(filePath, 'utf8')
 
-      // Validate required fields
-      if (!('timestamp' in record) || typeof record.timestamp !== 'string') {
-        throw new Error('Invalid JSON in file: Missing or invalid timestamp field');
-      }
-
-      if (!('level' in record) || !['info', 'warn', 'error', 'debug'].includes(record.level)) {
-        throw new Error('Invalid JSON in file: Missing or invalid level field');
-      }
-
-      if (!('message' in record) || typeof record.message !== 'string') {
-        throw new Error('Invalid JSON in file: Missing or invalid message field');
-      }
-
-      // Create normalized record
-      const normalizedRecord: LogRecord = {
-        timestamp: record.timestamp,
-        level: record.level as 'info' | 'warn' | 'error' | 'debug',
-        message: record.message
-      };
-
-      normalizedRecords.push(normalizedRecord);
+    return {
+      fileName: path.basename(filePath),
+      content,
+      size: stats.size,
+      timestamp: new Date()
     }
-
-    return normalizedRecords;
   } catch (error) {
-    // Re-throw the error with more context if it's not already an Error instance
     if (error instanceof Error) {
-      throw error;
-    } else {
-      throw new Error(`Failed to process file: ${error}`);
+      throw new Error(`Failed to process file ${filePath}: ${error.message}`)
     }
+    throw new Error(`Failed to process file ${filePath}: Unknown error`)
+  }
+}
+
+/**
+ * Process multiple files in parallel
+ * @param filePaths - Array of file paths to process
+ * @returns Promise resolving to array of processed file data
+ */
+export async function processFiles(filePaths: string[]): Promise<ProcessedFileData[]> {
+  try {
+    // Validate input
+    if (!Array.isArray(filePaths)) {
+      throw new Error('File paths must be provided as an array')
+    }
+
+    // Process files in parallel
+    const results = await Promise.all(
+      filePaths.map(filePath => processFile(filePath))
+    )
+
+    return results
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to process files: ${error.message}`)
+    }
+    throw new Error('Failed to process files: Unknown error')
+  }
+}
+
+/**
+ * Get file size in bytes
+ * @param filePath - Path to the file
+ * @returns Promise resolving to file size in bytes
+ */
+export async function getFileSize(filePath: string): Promise<number> {
+  try {
+    const stats = await fs.promises.stat(filePath)
+    return stats.size
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to get file size for ${filePath}: ${error.message}`)
+    }
+    throw new Error(`Failed to get file size for ${filePath}: Unknown error`)
   }
 }

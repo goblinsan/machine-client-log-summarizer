@@ -1,43 +1,63 @@
-import fs from 'fs';
+import fs from 'fs'
+import path from 'path'
+import { processFiles, ProcessedFileData } from './fileIngest'
 
-// Define the structure of a log record
-export interface LogRecord {
-  timestamp: string;
-  level: string;
-  message: string;
+export interface LogProcessingResult {
+  totalFiles: number
+  totalSize: number
+  processedFiles: ProcessedFileData[]
+  summary: string
 }
 
-// Normalize a single log record to ensure consistent structure
-export function normalizeRecord(record: any): LogRecord {
-  return {
-    timestamp: record.timestamp || '',
-    level: record.level || '',
-    message: record.message || '',
-  };
-}
-
-// Ingest multiple JSON files and return normalized records
-export function ingestFiles(filePaths: string[]): LogRecord[] {
-  const allRecords: LogRecord[] = [];
-
-  for (const filePath of filePaths) {
-    // Check if file exists
-    if (!fs.existsSync(filePath)) {
-      throw new Error(`File does not exist: ${filePath}`);
+/**
+ * Process log files from a directory
+ * @param directoryPath - Path to the directory containing log files
+ * @returns Promise resolving to processing results summary
+ */
+export async function processLogFiles(directoryPath: string): Promise<LogProcessingResult> {
+  try {
+    // Validate directory path
+    if (!directoryPath || typeof directoryPath !== 'string') {
+      throw new Error('Invalid directory path provided')
     }
 
-    try {
-      // Read and parse the file content
-      const fileContent = fs.readFileSync(filePath, 'utf-8');
-      const parsedRecords: any[] = JSON.parse(fileContent);
+    // Read directory contents
+    const files = await fs.promises.readdir(directoryPath)
 
-      // Normalize each record and add to the result
-      const normalizedRecords = parsedRecords.map(normalizeRecord);
-      allRecords.push(...normalizedRecords);
-    } catch (error) {
-      throw new Error(`Failed to parse JSON from file ${filePath}: ${error}`);
+    // Filter for log files (ending with .log)
+    const logFiles = files.filter(file => file.endsWith('.log'))
+
+    // Process all log files
+    const processedFiles = await processFiles(
+      logFiles.map(file => path.join(directoryPath, file))
+    )
+
+    // Calculate total size
+    const totalSize = processedFiles.reduce((sum, file) => sum + file.size, 0)
+
+    // Generate summary
+    const summary = generateSummary(processedFiles, totalSize)
+
+    return {
+      totalFiles: logFiles.length,
+      totalSize,
+      processedFiles,
+      summary
     }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to process log files from ${directoryPath}: ${error.message}`)
+    }
+    throw new Error(`Failed to process log files from ${directoryPath}: Unknown error`)
   }
+}
 
-  return allRecords;
+/**
+ * Generate a summary string from processed files
+ * @param files - Array of processed files
+ * @param totalSize - Total size in bytes
+ * @returns Summary string
+ */
+function generateSummary(files: ProcessedFileData[], totalSize: number): string {
+  return `Processed ${files.length} log files with total size of ${totalSize} bytes`
 }

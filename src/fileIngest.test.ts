@@ -1,55 +1,80 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest'
+import { processFile } from './fileIngest'
 
-import { parseLogContent } from './fileIngest';
+// Mock file system operations
+vi.mock('fs', () => ({
+  promises: {
+    readFile: vi.fn().mockResolvedValue('test log content'),
+    stat: vi.fn().mockResolvedValue({ size: 1024 })
+  }
+}))
 
-describe('parseLogContent', () => {
-  });
-});
+describe('processFile', () => {
+  it('should process a file and return parsed content', async () => {
+    const result = await processFile('test.log')
+    expect(result).toEqual({
+      fileName: 'test.log',
+      content: 'test log content',
+      size: 1024
+    })
+  })
 
-describe('parseLogContent with invalid input', () => {
-  it('should handle empty content gracefully', () => {
-    const result = parseLogContent('');
-    expect(result).toEqual([]);
-  });
-
-  it('should handle malformed JSON', () => {
-    const result = parseLogContent('{ invalid json }');
-    expect(result).toEqual([]);
-  });
-
-  it('should handle non-array JSON', () => {
-    const result = parseLogContent('{ "key": "value" }');
-    expect(result).toEqual([]);
-  });
-});
-
-describe('parseLogContent with valid input', () => {
-  it('should parse valid JSON array', () => {
-    const content = '[{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "test"}]';
-    const result = parseLogContent(content);
-    expect(result).toEqual([
-      {
-        timestamp: "2023-01-01T00:00:00Z",
-        level: "INFO",
-        message: "test"
+  it('should handle file read errors gracefully', async () => {
+    const mockReadFile = vi.fn().mockRejectedValue(new Error('File not found'))
+    vi.mock('fs', () => ({
+      promises: {
+        readFile: mockReadFile,
+        stat: vi.fn().mockResolvedValue({ size: 1024 })
       }
-    ]);
-  });
+    }))
 
-  it('should handle multiple log entries', () => {
-    const content = '[{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "test1"}, {"timestamp": "2023-01-01T00:01:00Z", "level": "ERROR", "message": "test2"}]';
-    const result = parseLogContent(content);
-    expect(result).toEqual([
-      {
-        timestamp: "2023-01-01T00:00:00Z",
-        level: "INFO",
-        message: "test1"
-      },
-      {
-        timestamp: "2023-01-01T00:01:00Z",
-        level: "ERROR",
-       message: "test2"
-     }
-   ]);
-  });
-});
+    await expect(processFile('nonexistent.log')).rejects.toThrow('File not found')
+  })
+
+  it('should handle file size calculation errors', async () => {
+    const mockStat = vi.fn().mockRejectedValue(new Error('Stat failed'))
+    vi.mock('fs', () => ({
+      promises: {
+        readFile: vi.fn().mockResolvedValue('test content'),
+        stat: mockStat
+      }
+    }))
+
+    await expect(processFile('test.log')).rejects.toThrow('Stat failed')
+  })
+
+  it('should handle empty file content', async () => {
+    const mockReadFile = vi.fn().mockResolvedValue('')
+    vi.mock('fs', () => ({
+      promises: {
+        readFile: mockReadFile,
+        stat: vi.fn().mockResolvedValue({ size: 0 })
+      }
+    }))
+
+    const result = await processFile('empty.log')
+    expect(result).toEqual({
+      fileName: 'empty.log',
+      content: '',
+      size: 0
+    })
+  })
+
+  it('should handle large file content', async () => {
+    const largeContent = 'A'.repeat(1000000)
+    const mockReadFile = vi.fn().mockResolvedValue(largeContent)
+    vi.mock('fs', () => ({
+      promises: {
+        readFile: mockReadFile,
+        stat: vi.fn().mockResolvedValue({ size: 1000000 })
+      }
+    }))
+
+    const result = await processFile('large.log')
+    expect(result).toEqual({
+      fileName: 'large.log',
+      content: largeContent,
+      size: 1000000
+    })
+  })
+})
