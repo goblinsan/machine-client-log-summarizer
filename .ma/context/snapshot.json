@@ -1,9 +1,9 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-12T01:09:51.574Z",
+  "generated_at": "2025-10-12T01:13:41.117Z",
   "totals": {
     "files": 13,
-    "bytes": 15653,
+    "bytes": 15659,
     "lines": 753
   },
   "components": [
@@ -11,7 +11,7 @@
       "component": ".",
       "totals": {
         "files": 13,
-        "bytes": 15653,
+        "bytes": 15659,
         "lines": 753
       },
       "largest": [
@@ -52,10 +52,10 @@
         },
         {
           "path": "src/ingestion.test.ts",
-          "bytes": 800,
-          "mtime": 1760231391462.02,
+          "bytes": 806,
+          "mtime": 1760231621010.5862,
           "lines": 26,
-          "sha1": "ac58c5b455ed5f1b57bfdc2bd55bb9a63c23d4ff"
+          "sha1": "10302a553810180952c1a8d52b5af6c4363a9458"
         },
         {
           "path": "src/ingestion.ts",
@@ -131,10 +131,10 @@
         },
         {
           "path": "src/ingestion.test.ts",
-          "bytes": 800,
-          "mtime": 1760231391462.02,
+          "bytes": 806,
+          "mtime": 1760231621010.5862,
           "lines": 26,
-          "sha1": "ac58c5b455ed5f1b57bfdc2bd55bb9a63c23d4ff"
+          "sha1": "10302a553810180952c1a8d52b5af6c4363a9458"
         },
         {
           "path": "src/styles/_extras.scss",
@@ -199,10 +199,10 @@
       },
       {
         "path": "src/ingestion.test.ts",
-        "bytes": 800,
-        "mtime": 1760231391462.02,
+        "bytes": 806,
+        "mtime": 1760231621010.5862,
         "lines": 26,
-        "sha1": "ac58c5b455ed5f1b57bfdc2bd55bb9a63c23d4ff"
+        "sha1": "10302a553810180952c1a8d52b5af6c4363a9458"
       },
       {
         "path": "src/ingestion.ts",
@@ -299,10 +299,10 @@
       },
       {
         "path": "src/ingestion.test.ts",
-        "bytes": 800,
-        "mtime": 1760231391462.02,
+        "bytes": 806,
+        "mtime": 1760231621010.5862,
         "lines": 26,
-        "sha1": "ac58c5b455ed5f1b57bfdc2bd55bb9a63c23d4ff"
+        "sha1": "10302a553810180952c1a8d52b5af6c4363a9458"
       },
       {
         "path": "src/styles/_extras.scss",
