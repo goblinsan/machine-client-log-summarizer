@@ -1,6 +1,7 @@
 /**
  * Ingestion module for processing log files
  */
+import { File } from 'buffer';
 
 /**
  * Process a file and parse its content as JSON
@@ -14,14 +15,20 @@ export const processFile = (file: File): Promise<any> => {
     reader.onload = (e) => {
       try {
         const content = e.target?.result as string;
+
         // Validate that the file is actually a JSON file
         if (!file.name.endsWith('.json')) {
           reject(new Error('File must be a JSON file'));
           return;
         }
 
+        // Validate that the content is valid JSON
         const parsedContent = JSON.parse(content);
-        resolve(parsedContent);
+
+        // Normalize the parsed content (e.g., ensure consistent structure)
+        const normalizedRecord = normalizeRecord(parsedContent);
+
+        resolve(normalizedRecord);
       } catch (err) {
         reject(new Error('Failed to parse file as JSON'));
       }
@@ -33,4 +40,16 @@ export const processFile = (file: File): Promise<any> => {
 
     reader.readAsText(file);
   });
+};
+
+/**
+ * Normalize a parsed JSON record to ensure consistent structure
+ * @param record - The parsed JSON object to normalize
+ * @returns Normalized record with consistent structure
+ */
+export const normalizeRecord = (record: any): any => {
+  // Example normalization logic - in a real implementation,
+  // this would transform the record to a standardized format
+  // For now, we'll just return the record as-is for demonstration
+  return record;
 };
