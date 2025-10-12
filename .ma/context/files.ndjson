@@ -1,11 +1,12 @@
 {"path":".gitignore","bytes":206,"mtime":1759457453023.9875,"lines":26,"sha1":"501e9be30f73cb6ea67ae7a2fa665b1134fc7d13"}
-{"path":".ma/context/files.ndjson","bytes":4621,"mtime":1760293835017.1477,"lines":35,"sha1":"d715760a915a03e1608d9e511acab3868ff63d3e"}
-{"path":".ma/context/snapshot.json","bytes":19157,"mtime":1760293835015.425,"lines":690,"sha1":"16fe9c50f6a315a74b0c560b44185a372634103f"}
-{"path":".ma/context/summary.md","bytes":9401,"mtime":1760293859891.3943,"lines":218,"sha1":"98a15d33bee239ea1766c75a49bcd7c59e78bc08"}
+{"path":".ma/context/files.ndjson","bytes":4787,"mtime":1760294346966.573,"lines":36,"sha1":"d17d26ef49cfd0ef43e14c65f5e6f0719795f412"}
+{"path":".ma/context/snapshot.json","bytes":19393,"mtime":1760294346965.9802,"lines":697,"sha1":"f8b5df70e1a996fa3d4ab229cc0d587171e070cf"}
+{"path":".ma/context/summary.md","bytes":10019,"mtime":1760294375700.1785,"lines":269,"sha1":"c92fb415a516949890fdc484fa217417faabf023"}
 {"path":".ma/qa/task-008e1a7e-0df4-4703-b6b4-fb71dbae04a6-qa.log","bytes":868,"mtime":1760293691667.229,"lines":17,"sha1":"96178e99cd8d5d858e0d6d8731d6d004ca37eb9d"}
 {"path":".ma/qa/task-3a4e3faf-0955-4bff-9655-c75f6eae1360-qa.log","bytes":429,"mtime":1760293560787.3516,"lines":13,"sha1":"ac4765a27513b53c93d76041917cef5e5b4797ae"}
 {"path":".ma/qa/task-82038266-f6f6-4e84-a5f0-e7a1067e8c05-qa.log","bytes":969,"mtime":1760293451211.0186,"lines":21,"sha1":"bb1f6040935e9d1490cc3e60823051d0c379a073"}
 {"path":".ma/qa/task-83bb4d1f-0081-41c0-b09c-83304ef18e50-qa.log","bytes":691,"mtime":1760293834885.3027,"lines":30,"sha1":"7465d23ad816478d5a6cea1a8f0d7dfb591a2ebd"}
+{"path":".ma/qa/task-b5a95c45-5f2e-4909-a562-f2a291e9aced-qa.log","bytes":520,"mtime":1760294443776.3445,"lines":19,"sha1":"77882d725542f2b8121124ed95f35aaa7ec9b2ee"}
 {"path":".ma/qa/task-d631e40c-11a4-4479-b430-714ce0650d84-qa.log","bytes":1720,"mtime":1760294346832.7961,"lines":51,"sha1":"b02a8c910ed0707d08fcaa2379aee8455d4c1a9d"}
 {"path":".stylelintrc.json","bytes":469,"mtime":1760191477066.0342,"lines":17,"sha1":"face46337baec779ce9d364c84b7e70325534ef1"}
 {"path":"PROJECT_PLAN.md","bytes":10758,"mtime":1760191477068.0342,"lines":144,"sha1":"b67d9f0d2891c39f34b3cf021e14dbd754456403"}
@@ -17,8 +18,8 @@
 {"path":"src/App.tsx","bytes":1849,"mtime":1760293560788.3733,"lines":72,"sha1":"30b345f423b7b7733ac16e097c779f53f544548d"}
 {"path":"src/fileIngest.test.ts","bytes":2224,"mtime":1760294346834.1145,"lines":71,"sha1":"7455688c1c98cd42954fb2aef51081fbb4498a00"}
 {"path":"src/fileIngest.ts","bytes":2398,"mtime":1760294346835.1362,"lines":91,"sha1":"4dbf57a4adf1172d6feabd06efb6e4b009d4610d"}
-{"path":"src/ingest/fileIngest.test.ts","bytes":1440,"mtime":1760293691669.6367,"lines":55,"sha1":"5370ab28851c445f5e83fc9aa4eb67162c58089e"}
-{"path":"src/ingest/fileIngest.ts","bytes":604,"mtime":1760293691670.6753,"lines":28,"sha1":"5965e0bf4880150b66ce5ab94a4a52a1f34ca160"}
+{"path":"src/ingest/fileIngest.test.ts","bytes":1978,"mtime":1760294443778.1804,"lines":62,"sha1":"3ed6d204d45c0e241c5763b6162fbf5de85580df"}
+{"path":"src/ingest/fileIngest.ts","bytes":1298,"mtime":1760294443779.2349,"lines":51,"sha1":"32791ef2ba2aac9739b32a416fb0cb6890c89bd0"}
 {"path":"src/ingestion.test.ts","bytes":3404,"mtime":1760294346836.1362,"lines":90,"sha1":"9070063598842726b26b746500aa7dcca9b1745d"}
 {"path":"src/ingestion.ts","bytes":1966,"mtime":1760294346838.1362,"lines":85,"sha1":"ef5b55fc751586e62348cbca9e449dff3cf92f41"}
 {"path":"src/main.tsx","bytes":231,"mtime":1760191477077.034,"lines":10,"sha1":"ed567ef9985b18b3140a6d0bcd42af5bb19b2888"}
