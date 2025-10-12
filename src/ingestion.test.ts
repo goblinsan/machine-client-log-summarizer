@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import { processFile } from './ingestion';
+import { processFile } from './fileIngest';
 
 /**
  * Test suite for ingestion functionality
@@ -59,5 +59,48 @@ describe('Ingestion functionality', () => {
     const result = await processFile(mockFile);
 
     expect(result).toEqual({});
+  });
+
+  it('should normalize records to consistent structure', async () => {
+    const mockFile = new File(['{"message": "test", "timestamp": "2023-01-01T00:00:00Z"}'], 'normalized.json', {
+      type: 'application/json',
+    });
+
+    const result = await processFile(mockFile);
+
+    // Should return normalized record with consistent structure
+    expect(result).toEqual({
+      message: 'test',
+      timestamp: '2023-01-01T00:00:00Z'
+    });
+  });
+
+  it('should handle file read errors gracefully', async () => {
+    // Create a mock file that will fail to read
+    const mockFile = new File(['{"test": "value"}'], 'error.json', {
+      type: 'application/json',
+    });
+
+    // Mock FileReader to simulate read error
+    const originalFileReader = global.FileReader;
+    const mockReader = {
+      readAsText: jest.fn().mockImplementation(function() {
+        // Simulate error in reader
+        setTimeout(() => {
+          this.onerror?.();
+        }, 0);
+      }),
+      onload: jest.fn(),
+      onerror: jest.fn(),
+      result: null
+    };
+
+    // @ts-ignore - we're mocking FileReader for testing purposes
+    global.FileReader = jest.fn().mockImplementation(() => mockReader);
+
+    await expect(processFile(mockFile)).rejects.toThrow('Failed to read file');
+
+    // Restore original FileReader
+    global.FileReader = originalFileReader;
   });
 });

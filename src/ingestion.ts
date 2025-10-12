@@ -47,3 +47,41 @@ export const normalizeRecord = (record: any): any => {
   // For now, we'll just return the record as-is for demonstration
   return record;
 };
+
+/**
+ * New implementation to read and process JSON files
+ * This file is intended to be the new ingestion module that will handle file reading and normalization
+ */
+
+/**
+ * Read a JSON file and return normalized records
+ * @param file - The JSON file to read
+ * @returns Promise resolving to normalized records or rejecting with error
+ */
+export const readJSONFile = (file: File): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string;
+
+        // Validate that the content is valid JSON
+        const parsedContent = JSON.parse(content);
+
+        // Normalize the parsed content (e.g., ensure consistent structure)
+        const normalizedRecord = normalizeRecord(parsedContent);
+
+        resolve(normalizedRecord);
+      } catch (err) {
+        reject(new Error('Failed to parse file as JSON'));
+      }
+    };
+
+    reader.onerror = () => {
+      reject(new Error('Failed to read file'));
+    };
+
+    reader.readAsText(file);
+  });
+};
