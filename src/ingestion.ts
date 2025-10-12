@@ -1,37 +1,43 @@
-import { readAndNormalizeRecords } from './ingest/fileIngest';
+import fs from 'fs';
 
-/**
- * Processes log files and returns normalized records.
- * @param filePaths - Array of paths to JSON files containing log records
- * @returns Promise resolving to array of normalized log records from all files
- */
-export async function processLogFiles(filePaths: string[]): Promise<NormalizedRecord[]> {
-  const allRecords: NormalizedRecord[] = [];
+// Define the structure of a log record
+export interface LogRecord {
+  timestamp: string;
+  level: string;
+  message: string;
+}
+
+// Normalize a single log record to ensure consistent structure
+export function normalizeRecord(record: any): LogRecord {
+  return {
+    timestamp: record.timestamp || '',
+    level: record.level || '',
+    message: record.message || '',
+  };
+}
+
+// Ingest multiple JSON files and return normalized records
+export function ingestFiles(filePaths: string[]): LogRecord[] {
+  const allRecords: LogRecord[] = [];
 
   for (const filePath of filePaths) {
-    const records = await readAndNormalizeRecords(filePath);
-    allRecords.push(...records);
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`File does not exist: ${filePath}`);
+    }
+
+    try {
+      // Read and parse the file content
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      const parsedRecords: any[] = JSON.parse(fileContent);
+
+      // Normalize each record and add to the result
+      const normalizedRecords = parsedRecords.map(normalizeRecord);
+      allRecords.push(...normalizedRecords);
+    } catch (error) {
+      throw new Error(`Failed to parse JSON from file ${filePath}: ${error}`);
+    }
   }
 
   return allRecords;
-}
-
-/**
- * Processes a single log file and returns normalized records.
- * @param filePath - Path to the JSON file containing log records
- * @returns Promise resolving to array of normalized log records from the file
- */
-export async function processLogFile(filePath: string): Promise<NormalizedRecord[]> {
-  return readAndNormalizeRecords(filePath);
-}
-
-/**
- * Processes multiple log files and returns normalized records.
- * @param filePaths - Array of paths to JSON files containing log records
- * @returns Promise resolving to array of normalized log records from all files
- */
-export async function processLogFilesFromMultipleSources(
-  filePaths: string[]
-): Promise<NormalizedRecord[]> {
-  return readAndNormalizeRecordsFromMultipleFiles(filePaths);
 }

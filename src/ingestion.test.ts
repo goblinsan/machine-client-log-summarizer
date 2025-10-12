@@ -1,57 +1,72 @@
-import { processLogFiles, processLogFile, processLogFilesFromMultipleSources } from './ingestion';
-import { readAndNormalizeRecords } from './ingest/fileIngest';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import fs from 'fs';
+import { ingestFiles } from './ingestion';
 
-jest.mock('fs', () => ({
-  promises: {
-    readFile: jest.fn()
-  }
+// Mock fs module to simulate file system operations
+vi.mock('fs', () => ({
+  default: {
+    readFileSync: vi.fn(),
+    existsSync: vi.fn(),
+  },
 }));
 
-describe('ingestion', () => {
-  const mockLogRecords = [
-    {
-      timestamp: '2023-01-01T00:00:00.000Z',
-      level: 'INFO',
-      message: 'Test log message',
-      service: 'test-service'
-    }
-  ];
-
-  const mockNormalizedRecords = [
-    {
-      timestamp: new Date('2023-01-01T00:00:00.000Z'),
-      level: 'INFO',
-      message: 'Test log message',
-      service: 'test-service'
-    }
-  ];
-
-  it('should process a single log file', async () => {
-    (fs.readFile as jest.Mock).mockResolvedValue(JSON.stringify(mockLogRecords));
-
-    const result = await processLogFile('test.json');
-    expect(result).toEqual(mockNormalizedRecords);
+describe('ingestFiles', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('should process multiple log files', async () => {
-    (fs.readFile as jest.Mock).mockResolvedValue(JSON.stringify(mockLogRecords));
+  it('should process a single valid JSON file', () => {
+    const mockFileContent = JSON.stringify([
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'Test log entry' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Another log entry' },
+    ]);
 
-    const result = await processLogFilesFromMultipleSources(['file1.json', 'file2.json']);
-    expect(result).toEqual(mockNormalizedRecords);
+    vi.mocked(fs.readFileSync).mockReturnValue(mockFileContent);
+    vi.mocked(fs.existsSync).mockReturnValue(true);
+
+    const result = ingestFiles(['test.json']);
+
+    expect(result).toEqual([
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'Test log entry' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Another log entry' },
+    ]);
   });
 
-  it('should process log files from multiple sources', async () => {
-    (fs.readFile as jest.Mock).mockResolvedValue(JSON.stringify(mockLogRecords));
+  it('should handle multiple JSON files', () => {
+    const file1Content = JSON.stringify([
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'First log entry' },
+    ]);
 
-    const result = await processLogFiles(['file1.json', 'file2.json']);
-    expect(result).toEqual(mockNormalizedRecords);
+    const file2Content = JSON.stringify([
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Second log entry' },
+    ]);
+
+    vi.mocked(fs.readFileSync).mockImplementation((path) => {
+      if (path === 'file1.json') return file1Content;
+      if (path === 'file2.json') return file2Content;
+      return '';
+    });
+
+    vi.mocked(fs.existsSync).mockReturnValue(true);
+
+    const result = ingestFiles(['file1.json', 'file2.json']);
+
+    expect(result).toEqual([
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'First log entry' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Second log entry' },
+    ]);
   });
 
-  it('should handle file reading errors', async () => {
-    (fs.readFile as jest.Mock).mockRejectedValue(new Error('File not found'));
+  it('should throw an error for invalid JSON content', () => {
+    vi.mocked(fs.readFileSync).mockReturnValue('invalid json');
+    vi.mocked(fs.existsSync).mockReturnValue(true);
 
-    await expect(processLogFile('nonexistent.json')).rejects.toThrow('File not found');
+    expect(() => ingestFiles(['invalid.json'])).toThrow('Failed to parse JSON');
+  });
+
+  it('should throw an error for non-existent files', () => {
+    vi.mocked(fs.existsSync).mockReturnValue(false);
+
+    expect(() => ingestFiles(['nonexistent.json'])).toThrow('File does not exist');
   });
 });
