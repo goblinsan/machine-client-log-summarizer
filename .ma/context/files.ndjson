@@ -1,7 +1,7 @@
 {"path":".gitignore","bytes":206,"mtime":1759457453023.9875,"lines":26,"sha1":"501e9be30f73cb6ea67ae7a2fa665b1134fc7d13"}
-{"path":".ma/context/files.ndjson","bytes":2362,"mtime":1760273220687.9578,"lines":19,"sha1":"15669a2188cf64dfce7ad1b97730be96058465e3"}
-{"path":".ma/context/snapshot.json","bytes":11720,"mtime":1760273220686.9575,"lines":422,"sha1":"11218200f54baa08e6def38043b5b4c6257b1975"}
-{"path":".ma/context/summary.md","bytes":6916,"mtime":1760273244648.955,"lines":184,"sha1":"fcbef1170562365ec7c7605b339211e574973ab3"}
+{"path":".ma/context/files.ndjson","bytes":3673,"mtime":1760275983167.7737,"lines":29,"sha1":"0c16a6a75a4a7c1eee355f55b8c989e94ca3a1dd"}
+{"path":".ma/context/snapshot.json","bytes":12604,"mtime":1760275983166.6135,"lines":450,"sha1":"4b093e939ac6630bc73ad119ee2fb4d47149e6d8"}
+{"path":".ma/context/summary.md","bytes":7878,"mtime":1760276010351.028,"lines":211,"sha1":"e50bc51cfbc49fbbc72c6e8e6e295bc440d1dffa"}
 {"path":".stylelintrc.json","bytes":469,"mtime":1760191477066.0342,"lines":17,"sha1":"face46337baec779ce9d364c84b7e70325534ef1"}
 {"path":"PROJECT_PLAN.md","bytes":10758,"mtime":1760191477068.0342,"lines":144,"sha1":"b67d9f0d2891c39f34b3cf021e14dbd754456403"}
 {"path":"README.md","bytes":210,"mtime":1759457453023.9875,"lines":11,"sha1":"02df2ba2ab48fc0691e4b1bc15f8511f14404557"}
@@ -12,6 +12,8 @@
 {"path":"src/App.tsx","bytes":2490,"mtime":1760232949121.4832,"lines":96,"sha1":"bf9248749b98d64f0f1183f10e1a422ed9e784c5"}
 {"path":"src/fileIngest.test.ts","bytes":6072,"mtime":1760275982998.838,"lines":171,"sha1":"422e853b0da47bebedbbc3107dd200eac9ed80f0"}
 {"path":"src/fileIngest.ts","bytes":2268,"mtime":1760275982999.5967,"lines":69,"sha1":"a5c1c97ce3bb784f3bf19e1eaf9a3e8d007b3637"}
+{"path":"src/ingest/fileIngest.test.ts","bytes":2653,"mtime":1760276079759.4722,"lines":97,"sha1":"a1dbbfda25428a59a31d9a0067515466831f1bda"}
+{"path":"src/ingest/fileIngest.ts","bytes":1093,"mtime":1760276079760.4976,"lines":44,"sha1":"23cdfe45df0f1078c22c8dfae30dfc040588c4c2"}
 {"path":"src/ingestion.test.ts","bytes":2380,"mtime":1760273220566.9802,"lines":72,"sha1":"6c69fdbb4377841ec87606b9b575826c9e7b13ee"}
 {"path":"src/ingestion.ts","bytes":1202,"mtime":1760273220567.954,"lines":43,"sha1":"151e19e45ea08243d85a3c704bbf3a2c6e20ecb3"}
 {"path":"src/main.tsx","bytes":231,"mtime":1760191477077.034,"lines":10,"sha1":"ed567ef9985b18b3140a6d0bcd42af5bb19b2888"}
