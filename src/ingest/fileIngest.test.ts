@@ -1,128 +1,52 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { processFile } from './fileIngest';
+import { describe, it, expect, vi } from 'vitest';
+import { readJsonFile } from './fileIngest';
 
-describe('processFile', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
+// Mock fs module
+vi.mock('fs', () => ({
+  readFileSync: vi.fn(),
+}));
+
+describe('readJsonFile', () => {
+  it('should parse valid JSON file and return normalized records', () => {
+    const mockData = [
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'test log' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'error log' },
+    ];
+
+    vi.mocked(require('fs')).readFileSync.mockReturnValueOnce(JSON.stringify(mockData));
+
+    const result = readJsonFile('mock-path.json');
+
+    expect(result).toEqual(mockData);
   });
 
-  it('should process valid JSON file and return normalized records', async () => {
-    const mockFileContent = `{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO", "message": "Test message", "service": "test-service"}\n{"timestamp": "2023-01-01T11:00:00Z", "level": "ERROR", "message": "Error message", "service": "test-service"}`;
-    
-    const result = await processFile(mockFileContent);
+  it('should throw an error for invalid JSON', () => {
+    vi.mocked(require('fs')).readFileSync.mockReturnValueOnce('{ invalid json }');
 
-    expect(result).toHaveLength(2);
-    expect(result[0]).toEqual({
-      timestamp: "2023-01-01T10:00:00Z",
-      level: "INFO",
-      message: "Test message",
-      service: "test-service"
-    });
-    expect(result[1]).toEqual({
-      timestamp: "2023-01-01T11:00:00Z",
-      level: "ERROR",
-      message: "Error message",
-      service: "test-service"
-    });
+    expect(() => readJsonFile('mock-path.json')).toThrow('Invalid JSON in file');
   });
 
-  it('should handle malformed JSON lines gracefully', async () => {
-    const mockFileContent = `{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO", "message": "Test message"}\n{"malformed": json}\n{"timestamp": "2023-01-01T11:00:00Z", "level": "ERROR", "message": "Error message"}`;
-
-    const result = await processFile(mockFileContent);
-
-    expect(result).toHaveLength(2);
-    expect(result[0]).toEqual({
-      timestamp: "2023-01-01T10:00:00Z",
-      level: "INFO",
-      message: "Test message"
+  it('should handle missing file gracefully', () => {
+    vi.mocked(require('fs')).readFileSync.mockImplementationOnce(() => {
+      throw new Error('File not found');
     });
-    expect(result[1]).toEqual({
-      timestamp: "2023-01-01T11:00:00Z",
-      level: "ERROR",
-      message: "Error message"
-    });
+
+    expect(() => readJsonFile('nonexistent.json')).toThrow('File not found');
   });
 
-  it('should handle missing fields in JSON records', async () => {
-    const mockFileContent = `{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO"}\n{"timestamp": "2023-01-01T11:00:00Z", "level": "ERROR", "message": "Error message"}`;
+  it('should normalize records by ensuring required fields exist', () => {
+    const mockData = [
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'test error' },
+    ];
 
-    const result = await processFile(mockFileContent);
+    vi.mocked(require('fs')).readFileSync.mockReturnValueOnce(JSON.stringify(mockData));
 
-    expect(result).toHaveLength(2);
-    expect(result[0]).toEqual({
-      timestamp: "2023-01-01T10:00:00Z",
-      level: "INFO"
-    });
-    expect(result[1]).toEqual({
-      timestamp: "2023-01-01T11:00:00Z",
-      level: "ERROR",
-      message: "Error message"
-    });
-  });
+    const result = readJsonFile('mock-path.json');
 
-  it('should handle empty file', async () => {
-    const mockFileContent = '';
-
-    const result = await processFile(mockFileContent);
-
-    expect(result).toHaveLength(0);
-  });
-
-  it('should handle file with only whitespace', async () => {
-    const mockFileContent = '   \n  \n\t\n';
-
-    const result = await processFile(mockFileContent);
-
-    expect(result).toHaveLength(0);
-  });
-
-  it('should normalize timestamp format', async () => {
-    const mockFileContent = `{"timestamp": "2023-01-01 10:00:00", "level": "INFO", "message": "Test message"}`;
-
-    const result = await processFile(mockFileContent);
-
-    expect(result).toHaveLength(1);
-    expect(result[0]).toEqual({
-      timestamp: "2023-01-01 10:00:00",
-      level: "INFO",
-      message: "Test message"
-    });
-  });
-
-  it('should handle JSON array format', async () => {
-    const mockFileContent = `[{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO", "message": "Test message"}, {"timestamp": "2023-01-01T11:00:00Z", "level": "ERROR", "message": "Error message"}]`;
-
-    const result = await processFile(mockFileContent);
-
-    expect(result).toHaveLength(2);
-    expect(result[0]).toEqual({
-      timestamp: "2023-01-01T10:00:00Z",
-      level: "INFO",
-      message: "Test message"
-    });
-    expect(result[1]).toEqual({
-      timestamp: "2023-01-01T11:00:00Z",
-      level: "ERROR",
-      message: "Error message"
-    });
-  });
-
-  it('should handle mixed JSON array and newline format', async () => {
-    const mockFileContent = `[{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO", "message": "Test message"}]\n{"timestamp": "2023-01-01T11:00:00Z", "level": "ERROR", "message": "Error message"}`;
-
-    const result = await processFile(mockFileContent);
-
-    expect(result).toHaveLength(2);
-    expect(result[0]).toEqual({
-      timestamp: "2023-01-01T10:00:00Z",
-      level: "INFO",
-      message: "Test message"
-    });
-    expect(result[1]).toEqual({
-      timestamp: "2023-01-01T11:00:00Z",
-      level: "ERROR",
-      message: "Error message"
-    });
+    expect(result).toEqual([
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: '' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'test error' },
+    ]);
   });
 });
