@@ -16,12 +16,6 @@ export const processFile = (file: File): Promise<any> => {
       try {
         const content = e.target?.result as string;
 
-        // Validate that the file is actually a JSON file
-        if (!file.name.endsWith('.json')) {
-          reject(new Error('File must be a JSON file'));
-          return;
-        }
-
         // Validate that the content is valid JSON
         const parsedContent = JSON.parse(content);
 
