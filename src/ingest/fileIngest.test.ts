@@ -1,155 +1,97 @@
-import { describe, it, expect, vi } from 'vitest'
-import { processFileContent } from './fileIngest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { readAndNormalizeJsonFile } from './fileIngest'
 
-describe('processFileContent', () => {
-  it('should parse valid JSON array and return normalized records', () => {
-    const content = `[
-      {
-        "timestamp": "2023-01-01T00:00:00Z",
-        "level": "INFO",
-        "message": "Application started",
-        "service": "frontend"
-      },
-      {
-        "timestamp": "2023-01-01T01:00:00Z",
-        "level": "ERROR",
-        "message": "Database connection failed",
-        "service": "backend"
+// Mock file system operations
+vi.mock('fs', () => ({
+  promises: {
+    readFile: vi.fn(),
+    access: vi.fn()
+  }
+}))
+
+describe('readAndNormalizeJsonFile', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it('should read and normalize valid JSON file', async () => {
+    const mockData = {
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'INFO',
+      message: 'Test log entry',
+      metadata: {
+        service: 'test-service'
       }
-    ]`
+    }
 
-    const result = processFileContent(content)
+    vi.mocked(require('fs').promises.readFile).mockResolvedValue(
+      JSON.stringify(mockData)
+    )
 
-    expect(result).toHaveLength(2)
-    expect(result[0]).toEqual({
+    const result = await readAndNormalizeJsonFile('test.json')
+
+    expect(result).toEqual({
       timestamp: '2023-01-01T00:00:00Z',
       level: 'INFO',
-      message: 'Application started',
-      service: 'frontend'
-    })
-    expect(result[1]).toEqual({
-      timestamp: '2023-01-01T01:00:00Z',
-      level: 'ERROR',
-      message: 'Database connection failed',
-      service: 'backend'
+      message: 'Test log entry',
+      service: 'test-service'
     })
   })
 
-  it('should handle single JSON object', () => {
-    const content = `{
-      "timestamp": "2023-01-01T00:00:00Z",
-      "level": "INFO",
-      "message": "Application started",
-      "service": "frontend"
-    }`
+  it('should throw error for invalid JSON', async () => {
+    vi.mocked(require('fs').promises.readFile).mockResolvedValue(
+      '{ invalid json }'
+    )
 
-    const result = processFileContent(content)
+    await expect(readAndNormalizeJsonFile('test.json')).rejects.toThrow(
+      'Failed to parse JSON'
+    )
+  })
 
-    expect(result).toHaveLength(1)
-    expect(result[0]).toEqual({
+  it('should throw error for missing file', async () => {
+    vi.mocked(require('fs').promises.access).mockRejectedValue(
+      new Error('File not found')
+    )
+
+    await expect(readAndNormalizeJsonFile('nonexistent.json')).rejects.toThrow(
+      'File not found'
+    )
+  })
+
+  it('should handle missing metadata gracefully', async () => {
+    const mockData = {
       timestamp: '2023-01-01T00:00:00Z',
       level: 'INFO',
-      message: 'Application started',
-      service: 'frontend'
-    })
-  })
+      message: 'Test log entry'
+    }
 
-  it('should handle malformed JSON gracefully', () => {
-    const content = `{
-      "timestamp": "2023-01-01T00:00:00Z",
-      "level": "INFO",
-      "message": "Application started",
-      "service": "frontend"
-    }`
+    vi.mocked(require('fs').promises.readFile).mockResolvedValue(
+      JSON.stringify(mockData)
+    )
 
-    const result = processFileContent(content)
+    const result = await readAndNormalizeJsonFile('test.json')
 
-    expect(result).toHaveLength(1)
-    expect(result[0]).toEqual({
+    expect(result).toEqual({
       timestamp: '2023-01-01T00:00:00Z',
       level: 'INFO',
-      message: 'Application started',
-      service: 'frontend'
+      message: 'Test log entry',
+      service: undefined
     })
   })
 
-  it('should handle empty content', () => {
-    const result = processFileContent('')
-
-    expect(result).toHaveLength(0)
-  })
-
-  it('should handle invalid JSON content', () => {
-    const result = processFileContent('{ invalid json }')
-
-    expect(result).toHaveLength(0)
-  })
-
-  it('should handle array with mixed valid/invalid entries', () => {
-    const content = `[
-      {
-        "timestamp": "2023-01-01T00:00:00Z",
-        "level": "INFO",
-        "message": "Application started"
-      },
-      "{ invalid json }",
-      {
-        "timestamp": "2023-01-01T01:00:00Z",
-        "level": "ERROR",
-        "message": "Database connection failed"
-      }
-    ]`
-
-    const result = processFileContent(content)
-
-    expect(result).toHaveLength(2)
-    expect(result[0]).toEqual({
+  it('should normalize log level to uppercase', async () => {
+    const mockData = {
       timestamp: '2023-01-01T00:00:00Z',
-      level: 'INFO',
-      message: 'Application started'
-    })
-    expect(result[1]).toEqual({
-      timestamp: '2023-01-01T01:00:00Z',
-      level: 'ERROR',
-      message: 'Database connection failed'
-    })
-  })
+      level: 'info',
+      message: 'Test log entry'
+    }
 
-  it('should normalize field names to lowercase', () => {
-    const content = `[
-      {
-        "TIMESTAMP": "2023-01-01T00:00:00Z",
-        "LEVEL": "INFO",
-        "MESSAGE": "Application started",
-        "SERVICE": "frontend"
-      }
-    ]`
+    vi.mocked(require('fs').promises.readFile).mockResolvedValue(
+      JSON.stringify(mockData)
+    )
 
-    const result = processFileContent(content)
+    const result = await readAndNormalizeJsonFile('test.json')
 
-    expect(result).toHaveLength(1)
-    expect(result[0]).toEqual({
-      timestamp: '2023-01-01T00:00:00Z',
-      level: 'INFO',
-      message: 'Application started',
-      service: 'frontend'
-    })
-  })
-
-  it('should handle missing fields gracefully', () => {
-    const content = `[
-      {
-        "timestamp": "2023-01-01T00:00:00Z",
-        "level": "INFO"
-      }
-    ]`
-
-    const result = processFileContent(content)
-
-    expect(result).toHaveLength(1)
-    expect(result[0]).toEqual({
-      timestamp: '2023-01-01T00:00:00Z',
-      level: 'INFO'
-    })
+    expect(result.level).toBe('INFO')
   })
 })

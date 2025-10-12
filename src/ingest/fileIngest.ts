@@ -1,55 +1,53 @@
-export interface LogRecord {
-  timestamp?: string
-  level?: string
-  message?: string
+import { promises as fs } from 'fs'
+
+// Define types for our log records
+export interface RawLogRecord {
+  timestamp: string
+  level: string
+  message: string
+  metadata?: {
+    service?: string
+    [key: string]: unknown
+  }
+}
+
+export interface NormalizedLogRecord {
+  timestamp: string
+  level: string
+  message: string
   service?: string
 }
 
-export function processFileContent(content: string): LogRecord[] {
-  if (!content || typeof content !== 'string') {
-    return []
-  }
-
-  let parsedContent: unknown
+/**
+ * Reads a JSON file and normalizes its content into a standardized format
+ * @param filePath - Path to the JSON file to read
+ * @returns Promise resolving to normalized log record
+ */
+export async function readAndNormalizeJsonFile(
+  filePath: string
+): Promise<NormalizedLogRecord> {
   try {
-    parsedContent = JSON.parse(content)
+    // Check if file exists
+    await fs.access(filePath)
+
+    // Read and parse the file content
+    const fileContent = await fs.readFile(filePath, 'utf-8')
+    const rawLogRecord: RawLogRecord = JSON.parse(fileContent)
+
+    // Normalize the record
+    const normalizedRecord: NormalizedLogRecord = {
+      timestamp: rawLogRecord.timestamp,
+      level: rawLogRecord.level.toUpperCase(),
+      message: rawLogRecord.message,
+      service: rawLogRecord.metadata?.service
+    }
+
+    return normalizedRecord
   } catch (error) {
-    // Return empty array if content is not valid JSON
-    return []
-  }
-
-  // Handle single object case
-  if (parsedContent && typeof parsedContent === 'object' && !Array.isArray(parsedContent)) {
-    return [normalizeRecord(parsedContent as Record<string, unknown>)]
-  }
-
-  // Handle array case
-  if (Array.isArray(parsedContent)) {
-    return parsedContent
-      .map(item => {
-        if (typeof item === 'object' && item !== null) {
-          return normalizeRecord(item as Record<string, unknown>)
-        }
-        return null
-      })
-      .filter(Boolean) as LogRecord[]
-  }
-
-  // Return empty array for any other case
-  return []
-}
-
-function normalizeRecord(record: Record<string, unknown>): LogRecord {
-  const normalized: LogRecord = {}
-
-  for (const [key, value] of Object.entries(record)) {
-    const normalizedKey = key.toLowerCase()
-
-    // Only include known fields
-    if (['timestamp', 'level', 'message', 'service'].includes(normalizedKey)) {
-      normalized[normalizedKey as keyof LogRecord] = value as string
+    if (error instanceof Error) {
+      throw new Error(`Failed to read or parse file ${filePath}: ${error.message}`)
+    } else {
+      throw new Error(`Failed to read or parse file ${filePath}: Unknown error`)
     }
   }
-
-  return normalized
 }
