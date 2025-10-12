@@ -1,7 +1,7 @@
 {"path":".gitignore","bytes":206,"mtime":1759457453023.9875,"lines":26,"sha1":"501e9be30f73cb6ea67ae7a2fa665b1134fc7d13"}
-{"path":".ma/context/files.ndjson","bytes":3953,"mtime":1760284325563.887,"lines":31,"sha1":"f4be11b30324c6aa42fadeb13958115be8c6a68a"}
-{"path":".ma/context/snapshot.json","bytes":18154,"mtime":1760284325562.8655,"lines":662,"sha1":"6dc050ba276fb077f4574d151b19654d06e4d442"}
-{"path":".ma/context/summary.md","bytes":11468,"mtime":1760284362844.6208,"lines":263,"sha1":"68c365aeb01a22c4d7b2eb6cc3ddc0af6233da23"}
+{"path":".ma/context/files.ndjson","bytes":3953,"mtime":1760285015994.9026,"lines":31,"sha1":"8120a172b85249c17716496b23345dbf8f103931"}
+{"path":".ma/context/snapshot.json","bytes":18155,"mtime":1760285015993.7195,"lines":662,"sha1":"0767814d7ccbbbc4056e1c6145081ee68fd9edd8"}
+{"path":".ma/context/summary.md","bytes":9081,"mtime":1760285044432.9375,"lines":256,"sha1":"b253875f0a2fe62c90d77ad128a1f8d9bfe77940"}
 {"path":".stylelintrc.json","bytes":469,"mtime":1760191477066.0342,"lines":17,"sha1":"face46337baec779ce9d364c84b7e70325534ef1"}
 {"path":"PROJECT_PLAN.md","bytes":10758,"mtime":1760191477068.0342,"lines":144,"sha1":"b67d9f0d2891c39f34b3cf021e14dbd754456403"}
 {"path":"README.md","bytes":210,"mtime":1759457453023.9875,"lines":11,"sha1":"02df2ba2ab48fc0691e4b1bc15f8511f14404557"}
@@ -12,8 +12,8 @@
 {"path":"src/App.tsx","bytes":2490,"mtime":1760232949121.4832,"lines":96,"sha1":"bf9248749b98d64f0f1183f10e1a422ed9e784c5"}
 {"path":"src/fileIngest.test.ts","bytes":6072,"mtime":1760275982998.838,"lines":171,"sha1":"422e853b0da47bebedbbc3107dd200eac9ed80f0"}
 {"path":"src/fileIngest.ts","bytes":2268,"mtime":1760275982999.5967,"lines":69,"sha1":"a5c1c97ce3bb784f3bf19e1eaf9a3e8d007b3637"}
-{"path":"src/ingest/fileIngest.test.ts","bytes":4264,"mtime":1760284325424.273,"lines":159,"sha1":"6b4542eca7c76b1134d92c146080778198a7085f"}
-{"path":"src/ingest/fileIngest.ts","bytes":1737,"mtime":1760284325425.2903,"lines":64,"sha1":"e10b3a6f80bfcad3fc467afdc58898e21c19a2e2"}
+{"path":"src/ingest/fileIngest.test.ts","bytes":1936,"mtime":1760285109885.3381,"lines":64,"sha1":"5f9773076ee4b4c371b8c2b0519b13ead270c617"}
+{"path":"src/ingest/fileIngest.ts","bytes":804,"mtime":1760285109886.491,"lines":33,"sha1":"2b3ddc727d5d7807b36a142c16af241d1a047e92"}
 {"path":"src/ingestion.test.ts","bytes":2380,"mtime":1760273220566.9802,"lines":72,"sha1":"6c69fdbb4377841ec87606b9b575826c9e7b13ee"}
 {"path":"src/ingestion.ts","bytes":1202,"mtime":1760273220567.954,"lines":43,"sha1":"151e19e45ea08243d85a3c704bbf3a2c6e20ecb3"}
 {"path":"src/main.tsx","bytes":231,"mtime":1760191477077.034,"lines":10,"sha1":"ed567ef9985b18b3140a6d0bcd42af5bb19b2888"}
