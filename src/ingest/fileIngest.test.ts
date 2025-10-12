@@ -1,64 +1,80 @@
-import { describe, it, expect } from 'vitest';
-import { parseJsonFile } from './fileIngest';
+import { describe, it, expect, vi } from 'vitest';
+import { readAndNormalizeFile } from './fileIngest';
 
-describe('parseJsonFile', () => {
-  it('should parse a valid JSON log file and normalize records', () => {
-    const mockJsonContent = `{"timestamp": "2023-04-01T10:00:00Z", "level": "INFO", "message": "Application started"}\n{"timestamp": "2023-04-01T11:00:00Z", "level": "ERROR", "message": "Database connection failed"}`;
+// Mock the fs module to simulate file reading
+vi.mock('fs', () => ({
+  promises: {
+    readFile: vi.fn(),
+  },
+}));
 
-    const result = parseJsonFile(mockJsonContent);
+describe('readAndNormalizeFile', () => {
+  it('should read and normalize a valid JSON file', async () => {
+    const mockData = [
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'Test log entry 1' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Test log entry 2' },
+    ];
 
-    expect(result).toEqual([
-      {
-        timestamp: "2023-04-01T10:00:00Z",
-        level: "INFO",
-        message: "Application started"
-      },
-      {
-        timestamp: "2023-04-01T11:00:00Z",
-        level: "ERROR",
-        message: "Database connection failed"
-      }
-    ]);
+    const mockFileContent = JSON.stringify(mockData);
+
+    vi.mocked(require('fs').promises.readFile).mockResolvedValueOnce(mockFileContent);
+
+    const result = await readAndNormalizeFile('test.json');
+
+    expect(result).toEqual(mockData);
   });
 
-  it('should handle malformed JSON lines gracefully', () => {
-    const mockJsonContent = `{"timestamp": "2023-04-01T10:00:00Z", "level": "INFO"}\n{"malformed": json}\n{"timestamp": "2023-04-01T11:00:00Z", "level": "ERROR", "message": "Error occurred"}`;
+  it('should throw an error for invalid JSON', async () => {
+    const mockFileContent = '{ invalid json }';
 
-    const result = parseJsonFile(mockJsonContent);
+    vi.mocked(require('fs').promises.readFile).mockResolvedValueOnce(mockFileContent);
 
-    expect(result).toEqual([
-      {
-        timestamp: "2023-04-01T10:00:00Z",
-        level: "INFO"
-      },
-      {
-        timestamp: "2023-04-01T11:00:00Z",
-        level: "ERROR",
-        message: "Error occurred"
-      }
-    ]);
+    await expect(readAndNormalizeFile('test.json')).rejects.toThrow('Failed to parse JSON');
   });
 
-  it('should return an empty array for empty input', () => {
-    const result = parseJsonFile('');
+  it('should throw an error for missing file', async () => {
+    vi.mocked(require('fs').promises.readFile).mockRejectedValueOnce(new Error('File not found'));
+
+    await expect(readAndNormalizeFile('nonexistent.json')).rejects.toThrow('Failed to read file');
+  });
+
+  it('should handle empty array in JSON', async () => {
+    const mockFileContent = '[]';
+
+    vi.mocked(require('fs').promises.readFile).mockResolvedValueOnce(mockFileContent);
+
+    const result = await readAndNormalizeFile('empty.json');
 
     expect(result).toEqual([]);
   });
 
-  it('should handle multiple newlines and whitespace', () => {
-    const mockJsonContent = `\n\n{"timestamp": "2023-04-01T10:00:00Z", "level": "INFO"}\n\n{"timestamp": "2023-04-01T11:00:00Z", "level": "ERROR"}\n\n`;
+  it('should handle single log entry', async () => {
+    const mockData = { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'Single log entry' };
 
-    const result = parseJsonFile(mockJsonContent);
+    const mockFileContent = JSON.stringify(mockData);
+
+    vi.mocked(require('fs').promises.readFile).mockResolvedValueOnce(mockFileContent);
+
+    const result = await readAndNormalizeFile('single.json');
+
+    expect(result).toEqual([mockData]);
+  });
+
+  it('should normalize log entries with missing fields', async () => {
+    const mockData = [
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Test log entry 2' },
+    ];
+
+    const mockFileContent = JSON.stringify(mockData);
+
+    vi.mocked(require('fs').promises.readFile).mockResolvedValueOnce(mockFileContent);
+
+    const result = await readAndNormalizeFile('normalized.json');
 
     expect(result).toEqual([
-      {
-        timestamp: "2023-04-01T10:00:00Z",
-        level: "INFO"
-      },
-      {
-        timestamp: "2023-04-01T11:00:00Z",
-        level: "ERROR"
-      }
+      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: '' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'Test log entry 2' },
     ]);
   });
 });
