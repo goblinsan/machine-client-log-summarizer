@@ -1,8 +1,6 @@
 import { describe, it, expect } from '@jest/globals';
 import { processFile } from './ingestion';
 
-// Mock the FileReader API
-
 describe('Ingestion functionality', () => {
   it('should read and parse a JSON file correctly', async () => {
     const mockFile = new File(['{"test": "value"}'], 'test.json', {
