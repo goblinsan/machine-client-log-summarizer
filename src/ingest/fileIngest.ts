@@ -1,76 +1,103 @@
 import fs from 'fs';
 import path from 'path';
 
-export interface LogEntry {
+export interface LogRecord {
   timestamp: string;
   level: string;
-  message: string;
+  message: string | null;
+  raw: string;
+}
+
+export interface ProcessedLogData {
+  records: LogRecord[];
 }
 
 /**
- * Processes a log file and returns parsed entries.
- * Each line is expected to follow the format:
- * YYYY-MM-DDTHH:mm:ssZ LEVEL Message
- *
- * @param filePath - Path to the log file to process
- * @returns Array of parsed log entries
+ * Processes a JSON log file and returns normalized records
+ * Each line in the file is expected to be a valid JSON object
+ * @param filePath - Path to the log file
+ * @returns Array of normalized log records
  */
-export function processLogFile(filePath: string): LogEntry[] {
+export function processLogFile(filePath: string): LogRecord[] {
   try {
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const lines = fileContent.split('\n');
+    const fileContent = fs.readFileSync(filePath, 'utf8');
 
-    const entries: LogEntry[] = [];
+    if (!fileContent.trim()) {
+      return [];
+    }
+
+    const lines = fileContent.split(/\r?\n/);
+    const records: LogRecord[] = [];
 
     for (const line of lines) {
-      const trimmedLine = line.trim();
-
-      // Skip empty lines and comments
-      if (!trimmedLine || trimmedLine.startsWith('#')) {
+      if (!line.trim()) {
         continue;
       }
 
-      // Match log line format: YYYY-MM-DDTHH:mm:ssZ LEVEL Message
-      const logRegex = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)\s+(\w+)\s+(.+)$/;
-      const match = trimmedLine.match(logRegex);
+      try {
+        const parsed = JSON.parse(line);
 
-      if (match) {
-        const [, timestamp, level, message] = match;
-
-        // Validate log level
-        if (isValidLogLevel(level)) {
-          entries.push({
-            timestamp,
-            level,
-            message
-          });
-        } else {
-          // Optionally log warning for invalid levels or skip
-          console.warn(`Invalid log level found: ${level}`);
+        // Validate required fields
+        if (!parsed.timestamp || !parsed.level || parsed.message === undefined) {
+          throw new Error('Missing required fields: timestamp, level, or message');
         }
-      } else {
-        // Optionally log warning for malformed lines or skip
-        console.warn(`Malformed log line skipped: ${trimmedLine}`);
+
+        // Normalize the record structure
+        const normalizedRecord: LogRecord = {
+          timestamp: parsed.timestamp,
+          level: parsed.level,
+          message: parsed.message,
+          raw: line
+        };
+
+        records.push(normalizedRecord);
+      } catch (parseError) {
+        // Re-throw with more context
+        throw new Error(`Failed to parse JSON line: ${parseError instanceof Error ? parseError.message : String(parseError)}`);
       }
     }
 
-    return entries;
+    return records;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`Failed to process log file: ${error.message}`);
-    } else {
-      throw new Error('Failed to process log file: Unknown error');
-    }
+    // Re-throw with more context
+    throw new Error(`Failed to read file ${filePath}: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
 
 /**
- * Validates if the log level is one of the expected values.
- *
- * @param level - Log level to validate
- * @returns True if valid, false otherwise
+ * Processes multiple log files and returns combined normalized records
+ * @param filePaths - Array of paths to log files
+ * @returns Array of normalized log records from all files
  */
-function isValidLogLevel(level: string): boolean {
-  const validLevels = ['INFO', 'WARN', 'ERROR', 'DEBUG', 'TRACE'];
-  return validLevels.includes(level);
+export function processLogFiles(filePaths: string[]): LogRecord[] {
+  const allRecords: LogRecord[] = [];
+
+  for (const filePath of filePaths) {
+    try {
+      const records = processLogFile(filePath);
+      allRecords.push(...records);
+    } catch (error) {
+      // Log error but continue processing other files
+      console.error(`Error processing file ${filePath}:`, error instanceof Error ? error.message : String(error));
+    }
+  }
+
+  return allRecords;
+}
+
+/**
+ * Processes a directory of log files and returns combined normalized records
+ * @param dirPath - Path to the directory containing log files
+ * @returns Array of normalized log records from all files in directory
+ */
+export function processLogDirectory(dirPath: string): LogRecord[] {
+  try {
+    const files = fs.readdirSync(dirPath);
+    const logFiles = files.filter(file => file.endsWith('.log'));
+
+    const filePaths = logFiles.map(file => path.join(dirPath, file));
+    return processLogFiles(filePaths);
+  } catch (error) {
+    throw new Error(`Failed to process directory ${dirPath}: ${error instanceof Error ? error.message : String(error)}`);
+  }
 }
