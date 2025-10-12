@@ -1,97 +1,122 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, jest, beforeEach } from '@jest/globals';
 import fs from 'fs';
-import { processJsonFiles } from './fileIngest';
+import path from 'path';
+import { processLogFile } from './fileIngest';
 
-// Mock fs module to simulate file reading
-vi.mock('fs', () => ({
-  default: {
-    readFileSync: vi.fn(),
-    existsSync: vi.fn(),
-  },
-}));
+// Mock fs module to avoid actual file system access during tests
+jest.mock('fs');
 
-describe('processJsonFiles', () => {
-  it('should process a single JSON file and return normalized records', () => {
-    const mockFileContent = JSON.stringify({
-      timestamp: '2023-01-01T00:00:00Z',
-      level: 'info',
-      message: 'Test log entry',
-      service: 'test-service',
-    });
+describe('processLogFile', () => {
+  const mockLogContent = `
+2023-10-01T10:00:00Z INFO Starting application
+2023-10-01T10:01:00Z ERROR Failed to connect to database
+2023-10-01T10:02:00Z WARN Memory usage high
+2023-10-01T10:03:00Z INFO Shutdown initiated
+`;
 
-    vi.mocked(fs.readFileSync).mockReturnValue(mockFileContent);
-    vi.mocked(fs.existsSync).mockReturnValue(true);
+  const mockLogContentWithInvalid = `
+2023-10-01T10:00:00Z INFO Starting application
+2023-10-01T10:01:00Z ERROR Failed to connect to database
+2023-10-01T10:02:00Z WARN Memory usage high
+invalid log line
+2023-10-01T10:03:00Z INFO Shutdown initiated
+`;
 
-    const result = processJsonFiles(['test.json']);
-
-    expect(result).toEqual([
-      {
-        timestamp: '2023-01-01T00:00:00Z',
-        level: 'info',
-        message: 'Test log entry',
-        service: 'test-service',
-        sourceFile: 'test.json',
-      },
-    ]);
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('should process multiple JSON files and return normalized records', () => {
-    const mockFile1Content = JSON.stringify({
-      timestamp: '2023-01-01T00:00:00Z',
-      level: 'info',
-      message: 'Test log entry 1',
-      service: 'test-service-1',
+  it('should process a valid log file and return parsed entries', () => {
+    const mockReadFile = fs.readFile as jest.Mock;
+    mockReadFile.mockImplementation((filePath, encoding, callback) => {
+      if (typeof callback === 'function') {
+        callback(null, mockLogContent);
+      }
     });
 
-    const mockFile2Content = JSON.stringify({
-      timestamp: '2023-01-02T00:00:00Z',
-      level: 'error',
-      message: 'Test log entry 2',
-      service: 'test-service-2',
+    const result = processLogFile('mock-path.log');
+
+    expect(result).toHaveLength(4);
+    expect(result[0]).toEqual({
+      timestamp: '2023-10-01T10:00:00Z',
+      level: 'INFO',
+      message: 'Starting application'
     });
-
-    vi.mocked(fs.readFileSync).mockImplementation((filePath) => {
-      if (filePath === 'file1.json') return mockFile1Content;
-      if (filePath === 'file2.json') return mockFile2Content;
-      return '';
+    expect(result[1]).toEqual({
+      timestamp: '2023-10-01T10:01:00Z',
+      level: 'ERROR',
+      message: 'Failed to connect to database'
     });
-
-    vi.mocked(fs.existsSync).mockReturnValue(true);
-
-    const result = processJsonFiles(['file1.json', 'file2.json']);
-
-    expect(result).toEqual([
-      {
-        timestamp: '2023-01-01T00:00:00Z',
-        level: 'info',
-        message: 'Test log entry 1',
-        service: 'test-service-1',
-        sourceFile: 'file1.json',
-      },
-      {
-        timestamp: '2023-01-02T00:00:00Z',
-        level: 'error',
- +        message: 'Test log entry 2',
-        service: 'test-service-2',
-        sourceFile: 'file2.json',
-      },
-    ]);
+    expect(result[2]).toEqual({
+      timestamp: '2023-10-01T10:02:00Z',
+      level: 'WARN',
+      message: 'Memory usage high'
+    });
+    expect(result[3]).toEqual({
+      timestamp: '2023-10-01T10:03:00Z',
+      level: 'INFO',
+      message: 'Shutdown initiated'
+    });
   });
 
-  it('should skip files that do not exist', () => {
-    vi.mocked(fs.existsSync).mockReturnValue(false);
+  it('should skip invalid log lines', () => {
+    const mockReadFile = fs.readFile as jest.Mock;
+    mockReadFile.mockImplementation((filePath, encoding, callback) => {
+      if (typeof callback === 'function') {
+        callback(null, mockLogContentWithInvalid);
+      }
+    });
 
-    const result = processJsonFiles(['nonexistent.json']);
+    const result = processLogFile('mock-path.log');
 
-    expect(result).toEqual([]);
+    expect(result).toHaveLength(4);
+    expect(result[3]).toEqual({
+      timestamp: '2023-10-01T10:03:00Z',
+      level: 'INFO',
+      message: 'Shutdown initiated'
+    });
   });
 
-  it('should skip files with invalid JSON content', () => {
-    vi.mocked(fs.readFileSync).mockReturnValue('invalid json');
-    vi.mocked(fs.existsSync).mockReturnValue(true);
+  it('should handle file read errors gracefully', () => {
+    const mockReadFile = fs.readFile as jest.Mock;
+    mockReadFile.mockImplementation((filePath, encoding, callback) => {
+      if (typeof callback === 'function') {
+        callback(new Error('File not found'), null);
+      }
+    });
 
-    const result = processJsonFiles(['invalid.json']);
+    expect(() => processLogFile('nonexistent.log')).toThrow('File not found');
+  });
 
-    expect(result).toEqual([]);
+  it('should return empty array for empty log file', () => {
+    const mockReadFile = fs.readFile as jest.Mock;
+    mockReadFile.mockImplementation((filePath, encoding, callback) => {
+      if (typeof callback === 'function') {
+        callback(null, '');
+      }
+    });
+
+    const result = processLogFile('empty.log');
+
+    expect(result).toHaveLength(0);
+  });
+
+  it('should handle logs with missing fields', () => {
+    const mockLogContentWithMissingFields = `
+2023-10-01T10:00:00Z INFO Starting application
+2023-10-01T10:01:00Z ERROR
+2023-10-01T10:02:00Z
+`;
+
+    const mockReadFile = fs.readFile as jest.Mock;
+    mockReadFile.mockImplementation((filePath, encoding, callback) => {
+      if (typeof callback === 'function') {
+        callback(null, mockLogContentWithMissingFields);
+      }
+    });
+
+    const result = processLogFile('mock-path.log');
+
+    expect(result).toHaveLength(3);
   });
 });
