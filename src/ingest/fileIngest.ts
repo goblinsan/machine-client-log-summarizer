@@ -1,53 +1,84 @@
-import { promises as fs } from 'fs'
+import fs from 'fs/promises';
+import path from 'path';
 
-// Define types for our log records
-export interface RawLogRecord {
-  timestamp: string
-  level: string
-  message: string
-  metadata?: {
-    service?: string
-    [key: string]: unknown
-  }
+// Define the structure of a normalized log record
+export interface NormalizedLogRecord {
+  timestamp: string;
+  level: string;
+  message: string;
+  service?: string;
+  source?: string;
+  metadata?: Record<string, unknown>;
 }
 
-export interface NormalizedLogRecord {
-  timestamp: string
-  level: string
-  message: string
-  service?: string
+// Define the structure of a raw log record (from JSON)
+export interface RawLogRecord {
+  timestamp?: string;
+  level?: string;
+  message?: string;
+  service?: string;
+  source?: string;
+  metadata?: Record<string, unknown>;
 }
 
 /**
- * Reads a JSON file and normalizes its content into a standardized format
- * @param filePath - Path to the JSON file to read
- * @returns Promise resolving to normalized log record
+ * Normalize a raw log record into a standardized format
  */
-export async function readAndNormalizeJsonFile(
-  filePath: string
-): Promise<NormalizedLogRecord> {
+export function normalizeLogRecord(raw: RawLogRecord): NormalizedLogRecord {
+  return {
+    timestamp: raw.timestamp || new Date().toISOString(),
+    level: raw.level || 'info',
+    message: raw.message || '',
+    service: raw.service,
+    source: raw.source,
+    metadata: raw.metadata || {}
+  };
+}
+
+/**
+ * Read and parse a JSON file containing log records
+ * Returns an array of normalized log records
+ */
+export async function ingestFile(filePath: string): Promise<NormalizedLogRecord[]> {
   try {
-    // Check if file exists
-    await fs.access(filePath)
+    // Read the file content
+    const fileContent = await fs.readFile(filePath, 'utf8');
+    
+    // Parse the JSON content
+    const parsedContent = JSON.parse(fileContent);
 
-    // Read and parse the file content
-    const fileContent = await fs.readFile(filePath, 'utf-8')
-    const rawLogRecord: RawLogRecord = JSON.parse(fileContent)
+    // Handle single log record (object) vs array of records
+    let records: RawLogRecord[];
 
-    // Normalize the record
-    const normalizedRecord: NormalizedLogRecord = {
-      timestamp: rawLogRecord.timestamp,
-      level: rawLogRecord.level.toUpperCase(),
-      message: rawLogRecord.message,
-      service: rawLogRecord.metadata?.service
+    if (Array.isArray(parsedContent)) {
+      records = parsedContent;
+    } else if (typeof parsedContent === 'object' && parsedContent !== null) {
+      records = [parsedContent];
+    } else {
+      throw new Error('Invalid JSON format: expected array or object');
     }
 
-    return normalizedRecord
+    // Normalize each record
+    return records.map(normalizeLogRecord);
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`Failed to read or parse file ${filePath}: ${error.message}`)
-    } else {
-      throw new Error(`Failed to read or parse file ${filePath}: Unknown error`)
+      throw new Error(`Failed to ingest file ${filePath}: ${error.message}`);
     }
+    throw new Error(`Failed to ingest file ${filePath}: Unknown error`);
   }
+}
+
+/**
+ * Read and parse multiple JSON files
+ * Returns a flattened array of normalized log records
+ */
+export async function ingestFiles(filePaths: string[]): Promise<NormalizedLogRecord[]> {
+  const allRecords: NormalizedLogRecord[] = [];
+
+  for (const filePath of filePaths) {
+    const records = await ingestFile(filePath);
+    allRecords.push(...records);
+  }
+
+  return allRecords;
 }
