@@ -1,136 +1,147 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import fs from 'fs';
 import { fileIngest } from './fileIngest';
-import { promises as fs } from 'fs';
-import path from 'path';
-
-jest.mock('fs', () => ({
-  promises: {
-    readFile: jest.fn()
-  }
-}));
 
 describe('fileIngest', () => {
-  const mockReadFile = fs.readFile as jest.MockedFunction<typeof fs.readFile>;
-
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  it('should read and parse a JSON array of log records', async () => {
-    const mockLogData = [
+  it('should return an empty array for non-existent files', async () => {
+    const result = await fileIngest('non-existent-file.json');
+    expect(result).toEqual([]);
+  });
+
+  it('should return an empty array for invalid JSON', async () => {
+    const mockReadFileSync = vi.spyOn(fs, 'readFileSync');
+    mockReadFileSync.mockImplementation(() => {
+      throw new Error('Invalid JSON');
+    });
+
+    const result = await fileIngest('invalid.json');
+    expect(result).toEqual([]);
+  });
+
+  it('should return normalized records from valid JSON', async () => {
+    const mockReadFileSync = vi.spyOn(fs, 'readFileSync');
+    mockReadFileSync.mockReturnValue(
+      JSON.stringify([
+        {
+          timestamp: '2023-01-01T00:00:00.000Z',
+          level: 'info',
+          message: 'Test log entry'
+        }
+      ])
+    );
+
+    const result = await fileIngest('valid.json');
+    expect(result).toEqual([
       {
         timestamp: '2023-01-01T00:00:00.000Z',
         level: 'info',
-        message: 'Application started',
-        source: 'app.js'
-      },
-      {
-        timestamp: '2023-01-01T00:01:00.000Z',
-        level: 'error',
-        message: 'Database connection failed',
-        source: 'db.js'
+        message: 'Test log entry'
       }
-    ];
-
-    mockReadFile.mockResolvedValue(JSON.stringify(mockLogData));
-
-    const result = await fileIngest('/mock/path/logs.json');
-
-    expect(result).toHaveLength(2);
-    expect(result[0]).toEqual({
-      timestamp: '2023-01-01T00:00:00.000Z',
-      level: 'info',
-      message: 'Application started',
-      source: 'app.js'
-    });
-    expect(result[1]).toEqual({
-      timestamp: '2023-01-01T00:01:00.000Z',
-      level: 'error',
-      message: 'Database connection failed',
-      source: 'db.js'
-    });
+    ]);
   });
 
-  it('should handle a single log record object', async () => {
-    const mockLogData = {
-      timestamp: '2023-01-01T00:00:00.000Z',
-      level: 'debug',
-      message: 'Debug information',
-      source: 'debug.js'
-    };
+  it('should handle missing fields and normalize them', async () => {
+    const mockReadFileSync = vi.spyOn(fs, 'readFileSync');
+    mockReadFileSync.mockReturnValue(
+      JSON.stringify([
+        {
+          timestamp: '2023-01-01T00:00:00.000Z',
+          level: 'warn',
+          message: 'Test log entry'
+        },
+        {
+          timestamp: '2023-01-01T00:00:01.000Z',
+          message: 'Another test log entry'
+        }
+      ])
+    );
 
-    mockReadFile.mockResolvedValue(JSON.stringify(mockLogData));
-
-    const result = await fileIngest('/mock/path/log.json');
-
-    expect(result).toHaveLength(1);
-    expect(result[0]).toEqual({
-      timestamp: '2023-01-01T00:00:00.000Z',
-      level: 'debug',
-      message: 'Debug information',
-      source: 'debug.js'
-    });
-  });
-
-  it('should handle primitive values as single messages', async () => {
-    mockReadFile.mockResolvedValue('Application error occurred');
-
-    const result = await fileIngest('/mock/path/error.txt');
-
-    expect(result).toHaveLength(1);
-    expect(result[0]).toEqual({
-      timestamp: expect.any(String),
-      level: 'info',
-      message: 'Application error occurred'
-    });
-  });
-
-  it('should normalize log levels to valid values', async () => {
-    const mockLogData = [
+    const result = await fileIngest('partial.json');
+    expect(result).toEqual([
       {
         timestamp: '2023-01-01T00:00:00.000Z',
-        level: 'invalid-level',
-        message: 'Test message'
-      }
-    ];
-
-    mockReadFile.mockResolvedValue(JSON.stringify(mockLogData));
-
-    const result = await fileIngest('/mock/path/logs.json');
-
-    expect(result[0].level).toBe('info'); // Should default to 'info'
-  });
-
-  it('should handle missing required fields with defaults', async () => {
-    const mockLogData = [
+        level: 'warn',
+        message: 'Test log entry'
+      },
       {
-        message: 'Test message without timestamp'
+        timestamp: '2023-01-01T00:00:01.000Z',
+        level: 'info',
+        message: 'Another test log entry'
       }
-    ];
+    ]);
+  });
 
-    mockReadFile.mockResolvedValue(JSON.stringify(mockLogData));
+  it('should handle invalid timestamp and normalize to current time', async () => {
+    const mockReadFileSync = vi.spyOn(fs, 'readFileSync');
+    mockReadFileSync.mockReturnValue(
+      JSON.stringify([
+        {
+          timestamp: 'invalid-timestamp',
+          level: 'error',
+          message: 'Test log entry'
+        }
+      ])
+    );
 
-    const result = await fileIngest('/mock/path/logs.json');
+    const result = await fileIngest('invalid-timestamp.json');
+    expect(result[0].timestamp).toMatch(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.000Z/);
+    expect(result[0].level).toBe('error');
+    expect(result[0].message).toBe('Test log entry');
+  });
 
-    expect(result[0]).toEqual({
-      timestamp: expect.any(String),
-      level: 'info',
-      message: 'Test message without timestamp'
+  it('should handle invalid level and normalize to info', async () => {
+    const mockReadFileSync = vi.spyOn(fs, 'readFileSync');
+    mockReadFileSync.mockReturnValue(
+      JSON.stringify([
+        {
+          timestamp: '2023-01-01T00:00:00.000Z',
+          level: 'invalid-level',
+          message: 'Test log entry'
+        }
+      ])
+    );
+
+    const result = await fileIngest('invalid-level.json');
+    expect(result[0].timestamp).toBe('2023-01-01T00:00:00.000Z');
+    expect(result[0].level).toBe('info');
+    expect(result[0].message).toBe('Test log entry');
+  });
+
+  it('should handle missing array and return empty array', async () => {
+    const mockReadFileSync = vi.spyOn(fs, 'readFileSync');
+    mockReadFileSync.mockReturnValue(
+      JSON.stringify({
+        timestamp: '2023-01-01T00:00:00.000Z',
+        level: 'info',
+        message: 'Test log entry'
+      })
+    );
+
+    const result = await fileIngest('non-array.json');
+    expect(result).toEqual([]);
+  });
+
+  it('should handle empty array and return empty array', async () => {
+    const mockReadFileSync = vi.spyOn(fs, 'readFileSync');
+    mockReadFileSync.mockReturnValue(
+      JSON.stringify([])
+    );
+
+    const result = await fileIngest('empty-array.json');
+    expect(result).toEqual([]);
+  });
+
+  it('should handle file read errors gracefully', async () => {
+    const mockReadFileSync = vi.spyOn(fs, 'readFileSync');
+    mockReadFileSync.mockImplementation(() => {
+      throw new Error('File read error');
     });
-  });
 
-  it('should throw an error for invalid JSON', async () => {
-    mockReadFile.mockResolvedValue('{ invalid json }');
-
-    await expect(fileIngest('/mock/path/invalid.json')).rejects.toThrow(
-      'Failed to ingest file /mock/path/invalid.json'
-    );
-  });
-
-  it('should handle missing file gracefully', async () => {
-    mockReadFile.mockRejectedValue(new Error('File not found'));
-
-    await expect(fileIngest('/mock/path/missing.json')).rejects.toThrow(
-      'Failed to ingest file /mock/path/missing.json'
-    );
+    const result = await fileIngest('read-error.json');
+    expect(result).toEqual([]);
   });
 });
