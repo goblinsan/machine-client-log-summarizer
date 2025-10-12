@@ -1,64 +1,113 @@
-import { processFile, processLogs, processFileWithSummary } from './fileIngest';
-import fs from 'fs';
-import path from 'path';
-import { Summary } from './fileIngest';
+import { describe, it, expect, vi } from 'vitest';
+import { processFile } from './fileIngest';
 
-describe('fileIngest', () => {
-  const mockLogData = [
-    { level: 'info', source: 'app1', timestamp: '2023-01-01T00:00:00Z', message: 'test log 1' },
-    { level: 'error', source: 'app2', timestamp: '2023-01-01T01:00:00Z', message: 'test log 2' },
-    { level: 'debug', source: 'app1', timestamp: '2023-01-01T02:00:00Z', message: 'test log 3' }
-  ];
+describe('processFile', () => {
+  it('should parse valid JSON file and return normalized records', async () => {
+    const mockFileContent = `{
+      "records": [
+        {
+          "timestamp": "2023-01-01T00:00:00Z",
+          "level": "INFO",
+          "message": "Application started"
+        },
+        {
+          "timestamp": "2023-01-01T01:00:00Z",
+          "level": "ERROR",
+          "message": "Database connection failed"
+        }
+      ]
+    }`;
 
-  const mockSummary: Summary = {
-    totalEntries: 3,
-    entryCounts: { info: 1, error: 1, debug: 1 },
-    levels: ['info', 'error', 'debug'],
-    earliestTimestamp: '2023-01-01T00:00:00Z',
-    latestTimestamp: '2023-01-01T02:00:00Z',
-    sources: ['app1', 'app2']
-  };
+    const mockFile = new File([mockFileContent], 'test.json');
 
-  beforeEach(() => {
-    // Mock fs.readFile to return mock log data
-    jest.spyOn(fs, 'readFile').mockImplementation((filePath, encoding, callback) => {
-      const mockData = JSON.stringify(mockLogData);
-      (callback as any)(null, mockData);
+    const result = await processFile(mockFile);
+
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'INFO',
+        message: 'Application started'
+      },
+      {
+        timestamp: '2023-01-01T01:00:00Z',
+        level: 'ERROR',
+ +        message: 'Database connection failed'
+      }
+    ]);
+  });
+
+  it('should handle invalid JSON gracefully', async () => {
+    const mockFileContent = `{
+      "records": [
+        {
+          "timestamp": "2023-01-01T00:00:00Z",
+          "level": "INFO",
+          "message": "Application started"
+        },
+        {
+          "timestamp": "2023-01-01T01:00:00Z",
+          "level": "ERROR",
+          "message": "Database connection failed"
+        }
+      ]
+    }`;
+
+    const mockFile = new File([mockFileContent], 'test.json');
+
+    // Mock the file reader to simulate invalid JSON
+    const originalReadAsText = FileReader.prototype.readAsText;
+    vi.spyOn(FileReader.prototype, 'readAsText').mockImplementation(function (file) {
+      // Simulate reading invalid JSON content
+      const mockInvalidContent = '{ "invalid": json }';
+      (this as any).onload?.({ target: { result: mockInvalidContent } } as any);
+      return undefined as any;
     });
+
+    const result = await processFile(mockFile);
+
+    expect(result).toEqual([]);
   });
 
-  afterEach(() => {
-    jest.restoreAllMocks();
+  it('should return empty array for missing file', async () => {
+    const mockFile = new File([], 'nonexistent.json');
+
+    const result = await processFile(mockFile);
+
+    expect(result).toEqual([]);
   });
 
-  it('should process a file and return its logs', async () => {
-    const result = await processFile('mock-file-path');
-    expect(result).toEqual(mockLogData);
+  it('should handle file with no records', async () => {
+    const mockFileContent = `{
+      "records": []
+    }`;
+
+    const mockFile = new File([mockFileContent], 'empty.json');
+
+    const result = await processFile(mockFile);
+
+    expect(result).toEqual([]);
   });
 
-  it('should process logs and return a summary', () => {
-    const result = processLogs(mockLogData);
-    expect(result).toEqual(mockSummary);
-  });
+  it('should handle file with malformed records', async () => {
+    const mockFileContent = `{
+      "records": [
+        {
+          "timestamp": "2023-01-01T00:00:00Z",
+          "level": "INFO"
+        }
+      ]
+    }`;
 
-  it('should process a file with summary', async () => {
-    const result = await processFileWithSummary('mock-file-path');
-    expect(result).toEqual(mockSummary);
-  });
+    const mockFile = new File([mockFileContent], 'malformed.json');
 
-  it('should handle file processing errors gracefully', async () => {
-    jest.spyOn(fs, 'readFile').mockImplementation((filePath, encoding, callback) => {
-      (callback as any)(new Error('File not found'), null);
-    });
+    const result = await processFile(mockFile);
 
-    await expect(processFile('mock-file-path')).rejects.toThrow();
-  });
-
-  it('should handle JSON parsing errors gracefully', async () => {
-    jest.spyOn(fs, 'readFile').mockImplementation((filePath, encoding, callback) => {
-      (callback as any)(null, 'invalid json');
-    });
-
-    await expect(processFile('mock-file-path')).rejects.toThrow();
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'INFO',
+        message: ''
+      }
+    ]);
   });
 });
