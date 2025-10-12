@@ -1,83 +1,105 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { readFile } from 'fs/promises';
+import { parseISO, isValid } from 'date-fns';
 
-// Define the structure of a normalized log record
-export interface NormalizedLogRecord {
+// Define the normalized record structure
+export interface NormalizedRecord {
   timestamp: string;
   level: string;
   message: string;
-  service?: string;
-  source?: string;
-  metadata?: Record<string, unknown>;
+  source: string;
 }
 
-// Define the structure of a raw log record (from JSON)
-export interface RawLogRecord {
-  timestamp?: string;
-  level?: string;
-  message?: string;
-  service?: string;
-  source?: string;
-  metadata?: Record<string, unknown>;
+// Helper function to normalize timestamp format
+function normalizeTimestamp(timestampStr: string): string {
+  // Try to parse the timestamp as ISO format first
+  const parsed = parseISO(timestampStr);
+  if (isValid(parsed)) {
+    return parsed.toISOString();
+  }
+
+  // If that fails, try to parse as a custom format (e.g., "2023-01-01 00:00:00")
+  const customFormatRegex = /^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2}:\d{2})$/;
+  const match = timestampStr.match(customFormatRegex);
+
+  if (match) {
+    const datePart = match[1];
+    const timePart = match[2];
+    const isoString = `${datePart}T${timePart}Z`;
+    return isoString;
+  }
+
+  // If all else fails, return the original string
+  return timestampStr;
 }
 
-/**
- * Normalize a raw log record into a standardized format
- */
-export function normalizeLogRecord(raw: RawLogRecord): NormalizedLogRecord {
-  return {
-    timestamp: raw.timestamp || new Date().toISOString(),
-    level: raw.level || 'info',
-    message: raw.message || '',
-    service: raw.service,
-    source: raw.source,
-    metadata: raw.metadata || {}
-  };
+// Helper function to validate required fields
+function isValidRecord(obj: any): obj is NormalizedRecord {
+  return (
+    typeof obj.timestamp === 'string' &&
+    typeof obj.level === 'string' &&
+    typeof obj.message === 'string'
+  );
 }
 
-/**
- * Read and parse a JSON file containing log records
- * Returns an array of normalized log records
- */
-export async function ingestFile(filePath: string): Promise<NormalizedLogRecord[]> {
+// Helper function to parse JSON content
+async function parseJsonContent(content: string): Promise<any[]> {
   try {
-    // Read the file content
-    const fileContent = await fs.readFile(filePath, 'utf8');
-    
-    // Parse the JSON content
-    const parsedContent = JSON.parse(fileContent);
+    const parsed = JSON.parse(content);
 
-    // Handle single log record (object) vs array of records
-    let records: RawLogRecord[];
-
-    if (Array.isArray(parsedContent)) {
-      records = parsedContent;
-    } else if (typeof parsedContent === 'object' && parsedContent !== null) {
-      records = [parsedContent];
-    } else {
-      throw new Error('Invalid JSON format: expected array or object');
+    // If it's an array, return as-is
+    if (Array.isArray(parsed)) {
+      return parsed;
     }
 
-    // Normalize each record
-    return records.map(normalizeLogRecord);
+    // If it's a single object, wrap in array
+    return [parsed];
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`Failed to ingest file ${filePath}: ${error.message}`);
-    }
-    throw new Error(`Failed to ingest file ${filePath}: Unknown error`);
+    // Return empty array if parsing fails
+    return [];
   }
 }
 
-/**
- * Read and parse multiple JSON files
- * Returns a flattened array of normalized log records
- */
-export async function ingestFiles(filePaths: string[]): Promise<NormalizedLogRecord[]> {
-  const allRecords: NormalizedLogRecord[] = [];
+// Main function to read and normalize JSON files
+export async function readAndNormalizeJsonFiles(
+  filePaths: string[]
+): Promise<NormalizedRecord[]> {
+  const allRecords: NormalizedRecord[] = [];
 
   for (const filePath of filePaths) {
-    const records = await ingestFile(filePath);
-    allRecords.push(...records);
+    try {
+      const content = await readFile(filePath, 'utf8');
+
+      // Skip empty files
+      if (!content.trim()) {
+        continue;
+      }
+
+      const parsedObjects = await parseJsonContent(content);
+
+      // Process each parsed object
+      for (const obj of parsedObjects) {
+        // Validate required fields
+        if (!isValidRecord(obj)) {
+          continue;
+        }
+
+        // Normalize timestamp
+        const normalizedTimestamp = normalizeTimestamp(obj.timestamp);
+
+        // Create normalized record with source
+        const normalizedRecord: NormalizedRecord = {
+          timestamp: normalizedTimestamp,
+          level: obj.level,
+          message: obj.message,
+          source: filePath
+        };
+
+        allRecords.push(normalizedRecord);
+      }
+    } catch (error) {
+      // Skip files that cannot be read or parsed
+      continue;
+    }
   }
 
   return allRecords;
