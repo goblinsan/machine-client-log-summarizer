@@ -1,10 +1,10 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-12T21:15:13.750Z",
+  "generated_at": "2025-10-12T21:31:37.056Z",
   "totals": {
     "files": 38,
-    "bytes": 213223,
-    "lines": 6418
+    "bytes": 214758,
+    "lines": 6446
   },
   "files": [
     {
@@ -16,24 +16,24 @@
     },
     {
       "path": ".ma/context/files.ndjson",
-      "bytes": 5119,
-      "mtime": 1760294564091.428,
-      "lines": 38,
-      "sha1": "3b7416f8a136315bcefa44fed840ae2744798878"
+      "bytes": 5287,
+      "mtime": 1760303713759.8655,
+      "lines": 39,
+      "sha1": "fcb08fe45bdc95df915db270368b49624c1aeb36"
     },
     {
       "path": ".ma/context/snapshot.json",
-      "bytes": 19817,
-      "mtime": 1760294564090.43,
-      "lines": 711,
-      "sha1": "9b1afd73da9c1d3cf27285075cab8aece926cf0e"
+      "bytes": 20208,
+      "mtime": 1760303713758.7573,
+      "lines": 718,
+      "sha1": "13704edcf04f76ea0a6beeaaacdac40432d0cb7d"
     },
     {
       "path": ".ma/context/summary.md",
-      "bytes": 11505,
-      "mtime": 1760294601908.4597,
-      "lines": 274,
-      "sha1": "ca566ee7e698b7dd26fa7f7f4e5232749728bb90"
+      "bytes": 12481,
+      "mtime": 1760303754833.0574,
+      "lines": 294,
+      "sha1": "07c3a40128b2e756b12dfc77cf9c54bb96f1c6d6"
     },
     {
       "path": ".ma/qa/task-008e1a7e-0df4-4703-b6b4-fb71dbae04a6-qa.log",
@@ -279,8 +279,8 @@
       "component": ".",
       "totals": {
         "files": 38,
-        "bytes": 213223,
-        "lines": 6418
+        "bytes": 214758,
+        "lines": 6446
       },
       "largest": [
         {
@@ -292,17 +292,17 @@
         },
         {
           "path": ".ma/context/snapshot.json",
-          "bytes": 19817,
-          "mtime": 1760294564090.43,
-          "lines": 711,
-          "sha1": "9b1afd73da9c1d3cf27285075cab8aece926cf0e"
+          "bytes": 20208,
+          "mtime": 1760303713758.7573,
+          "lines": 718,
+          "sha1": "13704edcf04f76ea0a6beeaaacdac40432d0cb7d"
         },
         {
           "path": ".ma/context/summary.md",
-          "bytes": 11505,
-          "mtime": 1760294601908.4597,
-          "lines": 274,
-          "sha1": "ca566ee7e698b7dd26fa7f7f4e5232749728bb90"
+          "bytes": 12481,
+          "mtime": 1760303754833.0574,
+          "lines": 294,
+          "sha1": "07c3a40128b2e756b12dfc77cf9c54bb96f1c6d6"
         },
         {
           "path": "PROJECT_PLAN.md",
@@ -313,10 +313,10 @@
         },
         {
           "path": ".ma/context/files.ndjson",
-          "bytes": 5119,
-          "mtime": 1760294564091.428,
-          "lines": 38,
-          "sha1": "3b7416f8a136315bcefa44fed840ae2744798878"
+          "bytes": 5287,
+          "mtime": 1760303713759.8655,
+          "lines": 39,
+          "sha1": "fcb08fe45bdc95df915db270368b49624c1aeb36"
         },
         {
           "path": "scripts/replace-colors.js",
@@ -364,17 +364,17 @@
         },
         {
           "path": ".ma/context/snapshot.json",
-          "bytes": 19817,
-          "mtime": 1760294564090.43,
-          "lines": 711,
-          "sha1": "9b1afd73da9c1d3cf27285075cab8aece926cf0e"
+          "bytes": 20208,
+          "mtime": 1760303713758.7573,
+          "lines": 718,
+          "sha1": "13704edcf04f76ea0a6beeaaacdac40432d0cb7d"
         },
         {
           "path": ".ma/context/summary.md",
-          "bytes": 11505,
-          "mtime": 1760294601908.4597,
-          "lines": 274,
-          "sha1": "ca566ee7e698b7dd26fa7f7f4e5232749728bb90"
+          "bytes": 12481,
+          "mtime": 1760303754833.0574,
+          "lines": 294,
+          "sha1": "07c3a40128b2e756b12dfc77cf9c54bb96f1c6d6"
         },
         {
           "path": "src/styles/_migrated.scss",
@@ -439,17 +439,17 @@
       },
       {
         "path": ".ma/context/snapshot.json",
-        "bytes": 19817,
-        "mtime": 1760294564090.43,
-        "lines": 711,
-        "sha1": "9b1afd73da9c1d3cf27285075cab8aece926cf0e"
+        "bytes": 20208,
+        "mtime": 1760303713758.7573,
+        "lines": 718,
+        "sha1": "13704edcf04f76ea0a6beeaaacdac40432d0cb7d"
       },
       {
         "path": ".ma/context/summary.md",
-        "bytes": 11505,
-        "mtime": 1760294601908.4597,
-        "lines": 274,
-        "sha1": "ca566ee7e698b7dd26fa7f7f4e5232749728bb90"
+        "bytes": 12481,
+        "mtime": 1760303754833.0574,
+        "lines": 294,
+        "sha1": "07c3a40128b2e756b12dfc77cf9c54bb96f1c6d6"
       },
       {
         "path": "PROJECT_PLAN.md",
@@ -460,10 +460,10 @@
       },
       {
         "path": ".ma/context/files.ndjson",
-        "bytes": 5119,
-        "mtime": 1760294564091.428,
-        "lines": 38,
-        "sha1": "3b7416f8a136315bcefa44fed840ae2744798878"
+        "bytes": 5287,
+        "mtime": 1760303713759.8655,
+        "lines": 39,
+        "sha1": "fcb08fe45bdc95df915db270368b49624c1aeb36"
       },
       {
         "path": "scripts/replace-colors.js",
@@ -581,17 +581,17 @@
       },
       {
         "path": ".ma/context/snapshot.json",
-        "bytes": 19817,
-        "mtime": 1760294564090.43,
-        "lines": 711,
-        "sha1": "9b1afd73da9c1d3cf27285075cab8aece926cf0e"
+        "bytes": 20208,
+        "mtime": 1760303713758.7573,
+        "lines": 718,
+        "sha1": "13704edcf04f76ea0a6beeaaacdac40432d0cb7d"
       },
       {
         "path": ".ma/context/summary.md",
-        "bytes": 11505,
-        "mtime": 1760294601908.4597,
-        "lines": 274,
-        "sha1": "ca566ee7e698b7dd26fa7f7f4e5232749728bb90"
+        "bytes": 12481,
+        "mtime": 1760303754833.0574,
+        "lines": 294,
+        "sha1": "07c3a40128b2e756b12dfc77cf9c54bb96f1c6d6"
       },
       {
         "path": "src/styles/_migrated.scss",
@@ -693,10 +693,10 @@
       },
       {
         "path": ".ma/context/files.ndjson",
-        "bytes": 5119,
-        "mtime": 1760294564091.428,
-        "lines": 38,
-        "sha1": "3b7416f8a136315bcefa44fed840ae2744798878"
+        "bytes": 5287,
+        "mtime": 1760303713759.8655,
+        "lines": 39,
+        "sha1": "fcb08fe45bdc95df915db270368b49624c1aeb36"
       },
       {
         "path": ".ma/qa/task-83bb4d1f-0081-41c0-b09c-83304ef18e50-qa.log",
