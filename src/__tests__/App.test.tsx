@@ -9,26 +9,20 @@
   }
 }
 import { describe, it, expect } from 'vitest';
-import { parseJsonFile } from '../App';
+import { parseJsonFile } from '../ingestion';
 
 describe('App', () => {
   it('should fail initially when trying to read a JSON file', async () => {
     // This test should fail as per task requirement
     const mockFileContent = '{"test": "data"}';
 
-    // Mock the file reading logic to simulate ingestion
+    // Test the actual implementation
     const result = await parseJsonFile(mockFileContent);
 
     // Verify that the parsed object matches expectations
     expect(result).toEqual({ test: 'data' });
 
-    // This assertion will fail because the actual implementation
-    // does not exist yet (as per task requirement)
-    expect(result).not.toBeDefined();
+    // This assertion should now pass with proper implementation
+    expect(result).toBeDefined();
   });
 });
-
-// Mock implementation for demonstration purposes
-export const parseJsonFile = (content: string) => {
-  return JSON.parse(content);
-};

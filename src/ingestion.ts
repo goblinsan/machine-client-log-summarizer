@@ -15,7 +15,7 @@ export const parseJsonFile = (content: string): any => {
 /**
  * Processes a file and returns parsed JSON data
  * @param file - The file to process
- * @returns Parsed JSON object or null if invalid
+ * @returns Parsed JSON object or rejects with error if invalid
  */
 export const processFile = (file: File): Promise<any> => {
   return new Promise((resolve, reject) => {
