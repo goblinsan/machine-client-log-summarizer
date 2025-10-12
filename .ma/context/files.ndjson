@@ -2,8 +2,8 @@
 {"path":"package-lock.json","bytes":125965,"mtime":1760191477070.0342,"lines":3711,"sha1":"42444667abc208d904cb89aa2d5284e5d503c029"}
 {"path":"package.json","bytes":319,"mtime":1760232949120.5122,"lines":17,"sha1":"66bc6d6eda61f9793416d9338899ade3f95e694f"}
 {"path":"src/App.tsx","bytes":2490,"mtime":1760232949121.4832,"lines":96,"sha1":"bf9248749b98d64f0f1183f10e1a422ed9e784c5"}
-{"path":"src/ingestion.test.ts","bytes":4245,"mtime":1760235812536.2993,"lines":139,"sha1":"6f6d456478982a75a476e081f07ca3e2806d62ef"}
-{"path":"src/ingestion.ts","bytes":2906,"mtime":1760235812537.8015,"lines":104,"sha1":"273ba90af3179cff0fddad149286617578b07817"}
+{"path":"src/ingestion.test.ts","bytes":10658,"mtime":1760273016726.786,"lines":340,"sha1":"d4b6cbb35cac7072b7b4c7b6d6c4c86ff8ab2a1b"}
+{"path":"src/ingestion.ts","bytes":3620,"mtime":1760273016727.786,"lines":113,"sha1":"6c511c33bce0a82ddcb0ff82ab7793d395822e15"}
 {"path":"src/main.tsx","bytes":231,"mtime":1760191477077.034,"lines":10,"sha1":"ed567ef9985b18b3140a6d0bcd42af5bb19b2888"}
 {"path":"src/styles/_base.scss","bytes":1700,"mtime":1760191477079.0405,"lines":79,"sha1":"7a8123f5d7bf32d337e8d957e6ec9f9fd388a30c"}
 {"path":"src/styles/_components.scss","bytes":3399,"mtime":1760191477080.0332,"lines":182,"sha1":"07a816d6bcf39d659e2ed0ff7020fcdb744409b0"}
