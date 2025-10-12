@@ -1,63 +1,85 @@
-import fs from 'fs'
-import path from 'path'
-import { processFiles, ProcessedFileData } from './fileIngest'
+import { processFile } from './fileIngest';
 
-export interface LogProcessingResult {
-  totalFiles: number
-  totalSize: number
-  processedFiles: ProcessedFileData[]
-  summary: string
+export interface LogEntry {
+  timestamp: string;
+  level: 'info' | 'warn' | 'error' | 'debug';
+  message: string;
+  source?: string;
+}
+
+export interface Summary {
+  totalEntries: number;
+  entryCounts: Record<string, number>;
+  levels: string[];
+  earliestTimestamp: string | null;
+  latestTimestamp: string | null;
+  sources: string[];
 }
 
 /**
- * Process log files from a directory
- * @param directoryPath - Path to the directory containing log files
- * @returns Promise resolving to processing results summary
+ * Process a collection of log entries and generate a summary
  */
-export async function processLogFiles(directoryPath: string): Promise<LogProcessingResult> {
-  try {
-    // Validate directory path
-    if (!directoryPath || typeof directoryPath !== 'string') {
-      throw new Error('Invalid directory path provided')
-    }
-
-    // Read directory contents
-    const files = await fs.promises.readdir(directoryPath)
-
-    // Filter for log files (ending with .log)
-    const logFiles = files.filter(file => file.endsWith('.log'))
-
-    // Process all log files
-    const processedFiles = await processFiles(
-      logFiles.map(file => path.join(directoryPath, file))
-    )
-
-    // Calculate total size
-    const totalSize = processedFiles.reduce((sum, file) => sum + file.size, 0)
-
-    // Generate summary
-    const summary = generateSummary(processedFiles, totalSize)
-
+export function processLogs(logs: LogEntry[]): Summary {
+  if (!logs || logs.length === 0) {
     return {
-      totalFiles: logFiles.length,
-      totalSize,
-      processedFiles,
-      summary
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`Failed to process log files from ${directoryPath}: ${error.message}`)
-    }
-    throw new Error(`Failed to process log files from ${directoryPath}: Unknown error`)
+      totalEntries: 0,
+      entryCounts: {},
+      levels: [],
+      earliestTimestamp: null,
+      latestTimestamp: null,
+      sources: []
+    };
   }
+
+  const entryCounts: Record<string, number> = {};
+  const levels: string[] = [];
+  const sources: string[] = [];
+  let earliestTimestamp: string | null = null;
+  let latestTimestamp: string | null = null;
+
+  logs.forEach(log => {
+    // Count entries by level
+    entryCounts[log.level] = (entryCounts[log.level] || 0) + 1;
+
+    // Track levels
+    if (!levels.includes(log.level)) {
+      levels.push(log.level);
+    }
+
+    // Track sources
+    if (log.source && !sources.includes(log.source)) {
+      sources.push(log.source);
+    }
+
+    // Track timestamps
+    if (!earliestTimestamp || log.timestamp < earliestTimestamp) {
+      earliestTimestamp = log.timestamp;
+    }
+
+    if (!latestTimestamp || log.timestamp > latestTimestamp) {
+      latestTimestamp = log.timestamp;
+    }
+  });
+
+  return {
+    totalEntries: logs.length,
+    entryCounts,
+    levels,
+    earliestTimestamp,
+    latestTimestamp,
+    sources
+  };
 }
 
 /**
- * Generate a summary string from processed files
- * @param files - Array of processed files
- * @param totalSize - Total size in bytes
- * @returns Summary string
+ * Process a file and return its log summary
  */
-function generateSummary(files: ProcessedFileData[], totalSize: number): string {
-  return `Processed ${files.length} log files with total size of ${totalSize} bytes`
+export async function processFileWithSummary(filePath: string): Promise<Summary> {
+  try {
+    const logs = await processFile(filePath);
+    return processLogs(logs);
+  } catch (error) {
+    console.error(`Error processing file ${filePath}:`, error);
+    throw error;
+  }
 }
