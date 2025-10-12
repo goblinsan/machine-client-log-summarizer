@@ -1,3 +1,6 @@
+{"path":".stylelintrc.json","bytes":469,"mtime":1760191477066.0342,"lines":17,"sha1":"face46337baec779ce9d364c84b7e70325534ef1"}
+{"path":"package-lock.json","bytes":125965,"mtime":1760191477070.0342,"lines":3711,"sha1":"42444667abc208d904cb89aa2d5284e5d503c029"}
+{"path":"package.json","bytes":319,"mtime":1760232949120.5122,"lines":17,"sha1":"66bc6d6eda61f9793416d9338899ade3f95e694f"}
 {"path":"src/App.tsx","bytes":2490,"mtime":1760232949121.4832,"lines":96,"sha1":"bf9248749b98d64f0f1183f10e1a422ed9e784c5"}
 {"path":"src/ingestion.test.ts","bytes":4245,"mtime":1760235812536.2993,"lines":139,"sha1":"6f6d456478982a75a476e081f07ca3e2806d62ef"}
 {"path":"src/ingestion.ts","bytes":2906,"mtime":1760235812537.8015,"lines":104,"sha1":"273ba90af3179cff0fddad149286617578b07817"}
@@ -11,3 +14,5 @@
 {"path":"src/styles/_mixins.scss","bytes":222,"mtime":1760191477088.0376,"lines":12,"sha1":"dabc364708c82801cfd10c9744d60c6e15bc1b79"}
 {"path":"src/styles/_utils.scss","bytes":361,"mtime":1760191477089.035,"lines":10,"sha1":"4d4e8801caed6b65173200e1fd7486953995000f"}
 {"path":"src/styles/main.scss","bytes":313,"mtime":1760191477091.042,"lines":22,"sha1":"bae6479542a18ee4bd341ee8fe8bc621f9000e1b"}
+{"path":"tsconfig.json","bytes":445,"mtime":1759457453027.9893,"lines":19,"sha1":"7d54710fb9bae1c5f64b5afbba9a691478b81ddf"}
+{"path":"vite.config.ts","bytes":194,"mtime":1759457453027.9893,"lines":11,"sha1":"2048f39c3dc63bb61d702a7d0407574ea0e3530c"}
