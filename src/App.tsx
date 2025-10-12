@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 const App = () => {
   const [file, setFile] = useState<File | null>(null);
   const [ingestionResult, setIngestionResult] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,8 +30,20 @@ const App = () => {
   const processFile = (file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
-      const content = e.target?.result as string;
-      setIngestionResult(`Processed file: ${file.name}\nContent preview:\n${content.substring(0, 200)}...`);
+      try {
+        const content = e.target?.result as string;
+        // Simulate parsing logic for JSON files
+        const parsedContent = JSON.parse(content);
+        setIngestionResult(`Processed file: ${file.name}\nParsed content:\n${JSON.stringify(parsedContent, null, 2)}`);
+        setError(null);
+      } catch (err) {
+        setError('Failed to parse file as JSON');
+        setIngestionResult(null);
+      }
+    };
+    reader.onerror = () => {
+      setError('Failed to read file');
+      setIngestionResult(null);
     };
     reader.readAsText(file);
   };
@@ -64,14 +77,20 @@ const App = () => {
         </div>
       )}
 
+      {error && (
+        <div className="error">
+          <p>Error: {error}</p>
+        </div>
+      )}
+
       {ingestionResult && (
         <div className="ingestion-result">
           <h2>Ingestion Result</h2>
-          <pre>{ingestionResult}</pre>
-        </div>
-      )}
-    </div>
-  );
+          {ingestionResult}
+       </div>
+     )}
+   </div>
+ );
 };
 
 export default App;
