@@ -21,4 +21,13 @@ describe('Ingestion functionality', () => {
     // Test that invalid JSON throws an error
     await expect(processFile(mockFile)).rejects.toThrow('Failed to parse file as JSON');
   });
+
+  it('should handle non-JSON files gracefully', async () => {
+    const mockFile = new File(['not json content'], 'text.txt', {
+      type: 'text/plain',
+    });
+
+    // Test that non-JSON files throw an error
+    await expect(processFile(mockFile)).rejects.toThrow('Failed to parse file as JSON');
+  });
 });
