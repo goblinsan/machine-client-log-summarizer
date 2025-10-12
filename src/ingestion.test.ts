@@ -1,139 +1,340 @@
-/**
- * Test suite for ingestion functionality
- */
-import { describe, it, expect } from '@jest/globals';
-import { readJSONFile, normalizeRecord } from './ingestion';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { processLogFiles } from './ingestion';
 
-/**
- * Test suite for ingestion functionality
- */
-describe('Ingestion functionality', () => {
-  it('should read and parse a JSON file correctly', async () => {
-    const mockFile = new File(['{"test": "value"}'], 'test.json', {
-      type: 'application/json',
-    });
+// Mock the fs module to avoid actual file system operations
+vi.mock('fs', () => ({
+  promises: {
+    readFile: vi.fn(),
+    readdir: vi.fn(),
+  },
+}));
 
-    // Test the actual readJSONFile function
-    const result = await readJSONFile(mockFile);
+// Mock the path module to avoid actual path operations
+vi.mock('path', () => ({
+  join: vi.fn((...args) => args.join('/')),
+}));
 
-    expect(result).toEqual({ test: 'value' });
+describe('processLogFiles', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('should handle invalid JSON gracefully', async () => {
-    const mockFile = new File(['{invalid: json}'], 'invalid.json', {
-      type: 'application/json',
+  it('should process a single valid JSON log file', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      message: 'Test log entry',
+      service: 'test-service'
     });
 
-    // Test that invalid JSON throws an error
-    await expect(readJSONFile(mockFile)).rejects.toThrow('Failed to parse file as JSON');
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'info',
+        message: 'Test log entry',
+        service: 'test-service'
+      }
+    ]);
   });
 
-  it('should handle non-JSON files gracefully', async () => {
-    const mockFile = new File(['not json content'], 'text.txt', {
-      type: 'text/plain',
+  it('should process multiple valid JSON log files', async () => {
+    const mockFile1Content = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      message: 'Test log entry 1',
+      service: 'test-service'
     });
 
-    // Test that non-JSON files throw an error
-    await expect(readJSONFile(mockFile)).rejects.toThrow('Failed to parse file as JSON');
+    const mockFile2Content = JSON.stringify({
+      timestamp: '2023-01-01T01:00:00Z',
+      level: 'error',
+      message: 'Test log entry 2',
+      service: 'test-service'
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValueOnce(mockFile1Content);
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValueOnce(mockFile2Content);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['file1.log', 'file2.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'info',
+        message: 'Test log entry 1',
+        service: 'test-service'
+      },
+      {
+        timestamp: '2023-01-01T01:00:00Z',
+        level: 'error',
+        message: 'Test log entry 2',
+        service: 'test-service'
+      }
+    ]);
   });
 
-  it('should handle valid JSON with complex structure', async () => {
-    const mockFile = new File(['{"logs": [{"timestamp": "2023-01-01T00:00:00Z", "message": "test log"}]}'], 'complex.json', {
-      type: 'application/json',
-    });
+  it('should skip non-JSON files', async () => {
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.txt', 'test.log']);
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue('not json');
 
-    const result = await readJSONFile(mockFile);
+    const result = await processLogFiles('./logs');
 
-    expect(result).toEqual({
-      logs: [
-        {
-          timestamp: '2023-01-01T00:00:00Z',
-          message: 'test log'
-        }
-      ]
-    });
+    expect(result).toEqual([]);
   });
 
-  it('should handle empty JSON object', async () => {
-    const mockFile = new File(['{}'], 'empty.json', {
-      type: 'application/json',
-    });
+  it('should filter out invalid JSON files', async () => {
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue('invalid json');
 
-    const result = await readJSONFile(mockFile);
+    const result = await processLogFiles('./logs');
 
-    expect(result).toEqual({});
+    expect(result).toEqual([]);
   });
 
-  it('should normalize records to consistent structure', async () => {
-    const mockFile = new File(['{"message": "test", "timestamp": "2023-01-01T00:00:00Z"}'], 'normalized.json', {
-      type: 'application/json',
-    });
+  it('should handle empty directory', async () => {
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue([]);
 
-    const result = await readJSONFile(mockFile);
+    const result = await processLogFiles('./logs');
 
-    // Should return normalized record with consistent structure
-    expect(result).toEqual({
-      message: 'test',
-      timestamp: '2023-01-01T00:00:00Z'
-    });
+    expect(result).toEqual([]);
   });
 
-  it('should handle file read errors gracefully', async () => {
-    // Create a mock file that will fail to read
-    const mockFile = new File(['{"test": "value"}'], 'error.json', {
-      type: 'application/json',
-    });
+  it('should handle directory read errors', async () => {
+    vi.mocked((await import('fs')).promises.readdir).mockRejectedValue(new Error('Read error'));
 
-    // Mock FileReader to simulate read error
-    const originalFileReader = global.FileReader;
-    const mockReader = {
-      readAsText: jest.fn().mockImplementation(function() {
-        // Simulate error in reader
-        setTimeout(() => {
-          this.onerror?.();
-        }, 0);
-      }),
-      onload: jest.fn(),
-      onerror: jest.fn(),
-      result: null
-    };
-
-    // @ts-ignore - we're mocking FileReader for testing purposes
-    global.FileReader = jest.fn().mockImplementation(() => mockReader);
-
-    await expect(readJSONFile(mockFile)).rejects.toThrow('Failed to read file');
-
-    // Restore original FileReader
-    global.FileReader = originalFileReader;
+    await expect(processLogFiles('./logs')).rejects.toThrow('Read error');
   });
 
-  describe('normalizeRecord function', () => {
-    it('should normalize timestamp to ISO string', () => {
-      const input = { timestamp: '2023-01-01T00:00:00Z', message: 'test' };
-      const result = normalizeRecord(input);
+  it('should handle file read errors', async () => {
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+    vi.mocked((await import('fs')).promises.readFile).mockRejectedValue(new Error('File read error'));
 
-      expect(result.timestamp).toBe('2023-01-01T00:00:00.000Z');
+    await expect(processLogFiles('./logs')).rejects.toThrow('File read error');
+  });
+
+  it('should handle missing required fields', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info'
+      // missing message and service fields
     });
 
-    it('should normalize message to string', () => {
-      const input = { timestamp: '2023-01-01T00:00:00Z', message: 123 };
-      const result = normalizeRecord(input);
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
 
-      expect(result.message).toBe('123');
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle malformed timestamp', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: 'not-a-date',
+      level: 'info',
+      message: 'Test log entry',
+      service: 'test-service'
     });
 
-    it('should handle null and undefined values', () => {
-      const input = { timestamp: '2023-01-01T00:00:00Z', message: null, other: undefined };
-      const result = normalizeRecord(input);
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
 
-      expect(result).toEqual({ timestamp: '2023-01-01T00:00:00.000Z' });
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle missing timestamp', async () => {
+    const mockFileContent = JSON.stringify({
+      level: 'info',
+      message: 'Test log entry',
+      service: 'test-service'
     });
 
-    it('should return non-object inputs as-is', () => {
-      const input = 'not an object';
-      const result = normalizeRecord(input);
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
 
-      expect(result).toBe('not an object');
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle missing level', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      message: 'Test log entry',
+      service: 'test-service'
     });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle missing message', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      service: 'test-service'
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle missing service', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      message: 'Test log entry'
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle invalid JSON content', async () => {
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue('{ invalid json }');
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle valid JSON with extra fields', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      message: 'Test log entry',
+      service: 'test-service',
+      extraField: 'should be ignored'
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'info',
+        message: 'Test log entry',
+        service: 'test-service'
+      }
+    ]);
+  });
+
+  it('should handle valid JSON with empty string values', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      message: '',
+      service: ''
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle valid JSON with null values', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      message: null,
+      service: null
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle valid JSON with numeric values', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 123,
+      message: 'Test log entry',
+      service: 'test-service'
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle valid JSON with boolean values', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: true,
+      message: 'Test log entry',
+      service: 'test-service'
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle valid JSON with array values', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      message: 'Test log entry',
+      service: ['test-service']
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle valid JSON with object values', async () => {
+    const mockFileContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      message: 'Test log entry',
+      service: { name: 'test-service' }
+    });
+
+    vi.mocked((await import('fs')).promises.readFile).mockResolvedValue(mockFileContent);
+    vi.mocked((await import('fs')).promises.readdir).mockResolvedValue(['test.log']);
+
+    const result = await processLogFiles('./logs');
+
+    expect(result).toEqual([]);
   });
 });

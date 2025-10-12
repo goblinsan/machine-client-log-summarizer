@@ -1,104 +1,113 @@
-/**
- * Ingestion module for processing log files
- */
-import { File } from 'buffer';
+import fs from 'fs';
+import path from 'path';
+
+// Define the structure of a log entry
+export interface LogEntry {
+  timestamp: string;
+  level: string;
+  message: string;
+  service: string;
+}
 
 /**
- * Process a file and parse its content as JSON
- * @param file - The file to process
- * @returns Promise resolving to parsed JSON object or rejecting with error
+ * Processes log files from a directory and returns parsed entries
+ * @param directoryPath - Path to the directory containing log files
+ * @returns Promise resolving to array of parsed LogEntry objects
  */
-export const readJSONFile = (file: File): Promise<any> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+export async function processLogFiles(directoryPath: string): Promise<LogEntry[]> {
+  try {
+    // Read directory contents
+    const files = await fs.promises.readdir(directoryPath);
 
-    reader.onload = (e) => {
+    // Filter for JSON files
+    const jsonFiles = files.filter(file => file.endsWith('.json'));
+
+    // Process each JSON file
+    const logEntries: LogEntry[] = [];
+
+    for (const file of jsonFiles) {
       try {
-        const content = e.target?.result as string;
+        const filePath = path.join(directoryPath, file);
+        const fileContent = await fs.promises.readFile(filePath, 'utf-8');
 
-        // Validate that the content is valid JSON
-        const parsedContent = JSON.parse(content);
+        // Parse JSON content
+        const parsedContent = JSON.parse(fileContent);
 
-        // Normalize the parsed content (e.g., ensure consistent structure)
-        const normalizedRecord = normalizeRecord(parsedContent);
+        // Validate required fields and types
+        if (
+          typeof parsedContent.timestamp === 'string' &&
+          typeof parsedContent.level === 'string' &&
+          typeof parsedContent.message === 'string' &&
+          typeof parsedContent.service === 'string' &&
+          parsedContent.timestamp.trim() !== '' &&
+          parsedContent.level.trim() !== '' &&
+          parsedContent.message.trim() !== '' &&
+          parsedContent.service.trim() !== ''
+        ) {
+          // Validate timestamp format (ISO 8601)
+          const timestamp = new Date(parsedContent.timestamp);
+          if (isNaN(timestamp.getTime())) {
+            continue; // Skip invalid timestamp
+          }
 
-        resolve(normalizedRecord);
-      } catch (err) {
-        reject(new Error('Failed to parse file as JSON'));
+          // Add to results if all validations pass
+          logEntries.push({
+            timestamp: parsedContent.timestamp,
+            level: parsedContent.level,
+            message: parsedContent.message,
+            service: parsedContent.service
+          });
+        }
+      } catch (error) {
+        // Skip files that fail to parse or validate
+        continue;
       }
-    };
-
-    reader.onerror = () => {
-      reject(new Error('Failed to read file'));
-    };
-
-    reader.readAsText(file);
-  });
-};
-
-/**
- * Normalize a parsed JSON record to ensure consistent structure
- * @param record - The parsed JSON object to normalize
- * @returns Normalized record with consistent structure
- */
-export const normalizeRecord = (record: any): any => {
-  // Example normalization logic - in a real implementation,
-  // this would transform the record to a standardized format
-  if (record && typeof record === 'object') {
-    // Normalize timestamp field if present
-    if (record.timestamp) {
-      record.timestamp = new Date(record.timestamp).toISOString();
     }
 
-    // Normalize message field if present
-    if (record.message) {
-      record.message = String(record.message);
-    }
-
-    // Ensure all fields are properly typed and formatted
-    const normalized = {};
-    Object.keys(record).forEach(key => {
-      if (record[key] !== null && record[key] !== undefined) {
-        normalized[key] = record[key];
-      }
-    });
-
-    return normalized;
+    return logEntries;
+  } catch (error) {
+    throw new Error(`Failed to process log files: ${error instanceof Error ? error.message : String(error)}`);
   }
-
-  // Return record as-is if not an object
-  return record;
-};
+}
 
 /**
- * Process a file and parse its content as JSON
- * @param file - The file to process
- * @returns Promise resolving to parsed JSON object or rejecting with error
+ * Processes a single log file and returns parsed entries
+ * @param filePath - Path to the log file
+ * @returns Promise resolving to array of parsed LogEntry objects
  */
-export const processFile = (file: File): Promise<any> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+export async function processLogFile(filePath: string): Promise<LogEntry[]> {
+  try {
+    const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+    const parsedContent = JSON.parse(fileContent);
 
-    reader.onload = (e) => {
-      try {
-        const content = e.target?.result as string;
-
-        // Validate that the content is valid JSON
-        const parsedContent = JSON.parse(content);
-
-        // Normalize the parsed content (e.g., ensure consistent structure)
-        const normalizedRecord = normalizeRecord(parsedContent);
-
-        resolve(normalizedRecord);
-      } catch (err) {
-        reject(new Error('Failed to parse file as JSON'));
+    // Validate required fields and types
+    if (
+      typeof parsedContent.timestamp === 'string' &&
+      typeof parsedContent.level === 'string' &&
+      typeof parsedContent.message === 'string' &&
+      typeof parsedContent.service === 'string' &&
+      parsedContent.timestamp.trim() !== '' &&
+      parsedContent.level.trim() !== '' &&
+      parsedContent.message.trim() !== '' &&
+      parsedContent.service.trim() !== ''
+    ) {
+      // Validate timestamp format (ISO 8601)
+      const timestamp = new Date(parsedContent.timestamp);
+      if (isNaN(timestamp.getTime())) {
+        return []; // Return empty array for invalid timestamp
       }
-    };
 
-    reader.onerror = () => {
-      reject(new Error('Failed to read file'));
-    };
+      return [{
+        timestamp: parsedContent.timestamp,
+        level: parsedContent.level,
+        message: parsedContent.message,
+        service: parsedContent.service
+      }];
+    }
 
-    reader.readAsText(file);
-  });
-};
+    return [];
+  } catch (error) {
+    // Return empty array for invalid JSON or other errors
+    return [];
+  }
+}
