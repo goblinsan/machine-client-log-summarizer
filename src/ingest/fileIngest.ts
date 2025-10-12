@@ -1,64 +1,33 @@
-import fs from 'fs';
-import path from 'path';
-
-// Define the structure of a normalized log record
-interface LogRecord {
-  timestamp: string;
-  level: string;
-  message: string;
-  service: string;
-}
-
-// Define the structure of a raw log entry (from JSON file)
-interface RawLogEntry {
-  timestamp?: string;
-  level?: string;
-  message?: string;
-  service?: string;
-  [key: string]: any; // Allow for extra fields
-}
-
 /**
- * Reads a JSON file and returns normalized log records.
- * @param filePath - Path to the JSON file
- * @returns Array of normalized log records
+ * Parses a JSON log file content and returns normalized records.
+ * Each line is expected to be a valid JSON object.
+ *
+ * @param content - The raw content of the JSON log file
+ * @returns An array of normalized log records
  */
-export function fileIngest(filePath: string): LogRecord[] {
-  try {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
+export function parseJsonFile(content: string): Record<string, any>[] {
+  if (!content.trim()) {
+    return [];
+  }
 
-    // Parse the JSON content
-    const parsedContent: RawLogEntry | RawLogEntry[] = JSON.parse(fileContent);
+  const lines = content.split('\n');
+  const records: Record<string, any>[] = [];
 
-    // Handle both single object and array of objects
-    const entries = Array.isArray(parsedContent) ? parsedContent : [parsedContent];
+  for (const line of lines) {
+    const trimmedLine = line.trim();
 
-    // Normalize each entry
-    const normalizedRecords: LogRecord[] = [];
-
-    for (const entry of entries) {
-      // Check if required fields are present
-      if (!entry.timestamp || !entry.level || !entry.message || !entry.service) {
-        continue; // Skip invalid entries
-      }
-
-      // Create normalized record with only required fields
-      const normalizedRecord: LogRecord = {
-        timestamp: entry.timestamp,
-        level: entry.level,
-        message: entry.message,
-        service: entry.service
-      };
-
-      normalizedRecords.push(normalizedRecord);
+    if (trimmedLine === '') {
+      continue;
     }
 
-    return normalizedRecords;
-  } catch (error) {
-    if (error instanceof SyntaxError) {
-      throw new Error('Failed to parse JSON');
-    } else {
-      throw new Error('Failed to read file');
+    try {
+      const parsed = JSON.parse(trimmedLine);
+      records.push(parsed);
+    } catch (error) {
+      // Silently ignore malformed JSON lines
+      console.warn(`Skipping malformed JSON line: ${trimmedLine}`);
     }
   }
+
+  return records;
 }

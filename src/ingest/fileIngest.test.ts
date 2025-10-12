@@ -1,158 +1,63 @@
-import { fileIngest } from './fileIngest';
-import fs from 'fs';
-import path from 'path';
+import { describe, it, expect } from 'vitest';
+import { parseJsonFile } from './fileIngest';
 
-jest.mock('fs');
+describe('parseJsonFile', () => {
+  it('should parse a valid JSON log file and normalize records', () => {
+    const mockJsonContent = `{"timestamp": "2023-04-01T10:00:00Z", "level": "INFO", "message": "Application started"}\n{"timestamp": "2023-04-01T11:00:00Z", "level": "ERROR", "message": "Database connection failed"}`;
 
-describe('fileIngest', () => {
-  const mockFileContent = JSON.stringify({
-    timestamp: '2023-01-01T00:00:00Z',
-    level: 'info',
-    message: 'Test log entry',
-    service: 'test-service'
-  });
-
-  const mockFileContentWithExtraFields = JSON.stringify({
-    timestamp: '2023-01-01T00:00:00Z',
-    level: 'error',
-    message: 'Another test log entry',
-    service: 'test-service-2',
-    extraField: 'extraValue'
-  });
-
-  const mockFileContentWithInvalidJson = '{ invalid json }';
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should read a single JSON file and return normalized records', () => {
-    const mockFilePath = '/mock/path/file.json';
-
-    (fs.readFile as jest.Mock).mockImplementationOnce(
-      (filePath: string, encoding: string, callback: Function) => {
-        callback(null, mockFileContent);
-      }
-    );
-
-    const result = fileIngest(mockFilePath);
+    const result = parseJsonFile(mockJsonContent);
 
     expect(result).toEqual([
       {
-        timestamp: '2023-01-01T00:00:00Z',
-        level: 'info',
-        message: 'Test log entry',
-        service: 'test-service'
-      }
-    ]);
-  });
-
-  it('should handle extra fields in JSON', () => {
-    const mockFilePath = '/mock/path/file2.json';
-
-    (fs.readFile as jest.Mock).mockImplementationOnce(
-      (filePath: string, encoding: string, callback: Function) => {
-        callback(null, mockFileContentWithExtraFields);
-      }
-    );
-
-    const result = fileIngest(mockFilePath);
-
-    expect(result).toEqual([
-      {
-        timestamp: '2023-01-01T00:00:00Z',
-        level: 'error',
-        message: 'Another test log entry',
-        service: 'test-service-2'
-      }
-    ]);
-  });
-
-  it('should throw an error for invalid JSON', () => {
-    const mockFilePath = '/mock/path/invalid.json';
-
-    (fs.readFile as jest.Mock).mockImplementationOnce(
-      (filePath: string, encoding: string, callback: Function) => {
-        callback(null, mockFileContentWithInvalidJson);
-      }
-    );
-
-    expect(() => fileIngest(mockFilePath)).toThrow('Failed to parse JSON');
-  });
-
-  it('should throw an error for file read errors', () => {
-    const mockFilePath = '/mock/path/error.json';
-
-    (fs.readFile as jest.Mock).mockImplementationOnce(
-      (filePath: string, encoding: string, callback: Function) => {
-        callback(new Error('File read error'), null);
-      }
-    );
-
-    expect(() => fileIngest(mockFilePath)).toThrow('Failed to read file');
-  });
-
-  it('should handle multiple JSON entries in one file', () => {
-    const mockFilePath = '/mock/path/multi.json';
-
-    const multiEntryContent = `[${mockFileContent}, ${mockFileContentWithExtraFields}]`;
-
-    (fs.readFile as jest.Mock).mockImplementationOnce(
-      (filePath: string, encoding: string, callback: Function) => {
-        callback(null, multiEntryContent);
-      }
-    );
-
-    const result = fileIngest(mockFilePath);
-
-    expect(result).toEqual([
-      {
-        timestamp: '2023-01-01T00:00:00Z',
-        level: 'info',
-        message: 'Test log entry',
-        service: 'test-service'
+        timestamp: "2023-04-01T10:00:00Z",
+        level: "INFO",
+        message: "Application started"
       },
       {
-        timestamp: '2023-01-01T00:00:00Z',
-        level: 'error',
-        message: 'Another test log entry',
-        service: 'test-service-2'
+        timestamp: "2023-04-01T11:00:00Z",
+        level: "ERROR",
+        message: "Database connection failed"
       }
     ]);
   });
 
-  it('should filter out records with missing required fields', () => {
-    const mockFilePath = '/mock/path/missing.json';
+  it('should handle malformed JSON lines gracefully', () => {
+    const mockJsonContent = `{"timestamp": "2023-04-01T10:00:00Z", "level": "INFO"}\n{"malformed": json}\n{"timestamp": "2023-04-01T11:00:00Z", "level": "ERROR", "message": "Error occurred"}`;
 
-    const invalidEntryContent = JSON.stringify({
-      timestamp: '2023-01-01T00:00:00Z',
-      level: 'info'
-      // missing message and service fields
-    });
-
-    const validEntryContent = JSON.stringify({
-      timestamp: '2023-01-01T00:00:00Z',
-      level: 'info',
-      message: 'Valid entry',
-      service: 'valid-service'
-    });
-
-    const multiEntryContent = `[${invalidEntryContent}, ${validEntryContent}]`;
-
-    (fs.readFile as jest.Mock).mockImplementationOnce(
-      (filePath: string, encoding: string, callback: Function) => {
-        callback(null, multiEntryContent);
-      }
-    );
-
-    const result = fileIngest(mockFilePath);
+    const result = parseJsonFile(mockJsonContent);
 
     expect(result).toEqual([
       {
-        timestamp: '2023-01-01T00:00:00Z',
-        level: 'info',
-        message: 'Valid entry',
-        service: 'valid-service'
+        timestamp: "2023-04-01T10:00:00Z",
+        level: "INFO"
+      },
+      {
+        timestamp: "2023-04-01T11:00:00Z",
+        level: "ERROR",
+        message: "Error occurred"
+      }
+    ]);
+  });
+
+  it('should return an empty array for empty input', () => {
+    const result = parseJsonFile('');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle multiple newlines and whitespace', () => {
+    const mockJsonContent = `\n\n{"timestamp": "2023-04-01T10:00:00Z", "level": "INFO"}\n\n{"timestamp": "2023-04-01T11:00:00Z", "level": "ERROR"}\n\n`;
+
+    const result = parseJsonFile(mockJsonContent);
+
+    expect(result).toEqual([
+      {
+        timestamp: "2023-04-01T10:00:00Z",
+        level: "INFO"
+      },
+      {
+        timestamp: "2023-04-01T11:00:00Z",
+        level: "ERROR"
       }
     ]);
   });
