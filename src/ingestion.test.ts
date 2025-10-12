@@ -1,5 +1,8 @@
+/**
+ * Test suite for ingestion functionality
+ */
 import { describe, it, expect } from '@jest/globals';
-import { readJSONFile } from './ingestion';
+import { readJSONFile, normalizeRecord } from './ingestion';
 
 /**
  * Test suite for ingestion functionality
@@ -102,5 +105,35 @@ describe('Ingestion functionality', () => {
 
     // Restore original FileReader
     global.FileReader = originalFileReader;
+  });
+
+  describe('normalizeRecord function', () => {
+    it('should normalize timestamp to ISO string', () => {
+      const input = { timestamp: '2023-01-01T00:00:00Z', message: 'test' };
+      const result = normalizeRecord(input);
+
+      expect(result.timestamp).toBe('2023-01-01T00:00:00.000Z');
+    });
+
+    it('should normalize message to string', () => {
+      const input = { timestamp: '2023-01-01T00:00:00Z', message: 123 };
+      const result = normalizeRecord(input);
+
+      expect(result.message).toBe('123');
+    });
+
+    it('should handle null and undefined values', () => {
+      const input = { timestamp: '2023-01-01T00:00:00Z', message: null, other: undefined };
+      const result = normalizeRecord(input);
+
+      expect(result).toEqual({ timestamp: '2023-01-01T00:00:00.000Z' });
+    });
+
+    it('should return non-object inputs as-is', () => {
+      const input = 'not an object';
+      const result = normalizeRecord(input);
+
+      expect(result).toBe('not an object');
+    });
   });
 });

@@ -44,7 +44,29 @@ export const readJSONFile = (file: File): Promise<any> => {
 export const normalizeRecord = (record: any): any => {
   // Example normalization logic - in a real implementation,
   // this would transform the record to a standardized format
-  // For now, we'll just return the record as-is for demonstration
+  if (record && typeof record === 'object') {
+    // Normalize timestamp field if present
+    if (record.timestamp) {
+      record.timestamp = new Date(record.timestamp).toISOString();
+    }
+
+    // Normalize message field if present
+    if (record.message) {
+      record.message = String(record.message);
+    }
+
+    // Ensure all fields are properly typed and formatted
+    const normalized = {};
+    Object.keys(record).forEach(key => {
+      if (record[key] !== null && record[key] !== undefined) {
+        normalized[key] = record[key];
+      }
+    });
+
+    return normalized;
+  }
+
+  // Return record as-is if not an object
   return record;
 };
 
