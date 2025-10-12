@@ -1,82 +1,159 @@
-import { describe, it, expect, vi } from 'vitest';
-import { readAndNormalizeJsonFile } from './fileIngest';
+import { fileIngest } from './fileIngest';
+import fs from 'fs';
+import path from 'path';
 
-// Mock file system operations
-vi.mock('fs', () => ({
-  readFileSync: vi.fn(),
-}));
+jest.mock('fs');
 
-describe('readAndNormalizeJsonFile', () => {
-  it('should parse and normalize valid JSON file content', () => {
-    const mockContent = JSON.stringify({
-      logs: [
-        { timestamp: '2023-01-01T00:00:00Z', level: 'INFO', message: 'Test log entry' },
-        { timestamp: '2023-01-01T01:00:00Z', level: 'ERROR', message: 'Another error' }
-      ]
-    });
+describe('fileIngest', () => {
+  const mockFileContent = JSON.stringify({
+    timestamp: '2023-01-01T00:00:00Z',
+    level: 'info',
+    message: 'Test log entry',
+    service: 'test-service'
+  });
 
-    const mockReadFileSync = vi.fn().mockReturnValue(mockContent);
-    vi.spyOn(require('fs'), 'readFileSync').mockImplementation(mockReadFileSync);
+  const mockFileContentWithExtraFields = JSON.stringify({
+    timestamp: '2023-01-01T00:00:00Z',
+    level: 'error',
+    message: 'Another test log entry',
+    service: 'test-service-2',
+    extraField: 'extraValue'
+  });
 
-    const result = readAndNormalizeJsonFile('mock-path.json');
+  const mockFileContentWithInvalidJson = '{ invalid json }';
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should read a single JSON file and return normalized records', () => {
+    const mockFilePath = '/mock/path/file.json';
+
+    (fs.readFile as jest.Mock).mockImplementationOnce(
+      (filePath: string, encoding: string, callback: Function) => {
+        callback(null, mockFileContent);
+      }
+    );
+
+    const result = fileIngest(mockFilePath);
 
     expect(result).toEqual([
-      { timestamp: '2023-01-01T00:00:00Z', level: 'INFO', message: 'Test log entry' },
-      { timestamp: '2023-01-01T01:00:00Z', level: 'ERROR', message: 'Another error' }
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'info',
+        message: 'Test log entry',
+        service: 'test-service'
+      }
     ]);
-
-    expect(mockReadFileSync).toHaveBeenCalledWith('mock-path.json', 'utf8');
   });
 
-  it('should throw an error for invalid JSON content', () => {
-    const mockContent = '{ invalid json }';
+  it('should handle extra fields in JSON', () => {
+    const mockFilePath = '/mock/path/file2.json';
 
-    const mockReadFileSync = vi.fn().mockReturnValue(mockContent);
-    vi.spyOn(require('fs'), 'readFileSync').mockImplementation(mockReadFileSync);
+    (fs.readFile as jest.Mock).mockImplementationOnce(
+      (filePath: string, encoding: string, callback: Function) => {
+        callback(null, mockFileContentWithExtraFields);
+      }
+    );
 
-    expect(() => readAndNormalizeJsonFile('mock-path.json')).toThrow('Failed to parse JSON');
+    const result = fileIngest(mockFilePath);
+
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'error',
+        message: 'Another test log entry',
+        service: 'test-service-2'
+      }
+    ]);
   });
 
-  it('should handle missing file gracefully', () => {
-    const mockReadFileSync = vi.fn().mockImplementation(() => {
-      throw new Error('File not found');
+  it('should throw an error for invalid JSON', () => {
+    const mockFilePath = '/mock/path/invalid.json';
+
+    (fs.readFile as jest.Mock).mockImplementationOnce(
+      (filePath: string, encoding: string, callback: Function) => {
+        callback(null, mockFileContentWithInvalidJson);
+      }
+    );
+
+    expect(() => fileIngest(mockFilePath)).toThrow('Failed to parse JSON');
+  });
+
+  it('should throw an error for file read errors', () => {
+    const mockFilePath = '/mock/path/error.json';
+
+    (fs.readFile as jest.Mock).mockImplementationOnce(
+      (filePath: string, encoding: string, callback: Function) => {
+        callback(new Error('File read error'), null);
+      }
+    );
+
+    expect(() => fileIngest(mockFilePath)).toThrow('Failed to read file');
+  });
+
+  it('should handle multiple JSON entries in one file', () => {
+    const mockFilePath = '/mock/path/multi.json';
+
+    const multiEntryContent = `[${mockFileContent}, ${mockFileContentWithExtraFields}]`;
+
+    (fs.readFile as jest.Mock).mockImplementationOnce(
+      (filePath: string, encoding: string, callback: Function) => {
+        callback(null, multiEntryContent);
+      }
+    );
+
+    const result = fileIngest(mockFilePath);
+
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'info',
+        message: 'Test log entry',
+        service: 'test-service'
+      },
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'error',
+        message: 'Another test log entry',
+        service: 'test-service-2'
+      }
+    ]);
+  });
+
+  it('should filter out records with missing required fields', () => {
+    const mockFilePath = '/mock/path/missing.json';
+
+    const invalidEntryContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info'
+      // missing message and service fields
     });
 
-    vi.spyOn(require('fs'), 'readFileSync').mockImplementation(mockReadFileSync);
-
-    expect(() => readAndNormalizeJsonFile('nonexistent.json')).toThrow('Failed to read file');
-  });
-
-  it('should normalize timestamp format', () => {
-    const mockContent = JSON.stringify({
-      logs: [
-        { timestamp: '2023-01-01 00:00:00', level: 'DEBUG', message: 'Timestamp test' }
-      ]
+    const validEntryContent = JSON.stringify({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'info',
+      message: 'Valid entry',
+      service: 'valid-service'
     });
 
-    const mockReadFileSync = vi.fn().mockReturnValue(mockContent);
-    vi.spyOn(require('fs'), 'readFileSync').mockImplementation(mockReadFileSync);
+    const multiEntryContent = `[${invalidEntryContent}, ${validEntryContent}]`;
 
-    const result = readAndNormalizeJsonFile('mock-path.json');
+    (fs.readFile as jest.Mock).mockImplementationOnce(
+      (filePath: string, encoding: string, callback: Function) => {
+        callback(null, multiEntryContent);
+      }
+    );
 
-    expect(result[0].timestamp).toBe('2023-01-01T00:00:00Z');
-  });
+    const result = fileIngest(mockFilePath);
 
-  it('should filter out invalid log entries', () => {
-    const mockContent = JSON.stringify({
-      logs: [
-        { timestamp: '2023-01-01T00:00:00Z', level: 'INFO', message: 'Valid log' },
-        { timestamp: 'invalid', level: 'ERROR', message: 'Invalid timestamp' },
-        { timestamp: '2023-01-01T02:00:00Z', level: 'WARN', message: undefined }
-      ]
-    });
-
-    const mockReadFileSync = vi.fn().mockReturnValue(mockContent);
-    vi.spyOn(require('fs'), 'readFileSync').mockImplementation(mockReadFileSync);
-
-    const result = readAndNormalizeJsonFile('mock-path.json');
-
-    expect(result).toHaveLength(1);
-    expect(result[0].message).toBe('Valid log');
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'info',
+        message: 'Valid entry',
+        service: 'valid-service'
+      }
+    ]);
   });
 });
