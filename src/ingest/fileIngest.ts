@@ -1,51 +1,50 @@
 /**
- * Processes an array of log files and returns normalized records
- * Each file is expected to contain newline-delimited JSON entries
+ * Parses a JSON log file content and returns normalized records
+ * Each line should contain a valid JSON object with timestamp, level, and message fields
+ * @param fileContent - The content of the JSON log file as a string
+ * @returns Array of normalized log records
  */
+export function fileIngest(fileContent: string): Array<{ timestamp: string; level: string; message: string }> {
+  if (!fileContent || fileContent.trim() === '') {
+    return [];
+  }
 
-export interface LogRecord {
-  timestamp: string
-  level: string
-  message: string
-}
+  const lines = fileContent.split('\n');
+  const records: Array<{ timestamp: string; level: string; message: string }> = [];
 
-/**
- * Processes an array of File objects containing JSON log entries
- * Returns an array of normalized LogRecord objects
- */
-export function processLogFiles(files: File[]): LogRecord[] {
-  const allRecords: LogRecord[] = []
+  for (const line of lines) {
+    const trimmedLine = line.trim();
 
-  for (const file of files) {
-    const reader = new FileReader()
+    // Skip empty lines
+    if (trimmedLine === '') {
+      continue;
+    }
 
-    // Read file content synchronously (this is a simplified approach)
-    const content = reader.readAsText(file)
+    try {
+      // Parse the JSON line
+      const parsedLine = JSON.parse(trimmedLine);
 
-    // For demonstration, we'll simulate the file reading
-    // In a real implementation, this would be handled asynchronously
-    const fileContent = file.name.includes('test') ? 
-      '{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "Test message"}\n{"timestamp": "2023-01-01T01:00:00Z", "level": "ERROR", "message": "Error message"}' : 
-      ''
+      // Validate required fields
+      if (!parsedLine.timestamp || !parsedLine.level || !parsedLine.message) {
+        throw new Error('Missing required fields in log line');
+      }
 
-    const lines = fileContent.split('\n')
+      // Normalize the record by only including timestamp, level, and message
+      records.push({
+        timestamp: parsedLine.timestamp,
+        level: parsedLine.level,
+        message: parsedLine.message
+      });
 
-    for (const line of lines) {
-      if (!line.trim()) continue
-
-      try {
-        const record = JSON.parse(line)
-        allRecords.push({
-          timestamp: record.timestamp,
-          level: record.level,
-          message: record.message
-        })
-      } catch (e) {
-        // Skip invalid JSON entries
-        continue
+    } catch (error) {
+      // Re-throw error with more context
+      if (error instanceof SyntaxError) {
+        throw new Error('Invalid JSON in log line');
+      } else {
+        throw error;
       }
     }
   }
 
-  return allRecords
+  return records;
 }
