@@ -1,55 +1,62 @@
-import fs from 'fs';
-import { readJsonFile, normalizeRecord, processFile } from './fileIngest';
+import { describe, it, expect, vi } from 'vitest';
+import { processFile } from './fileIngest';
 
-jest.mock('fs', () => ({
-  readFileSync: jest.fn(),
-}));
+describe('processFile', () => {
+  it('should parse valid JSON and return normalized records', async () => {
+    const mockFileContent = `{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "Test message"}`;
+    const mockFile = new File([mockFileContent], 'test.json');
 
-describe('fileIngest', () => {
-  const mockData = {
-    timestamp: '2023-01-01T00:00:00Z',
-    level: 'info',
-    message: 'Test log message',
-    service: 'test-service',
-    host: 'localhost'
-  };
+    const result = await processFile(mockFile);
 
-  const mockNormalizedData = {
-    timestamp: '2023-01-01T00:00:00Z',
-    level: 'info',
-    message: 'Test log message',
-    service: 'test-service',
-    host: 'localhost'
-  };
-
-  const mockFileContent = JSON.stringify(mockData);
-
-  beforeEach(() => {
-    jest.clearAllMocks();
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'INFO',
+        message: 'Test message'
+      }
+    ]);
   });
 
-  it('should read and parse JSON file correctly', () => {
-    (fs.readFileSync as jest.Mock).mockReturnValue(mockFileContent);
+  it('should handle multiple JSON objects in file', async () => {
+    const mockFileContent = `{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "First message"}
+{"timestamp": "2023-01-01T01:00:00Z", "level": "ERROR", "message": "Second message"}`;
+    const mockFile = new File([mockFileContent], 'test.json');
 
-    const result = readJsonFile('test.json');
-    expect(result).toEqual(mockData);
+    const result = await processFile(mockFile);
+
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+       level: 'INFO',
+       message: 'First message'
+     },
+      {
+        timestamp: '2023-01-01T01:00:00Z',
+        level: 'ERROR',
+        message: 'Second message'
+      }
+    ]);
   });
 
-  it('should normalize a record correctly', () => {
-    const result = normalizeRecord(mockData);
-    expect(result).toEqual(mockNormalizedData);
+  it('should throw error for invalid JSON', async () => {
+    const mockFileContent = `{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO"`;
+    const mockFile = new File([mockFileContent], 'test.json');
+
+    await expect(processFile(mockFile)).rejects.toThrow('Invalid JSON in file');
   });
 
-  it('should process a file and return normalized records', () => {
-    (fs.readFileSync as jest.Mock).mockReturnValue(mockFileContent);
+  it('should handle missing required fields gracefully', async () => {
+    const mockFileContent = `{"timestamp": "2023-01-01T00:00:00Z", "message": "Test message"}`;
+    const mockFile = new File([mockFileContent], 'test.json');
 
-    const result = processFile('test.json');
-    expect(result).toEqual([mockNormalizedData]);
-  });
+    const result = await processFile(mockFile);
 
-  it('should handle invalid JSON gracefully', () => {
-    (fs.readFileSync as jest.Mock).mockReturnValue('invalid json');
-
-    expect(() => readJsonFile('test.json')).toThrow();
+    expect(result).toEqual([
+      {
+        timestamp: '2023-01-01T00:00:00Z',
+        level: 'UNKNOWN',
+        message: 'Test message'
+      }
+    ]);
   });
 });
