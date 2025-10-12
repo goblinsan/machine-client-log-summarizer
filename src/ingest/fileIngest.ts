@@ -1,60 +1,43 @@
-// fileIngest.ts
-
 import fs from 'fs';
-import { promisify } from 'util';
+import path from 'path';
 
-// Define the structure of a normalized log record
-export interface LogRecord {
+export interface LogEntry {
   timestamp: string;
   level: string;
   message: string;
 }
 
-// Normalize a single log record
-export function normalizeRecord(logLine: any): LogRecord | null {
-  // Validate that the log line has required fields
-  if (!logLine.timestamp || !logLine.level || !logLine.message) {
-    return null;
-  }
-
-  // Return normalized record
-  return {
-    timestamp: logLine.timestamp,
-    level: logLine.level,
-    message: logLine.message,
-  };
-}
-
-// Read and parse JSON logs into normalized records
-export async function fileIngest(filePath: string): Promise<LogRecord[]> {
+export function parseLogContent(content: string): LogEntry[] {
   try {
-    // Read file content
-    const readFile = promisify(fs.readFile);
-    const content = await readFile(filePath, 'utf-8');
-
-    // Split content into lines
-    const lines = content.split('\n').filter(line => line.trim() !== '');
-
-    // Parse each line as JSON and normalize
-    const records: LogRecord[] = [];
-
-    for (const line of lines) {
-      try {
-        const parsed = JSON.parse(line);
-        const normalized = normalizeRecord(parsed);
-
-        if (normalized) {
-          records.push(normalized);
-        }
-      } catch (e) {
-        // Skip invalid JSON lines
-        continue;
-      }
+    const parsed = JSON.parse(content);
+    if (Array.isArray(parsed)) {
+      return parsed.map(entry => ({
+        timestamp: entry.timestamp,
+        level: entry.level,
+        message: entry.message
+      }));
     }
-
-    return records;
+    return [];
   } catch (e) {
-    // Return empty array on file read errors
     return [];
   }
+}
+
+export function readLogFromFile(filePath: string): Promise<LogEntry[]> {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(parseLogContent(data));
+    });
+  });
+}
+
+export function processLogFiles(filePaths: string[]): Promise<LogEntry[]> {
+  const promises = filePaths.map(filePath => readLogFromFile(filePath));
+  return Promise.all(promises).then(results => {
+    return results.flat();
+  });
 }

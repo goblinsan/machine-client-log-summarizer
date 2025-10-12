@@ -1,96 +1,72 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const App = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [ingestionResult, setIngestionResult] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+import { processLogFiles } from './ingest/fileIngest';
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-      processFile(selectedFile);
-    }
-  };
+interface LogEntry {
+  timestamp: string;
+  level: string;
+  message: string;
+}
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const droppedFile = e.dataTransfer.files?.[0];
-    if (droppedFile) {
-      setFile(droppedFile);
-      processFile(droppedFile);
-    }
-  };
+function App() {
+  const [logEntries, setLogEntries] = useState<LogEntry[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-
-  const processFile = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
+  useEffect(() => {
+    const fetchLogData = async () => {
       try {
-        const content = e.target?.result as string;
-        // Simulate parsing logic for JSON files
-        const parsedContent = JSON.parse(content);
-        setIngestionResult(`Processed file: ${file.name}\nParsed content:\n${JSON.stringify(parsedContent, null, 2)}`);
-        setError(null);
-      } catch (err) {
-        setError('Failed to parse file as JSON');
-        setIngestionResult(null);
+        // For demo purposes, we'll simulate loading log files
+        const filePaths = ['mock-log-file.json'];
+        const entries = await processLogFiles(filePaths);
+        setLogEntries(entries);
+      } catch (error) {
+        console.error('Failed to process log files:', error);
+      } finally {
+        setLoading(false);
       }
     };
-    reader.onerror = () => {
-      setError('Failed to read file');
-      setIngestionResult(null);
-    };
-    reader.readAsText(file);
-  };
 
-  const triggerFileSelect = () => {
-    fileInputRef.current?.click();
-  };
+    fetchLogData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading log data...</div>;
+  }
 
   return (
     <div className="app">
-      <h1>Log Summarizer</h1>
-
-      <div
-        className="file-drop-zone"
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onClick={triggerFileSelect}
-      >
-        <p>Drag & drop a file here or click to select</p>
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          style={{ display: 'none' }}
-        />
+      <h1>Machine Client Log Summarizer</h1>
+      <div className="log-entries">
+        {logEntries.map((entry, index) => (
+          <div key={index} className="log-entry">
+            <span className={`level-${entry.level.toLowerCase()}`}>{entry.level}</span>
+            <span className="timestamp">{new Date(entry.timestamp).toLocaleString()}</span>
+            <p className="message">{entry.message}</p>
+          </div>
+        ))}
       </div>
-
-      {file && (
-        <div className="file-info">
-          <p>Selected file: {file.name}</p>
-        </div>
-      )}
-
-      {error && (
-        <div className="error">
-          <p>Error: {error}</p>
-        </div>
-      )}
-
-      {ingestionResult && (
-        <div className="ingestion-result">
-          <h2>Ingestion Result</h2>
-          {ingestionResult}
-       </div>
-     )}
-   </div>
- );
-};
+    </div>
+  );
+}
 
 export default App;
+
+// Mock log file content for testing
+const mockLogContent = `[
+  {
+    "timestamp": "2023-01-01T00:00:00Z",
+    "level": "INFO",
+    "message": "Application started successfully"
+  },
+  {
+    "timestamp": "2023-01-01T00:01:00Z",
+    "level": "ERROR",
+    "message": "Failed to connect to database"
+  }
+]`;
+
+// This would normally be read from actual files
+// For now, we're simulating the file reading process
+const mockLogFiles = {
+  'mock-log-file.json': mockLogContent
+};
