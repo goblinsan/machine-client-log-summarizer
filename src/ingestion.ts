@@ -23,7 +23,8 @@ export const processFile = (file: File): Promise<any> => {
     reader.onload = (e) => {
       const content = e.target?.result as string;
       try {
-        resolve(JSON.parse(content));
+        const parsed = JSON.parse(content);
+        resolve(parsed);
       } catch (error) {
         reject(new Error(`Failed to parse file: ${error instanceof Error ? error.message : 'Unknown error'}`));
       }

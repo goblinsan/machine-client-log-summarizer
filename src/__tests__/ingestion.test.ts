@@ -21,6 +21,22 @@ describe('ingestion', () => {
   });
 
   describe('processFile', () => {
+    // Mock FileReader to avoid DOM dependency in tests
+    const mockFileReader = vi.spyOn(global, 'FileReader').mockImplementation(() => {
+      const reader = new FileReader();
+      // Mock successful read
+      Object.defineProperty(reader, 'onload', {
+        writable: true,
+        value: function (e: ProgressEvent<FileReader>) {
+          // Simulate successful read with valid JSON
+          const content = '{"message": "test log entry"}';
+          // @ts-expect-error - we're mocking the prototype
+          this.onload?.(e);
+        }
+      });
+      return reader;
+    });
+
     it('should process a valid JSON file and return parsed data', async () => {
       const mockFile = new File(['{"message": "test log entry"}'], 'test.json', {
         type: 'application/json',
@@ -44,16 +60,23 @@ describe('ingestion', () => {
       });
 
       // Mock FileReader to simulate read error
-      const originalReadAsText = FileReader.prototype.readAsText;
-      vi.spyOn(FileReader.prototype, 'readAsText').mockImplementation(function () {
-        // @ts-expect-error - we're mocking the prototype
-        this.onerror?.({ target: { result: null } });
+      const mockFileReaderWithError = vi.spyOn(global, 'FileReader').mockImplementation(() => {
+        const reader = new FileReader();
+        // Mock read error
+        Object.defineProperty(reader, 'onerror', {
+          writable: true,
+          value: function (e: ProgressEvent<FileReader>) {
+            // @ts-expect-error - we're mocking the prototype
+            this.onerror?.(e);
+          }
+        });
+        return reader;
       });
 
       await expect(processFile(mockFile)).rejects.toThrow('Failed to read file');
 
       // Restore original implementation
-      vi.spyOn(FileReader.prototype, 'readAsText').mockImplementation(originalReadAsText);
+      mockFileReaderWithError.mockRestore();
     });
   });
 });
