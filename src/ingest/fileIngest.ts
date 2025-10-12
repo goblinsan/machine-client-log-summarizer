@@ -1,50 +1,55 @@
-/**
- * Parses a JSON log file content and returns normalized records
- * Each line should contain a valid JSON object with timestamp, level, and message fields
- * @param fileContent - The content of the JSON log file as a string
- * @returns Array of normalized log records
- */
-export function fileIngest(fileContent: string): Array<{ timestamp: string; level: string; message: string }> {
-  if (!fileContent || fileContent.trim() === '') {
-    return [];
+export interface LogRecord {
+  timestamp?: string
+  level?: string
+  message?: string
+  service?: string
+}
+
+export function processFileContent(content: string): LogRecord[] {
+  if (!content || typeof content !== 'string') {
+    return []
   }
 
-  const lines = fileContent.split('\n');
-  const records: Array<{ timestamp: string; level: string; message: string }> = [];
+  let parsedContent: unknown
+  try {
+    parsedContent = JSON.parse(content)
+  } catch (error) {
+    // Return empty array if content is not valid JSON
+    return []
+  }
 
-  for (const line of lines) {
-    const trimmedLine = line.trim();
+  // Handle single object case
+  if (parsedContent && typeof parsedContent === 'object' && !Array.isArray(parsedContent)) {
+    return [normalizeRecord(parsedContent as Record<string, unknown>)]
+  }
 
-    // Skip empty lines
-    if (trimmedLine === '') {
-      continue;
-    }
+  // Handle array case
+  if (Array.isArray(parsedContent)) {
+    return parsedContent
+      .map(item => {
+        if (typeof item === 'object' && item !== null) {
+          return normalizeRecord(item as Record<string, unknown>)
+        }
+        return null
+      })
+      .filter(Boolean) as LogRecord[]
+  }
 
-    try {
-      // Parse the JSON line
-      const parsedLine = JSON.parse(trimmedLine);
+  // Return empty array for any other case
+  return []
+}
 
-      // Validate required fields
-      if (!parsedLine.timestamp || !parsedLine.level || !parsedLine.message) {
-        throw new Error('Missing required fields in log line');
-      }
+function normalizeRecord(record: Record<string, unknown>): LogRecord {
+  const normalized: LogRecord = {}
 
-      // Normalize the record by only including timestamp, level, and message
-      records.push({
-        timestamp: parsedLine.timestamp,
-        level: parsedLine.level,
-        message: parsedLine.message
-      });
+  for (const [key, value] of Object.entries(record)) {
+    const normalizedKey = key.toLowerCase()
 
-    } catch (error) {
-      // Re-throw error with more context
-      if (error instanceof SyntaxError) {
-        throw new Error('Invalid JSON in log line');
-      } else {
-        throw error;
-      }
+    // Only include known fields
+    if (['timestamp', 'level', 'message', 'service'].includes(normalizedKey)) {
+      normalized[normalizedKey as keyof LogRecord] = value as string
     }
   }
 
-  return records;
+  return normalized
 }

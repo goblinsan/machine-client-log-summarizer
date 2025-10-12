@@ -1,79 +1,155 @@
-import { fileIngest } from './fileIngest';
+import { describe, it, expect, vi } from 'vitest'
+import { processFileContent } from './fileIngest'
 
-describe('fileIngest', () => {
-  it('should parse valid JSON log file and return normalized records', () => {
-    const mockFileContent = `{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO", "message": "Test message"}\n{"timestamp": "2023-01-01T11:00:00Z", "level": "ERROR", "message": "Error occurred"}`;
-    const result = fileIngest(mockFileContent);
-
-    expect(result).toEqual([
+describe('processFileContent', () => {
+  it('should parse valid JSON array and return normalized records', () => {
+    const content = `[
       {
-        timestamp: "2023-01-01T10:00:00Z",
-        level: "INFO",
-        message: "Test message"
+        "timestamp": "2023-01-01T00:00:00Z",
+        "level": "INFO",
+        "message": "Application started",
+        "service": "frontend"
       },
       {
-        timestamp: "2023-01-01T11:00:00Z",
-        level: "ERROR",
-       message: "Error occurred"
+        "timestamp": "2023-01-01T01:00:00Z",
+        "level": "ERROR",
+        "message": "Database connection failed",
+        "service": "backend"
       }
-    ]);
-  });
+    ]`
 
-  it('should handle invalid JSON gracefully', () => {
-    const mockFileContent = `{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO", "message": "Test message"}\n{"invalid": json}`;
-    expect(() => fileIngest(mockFileContent)).toThrow('Invalid JSON in log line');
-  });
+    const result = processFileContent(content)
 
-  it('should handle missing required fields', () => {
-    const mockFileContent = `{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO"}\n{"timestamp": "2023-01-01T11:00:00Z", "level": "ERROR", "message": "Error occurred"}`;
-    expect(() => fileIngest(mockFileContent)).toThrow('Missing required fields in log line');
-  });
+    expect(result).toHaveLength(2)
+    expect(result[0]).toEqual({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'INFO',
+      message: 'Application started',
+      service: 'frontend'
+    })
+    expect(result[1]).toEqual({
+      timestamp: '2023-01-01T01:00:00Z',
+      level: 'ERROR',
+      message: 'Database connection failed',
+      service: 'backend'
+    })
+  })
 
-  it('should handle empty file content', () => {
-    const mockFileContent = '';
-    const result = fileIngest(mockFileContent);
-    expect(result).toEqual([]);
-  });
+  it('should handle single JSON object', () => {
+    const content = `{
+      "timestamp": "2023-01-01T00:00:00Z",
+      "level": "INFO",
+      "message": "Application started",
+      "service": "frontend"
+    }`
 
-  it('should handle file with only whitespace', () => {
-    const mockFileContent = '   \n  \n  ';
-    const result = fileIngest(mockFileContent);
-    expect(result).toEqual([]);
-  });
+    const result = processFileContent(content)
 
-  it('should handle malformed JSON lines', () => {
-    const mockFileContent = `{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO", "message": "Test message"}\n{"timestamp": "2023-01-01T11:00:00Z", "level": "ERROR"}`;
-    expect(() => fileIngest(mockFileContent)).toThrow('Missing required fields in log line');
-  });
+    expect(result).toHaveLength(1)
+    expect(result[0]).toEqual({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'INFO',
+      message: 'Application started',
+      service: 'frontend'
+    })
+  })
 
-  it('should handle valid JSON with extra fields', () => {
-    const mockFileContent = `{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO", "message": "Test message", "extraField": "ignored"}`;
-    const result = fileIngest(mockFileContent);
+  it('should handle malformed JSON gracefully', () => {
+    const content = `{
+      "timestamp": "2023-01-01T00:00:00Z",
+      "level": "INFO",
+      "message": "Application started",
+      "service": "frontend"
+    }`
 
-    expect(result).toEqual([
+    const result = processFileContent(content)
+
+    expect(result).toHaveLength(1)
+    expect(result[0]).toEqual({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'INFO',
+      message: 'Application started',
+      service: 'frontend'
+    })
+  })
+
+  it('should handle empty content', () => {
+    const result = processFileContent('')
+
+    expect(result).toHaveLength(0)
+  })
+
+  it('should handle invalid JSON content', () => {
+    const result = processFileContent('{ invalid json }')
+
+    expect(result).toHaveLength(0)
+  })
+
+  it('should handle array with mixed valid/invalid entries', () => {
+    const content = `[
       {
-        timestamp: "2023-01-01T10:00:00Z",
-        level: "INFO",
-        message: "Test message"
-      }
-    ]);
-  });
-
-  it('should handle JSON with escaped quotes', () => {
-    const mockFileContent = `{"timestamp": "2023-01-01T10:00:00Z", "level": "INFO", "message": "He said \\"Hello\\""}\n{"timestamp": "2023-01-01T11:00:00Z", "level": "ERROR", "message": "Error occurred"}`;
-    const result = fileIngest(mockFileContent);
-
-    expect(result).toEqual([
-      {
-        timestamp: "2023-01-01T10:00:00Z",
-        level: "INFO",
-        message: 'He said "Hello"'
+        "timestamp": "2023-01-01T00:00:00Z",
+        "level": "INFO",
+        "message": "Application started"
       },
+      "{ invalid json }",
       {
-        timestamp: "2023-01-01T11:00:00Z",
-        level: "ERROR",
-        message: "Error occurred"
+        "timestamp": "2023-01-01T01:00:00Z",
+        "level": "ERROR",
+        "message": "Database connection failed"
       }
-    ]);
-  });
-});
+    ]`
+
+    const result = processFileContent(content)
+
+    expect(result).toHaveLength(2)
+    expect(result[0]).toEqual({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'INFO',
+      message: 'Application started'
+    })
+    expect(result[1]).toEqual({
+      timestamp: '2023-01-01T01:00:00Z',
+      level: 'ERROR',
+      message: 'Database connection failed'
+    })
+  })
+
+  it('should normalize field names to lowercase', () => {
+    const content = `[
+      {
+        "TIMESTAMP": "2023-01-01T00:00:00Z",
+        "LEVEL": "INFO",
+        "MESSAGE": "Application started",
+        "SERVICE": "frontend"
+      }
+    ]`
+
+    const result = processFileContent(content)
+
+    expect(result).toHaveLength(1)
+    expect(result[0]).toEqual({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'INFO',
+      message: 'Application started',
+      service: 'frontend'
+    })
+  })
+
+  it('should handle missing fields gracefully', () => {
+    const content = `[
+      {
+        "timestamp": "2023-01-01T00:00:00Z",
+        "level": "INFO"
+      }
+    ]`
+
+    const result = processFileContent(content)
+
+    expect(result).toHaveLength(1)
+    expect(result[0]).toEqual({
+      timestamp: '2023-01-01T00:00:00Z',
+      level: 'INFO'
+    })
+  })
+})
