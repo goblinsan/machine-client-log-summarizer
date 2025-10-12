@@ -1,36 +1,55 @@
-import { fileIngest } from './fileIngest';
+import fs from 'fs';
+import { readJsonFile, normalizeRecord, processFile } from './fileIngest';
+
+jest.mock('fs', () => ({
+  readFileSync: jest.fn(),
+}));
 
 describe('fileIngest', () => {
-  it('should parse valid JSON logs and return normalized records', async () => {
-    const mockValidLog = `{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "Test log entry"}
-{"timestamp": "2023-01-01T01:00:00Z", "level": "ERROR", "message": "Another test log entry"}
-{"timestamp": "2023-01-01T02:00:00Z", "level": "DEBUG", "message": "Debug log entry"}`;
+  const mockData = {
+    timestamp: '2023-01-01T00:00:00Z',
+    level: 'info',
+    message: 'Test log message',
+    service: 'test-service',
+    host: 'localhost'
+  };
 
-    const result = await fileIngest('mockValidLog');
-    expect(result).toEqual([
-      { timestamp: '2023-01-01T00:00:00Z', level: 'INFO', message: 'Test log entry' },
-      { timestamp: '2023-01-01T01:00:00Z', level: 'ERROR', message: 'Another test log entry' },
-      { timestamp: '2023-01-01T02:00:00Z', level: 'DEBUG', message: 'Debug log entry' },
-    ]);
+  const mockNormalizedData = {
+    timestamp: '2023-01-01T00:00:00Z',
+    level: 'info',
+    message: 'Test log message',
+    service: 'test-service',
+    host: 'localhost'
+  };
+
+  const mockFileContent = JSON.stringify(mockData);
+
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('should handle invalid JSON logs gracefully', async () => {
-    const mockInvalidLog = `{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "Test log entry"}
-{"timestamp": "2023-01-01T01:00:00Z", "level": "ERROR", "message": "Another test log entry"}`;
+  it('should read and parse JSON file correctly', () => {
+    (fs.readFileSync as jest.Mock).mockReturnValue(mockFileContent);
 
-    const result = await fileIngest('mockInvalidLog');
-    expect(result).toEqual([]);
+    const result = readJsonFile('test.json');
+    expect(result).toEqual(mockData);
   });
 
-  it('should handle empty log files gracefully', async () => {
-    const mockEmptyLog = ``;
-
-    const result = await fileIngest('mockEmptyLog');
-    expect(result).toEqual([]);
+  it('should normalize a record correctly', () => {
+    const result = normalizeRecord(mockData);
+    expect(result).toEqual(mockNormalizedData);
   });
 
-  it('should handle file not found errors', async () => {
-    const result = await fileIngest('nonexistent.log');
-    expect(result).toEqual([]);
+  it('should process a file and return normalized records', () => {
+    (fs.readFileSync as jest.Mock).mockReturnValue(mockFileContent);
+
+    const result = processFile('test.json');
+    expect(result).toEqual([mockNormalizedData]);
+  });
+
+  it('should handle invalid JSON gracefully', () => {
+    (fs.readFileSync as jest.Mock).mockReturnValue('invalid json');
+
+    expect(() => readJsonFile('test.json')).toThrow();
   });
 });
