@@ -1,30 +1,24 @@
-import fs from 'fs';
-import path from 'path';
+import { processLogFile } from './fileIngest';
 
-import { processFileWithSummary } from './fileIngest';
-
-/**
- * Process a file and return its log summary
- */
-export async function processFile(filePath: string): Promise<any> {
-  return await processFileWithSummary(filePath);
+export interface ProcessedLogFile {
+  fileName: string;
+  fileSize: number;
+  parsedContent: {
+    timestamp: string;
+    level: string;
+    message: string;
+  }[];
 }
 
-/**
- * Process multiple files and return their summaries
- */
-export async function processFiles(filePaths: string[]): Promise<any[]> {
-  const summaries: any[] = [];
+export async function processLogFiles(filePaths: string[]): Promise<ProcessedLogFile[]> {
+  try {
+    // Process files in parallel for better performance
+    const results = await Promise.all(
+      filePaths.map(filePath => processLogFile(filePath))
+    );
 
-  for (const filePath of filePaths) {
-    try {
-      const summary = await processFileWithSummary(filePath);
-      summaries.push(summary);
-    } catch (error) {
-      console.error(`Error processing file ${filePath}:`, error);
-      // Optionally continue with other files or throw the error
-    }
+    return results;
+  } catch (error) {
+    throw new Error(`Failed to process log files: ${(error as Error).message}`);
   }
-
-  return summaries;
 }

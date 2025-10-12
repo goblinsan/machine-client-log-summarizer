@@ -1,45 +1,53 @@
-export interface LogRecord {
+import { promises as fs } from 'fs';
+
+export interface LogEntry {
   timestamp: string;
   level: string;
   message: string;
 }
 
-export interface IngestionResult {
-  records: LogRecord[];
+export interface ProcessedLogFile {
+  fileName: string;
+  fileSize: number;
+  parsedContent: LogEntry[];
 }
 
-export async function processFile(file: File): Promise<LogRecord[]> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+export async function processLogFile(filePath: string): Promise<ProcessedLogFile> {
+  try {
+    const fileContent = await fs.readFile(filePath, 'utf8');
+    const stats = await fs.stat(filePath);
 
-    reader.onload = function (e) {
-      try {
-        const content = e.target?.result as string;
-        const parsed = JSON.parse(content);
+    // Split content into lines and filter out empty lines
+    const lines = fileContent.split('\n').filter(line => line.trim() !== '');
 
-        if (!Array.isArray(parsed.records)) {
-          resolve([]);
-          return;
-        }
+    // Parse each line into log entries
+    const parsedContent: LogEntry[] = lines.map(line => {
+      // Match timestamp, level and message
+      const logEntryRegex = /^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\s+(\w+)\s+(.*)$/;
+      const match = line.match(logEntryRegex);
 
-        const normalizedRecords = parsed.records.map((record: any) => ({
-          timestamp: record.timestamp || '',
-          level: record.level || '',
-          message: record.message || ''
-        }));
-
-        resolve(normalizedRecords);
-      } catch (error) {
-        // Log error or handle gracefully
-        resolve([]);
+      if (match) {
+        return {
+          timestamp: match[1],
+          level: match[2],
+          message: match[3] || '',
+        };
+      } else {
+        // If line doesn't match expected format, treat as invalid log entry
+        return {
+          timestamp: line,
+          level: 'UNKNOWN',
+          message: '',
+        };
       }
-    };
+    });
 
-    reader.onerror = function () {
-      // Handle file reading errors
-      resolve([]);
+    return {
+      fileName: filePath,
+      fileSize: stats.size,
+      parsedContent,
     };
-
-    reader.readAsText(file);
-  });
+  } catch (error) {
+    throw new Error(`Failed to process log file ${filePath}: ${(error as Error).message}`);
+  }
 }
