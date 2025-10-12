@@ -1,36 +1,60 @@
-import fs from 'fs';
+// fileIngest.ts
 
+import fs from 'fs';
+import { promisify } from 'util';
+
+// Define the structure of a normalized log record
 export interface LogRecord {
   timestamp: string;
   level: string;
   message: string;
 }
 
-/**
- * Reads a JSON file and returns normalized log records.
- *
- * @param filePath - Path to the JSON file containing log entries
- * @returns Array of normalized log records
- */
-export function readJsonFile(filePath: string): LogRecord[] {
+// Normalize a single log record
+export function normalizeRecord(logLine: any): LogRecord | null {
+  // Validate that the log line has required fields
+  if (!logLine.timestamp || !logLine.level || !logLine.message) {
+    return null;
+  }
+
+  // Return normalized record
+  return {
+    timestamp: logLine.timestamp,
+    level: logLine.level,
+    message: logLine.message,
+  };
+}
+
+// Read and parse JSON logs into normalized records
+export async function fileIngest(filePath: string): Promise<LogRecord[]> {
   try {
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const parsedData = JSON.parse(fileContent);
+    // Read file content
+    const readFile = promisify(fs.readFile);
+    const content = await readFile(filePath, 'utf-8');
 
-    if (!Array.isArray(parsedData)) {
-      throw new Error('Invalid JSON in file: expected array of log records');
+    // Split content into lines
+    const lines = content.split('\n').filter(line => line.trim() !== '');
+
+    // Parse each line as JSON and normalize
+    const records: LogRecord[] = [];
+
+    for (const line of lines) {
+      try {
+        const parsed = JSON.parse(line);
+        const normalized = normalizeRecord(parsed);
+
+        if (normalized) {
+          records.push(normalized);
+        }
+      } catch (e) {
+        // Skip invalid JSON lines
+        continue;
+      }
     }
 
-    // Normalize each record to ensure required fields exist
-    return parsedData.map((record: any) => ({
-      timestamp: record.timestamp || '',
-      level: record.level || '',
-      message: record.message || '',
-    }));
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`Failed to read or parse JSON file: ${error.message}`);
-    }
-    throw new Error('Failed to read or parse JSON file');
+    return records;
+  } catch (e) {
+    // Return empty array on file read errors
+    return [];
   }
 }

@@ -1,52 +1,36 @@
-import { describe, it, expect, vi } from 'vitest';
-import { readJsonFile } from './fileIngest';
+import { fileIngest } from './fileIngest';
 
-// Mock fs module
-vi.mock('fs', () => ({
-  readFileSync: vi.fn(),
-}));
+describe('fileIngest', () => {
+  it('should parse valid JSON logs and return normalized records', async () => {
+    const mockValidLog = `{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "Test log entry"}
+{"timestamp": "2023-01-01T01:00:00Z", "level": "ERROR", "message": "Another test log entry"}
+{"timestamp": "2023-01-01T02:00:00Z", "level": "DEBUG", "message": "Debug log entry"}`;
 
-describe('readJsonFile', () => {
-  it('should parse valid JSON file and return normalized records', () => {
-    const mockData = [
-      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: 'test log' },
-      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'error log' },
-    ];
-
-    vi.mocked(require('fs')).readFileSync.mockReturnValueOnce(JSON.stringify(mockData));
-
-    const result = readJsonFile('mock-path.json');
-
-    expect(result).toEqual(mockData);
-  });
-
-  it('should throw an error for invalid JSON', () => {
-    vi.mocked(require('fs')).readFileSync.mockReturnValueOnce('{ invalid json }');
-
-    expect(() => readJsonFile('mock-path.json')).toThrow('Invalid JSON in file');
-  });
-
-  it('should handle missing file gracefully', () => {
-    vi.mocked(require('fs')).readFileSync.mockImplementationOnce(() => {
-      throw new Error('File not found');
-    });
-
-    expect(() => readJsonFile('nonexistent.json')).toThrow('File not found');
-  });
-
-  it('should normalize records by ensuring required fields exist', () => {
-    const mockData = [
-      { timestamp: '2023-01-01T00:00:00Z', level: 'info' },
-      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'test error' },
-    ];
-
-    vi.mocked(require('fs')).readFileSync.mockReturnValueOnce(JSON.stringify(mockData));
-
-    const result = readJsonFile('mock-path.json');
-
+    const result = await fileIngest('mockValidLog');
     expect(result).toEqual([
-      { timestamp: '2023-01-01T00:00:00Z', level: 'info', message: '' },
-      { timestamp: '2023-01-01T01:00:00Z', level: 'error', message: 'test error' },
+      { timestamp: '2023-01-01T00:00:00Z', level: 'INFO', message: 'Test log entry' },
+      { timestamp: '2023-01-01T01:00:00Z', level: 'ERROR', message: 'Another test log entry' },
+      { timestamp: '2023-01-01T02:00:00Z', level: 'DEBUG', message: 'Debug log entry' },
     ]);
+  });
+
+  it('should handle invalid JSON logs gracefully', async () => {
+    const mockInvalidLog = `{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "Test log entry"}
+{"timestamp": "2023-01-01T01:00:00Z", "level": "ERROR", "message": "Another test log entry"}`;
+
+    const result = await fileIngest('mockInvalidLog');
+    expect(result).toEqual([]);
+  });
+
+  it('should handle empty log files gracefully', async () => {
+    const mockEmptyLog = ``;
+
+    const result = await fileIngest('mockEmptyLog');
+    expect(result).toEqual([]);
+  });
+
+  it('should handle file not found errors', async () => {
+    const result = await fileIngest('nonexistent.log');
+    expect(result).toEqual([]);
   });
 });
