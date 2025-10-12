@@ -8,7 +8,7 @@ import { File } from 'buffer';
  * @param file - The file to process
  * @returns Promise resolving to parsed JSON object or rejecting with error
  */
-export const processFile = (file: File): Promise<any> => {
+export const readJSONFile = (file: File): Promise<any> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 
@@ -49,16 +49,11 @@ export const normalizeRecord = (record: any): any => {
 };
 
 /**
- * New implementation to read and process JSON files
- * This file is intended to be the new ingestion module that will handle file reading and normalization
+ * Process a file and parse its content as JSON
+ * @param file - The file to process
+ * @returns Promise resolving to parsed JSON object or rejecting with error
  */
-
-/**
- * Read a JSON file and return normalized records
- * @param file - The JSON file to read
- * @returns Promise resolving to normalized records or rejecting with error
- */
-export const readJSONFile = (file: File): Promise<any> => {
+export const processFile = (file: File): Promise<any> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 

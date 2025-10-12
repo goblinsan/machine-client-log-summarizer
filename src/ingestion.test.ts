@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import { processFile } from './fileIngest';
+import { readJSONFile } from './ingestion';
 
 /**
  * Test suite for ingestion functionality
@@ -10,8 +10,8 @@ describe('Ingestion functionality', () => {
       type: 'application/json',
     });
 
-    // Test the actual processFile function
-    const result = await processFile(mockFile);
+    // Test the actual readJSONFile function
+    const result = await readJSONFile(mockFile);
 
     expect(result).toEqual({ test: 'value' });
   });
@@ -22,7 +22,7 @@ describe('Ingestion functionality', () => {
     });
 
     // Test that invalid JSON throws an error
-    await expect(processFile(mockFile)).rejects.toThrow('Failed to parse file as JSON');
+    await expect(readJSONFile(mockFile)).rejects.toThrow('Failed to parse file as JSON');
   });
 
   it('should handle non-JSON files gracefully', async () => {
@@ -31,7 +31,7 @@ describe('Ingestion functionality', () => {
     });
 
     // Test that non-JSON files throw an error
-    await expect(processFile(mockFile)).rejects.toThrow('Failed to parse file as JSON');
+    await expect(readJSONFile(mockFile)).rejects.toThrow('Failed to parse file as JSON');
   });
 
   it('should handle valid JSON with complex structure', async () => {
@@ -39,7 +39,7 @@ describe('Ingestion functionality', () => {
       type: 'application/json',
     });
 
-    const result = await processFile(mockFile);
+    const result = await readJSONFile(mockFile);
 
     expect(result).toEqual({
       logs: [
@@ -56,7 +56,7 @@ describe('Ingestion functionality', () => {
       type: 'application/json',
     });
 
-    const result = await processFile(mockFile);
+    const result = await readJSONFile(mockFile);
 
     expect(result).toEqual({});
   });
@@ -66,7 +66,7 @@ describe('Ingestion functionality', () => {
       type: 'application/json',
     });
 
-    const result = await processFile(mockFile);
+    const result = await readJSONFile(mockFile);
 
     // Should return normalized record with consistent structure
     expect(result).toEqual({
@@ -98,7 +98,7 @@ describe('Ingestion functionality', () => {
     // @ts-ignore - we're mocking FileReader for testing purposes
     global.FileReader = jest.fn().mockImplementation(() => mockReader);
 
-    await expect(processFile(mockFile)).rejects.toThrow('Failed to read file');
+    await expect(readJSONFile(mockFile)).rejects.toThrow('Failed to read file');
 
     // Restore original FileReader
     global.FileReader = originalFileReader;
