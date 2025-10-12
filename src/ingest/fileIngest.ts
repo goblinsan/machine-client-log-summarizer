@@ -1,51 +1,73 @@
+import { promises as fs } from 'fs';
+import path from 'path';
+
+/**
+ * Represents a normalized log record
+ */
 export interface LogRecord {
   timestamp: string;
-  level: string;
+  level: 'info' | 'warn' | 'error' | 'debug';
   message: string;
+  source?: string;
+  metadata?: Record<string, unknown>;
 }
 
-export async function processFile(file: File): Promise<LogRecord[]> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+/**
+ * Reads a JSON file and returns normalized log records
+ * @param filePath - Path to the JSON file
+ * @returns Promise resolving to array of normalized log records
+ */
+export async function fileIngest(filePath: string): Promise<LogRecord[]> {
+  try {
+    // Read the file content
+    const fileContent = await fs.readFile(filePath, 'utf-8');
+    
+    // Parse the JSON content
+    const parsedContent = JSON.parse(fileContent);
 
-    reader.onload = (event) => {
-      try {
-        const content = event.target?.result as string;
-        if (!content) {
-          reject(new Error('Empty file content'));
-          return;
-        }
+    // Handle different JSON structures
+    let records: LogRecord[] = [];
 
-        const lines = content.split('\n').filter(line => line.trim() !== '');
-        const records: LogRecord[] = [];
+    if (Array.isArray(parsedContent)) {
+      // If it's an array of log entries
+      records = parsedContent.map(entry => normalizeLogRecord(entry));
+    } else if (typeof parsedContent === 'object') {
+      // If it's a single log entry or object with logs
+      records = [normalizeLogRecord(parsedContent)];
+    } else {
+      // If it's a string or other primitive, treat as single message
+      records = [{
+        timestamp: new Date().toISOString(),
+        level: 'info',
+        message: String(parsedContent)
+      }];
+    }
 
-        for (const line of lines) {
-          try {
-            const parsed = JSON.parse(line.trim());
+    return records;
+  } catch (error) {
+    throw new Error(`Failed to ingest file ${filePath}: ${(error as Error).message}`);
+  }
+}
 
-            // Normalize the record with required fields
-            const normalizedRecord: LogRecord = {
-              timestamp: parsed.timestamp || '',
-              level: parsed.level || 'UNKNOWN',
-              message: parsed.message || ''
-            };
+/**
+ * Normalizes a log record to ensure consistent structure
+ * @param rawRecord - Raw log record from file
+ * @returns Normalized log record
+ */
+function normalizeLogRecord(rawRecord: any): LogRecord {
+  // Ensure required fields exist with defaults
+  const normalizedRecord: LogRecord = {
+    timestamp: rawRecord.timestamp || new Date().toISOString(),
+    level: rawRecord.level || 'info',
+    message: rawRecord.message || '',
+    source: rawRecord.source,
+    metadata: rawRecord.metadata
+  };
 
-            records.push(normalizedRecord);
-          } catch (parseError) {
-            throw new Error('Invalid JSON in file');
-          }
-        }
+  // Validate level
+  if (!['info', 'warn', 'error', 'debug'].includes(normalizedRecord.level)) {
+    normalizedRecord.level = 'info';
+  }
 
-        resolve(records);
-      } catch (error) {
-        reject(error);
-      }
-    };
-
-    reader.onerror = () => {
-      reject(new Error('Failed to read file'));
-    };
-
-    reader.readAsText(file);
-  });
+  return normalizedRecord;
 }
