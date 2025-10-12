@@ -1,71 +1,64 @@
-import { parseLogLine, processFile, isLogFile } from './fileIngest';
+import { processFile, processLogs, processFileWithSummary } from './fileIngest';
+import fs from 'fs';
+import path from 'path';
+import { Summary } from './fileIngest';
 
-describe('parseLogLine', () => {
-  it('should parse valid log line correctly', () => {
-    const line = '2023-01-01T12:00:00.000Z [INFO] - User login successful';
-    const result = parseLogLine(line);
+describe('fileIngest', () => {
+  const mockLogData = [
+    { level: 'info', source: 'app1', timestamp: '2023-01-01T00:00:00Z', message: 'test log 1' },
+    { level: 'error', source: 'app2', timestamp: '2023-01-01T01:00:00Z', message: 'test log 2' },
+    { level: 'debug', source: 'app1', timestamp: '2023-01-01T02:00:00Z', message: 'test log 3' }
+  ];
 
-    expect(result).toEqual({
-      timestamp: '2023-01-01T12:00:00.000Z',
-      level: 'info',
-      message: 'User login successful'
+  const mockSummary: Summary = {
+    totalEntries: 3,
+    entryCounts: { info: 1, error: 1, debug: 1 },
+    levels: ['info', 'error', 'debug'],
+    earliestTimestamp: '2023-01-01T00:00:00Z',
+    latestTimestamp: '2023-01-01T02:00:00Z',
+    sources: ['app1', 'app2']
+  };
+
+  beforeEach(() => {
+    // Mock fs.readFile to return mock log data
+    jest.spyOn(fs, 'readFile').mockImplementation((filePath, encoding, callback) => {
+      const mockData = JSON.stringify(mockLogData);
+      (callback as any)(null, mockData);
     });
   });
 
-  it('should return null for invalid log line', () => {
-    const line = 'Invalid log line';
-    const result = parseLogLine(line);
-
-    expect(result).toBeNull();
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
-  it('should handle different log levels', () => {
-    const line = '2023-01-01T12:00:00.000Z [ERROR] - Database connection failed';
-    const result = parseLogLine(line);
+  it('should process a file and return its logs', async () => {
+    const result = await processFile('mock-file-path');
+    expect(result).toEqual(mockLogData);
+  });
 
-    expect(result).toEqual({
-      timestamp: '2023-01-01T12:00:00.000Z',
-      level: 'error',
-      message: 'Database connection failed'
+  it('should process logs and return a summary', () => {
+    const result = processLogs(mockLogData);
+    expect(result).toEqual(mockSummary);
+  });
+
+  it('should process a file with summary', async () => {
+    const result = await processFileWithSummary('mock-file-path');
+    expect(result).toEqual(mockSummary);
+  });
+
+  it('should handle file processing errors gracefully', async () => {
+    jest.spyOn(fs, 'readFile').mockImplementation((filePath, encoding, callback) => {
+      (callback as any)(new Error('File not found'), null);
     });
+
+    await expect(processFile('mock-file-path')).rejects.toThrow();
   });
 
-  it('should handle milliseconds in timestamp', () => {
-    const line = '2023-01-01T12:00:00.123Z [DEBUG] - Debug message';
-    const result = parseLogLine(line);
-
-    expect(result).toEqual({
-      timestamp: '2023-01-01T12:00:00.123Z',
-      level: 'debug',
-      message: 'Debug message'
+  it('should handle JSON parsing errors gracefully', async () => {
+    jest.spyOn(fs, 'readFile').mockImplementation((filePath, encoding, callback) => {
+      (callback as any)(null, 'invalid json');
     });
-  });
-});
 
-describe('isLogFile', () => {
-  it('should identify log files correctly', () => {
-    expect(isLogFile('app.log')).toBe(true);
-    expect(isLogFile('error.txt')).toBe(true);
-    expect(isLogFile('data.json')).toBe(false);
-  });
-
-  it('should handle case insensitive extensions', () => {
-    expect(isLogFile('app.LOG')).toBe(true);
-    expect(isLogFile('error.TXT')).toBe(true);
-  });
-});
-
-describe('processFile', () => {
-  // Note: These tests would require actual file system access
-  // In a real implementation, we'd mock the fs module or use in-memory files
-
-  it('should handle file not found gracefully', () => {
-    // This would test error handling for missing files
-    expect(true).toBe(true); // Placeholder - actual implementation would test error handling
-  });
-
-  it('should parse multiple log lines correctly', () => {
-    // This would test parsing of multi-line log files
-    expect(true).toBe(true); // Placeholder - actual implementation would test parsing logic
+    await expect(processFile('mock-file-path')).rejects.toThrow();
   });
 });

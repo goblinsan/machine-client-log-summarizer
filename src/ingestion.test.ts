@@ -1,90 +1,52 @@
-import { processLogs, processFileWithSummary } from './ingestion';
-import { LogEntry } from './fileIngest';
+import { processFile, processFiles } from './ingestion';
+import fs from 'fs';
+import path from 'path';
+import { Summary } from './fileIngest';
 
-describe('processLogs', () => {
-  it('should return empty summary for empty logs', () => {
-    const result = processLogs([]);
-    expect(result).toEqual({
-      totalEntries: 0,
-      entryCounts: {},
-      levels: [],
-      earliestTimestamp: null,
-      latestTimestamp: null,
-      sources: []
+describe('ingestion', () => {
+  const mockLogData = [
+    { level: 'info', source: 'app1', timestamp: '2023-01-01T00:00:00Z', message: 'test log 1' },
+    { level: 'error', source: 'app2', timestamp: '2023-01-01T01:00:00Z', message: 'test log 2' },
+    { level: 'debug', source: 'app1', timestamp: '2023-01-01T02:00:00Z', message: 'test log 3' }
+  ];
+
+  const mockSummary: Summary = {
+    totalEntries: 3,
+    entryCounts: { info: 1, error: 1, debug: 1 },
+    levels: ['info', 'error', 'debug'],
+    earliestTimestamp: '2023-01-01T00:00:00Z',
+    latestTimestamp: '2023-01-01T02:00:00Z',
+    sources: ['app1', 'app2']
+  };
+
+  beforeEach(() => {
+    // Mock fs.readFile to return mock log data
+    jest.spyOn(fs, 'readFile').mockImplementation((filePath, encoding, callback) => {
+      const mockData = JSON.stringify(mockLogData);
+      (callback as any)(null, mockData);
     });
   });
 
-  it('should count entries by level', () => {
-    const logs: LogEntry[] = [
-      { timestamp: '2023-01-01T12:00:00.000Z', level: 'info', message: 'test' },
-      { timestamp: '2023-01-01T12:01:00.000Z', level: 'error', message: 'test' },
-      { timestamp: '2023-01-01T12:02:00.000Z', level: 'info', message: 'test' }
-    ];
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
-    const result = processLogs(logs);
-    expect(result.entryCounts).toEqual({
-      info: 2,
-      error: 1
+  it('should process a file and return its summary', async () => {
+    const result = await processFile('mock-file-path');
+    expect(result).toEqual(mockSummary);
+  });
+
+  it('should process multiple files and return their summaries', async () => {
+    const result = await processFiles(['mock-file-path-1', 'mock-file-path-2']);
+    expect(result).toEqual([mockSummary, mockSummary]);
+  });
+
+  it('should handle file processing errors gracefully', async () => {
+    jest.spyOn(fs, 'readFile').mockImplementation((filePath, encoding, callback) => {
+      (callback as any)(new Error('File not found'), null);
     });
-  });
 
-  it('should track timestamps correctly', () => {
-    const logs: LogEntry[] = [
-      { timestamp: '2023-01-01T12:00:00.000Z', level: 'info', message: 'test' },
-      { timestamp: '2023-01-01T12:05:00.000Z', level: 'error', message: 'test' },
-      { timestamp: '2023-01-01T12:01:00.000Z', level: 'warn', message: 'test' }
-    ];
-
-    const result = processLogs(logs);
-    expect(result.earliestTimestamp).toBe('2023-01-01T12:00:00.000Z');
-    expect(result.latestTimestamp).toBe('2023-01-01T12:05:00.000Z');
-  });
-
-  it('should track levels correctly', () => {
-    const logs: LogEntry[] = [
-      { timestamp: '2023-01-01T12:00:00.000Z', level: 'info', message: 'test' },
-      { timestamp: '2023-01-01T12:01:00.000Z', level: 'error', message: 'test' },
-      { timestamp: '2023-01-01T12:02:00.000Z', level: 'debug', message: 'test' }
-    ];
-
-    const result = processLogs(logs);
-    expect(result.levels).toEqual(['info', 'error', 'debug']);
-  });
-
-  it('should handle sources correctly', () => {
-    const logs: LogEntry[] = [
-      { timestamp: '2023-01-01T12:00:00.000Z', level: 'info', message: 'test', source: 'auth' },
-      { timestamp: '2023-01-01T12:01:00.000Z', level: 'error', message: 'test', source: 'auth' },
-      { timestamp: '2023-01-01T12:02:00.000Z', level: 'warn', message: 'test', source: 'db' }
-    ];
-
-    const result = processLogs(logs);
-    expect(result.sources).toEqual(['auth', 'db']);
-  });
-
-  it('should count total entries correctly', () => {
-    const logs: LogEntry[] = [
-      { timestamp: '2023-01-01T12:00:00.000Z', level: 'info', message: 'test' },
-      { timestamp: '2023-01-01T12:01:00.000Z', level: 'error', message: 'test' },
-      { timestamp: '2023-01-01T12:02:00.000Z', level: 'info', message: 'test' }
-    ];
-
-    const result = processLogs(logs);
-    expect(result.totalEntries).toBe(3);
-  });
-});
-
-describe('processFileWithSummary', () => {
-  // Note: These tests would require actual file system access
-  // In a real implementation, we'd mock the fs module or use in-memory files
-
-  it('should handle file processing errors gracefully', () => {
-    // This test would require mocking fs module to simulate file read errors
-    expect(true).toBe(true); // Placeholder - actual implementation would test error handling
-  });
-
-  it('should process logs correctly when file is valid', () => {
-    // This would test the integration between file processing and log summarization
-    expect(true).toBe(true); // Placeholder - actual implementation would test integration
+    const result = await processFiles(['non-existent-file']);
+    expect(result).toEqual([]);
   });
 });
