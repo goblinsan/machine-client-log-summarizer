@@ -1,18 +1,18 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-12T00:15:57.693Z",
+  "generated_at": "2025-10-12T00:27:39.824Z",
   "totals": {
     "files": 14,
-    "bytes": 15696,
-    "lines": 756
+    "bytes": 15724,
+    "lines": 750
   },
   "components": [
     {
       "component": ".",
       "totals": {
         "files": 14,
-        "bytes": 15696,
-        "lines": 756
+        "bytes": 15724,
+        "lines": 750
       },
       "largest": [
         {
@@ -44,11 +44,11 @@
           "sha1": "7a8123f5d7bf32d337e8d957e6ec9f9fd388a30c"
         },
         {
-          "path": "src/__tests__/ingestion.test.ts",
-          "bytes": 1149,
-          "mtime": 1760211362113.1401,
-          "lines": 41,
-          "sha1": "f78bd0f2bd518aa37df38053286918799527a782"
+          "path": "src/ingestion.ts",
+          "bytes": 1072,
+          "mtime": 1760228859715.4414,
+          "lines": 34,
+          "sha1": "c2c91972c18829c238c0fde2a4405a7a3055e8d6"
         },
         {
           "path": "src/styles/_layout.scss",
@@ -123,18 +123,18 @@
           "sha1": "983b5faf1a0f20450727316427d2cbc9dc444a10"
         },
         {
-          "path": "src/__tests__/ingestion.test.ts",
-          "bytes": 1149,
-          "mtime": 1760211362113.1401,
-          "lines": 41,
-          "sha1": "f78bd0f2bd518aa37df38053286918799527a782"
-        },
-        {
           "path": "src/__tests__/App.test.tsx",
           "bytes": 973,
           "mtime": 1760211362111.1404,
           "lines": 35,
           "sha1": "11535b459183dc8e593c316955672c1ec3d45d76"
+        },
+        {
+          "path": "src/ingestion.ts",
+          "bytes": 1072,
+          "mtime": 1760228859715.4414,
+          "lines": 34,
+          "sha1": "c2c91972c18829c238c0fde2a4405a7a3055e8d6"
         },
         {
           "path": "src/styles/_extras.scss",
@@ -191,11 +191,11 @@
         "sha1": "7a8123f5d7bf32d337e8d957e6ec9f9fd388a30c"
       },
       {
-        "path": "src/__tests__/ingestion.test.ts",
-        "bytes": 1149,
-        "mtime": 1760211362113.1401,
-        "lines": 41,
-        "sha1": "f78bd0f2bd518aa37df38053286918799527a782"
+        "path": "src/ingestion.ts",
+        "bytes": 1072,
+        "mtime": 1760228859715.4414,
+        "lines": 34,
+        "sha1": "c2c91972c18829c238c0fde2a4405a7a3055e8d6"
       },
       {
         "path": "src/styles/_layout.scss",
@@ -254,11 +254,11 @@
         "sha1": "c95ab6d1be1dd3130c0c615438c741d6d10dc13c"
       },
       {
-        "path": "src/ingestion.ts",
-        "bytes": 0,
-        "mtime": 1760211362113.1401,
-        "lines": 1,
-        "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        "path": "src/__tests__/ingestion.test.ts",
+        "bytes": 105,
+        "mtime": 1760228859714.442,
+        "lines": 2,
+        "sha1": "9cdd71ba43941ce28def006ace5a42818fa53306"
       }
     ],
     "longest_files": [
@@ -298,18 +298,18 @@
         "sha1": "983b5faf1a0f20450727316427d2cbc9dc444a10"
       },
       {
-        "path": "src/__tests__/ingestion.test.ts",
-        "bytes": 1149,
-        "mtime": 1760211362113.1401,
-        "lines": 41,
-        "sha1": "f78bd0f2bd518aa37df38053286918799527a782"
-      },
-      {
         "path": "src/__tests__/App.test.tsx",
         "bytes": 973,
         "mtime": 1760211362111.1404,
         "lines": 35,
         "sha1": "11535b459183dc8e593c316955672c1ec3d45d76"
+      },
+      {
+        "path": "src/ingestion.ts",
+        "bytes": 1072,
+        "mtime": 1760228859715.4414,
+        "lines": 34,
+        "sha1": "c2c91972c18829c238c0fde2a4405a7a3055e8d6"
       },
       {
         "path": "src/styles/_extras.scss",
@@ -354,11 +354,11 @@
         "sha1": "c95ab6d1be1dd3130c0c615438c741d6d10dc13c"
       },
       {
-        "path": "src/ingestion.ts",
-        "bytes": 0,
-        "mtime": 1760211362113.1401,
-        "lines": 1,
-        "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        "path": "src/__tests__/ingestion.test.ts",
+        "bytes": 105,
+        "mtime": 1760228859714.442,
+        "lines": 2,
+        "sha1": "9cdd71ba43941ce28def006ace5a42818fa53306"
       }
     ]
   }
