@@ -1,10 +1,10 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-12T18:13:20.552Z",
+  "generated_at": "2025-10-12T18:20:19.209Z",
   "totals": {
     "files": 30,
-    "bytes": 205730,
-    "lines": 6306
+    "bytes": 204933,
+    "lines": 6322
   },
   "files": [
     {
@@ -16,24 +16,24 @@
     },
     {
       "path": ".ma/context/files.ndjson",
-      "bytes": 3954,
-      "mtime": 1760292422223.7239,
+      "bytes": 3953,
+      "mtime": 1760292800555.9226,
       "lines": 31,
-      "sha1": "21aca8d5de6d6837fbf8d502ac017752ca7ee1f9"
+      "sha1": "ac0bc6bee3de9fd971d4f1f6e889cab17f3fb9e4"
     },
     {
       "path": ".ma/context/snapshot.json",
-      "bytes": 18160,
-      "mtime": 1760292422222.7144,
+      "bytes": 18130,
+      "mtime": 1760292800554.9578,
       "lines": 662,
-      "sha1": "f2c4d34a4aa2e459d8aabd2bb2c127d28d874182"
+      "sha1": "234cade1b6e7cfead7d26d1fe30d51587cce506a"
     },
     {
       "path": ".ma/context/summary.md",
-      "bytes": 9412,
-      "mtime": 1760292450643.9556,
-      "lines": 234,
-      "sha1": "16b51bce0f8cd20f0215f8ad485b37ac29b615bc"
+      "bytes": 8646,
+      "mtime": 1760292824895.91,
+      "lines": 250,
+      "sha1": "ebdb0bc116927f886c91eae65158837a0a2d7daa"
     },
     {
       "path": ".stylelintrc.json",
@@ -223,8 +223,8 @@
       "component": ".",
       "totals": {
         "files": 30,
-        "bytes": 205730,
-        "lines": 6306
+        "bytes": 204933,
+        "lines": 6322
       },
       "largest": [
         {
@@ -236,10 +236,10 @@
         },
         {
           "path": ".ma/context/snapshot.json",
-          "bytes": 18160,
-          "mtime": 1760292422222.7144,
+          "bytes": 18130,
+          "mtime": 1760292800554.9578,
           "lines": 662,
-          "sha1": "f2c4d34a4aa2e459d8aabd2bb2c127d28d874182"
+          "sha1": "234cade1b6e7cfead7d26d1fe30d51587cce506a"
         },
         {
           "path": "PROJECT_PLAN.md",
@@ -250,10 +250,10 @@
         },
         {
           "path": ".ma/context/summary.md",
-          "bytes": 9412,
-          "mtime": 1760292450643.9556,
-          "lines": 234,
-          "sha1": "16b51bce0f8cd20f0215f8ad485b37ac29b615bc"
+          "bytes": 8646,
+          "mtime": 1760292824895.91,
+          "lines": 250,
+          "sha1": "ebdb0bc116927f886c91eae65158837a0a2d7daa"
         },
         {
           "path": "src/fileIngest.test.ts",
@@ -271,10 +271,10 @@
         },
         {
           "path": ".ma/context/files.ndjson",
-          "bytes": 3954,
-          "mtime": 1760292422223.7239,
+          "bytes": 3953,
+          "mtime": 1760292800555.9226,
           "lines": 31,
-          "sha1": "21aca8d5de6d6837fbf8d502ac017752ca7ee1f9"
+          "sha1": "ac0bc6bee3de9fd971d4f1f6e889cab17f3fb9e4"
         },
         {
           "path": "src/styles/_migrated.scss",
@@ -308,10 +308,10 @@
         },
         {
           "path": ".ma/context/snapshot.json",
-          "bytes": 18160,
-          "mtime": 1760292422222.7144,
+          "bytes": 18130,
+          "mtime": 1760292800554.9578,
           "lines": 662,
-          "sha1": "f2c4d34a4aa2e459d8aabd2bb2c127d28d874182"
+          "sha1": "234cade1b6e7cfead7d26d1fe30d51587cce506a"
         },
         {
           "path": "src/fileIngest.test.ts",
@@ -322,10 +322,10 @@
         },
         {
           "path": ".ma/context/summary.md",
-          "bytes": 9412,
-          "mtime": 1760292450643.9556,
-          "lines": 234,
-          "sha1": "16b51bce0f8cd20f0215f8ad485b37ac29b615bc"
+          "bytes": 8646,
+          "mtime": 1760292824895.91,
+          "lines": 250,
+          "sha1": "ebdb0bc116927f886c91eae65158837a0a2d7daa"
         },
         {
           "path": "src/styles/_migrated.scss",
@@ -383,10 +383,10 @@
       },
       {
         "path": ".ma/context/snapshot.json",
-        "bytes": 18160,
-        "mtime": 1760292422222.7144,
+        "bytes": 18130,
+        "mtime": 1760292800554.9578,
         "lines": 662,
-        "sha1": "f2c4d34a4aa2e459d8aabd2bb2c127d28d874182"
+        "sha1": "234cade1b6e7cfead7d26d1fe30d51587cce506a"
       },
       {
         "path": "PROJECT_PLAN.md",
@@ -397,10 +397,10 @@
       },
       {
         "path": ".ma/context/summary.md",
-        "bytes": 9412,
-        "mtime": 1760292450643.9556,
-        "lines": 234,
-        "sha1": "16b51bce0f8cd20f0215f8ad485b37ac29b615bc"
+        "bytes": 8646,
+        "mtime": 1760292824895.91,
+        "lines": 250,
+        "sha1": "ebdb0bc116927f886c91eae65158837a0a2d7daa"
       },
       {
         "path": "src/fileIngest.test.ts",
@@ -418,10 +418,10 @@
       },
       {
         "path": ".ma/context/files.ndjson",
-        "bytes": 3954,
-        "mtime": 1760292422223.7239,
+        "bytes": 3953,
+        "mtime": 1760292800555.9226,
         "lines": 31,
-        "sha1": "21aca8d5de6d6837fbf8d502ac017752ca7ee1f9"
+        "sha1": "ac0bc6bee3de9fd971d4f1f6e889cab17f3fb9e4"
       },
       {
         "path": "src/styles/_migrated.scss",
@@ -525,10 +525,10 @@
       },
       {
         "path": ".ma/context/snapshot.json",
-        "bytes": 18160,
-        "mtime": 1760292422222.7144,
+        "bytes": 18130,
+        "mtime": 1760292800554.9578,
         "lines": 662,
-        "sha1": "f2c4d34a4aa2e459d8aabd2bb2c127d28d874182"
+        "sha1": "234cade1b6e7cfead7d26d1fe30d51587cce506a"
       },
       {
         "path": "src/fileIngest.test.ts",
@@ -539,10 +539,10 @@
       },
       {
         "path": ".ma/context/summary.md",
-        "bytes": 9412,
-        "mtime": 1760292450643.9556,
-        "lines": 234,
-        "sha1": "16b51bce0f8cd20f0215f8ad485b37ac29b615bc"
+        "bytes": 8646,
+        "mtime": 1760292824895.91,
+        "lines": 250,
+        "sha1": "ebdb0bc116927f886c91eae65158837a0a2d7daa"
       },
       {
         "path": "src/styles/_migrated.scss",
@@ -630,10 +630,10 @@
       },
       {
         "path": ".ma/context/files.ndjson",
-        "bytes": 3954,
-        "mtime": 1760292422223.7239,
+        "bytes": 3953,
+        "mtime": 1760292800555.9226,
         "lines": 31,
-        "sha1": "21aca8d5de6d6837fbf8d502ac017752ca7ee1f9"
+        "sha1": "ac0bc6bee3de9fd971d4f1f6e889cab17f3fb9e4"
       },
       {
         "path": ".gitignore",
