@@ -1,47 +1,67 @@
 import fs from 'fs';
-import path from 'path';
 
-export type LogRecord = {
+// Define the structure of a normalized log record
+export interface NormalizedLogRecord {
   timestamp: string;
-  level: string;
+  level: 'info' | 'warn' | 'error' | 'debug';
   message: string;
-};
+}
 
-export const fileIngest = async (filePath: string): Promise<LogRecord[]> => {
+/**
+ * Reads a JSON log file and returns an array of normalized records
+ * @param filePath - Path to the JSON log file
+ * @returns Array of normalized log records
+ */
+export const fileIngest = (filePath: string): NormalizedLogRecord[] => {
   try {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const parsedData = JSON.parse(fileContent);
+    // Read the file content
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
 
-    // If parsed data is not an array, return empty array
-    if (!Array.isArray(parsedData)) {
-      return [];
-    }
+    // Split content into lines
+    const lines = fileContent.split('\n').filter(line => line.trim() !== '');
 
-    const normalizedRecords: LogRecord[] = parsedData.map((record) => {
-      // Normalize timestamp - if invalid, set to current time
-      let normalizedTimestamp = record.timestamp;
+    // Process each line
+    const normalizedRecords = lines.map(line => {
       try {
-        const timestampDate = new Date(record.timestamp);
-        if (isNaN(timestampDate.getTime())) {
+        // Parse the JSON line
+        const record = JSON.parse(line);
+
+        // Normalize timestamp - if invalid or missing, set to current time
+        let normalizedTimestamp = record.timestamp;
+        try {
+          if (record.timestamp) {
+            const timestampDate = new Date(record.timestamp);
+            if (isNaN(timestampDate.getTime())) {
+              normalizedTimestamp = new Date().toISOString();
+            }
+          } else {
+            normalizedTimestamp = new Date().toISOString();
+          }
+        } catch (error) {
           normalizedTimestamp = new Date().toISOString();
         }
+
+        // Normalize level - if invalid, set to 'info'
+        const normalizedLevel = ['info', 'warn', 'error', 'debug'].includes(record.level)
+          ? record.level
+          : 'info';
+
+        // Ensure message exists, default to empty string if missing
+        const normalizedMessage = record.message || '';
+
+        return {
+          timestamp: normalizedTimestamp,
+          level: normalizedLevel,
+          message: normalizedMessage
+        };
       } catch (error) {
-        normalizedTimestamp = new Date().toISOString();
+        // If JSON parsing fails, return a default record with current timestamp
+        return {
+          timestamp: new Date().toISOString(),
+          level: 'info',
+          message: ''
+        };
       }
-
-      // Normalize level - if invalid, set to 'info'
-      const normalizedLevel = ['info', 'warn', 'error', 'debug'].includes(record.level)
-        ? record.level
-        : 'info';
-
-      // Ensure message exists, default to empty string if missing
-      const normalizedMessage = record.message || '';
-
-      return {
-        timestamp: normalizedTimestamp,
-        level: normalizedLevel,
-        message: normalizedMessage
-      };
     });
 
     return normalizedRecords;
