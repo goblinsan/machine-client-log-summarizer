@@ -1,7 +1,7 @@
 {"path":".gitignore","bytes":206,"mtime":1759457453023.9875,"lines":26,"sha1":"501e9be30f73cb6ea67ae7a2fa665b1134fc7d13"}
-{"path":".ma/context/files.ndjson","bytes":5968,"mtime":1760307425594.104,"lines":43,"sha1":"5e47b2379a29d0a9d476e249da386f88fb90ce75"}
-{"path":".ma/context/snapshot.json","bytes":21218,"mtime":1760307425593.0984,"lines":746,"sha1":"7318b7904c1c9e862a3bfdae047f946b50ef3189"}
-{"path":".ma/context/summary.md","bytes":11672,"mtime":1760307457981.0654,"lines":279,"sha1":"db1682824e3dd8e8403533e024fb39a3094f44df"}
+{"path":".ma/context/files.ndjson","bytes":5967,"mtime":1760315279602.7388,"lines":43,"sha1":"762c806023c47506b2d52ef9632114be26207ba7"}
+{"path":".ma/context/snapshot.json","bytes":21214,"mtime":1760315279601.7659,"lines":746,"sha1":"dfbeda920bd957d242b009d648cfccebe8e5a176"}
+{"path":".ma/context/summary.md","bytes":10016,"mtime":1760315366066.2224,"lines":240,"sha1":"e75e7f1bc996a59aa57ffd1a9f175acfc2f3c411"}
 {"path":".ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log","bytes":19447,"mtime":1760307215312.5,"lines":569,"sha1":"f16307b21cd8af3ba97e39268848d91236b0e3b0"}
 {"path":".ma/qa/task-008e1a7e-0df4-4703-b6b4-fb71dbae04a6-qa.log","bytes":868,"mtime":1760293691667.229,"lines":17,"sha1":"96178e99cd8d5d858e0d6d8731d6d004ca37eb9d"}
 {"path":".ma/qa/task-0b724f66-4d16-4f9f-a0c0-70a2148e9cab-qa.log","bytes":518,"mtime":1760306625234.3606,"lines":19,"sha1":"5a35f201a648db46039bc8b025ddd5664c158fd4"}
