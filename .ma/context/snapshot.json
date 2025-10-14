@@ -1,10 +1,10 @@
 {
   "repo": "/mnt/e/code/machine-client-log-summarizer",
-  "generated_at": "2025-10-14T23:44:30.021Z",
+  "generated_at": "2025-10-14T23:48:53.453Z",
   "totals": {
     "files": 43,
-    "bytes": 248143,
-    "lines": 7480
+    "bytes": 248267,
+    "lines": 7481
   },
   "files": [
     {
@@ -16,24 +16,24 @@
     },
     {
       "path": ".ma/context/files.ndjson",
-      "bytes": 6136,
-      "mtime": 1760316046154.9878,
+      "bytes": 6138,
+      "mtime": 1760485470068.3755,
       "lines": 44,
-      "sha1": "068a9ea258f1b6075492417439febe0d4a483229"
+      "sha1": "3964a8710d829b07c8de292b55b58627ac2c237e"
     },
     {
       "path": ".ma/context/snapshot.json",
-      "bytes": 21435,
-      "mtime": 1760316046153.8813,
+      "bytes": 21445,
+      "mtime": 1760485470067.3772,
       "lines": 753,
-      "sha1": "096d42f730712f1ce27b6ab5f45048f164ea1674"
+      "sha1": "957208b38c7e9c694fdfe2cfe11d496b6fc2a237"
     },
     {
       "path": ".ma/context/summary.md",
-      "bytes": 10648,
-      "mtime": 1760316073856.5745,
-      "lines": 244,
-      "sha1": "f2fcacc5efffc327ba63b74a9038cdb65ac8e234"
+      "bytes": 10760,
+      "mtime": 1760485502155.7158,
+      "lines": 245,
+      "sha1": "104f551dfaecda8fc13749c5b1fff9b80e13cd22"
     },
     {
       "path": ".ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log",
@@ -314,8 +314,8 @@
       "component": ".",
       "totals": {
         "files": 43,
-        "bytes": 248143,
-        "lines": 7480
+        "bytes": 248267,
+        "lines": 7481
       },
       "largest": [
         {
@@ -334,10 +334,17 @@
         },
         {
           "path": ".ma/context/snapshot.json",
-          "bytes": 21435,
-          "mtime": 1760316046153.8813,
+          "bytes": 21445,
+          "mtime": 1760485470067.3772,
           "lines": 753,
-          "sha1": "096d42f730712f1ce27b6ab5f45048f164ea1674"
+          "sha1": "957208b38c7e9c694fdfe2cfe11d496b6fc2a237"
+        },
+        {
+          "path": ".ma/context/summary.md",
+          "bytes": 10760,
+          "mtime": 1760485502155.7158,
+          "lines": 245,
+          "sha1": "104f551dfaecda8fc13749c5b1fff9b80e13cd22"
         },
         {
           "path": "PROJECT_PLAN.md",
@@ -347,18 +354,11 @@
           "sha1": "b67d9f0d2891c39f34b3cf021e14dbd754456403"
         },
         {
-          "path": ".ma/context/summary.md",
-          "bytes": 10648,
-          "mtime": 1760316073856.5745,
-          "lines": 244,
-          "sha1": "f2fcacc5efffc327ba63b74a9038cdb65ac8e234"
-        },
-        {
           "path": ".ma/context/files.ndjson",
-          "bytes": 6136,
-          "mtime": 1760316046154.9878,
+          "bytes": 6138,
+          "mtime": 1760485470068.3755,
           "lines": 44,
-          "sha1": "068a9ea258f1b6075492417439febe0d4a483229"
+          "sha1": "3964a8710d829b07c8de292b55b58627ac2c237e"
         },
         {
           "path": "src/fileIngest.test.ts",
@@ -399,10 +399,10 @@
         },
         {
           "path": ".ma/context/snapshot.json",
-          "bytes": 21435,
-          "mtime": 1760316046153.8813,
+          "bytes": 21445,
+          "mtime": 1760485470067.3772,
           "lines": 753,
-          "sha1": "096d42f730712f1ce27b6ab5f45048f164ea1674"
+          "sha1": "957208b38c7e9c694fdfe2cfe11d496b6fc2a237"
         },
         {
           "path": ".ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log",
@@ -413,10 +413,10 @@
         },
         {
           "path": ".ma/context/summary.md",
-          "bytes": 10648,
-          "mtime": 1760316073856.5745,
-          "lines": 244,
-          "sha1": "f2fcacc5efffc327ba63b74a9038cdb65ac8e234"
+          "bytes": 10760,
+          "mtime": 1760485502155.7158,
+          "lines": 245,
+          "sha1": "104f551dfaecda8fc13749c5b1fff9b80e13cd22"
         },
         {
           "path": "src/fileIngest.test.ts",
@@ -481,10 +481,17 @@
       },
       {
         "path": ".ma/context/snapshot.json",
-        "bytes": 21435,
-        "mtime": 1760316046153.8813,
+        "bytes": 21445,
+        "mtime": 1760485470067.3772,
         "lines": 753,
-        "sha1": "096d42f730712f1ce27b6ab5f45048f164ea1674"
+        "sha1": "957208b38c7e9c694fdfe2cfe11d496b6fc2a237"
+      },
+      {
+        "path": ".ma/context/summary.md",
+        "bytes": 10760,
+        "mtime": 1760485502155.7158,
+        "lines": 245,
+        "sha1": "104f551dfaecda8fc13749c5b1fff9b80e13cd22"
       },
       {
         "path": "PROJECT_PLAN.md",
@@ -494,18 +501,11 @@
         "sha1": "b67d9f0d2891c39f34b3cf021e14dbd754456403"
       },
       {
-        "path": ".ma/context/summary.md",
-        "bytes": 10648,
-        "mtime": 1760316073856.5745,
-        "lines": 244,
-        "sha1": "f2fcacc5efffc327ba63b74a9038cdb65ac8e234"
-      },
-      {
         "path": ".ma/context/files.ndjson",
-        "bytes": 6136,
-        "mtime": 1760316046154.9878,
+        "bytes": 6138,
+        "mtime": 1760485470068.3755,
         "lines": 44,
-        "sha1": "068a9ea258f1b6075492417439febe0d4a483229"
+        "sha1": "3964a8710d829b07c8de292b55b58627ac2c237e"
       },
       {
         "path": "src/fileIngest.test.ts",
@@ -616,10 +616,10 @@
       },
       {
         "path": ".ma/context/snapshot.json",
-        "bytes": 21435,
-        "mtime": 1760316046153.8813,
+        "bytes": 21445,
+        "mtime": 1760485470067.3772,
         "lines": 753,
-        "sha1": "096d42f730712f1ce27b6ab5f45048f164ea1674"
+        "sha1": "957208b38c7e9c694fdfe2cfe11d496b6fc2a237"
       },
       {
         "path": ".ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log",
@@ -630,10 +630,10 @@
       },
       {
         "path": ".ma/context/summary.md",
-        "bytes": 10648,
-        "mtime": 1760316073856.5745,
-        "lines": 244,
-        "sha1": "f2fcacc5efffc327ba63b74a9038cdb65ac8e234"
+        "bytes": 10760,
+        "mtime": 1760485502155.7158,
+        "lines": 245,
+        "sha1": "104f551dfaecda8fc13749c5b1fff9b80e13cd22"
       },
       {
         "path": "src/fileIngest.test.ts",
@@ -735,10 +735,10 @@
       },
       {
         "path": ".ma/context/files.ndjson",
-        "bytes": 6136,
-        "mtime": 1760316046154.9878,
+        "bytes": 6138,
+        "mtime": 1760485470068.3755,
         "lines": 44,
-        "sha1": "068a9ea258f1b6075492417439febe0d4a483229"
+        "sha1": "3964a8710d829b07c8de292b55b58627ac2c237e"
       },
       {
         "path": ".ma/qa/task-239e460b-cd26-46c7-a7c3-c3f4fab94848-qa.log",
