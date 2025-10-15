@@ -1,1 +1,1 @@
-import { parse } from 'json';
+import { readFileSync } from 'fs';
