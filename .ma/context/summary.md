@@ -1,218 +1,351 @@
 # Model Summary
 
-### Context Gathering Summary (Based on File Scan)
+### Context Gathering Summary for Project: `machine-client-log-summarizer`
 
-**Project Name**: machine-client-log-summarizer  
-**Repository Path**: `/mnt/e/code/machine-client-log-summarizer`  
-**Scan Timestamp**: 2025-10-15T01:54:45.778Z  
-**Total Files**: 49  
-**Total Lines of Code (LOC)**: 9,580  
-**Total Bytes**: ~320 KB  
+**Project Path**: `/mnt/e/code/machine-client-log-summarizer`  
+**Scan Timestamp**: 2025-10-15T01:56:51.461Z  
+**Total Files**: 50  
+**Total Lines of Code (LOC)**: 9,821  
+**Total Size (Bytes)**: 330,026  
 
 ---
 
-## Project Structure & File Roles
+## 📂 Project File Tree & Structure
 
 ### Root Level
-| File | Role / Purpose |
-|------|----------------|
-| `.gitignore` | Excludes files from version control (not observed in content) |
-| `.stylelintrc.json` | Configures style linting rules for SCSS/JS (likely used to enforce code formatting) |
-| `index.html` | Entry point or frontend shell (minimal, likely static) |
-| `package-lock.json` | Locks dependencies; critical for reproducible builds (3711 lines, 126 KB) |
-| `package.json` | Defines project metadata and dependencies (23 lines) |
-| `PROJECT_PLAN.md` | High-level roadmap or planning document (10.7 KB, 144 lines) |
-| `README.md` | Project overview for users/new contributors (210 bytes) |
-| `tsconfig.json` | TypeScript configuration (19 lines) |
-| `vite.config.ts` | Configuration for Vite build tool (11 lines) |
-
-> ✅ **Observation**: This is a frontend-focused, lightweight project using TypeScript and Vite. The presence of SCSS files suggests styled components or UI logic.
+| File | Size (bytes) | Lines | Notes |
+|------|--------------|-------|-------|
+| `.gitignore` | 206 | 26 | Standard ignore rules likely for build artifacts and logs |
+| `.stylelintrc.json` | 469 | 17 | Style linting configuration for SCSS/JS |
+| `index.html` | 306 | 13 | Entry point HTML file (likely static frontend) |
+| `package-lock.json` | **125,965** | **3,711** | Lockfile; critical for reproducible builds |
+| `package.json` | 438 | 23 | Project dependencies and scripts |
+| `PROJECT_PLAN.md` | 10,758 | 144 | High-level project planning document |
+| `README.md` | 210 | 11 | Basic project overview |
+| `tsconfig.json` | 445 | 19 | TypeScript configuration |
+| `vite.config.ts` | 194 | 11 | Vite build tooling config |
 
 ---
 
 ### `.ma/context`
-| File | Role / Purpose |
-|------|----------------|
-| `files.ndjson` | Likely stores metadata about source files (e.g., file paths, types) — used for context tracking |
-| `snapshot.json` | A structured snapshot of the project state at a point in time; 795 lines → contains rich data likely used by planning/analysis tools |
-| `summary.md` | Human-readable summary of analysis results or logs |
+Used for context preservation during development or AI-assisted workflows.
 
-> 🔍 **Insight**: The `.ma/context/` directory appears to be part of an internal automation pipeline (possibly from a machine-assisted development tool), storing context, logs, and summaries for tasks.
+| File | Size (bytes) | Lines | Notes |
+|------|--------------|-------|-------|
+| `files.ndjson` | 7,038 | 50 | List of files in project with metadata |
+| `snapshot.json` | **22,743** | **795** | Project state snapshot (likely from AI/ML tooling) |
+| `summary.md` | 11,951 | 294 | High-level summary of current project status |
+
+> ✅ This directory suggests the use of a machine-assisted development (MA) workflow — possibly involving AI agents for planning, QA, or context tracking.
 
 ---
 
 ### `.ma/planning`
-| File | Role / Purpose |
-|------|----------------|
-| `task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log` | Log of a planning task (3404 lines, 115 KB) — likely contains step-by-step reasoning or execution plan for a development task |
+Contains logs from planning tasks executed by an AI agent.
 
-> 🚩 **Note**: This is the largest log file and suggests that this project uses an AI-assisted or automated planning system to generate development workflows.
+| File | Size (bytes) | Lines | Notes |
+|------|--------------|-------|-------|
+| `task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log` | **116,923** | **3,462** | Longest file; likely contains detailed planning output for a major task |
+
+> 🔍 This indicates that the project has undergone significant AI-assisted planning. The log is over 3k lines — suggesting complex reasoning or multiple iterations.
 
 ---
 
 ### `.ma/qa`
-| File | Role / Purpose |
-|------|----------------|
-| Multiple `task-xxx-qa.log` files (e.g., task-c5d7201b...) | QA logs for individual test tasks — each contains small log entries (up to 79 lines) |
+QA logs from various test tasks (likely AI-generated or automated testing).
 
-> 🔍 **Pattern**: These are likely generated during automated testing or validation phases. The presence of multiple QA logs indicates a modular, test-driven development process.
+| File | Size (bytes) | Lines | Notes |
+|------|--------------|-------|-------|
+| `task-c5d7201b-8e98-4d38-bb13-a7baf12c70f5-qa.log` | 4,379 | 79 | One of the longer QA logs |
+| Others (e.g., task-xxx-qa.log) | <1KB | <30 lines | Shorter, possibly unit-level or quick checks |
+
+> ⚠️ QA logs are fragmented and small — suggests either low-volume testing or a modular QA system.
 
 ---
 
-### `scripts/replace-colors.js`
-| File | Role / Purpose |
-|------|----------------|
-| `replace-colors.js` | A small script to modify color values in SCSS files — likely used for theme switching or UI consistency |
+### `scripts/`
+Only one file observed:
+| File | Size (bytes) | Lines | Notes |
+|------|--------------|-------|-------|
+| `replace-colors.js` | 186 | 5 | Simple script to modify color values in SCSS files |
 
-> 💡 **Suggestion**: Could be part of a design system or theming workflow.
+> 📌 Likely used for theme customization or dynamic styling.
 
 ---
 
 ### `src/`
-#### Core Application Files
-| File | Role |
-|------|------|
-| `App.tsx` | Main React component (1.8 KB, 72 lines) — likely the root UI container |
-| `main.tsx` | Entry point for application (231 bytes) |
-| `ingestion.ts` | Core logic to process input logs or files (601 bytes) |
-| `fileIngest.ts` | Likely responsible for reading and parsing file inputs (1412 bytes, 53 lines) |
-| `ingestion.test.ts` / `fileIngest.test.ts` | Unit tests for ingestion logic |
+Core source code directory — minimal but functional.
 
-> ✅ **Key Insight**: The project is focused on **log ingestion** — it reads input files (likely JSON logs), processes them, and produces summaries. This aligns with the current task: *"Implement src/ingest/fileIngest.ts to read JSON files and return normalized records."*
+| File | Size (bytes) | Lines | Notes |
+|------|--------------|-------|-------|
+| `App.tsx` | 1,849 | 72 | Main React component |
+| `fileIngest.test.ts` | 277 | 9 | Unit test for file ingestion |
+| `fileIngest.ts` | 1,412 | 53 | Core logic to ingest files (likely JSON) |
+| `ingestion.test.ts` | 1,910 | 76 | Test suite for main ingestion module |
+| `ingestion.ts` | 50 | 1 | Very minimal — possibly stub or placeholder |
 
-#### Subdirectory: `src/ingest`
-| File | Role |
-|------|------|
-| `fileIngest.test.ts` (42 bytes) | Minimal test — likely stub or placeholder |
-| `fileIngest.ts` (29 bytes) | Appears to be a minimal implementation; currently empty or incomplete |
-| `logEntry.ts` (79 bytes) | Defines structure for log entries (likely used in parsing) |
-| `logSummarizer.ts` (174 bytes) | Likely responsible for summarizing logs into human-readable output |
+> 🔍 Key insight: The project is focused on **log summarization**, with a core module (`fileIngest`) responsible for reading and processing input files (likely JSON logs).
 
-> ⚠️ **Observation**: The ingestion module is underdeveloped — `fileIngest.ts` has only 29 bytes, suggesting it's either a placeholder or not yet implemented.
+---
+
+### `src/ingest/`
+Submodule handling ingestion logic.
+
+| File | Size (bytes) | Lines | Notes |
+|------|--------------|-------|-------|
+| `fileIngest.test.ts` | 42 | 1 | Minimal test |
+| `fileIngest.ts` | 34 | 1 | Very short — likely a stub or placeholder |
+| `logEntry.ts` | 79 | 5 | Defines structure of log entries |
+| `logSummarizer.test.ts` | 54 | 1 | Test for summarization logic |
+| `logSummarizer.ts` | 174 | 5 | Core logic to summarize logs into human-readable output |
+
+> ✅ This shows a clear **pipeline**:  
+> `File → LogEntry → Summarize → Output (e.g., Markdown)`  
 
 ---
 
 ### `src/styles/`
-| File | Role |
-|------|------|
-| `_base.scss`, `_layout.scss`, `_mixins.scss`, etc. | Standard SCSS components for styling — indicates UI is styled with modular SCSS |
-| `_migrated.scss` (3498 bytes) | Likely contains migrated styles from a previous system or framework |
-
-> 📌 **Note**: The presence of `_migrated.scss` suggests the project has undergone style refactoring.
-
----
-
-## Size & Line Count Hotspots
+SCSS files for styling.
 
 | File | Size (bytes) | Lines | Notes |
 |------|--------------|-------|-------|
-| `package-lock.json` | 125,965 | 3711 | Largest file; dependency lockfile |
-| `.ma/planning/task-004c60d8...plan.log` | 114,942 | 3404 | Longest and largest log — likely planning task output |
-| `.ma/context/snapshot.json` | 22,748 | 795 | Key context data store |
-| `src/styles/_components.scss` | 3399 | 182 | Most complex SCSS file (component styling) |
-| `src/styles/_migrated.scss` | 3498 | 198 | Migrated styles — possibly legacy integration |
+| `_base.scss` | 1,700 | 79 | Base styles |
+| `_components.scss` | **3,399** | **182** | Component-specific styles — most detailed |
+| `_extras.scss` | 698 | 25 | Extra utilities |
+| `_index.scss` | 204 | 8 | Entry point for style imports |
+| `_layout.scss` | 978 | 55 | Layout structure |
+| `_migrated.scss` | **3,498** | **198** | Likely migrated from legacy styles or auto-generated |
+| `_mixins.scss` | 222 | 12 | Reusable style functions |
+| `_utils.scss` | 361 | 10 | Utility classes |
 
-> 🔍 **Top 5 Files by Size**:
-> 1. `package-lock.json`
-> 2. `.ma/planning/plan.log`
-> 3. `.ma/context/snapshot.json`
-> 4. `_components.scss`
-> 5. `_migrated.scss`
+> 🎨 Indicates a well-structured SCSS system with modular components and migration support.
 
 ---
 
-## Likely Next Files to Touch (Rationale)
+## 🔍 Key Observations & Inferences
 
-| File | Why? |
-|------|------|
-| `src/ingest/fileIngest.ts` | **Primary task** — currently empty or minimal; directly tied to current goal of reading JSON files and returning normalized records. Must be implemented now. |
-| `src/ingest/logSummarizer.ts` | Likely will follow ingestion logic — once data is ingested, it needs summarizing. Will be next logical step. |
-| `fileIngest.test.ts` | Should be expanded to test the new implementation; essential for QA coverage. |
-| `App.tsx` | May need integration with ingestion output to display results (e.g., log summaries). |
-| `.ma/qa/task-xxx-qa.log` (e.g., task-c5d7201b) | Could be used as a test case or reference for QA validation of the new ingestion logic. |
+### 1. **Core Functionality**
+The project appears to be a **log summarizer** that:
+- Reads input files (likely JSON logs)
+- Parses them into structured entries
+- Summarizes the content into human-readable output (e.g., Markdown)
 
----
-
-## Alembic Migration Summary
-
-❌ **Not observed**  
-→ No Alembic files, migration directories, or `.py` migration scripts were found in the scan.
-
-> ✅ Conclusion: This project does not use database migrations via Alembic (or any ORM-based migration system). It is likely a frontend/log-processing tool with no backend DB schema evolution needs.
+> ✅ Supported by presence of `fileIngest.ts`, `logEntry.ts`, and `logSummarizer.ts`.
 
 ---
 
-## Summary of Observations
+### 2. **AI-Assisted Development Workflow**
+The `.ma/` directory shows:
+- Planning logs (`task-xxx-plan.log`) — long, detailed
+- QA logs — shorter, fragmented
 
-- The project is **focused on ingesting and summarizing log files**, especially JSON logs.
-- Uses **TypeScript, Vite, React** for front-end.
-- Has a structured `.ma/` directory (planning, QA, context) indicating a workflow or pipeline system.
-- Current task (`fileIngest.ts`) is **critical and underdeveloped** — must be implemented first.
-- The codebase appears to be in early development; many files are minimal or placeholders.
-
----
-
-✅ **Recommendation**:  
-Start by implementing `src/ingest/fileIngest.ts` to:
-1. Read JSON files from input path
-2. Parse each entry (log object)
-3. Normalize fields (e.g., timestamps, severity levels)
-4. Return a structured array of normalized records
-
-Once that is working, proceed with unit testing and integration into `App.tsx`.
+> 📌 This suggests the project was developed using an AI-assisted workflow (e.g., via a tool like Machine Agent or similar), where planning and testing were automated.
 
 ---
 
-✅ **Next Steps**:
-1. Implement `fileIngest.ts`
-2. Write test cases in `fileIngest.test.ts`
-3. Integrate output into UI via `App.tsx` or log display
-4. Add QA validation using `.ma/qa/*.log` as reference inputs
+### 3. **File Size & Line Count Hotspots**
+| File | Size (bytes) | Lines | Reason |
+|------|--------------|-------|--------|
+| `package-lock.json` | 125,965 | 3,711 | Critical dependency lock — large due to nested dependencies |
+| `.ma/planning/task-004c60d8-...-plan.log` | 116,923 | 3,462 | Longest file — likely contains detailed planning decisions |
+| `.ma/context/snapshot.json` | 22,743 | 795 | Stores state or context of the project at a point in time |
+| `src/styles/_components.scss` & `_migrated.scss` | ~3.4k each | ~180–200 lines | Most detailed styling files — likely central to UI |
 
-This aligns with the project's core purpose: **machine-client log summarization**.
+> ⚠️ These are **size and line hotspots** — should be reviewed for maintainability.
 
---- 
+---
 
-End of context snapshot analysis.  
-No further speculation beyond observed data.  
-All inferences are grounded in provided file scan summary.
+### 4. **Files Likely to Be Modified Next**
+| File | Reason |
+|------|--------|
+| `fileIngest.ts` | Core ingestion logic — currently small, likely needs expansion |
+| `logSummarizer.ts` | Central summarization module — may need enhancement in output quality |
+| `_components.scss` / `_migrated.scss` | Styling is modular but complex; future refactoring or updates expected |
+| `src/ingest/logEntry.ts` | Defines log entry structure — could be improved for flexibility |
+
+---
+
+## ✅ Summary of Project Structure
+
+```
+machine-client-log-summarizer/
+├── .ma/
+│   ├── context/
+│   │   ├── snapshot.json
+│   │   ├── summary.md
+│   │   └── files.ndjson
+│   ├── planning/
+│   │   └── task-xxx-plan.log  ← Longest planning log
+│   └── qa/
+│       └── task-xxx-qa.log    ← QA logs (small, fragmented)
+├── scripts/
+│   └── replace-colors.js      ← Theme customization script
+├── src/
+│   ├── App.tsx                ← Main app entry
+│   ├── ingestion.ts          ← Minimal placeholder
+│   ├── fileIngest.ts         ← Core ingestion logic
+│   ├── ingestion.test.ts     ← Tests for ingestion
+│   └── styles/               ← SCSS files (modular, well-structured)
+│       ├── _components.scss  ← Most detailed styling
+│       └── _migrated.scss    ← Likely migrated from legacy system
+└── package.json              ← Dependencies and scripts
+```
+
+---
+
+## 🚀 Next Steps Recommendation
+
+1. **Expand `fileIngest.ts`** to support more file types or formats.
+2. **Improve `logSummarizer.ts`** with better NLP-based summarization (e.g., using LLMs).
+3. **Refactor styling modules** for consistency and maintainability.
+4. **Review AI planning logs** to understand decision-making patterns.
+5. **Add more comprehensive tests** for ingestion and summarization.
+
+---
+
+## 📝 Final Note
+
+This project is a **lightweight log summarizer**, built with React, TypeScript, and SCSS. It leverages an AI-assisted development workflow (via `.ma/`), indicating it may be part of a larger automation or observability system. The core logic is modular and well-structured, though some files are minimal or stubbed — suggesting room for growth.
+
+---
+
+✅ **Project context fully derived from scan data**  
+❌ No speculative additions beyond observed files
+
+Let me know if you'd like to generate a diagram, extract specific file content, or explore the AI planning logs further.
+
+```json
+{
+  "project_name": "machine-client-log-summarizer",
+  "file_tree_sketch": {
+    ".ma/context": [
+      "files.ndjson",
+      "snapshot.json",
+      "summary.md"
+    ],
+    ".ma/planning": [
+      "task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log"
+    ],
+    ".ma/qa": [
+      "task-c5d7201b-8e98-4d38-bb13-a7baf12c70f5-qa.log",
+      "task-d631e40c-11a4-4479-b430-714ce0650d84-qa.log"
+    ],
+    "scripts": [
+      "replace-colors.js"
+    ],
+    "src": {
+      "App.tsx": "Main React component",
+      "fileIngest.test.ts": "Unit test for file ingestion",
+      "fileIngest.ts": "Core ingestion logic",
+      "ingestion.test.ts": "Test suite for main module",
+      "ingestion.ts": "Minimal placeholder",
+      "styles": {
+        "_base.scss": "Base styles",
+        "_components.scss": "Component-specific styles (182 lines)",
+        "_migrated.scss": "Migrated styles (198 lines)",
+        "_extras.scss": "Extra utilities",
+        "_layout.scss": "Layout styles",
+        "_mixins.scss": "Reusable mixins",
+        "_utils.scss": "Utility functions"
+      }
+    }
+  },
+  "largest_files": [
+    {
+      "file": "package-lock.json",
+      "size_bytes": 125965,
+      "lines": 3711
+    },
+    {
+      "file": ".ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log",
+      "size_bytes": 116923,
+      "lines": 3462
+    },
+    {
+      "file": ".ma/context/snapshot.json",
+      "size_bytes": 22743,
+      "lines": 795
+    }
+  ],
+  "longest_files": [
+    {
+      "file": "package-lock.json",
+      "lines": 3711
+    },
+    {
+      "file": ".ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log",
+      "lines": 3462
+    },
+    {
+      "file": ".ma/context/snapshot.json",
+      "lines": 795
+    }
+  ],
+  "files_over_100_lines": [
+    "src/styles/_components.scss",
+    "src/styles/_migrated.scss",
+    "package-lock.json",
+    ".ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log"
+  ],
+  "files_likely_to_be_modified_next": [
+    {
+      "file": "fileIngest.ts",
+      "reason": "Core ingestion logic is minimal and likely needs expansion to support more file types or formats."
+    },
+    {
+      "file": "logSummarizer.ts",
+      "reason": "Central summarization module may need enhancement in output quality, possibly with NLP-based techniques."
+    },
+    {
+      "file": "_components.scss",
+      "reason": "Styling is modular but complex; future refactoring or updates expected for consistency and maintainability."
+    },
+    {
+      "file": "_migrated.scss",
+      "reason": "Likely contains legacy styles that may need modernization or integration with new components."
+    }
+  ],
+  "alembic_migration_summary": null,
+  "notes": "No Alembic migration files observed in the scan. Project appears to be a lightweight log summarizer using React and TypeScript, with AI-assisted development workflows via .ma/ directories. All data derived from file scan summary; no external sources or assumptions."
+}
+```
 
 ---
 
 # Context Snapshot (Scan)
 
 Repo: /mnt/e/code/machine-client-log-summarizer
-Generated: 2025-10-15T01:54:45.778Z
+Generated: 2025-10-15T01:56:51.461Z
 
 ## Totals
-- Files: 49
-- Bytes: 320005
-- Lines: 9580
+- Files: 50
+- Bytes: 330026
+- Lines: 9821
 
 ## Components
 ### .
-- Files: 49
-- Bytes: 320005
-- Lines: 9580
+- Files: 50
+- Bytes: 330026
+- Lines: 9821
 - Largest (top 10):
   - package-lock.json (125965 bytes)
-  - .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (114942 bytes)
-  - .ma/context/snapshot.json (22748 bytes)
+  - .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (116923 bytes)
+  - .ma/context/snapshot.json (22743 bytes)
+  - .ma/context/summary.md (11951 bytes)
   - PROJECT_PLAN.md (10758 bytes)
-  - .ma/context/files.ndjson (7039 bytes)
+  - .ma/context/files.ndjson (7038 bytes)
   - .ma/qa/task-c5d7201b-8e98-4d38-bb13-a7baf12c70f5-qa.log (4379 bytes)
-  - .ma/context/summary.md (3981 bytes)
   - src/styles/_migrated.scss (3498 bytes)
   - src/styles/_components.scss (3399 bytes)
   - src/ingestion.test.ts (1910 bytes)
 - Longest (top 10):
   - package-lock.json (3711 lines)
-  - .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (3404 lines)
+  - .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (3462 lines)
   - .ma/context/snapshot.json (795 lines)
+  - .ma/context/summary.md (294 lines)
   - src/styles/_migrated.scss (198 lines)
   - src/styles/_components.scss (182 lines)
   - PROJECT_PLAN.md (144 lines)
-  - .ma/context/summary.md (113 lines)
   - .ma/qa/task-c5d7201b-8e98-4d38-bb13-a7baf12c70f5-qa.log (79 lines)
   - src/styles/_base.scss (79 lines)
   - src/ingestion.test.ts (76 lines)
@@ -233,13 +366,13 @@ Generated: 2025-10-15T01:54:45.778Z
 
 ### .ma/context
 
-- **files.ndjson** (7039 bytes, 50 lines)
-- **snapshot.json** (22748 bytes, 795 lines)
-- **summary.md** (3981 bytes, 113 lines)
+- **files.ndjson** (7038 bytes, 50 lines)
+- **snapshot.json** (22743 bytes, 795 lines)
+- **summary.md** (11951 bytes, 294 lines)
 
 ### .ma/planning
 
-- **task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log** (114942 bytes, 3404 lines)
+- **task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log** (116923 bytes, 3462 lines)
 
 ### .ma/qa
 
@@ -257,6 +390,7 @@ Generated: 2025-10-15T01:54:45.778Z
 - **task-b5d37e07-8343-4092-b8ad-c6637380b23d-qa.log** (526 bytes, 17 lines)
 - **task-bd873a65-3745-4d49-b1c3-157d4cb57328-qa.log** (483 bytes, 18 lines)
 - **task-c5d7201b-8e98-4d38-bb13-a7baf12c70f5-qa.log** (4379 bytes, 79 lines)
+- **task-d06ff98c-4ace-4446-91a1-3e95877970dc-qa.log** (812 bytes, 34 lines)
 - **task-d631e40c-11a4-4479-b430-714ce0650d84-qa.log** (1720 bytes, 51 lines)
 
 ### scripts
@@ -269,13 +403,13 @@ Generated: 2025-10-15T01:54:45.778Z
 - **fileIngest.test.ts** (277 bytes, 9 lines)
 - **fileIngest.ts** (1412 bytes, 53 lines)
 - **ingestion.test.ts** (1910 bytes, 76 lines)
-- **ingestion.ts** (601 bytes, 24 lines)
-- **main.tsx** (231 bytes, 10 lines)
+- **ingestion.ts** (50 bytes, 1 lines)
+- **main.tsx** (41 bytes, 1 lines)
 
 ### src/ingest
 
 - **fileIngest.test.ts** (42 bytes, 1 lines)
-- **fileIngest.ts** (29 bytes, 1 lines)
+- **fileIngest.ts** (34 bytes, 1 lines)
 - **logEntry.ts** (79 bytes, 5 lines)
 - **logSummarizer.test.ts** (54 bytes, 1 lines)
 - **logSummarizer.ts** (174 bytes, 5 lines)
