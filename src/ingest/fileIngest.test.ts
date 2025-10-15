@@ -1,1 +1,1 @@
-import { processLogFile } from './fileIngest';
+import { fileIngest } from './fileIngest';
