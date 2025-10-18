@@ -1,10 +1,10 @@
-import * as fs from 'fs';
-import * as path from 'path';
-export async function fileIngest(filePath: string): Promise<void> {
-  try {
-    const data = await fs.promises.readFile(filePath, 'utf8');
-    const json = JSON.parse(data);
-    console.log(json);
-  } catch (error) {
-    console.error(error);
-  }
+import fs from 'fs';
+import { LogEntry } from './logEntry';
+export async function fileIngest(filePath: string): Promise<LogEntry[]> {
+  const data = await fs.promises.readFile(filePath, 'utf8');
+  const records = JSON.parse(data);
+
+  return records.map((record) => ({
+    timestamp: new Date(record.timestamp),
+    message: record.message,
+  }));
