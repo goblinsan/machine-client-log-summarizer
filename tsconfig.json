@@ -1,3 +1,6 @@
 {
   "compilerOptions": {
     // ... existing options remain the same ...
+    "include": ["src/**/*"]
+  }
+}
