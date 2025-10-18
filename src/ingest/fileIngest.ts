@@ -1,16 +1,6 @@
-import * as jsonfile from 'jsonfile';
 import { LogEntry } from '../logEntry';
+import * as fs from 'fs';
 export async function fileIngest(filePath: string): Promise<LogEntry[]> {
-  const data = readFileSync(filePath, 'utf8');
-  let records;
-  try {
-    records = await jsonfile.parse(data);
-  } catch (error) {
-    // TO DO: handle error when parsing JSON files
-    console.error(error);
-  }
-  return records.map((record) => ({
-    timestamp: new Date(record.timestamp),
-    message: record.message,
-  }));
-}
+  const data = await fs.promises.readFile(filePath, 'utf8');
+  const logEntries = JSON.parse(data);
+  return logEntries.map((entry) => ({ timestamp: new Date(entry.timestamp), message: entry.message }));
