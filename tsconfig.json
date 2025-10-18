@@ -1,4 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "moduleResolution": "node"
+    // ... existing options remain the same ...
+
+    "include": ["src/**/*"]
+  }
+}
