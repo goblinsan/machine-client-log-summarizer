@@ -1,13 +1,17 @@
 import * as fs from 'fs';
 import { LogEntry } from './logEntry';
-export async function fileIngest(filePath: string): Promise<LogEntry[]> {
-  const data = fs.readFileSync(filePath, 'utf8');
-  const logEntries = JSON.parse(data);
-
-  // Normalize the log entries
-  return logEntries.map((entry) => ({
-    timestamp: new Date(entry.timestamp),
-    message: entry.message,
-    data: entry.data,
-  }));
-}
+export function fileIngest(filePath: string): Promise<LogEntry[]> {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        try {
+          const json = JSON.parse(data.toString());
+          resolve(json.map((entry: any) => ({ timestamp: new Date(entry.timestamp), message: entry.message, data: entry.data })));
+        } catch (e) {
+          reject(e);
+        }
+      }
+    });
+  });

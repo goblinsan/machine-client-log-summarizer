@@ -3,5 +3,7 @@
     // ... existing options remain the same ...
     "include": ["src/**/*"]
   },
-  "moduleResolution": "node"
+  "moduleResolution": "node",
+  "esModuleInterop": true,
+  "allowSyntheticDefaultImports": true
 }
