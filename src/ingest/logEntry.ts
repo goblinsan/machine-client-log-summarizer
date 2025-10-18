@@ -1,5 +1,8 @@
 export interface LogEntry {
-  timestamp: string;
-  level: string;
+  timestamp: Date;
   message: string;
+}
+
+export function createLogEntry(timestamp: Date, message: string): LogEntry {
+  return { timestamp, message };
 }

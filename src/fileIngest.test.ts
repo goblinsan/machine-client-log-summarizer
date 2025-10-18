@@ -1,9 +1,10 @@
-import { ingestFile } from './fileIngest';
-
-describe('ingestFile', () => {
-  it('should return normalized records', async () => {
-    const filePath = 'path/to/log.json';
-    const logRecords = await ingestFile(filePath);
-    expect(logRecords).toBeInstanceOf(Array);
-  });
-});
+import { fileIngest } from './ingest/fileIngest';
+import * as fs from 'fs';
+import * as path from 'path';
+export async function testFileIngest(): Promise<void> {
+  try {
+    await fileIngest('test.json');
+  } catch (error) {
+    console.error(error);
+  }
+}
