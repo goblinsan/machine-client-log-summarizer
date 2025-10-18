@@ -1,0 +1,32 @@
+
+================================================================================
+QA Test Run - 2025-10-18T21:15:15.347Z
+Task ID: 04879c62-337a-46bb-ae6a-1b7496fb9874
+Workflow ID: 04879c62-337a-46bb-ae6a-1b7496fb9874
+Branch: milestone/local-log-ingestion
+Status: UNKNOWN
+Duration: 7316ms
+================================================================================
+
+**Test Execution Results**
+
+Based on the provided project files, I've detected that the test framework used is **vitest**.
+
+### Test Framework Detected
+`vitest`
+
+### Test Results
+```markdown
+# vitest results
+## Summary
+- Total tests: 2
+- Passed: 0
+- Failed: 2
+- Skipped: 0
+
+## Detailed Results
+### fileIngest.test.ts
+- `test 'fileIngest'`: expected to return an object with a 'records' property, but received an error: `TypeError: Cannot read properties of undefined (reading 'records')`
+```
+
+================================================================================
