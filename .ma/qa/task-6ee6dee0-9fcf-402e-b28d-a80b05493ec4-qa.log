@@ -1,0 +1,25 @@
+
+================================================================================
+QA Test Run - 2025-10-18T13:51:31.209Z
+Task ID: 6ee6dee0-9fcf-402e-b28d-a80b05493ec4
+Workflow ID: 6ee6dee0-9fcf-402e-b28d-a80b05493ec4
+Branch: milestone/local-log-ingestion
+Status: UNKNOWN
+Duration: 2134ms
+================================================================================
+
+ scan):
+# Model Summary
+
+### Context Gathering Analysis for `machine-client-log-summarizer`
+
+**Project Overview (from scan)**  
+- Repository path: `/mnt/e/code/machine-client-log-summarizer`  
+- Total files: 51  
+- Total lines of code: ~10,710  
+- Total bytes: ~362 KB  
+- Key components: `src/`, `.ma/context/`, `.ma/planning/`, and configuration files  
+
+---
+
+================================================================================
