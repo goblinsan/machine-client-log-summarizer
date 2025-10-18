@@ -1,1 +1,1 @@
-import { summarizeLogEntries } from './logSummarizer';
+import { fileIngest } from './fileIngest';
