@@ -1,0 +1,37 @@
+
+================================================================================
+QA Test Run - 2025-10-18T13:59:41.414Z
+Task ID: bfa93fc1-81ed-4836-ae75-0f0888eaf0ed
+Workflow ID: bfa93fc1-81ed-4836-ae75-0f0888eaf0ed
+Branch: milestone/local-log-ingestion
+Status: FAIL
+Duration: 2571ms
+================================================================================
+
+```json
+{
+  "status": "fail",
+  "tdd_red_phase_detected": false,
+  "test_framework": "no test framework found",
+  "pass_count": 0,
+  "fail_count": 0,
+  "skip_count": 0,
+  "failed_tests": [],
+  "linter_results": {
+    "stylelint": {
+      "status": "pass",
+      "errors": 0
+    },
+    "eslint": {
+      "status": "pass",
+      "errors": 0
+    }
+  },
+  "potential_root_causes": [
+    "No test framework detected in the project.",
+    "Linter and type-checker results indicate no issues."
+  ]
+}
+```
+
+================================================================================
