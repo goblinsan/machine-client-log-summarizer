@@ -1,8 +1,9 @@
-export function fileIngest(filePath: string): any {
-  try {
-    const data = require('fs').readFileSync(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error(`Error reading file ${filePath}:`, error);
-    return null;
-  }
+import { readFileSync } from 'fs';
+import { LogEntry } from './logEntry';
+export async function fileIngest(filePath: string): Promise<LogEntry[]> {
+  const data = JSON.parse(readFileSync(filePath, 'utf8'));
+  return data.map((entry) => ({
+    timestamp: new Date(entry.timestamp),
+    message: entry.message,
+    data: entry.data,
+  }));
