@@ -1,5 +1,4 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "test": "jest"
-  },
+    "install-deps": "npm install @types/json"
