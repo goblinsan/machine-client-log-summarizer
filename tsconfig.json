@@ -3,5 +3,9 @@
     // ... existing options remain the same ...
 
     "include": ["src/**/*"]
-  }
+  },
+
+  "typeRoots": ["node_modules/@types"],
+  "esModuleInterop": true,
+  "allowSyntheticDefaultImports": true
 }
