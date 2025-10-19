@@ -6,11 +6,11 @@ export function fileIngest(filePath: string): Promise<LogEntry[]> {
       if (err) {
         reject(err);
       } else {
-        const json = JSON.parse(data.toString());
-        resolve(json.map((entry: any) => ({
+        const logEntries = JSON.parse(data.toString()).logEntries;
+        resolve(logEntries.map((entry) => ({
           timestamp: new Date(entry.timestamp),
           message: entry.message,
-          data: entry.data
+          data: entry.data,
         })));
       }
     });

@@ -1,2 +1,2 @@
 import { fileIngest } from './fileIngest';
-import { logSummarizer } from './logSummarizer';
+import * as fs from 'fs';
