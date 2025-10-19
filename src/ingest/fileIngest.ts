@@ -1,25 +1,13 @@
-import fs from 'fs';
-import * as path from 'path';
+import { join } from 'path';
+import fs from 'fs/promises';
 import { LogEntry } from './logEntry';
 export class FileIngest {
-  private filePath: string;
-  constructor(filePath: string) {
-    this.filePath = filePath;
-  }
-  public readJsonFile(): Promise<LogEntry[]> {
-    return new Promise((resolve, reject) => {
-      fs.readFile(this.filePath, 'utf8', (err, data) => {
-        if (err) {
-          reject(err);
-        } else {
-          const logEntries = JSON.parse(data).map((entry: any) => ({
-            timestamp: new Date(entry.timestamp),
-            message: entry.message,
-            data: entry.data,
-          }));
-          resolve(logEntries);
-        }
-      });
-    });
+  async readJsonFile(filePath: string): Promise<LogEntry[]> {
+    const fileContent = await fs.readFile(join(process.cwd(), filePath), 'utf8');
+    return JSON.parse(fileContent).map((entry) => ({
+      timestamp: new Date(entry.timestamp),
+      message: entry.message,
+      data: entry.data,
+    }));
   }
 }
