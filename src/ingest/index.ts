@@ -1,1 +1,1 @@
-import { fileIngest } from './fileIngest';
+export * from './fileIngest';
