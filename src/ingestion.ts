@@ -1,2 +1,2 @@
-import fs from 'fs';
+import * as fs from 'fs';
 import { fileIngest } from '../ingest/fileIngest';
