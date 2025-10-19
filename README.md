@@ -1,1 +1,1 @@
-*   `src/ingest/fileIngest.ts`: Reads JSON files and returns normalized records.
+*   `src/ingest/fileIngest.ts`: Reads JSON files and returns normalized log entries.

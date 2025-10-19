@@ -1,10 +1,7 @@
-import { fileIngest } from './fileIngest';
-import fs from 'fs';
-
-describe('fileIngest', () => {
-  it('should read JSON file and return normalized records', async () => {
-    const filePath = 'path/to/example.json';
-    const expectedData = [];
-    expect(fileIngest(filePath)).resolves.toEqual(expectedData);
-  });
+  const filePath = 'path/to/example.json';
+  const expectedData = [];
+  const jsonData = [
+    { timestamp: new Date('2022-01-01T00:00:00.000Z'), message: 'example log entry', data: [] },
+  ];
+  expect(fileIngest(filePath)).resolves.toEqual([jsonData[0]]);
 });
