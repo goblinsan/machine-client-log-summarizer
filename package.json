@@ -1,4 +1,2 @@
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "install-deps": "npm install @types/json"
+  "dependencies": {
+    "@types/json": "^2.0.56",
