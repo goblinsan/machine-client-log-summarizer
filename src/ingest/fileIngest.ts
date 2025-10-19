@@ -1,18 +1,17 @@
-import { LogEntry } from './logEntry';
+import { readFileSync } from 'fs';
 
 export interface FileIngestOptions {
   filePath: string;
 }
-
 export class FileIngest {
-  private logEntries: LogEntry[] = [];
-
   async readJsonFile(options: FileIngestOptions): Promise<LogEntry[]> {
-    const fileContent = await import('fs').promises.readFile(options.filePath, 'utf8');
-    return JSON.parse(fileContent).map((entry) => ({ ...entry }));
+    const fileContent = readFileSync(options.filePath, 'utf8');
+    return JSON.parse(fileContent).map((entry) => ({
+      timestamp: new Date(entry.timestamp),
+      message: entry.message,
+    }));
   }
-
   async ingest(options: FileIngestOptions): Promise<LogEntry[]> {
-    this.logEntries = await this.readJsonFile(options);
-    return this.logEntries;
+    const logEntries = await this.readJsonFile(options);
+    return logEntries;
   }

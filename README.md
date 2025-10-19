@@ -1,1 +1,1 @@
- *   `src/ingest/FileIngest.js`: A class for ingesting log records from JSON files.
+*   `src/ingest/fileIngest.ts`: A class for ingesting log records from JSON files.
