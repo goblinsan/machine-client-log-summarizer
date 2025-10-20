@@ -1,86 +1,26 @@
-# Model Summary
-
-**Project Context Gathering**
-
-Based on the provided file scan summary, I will gather information about the project structure, roles of files, large files, size hotspots, and potential next steps.
-
-### Project Tree Sketch
-
-The project has the following top-level directories:
-
-* `.gitignore`
-* `.stylelintrc.json`
-* `index.html`
-* `package-lock.json`
-* `package.json`
-* `PROJECT_PLAN.md`
-* `README.md`
-* `tsconfig.json`
-* `vite.config.ts`
-
-### File Roles
-
-Based on the file names and extensions, the following roles can be inferred:
-
-* `.gitignore`: configuration for Git
-* `.stylelintrc.json`: stylelint configuration
-* `index.html`: entry point of the web application
-* `package-lock.json` and `package.json`: package management files
-* `PROJECT_PLAN.md`: project plan document
-* `README.md`: project README file
-* `tsconfig.json`: TypeScript configuration file
-* `vite.config.ts`: Vite configuration file
-
-### Large Files (>200 lines)
-
-The following files have more than 200 lines:
-
-* `.ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log` (25167 lines)
-* `.ma/qa/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log` (4544 lines)
-
-### Size Hotspots
-
-The following files are the largest:
-
-* `.ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log` (884282 bytes)
-* `package-lock.json` (125965 bytes)
-
-### Files Likely to Touch Next
-
-Based on the file names and extensions, the following files are likely to be touched next:
-
-* `.ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log`: This file is a plan log for a task, so it's likely that other files related to this task will be updated.
-* `package-lock.json`: As the package management files are often updated when new dependencies are added or removed.
-
-### Alembic Tree (Not Observed)
-
-Unfortunately, there is no information about an Alembic tree in the provided file scan summary.
-
----
-
 # Context Snapshot (Scan)
 
 Repo: /Users/jamescoghlan/code/machine-client-log-summarizer
-Generated: 2025-10-20T22:25:24.417Z
+Generated: 2025-10-20T22:28:24.588Z
 
 ## Totals
 - Files: 116
-- Bytes: 1437195
-- Lines: 40869
+- Bytes: 1436966
+- Lines: 40859
 
 ## Components
 ### .
 - Files: 116
-- Bytes: 1437195
-- Lines: 40869
+- Bytes: 1436966
+- Lines: 40859
 - Largest (top 10):
   - .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (884282 bytes)
   - .ma/qa/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log (150219 bytes)
   - package-lock.json (125965 bytes)
-  - .ma/context/snapshot.json (38693 bytes)
-  - .ma/context/files.ndjson (18308 bytes)
+  - .ma/context/snapshot.json (38698 bytes)
+  - .ma/context/files.ndjson (18309 bytes)
   - .ma/planning/task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log (11798 bytes)
-  - .ma/context/summary.md (11646 bytes)
+  - .ma/context/summary.md (11411 bytes)
   - .ma/reviews/task-c73e2214-3baa-438c-a7fb-519ba22a5b2d-code-review.log (8332 bytes)
   - .ma/planning/task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log (7206 bytes)
   - .ma/reviews/task-f8d78166-c4e5-4842-81e7-fbf220f1a1b0-code-review.log (5223 bytes)
@@ -90,7 +30,7 @@ Generated: 2025-10-20T22:25:24.417Z
   - package-lock.json (3711 lines)
   - .ma/context/snapshot.json (1264 lines)
   - .ma/planning/task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log (298 lines)
-  - .ma/context/summary.md (253 lines)
+  - .ma/context/summary.md (243 lines)
   - .ma/planning/task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log (204 lines)
   - src/styles/_migrated.scss (198 lines)
   - src/styles/_components.scss (182 lines)
@@ -112,9 +52,9 @@ Generated: 2025-10-20T22:25:24.417Z
 
 ### .ma/context
 
-- **files.ndjson** (18308 bytes, 117 lines)
-- **snapshot.json** (38693 bytes, 1264 lines)
-- **summary.md** (11646 bytes, 253 lines)
+- **files.ndjson** (18309 bytes, 117 lines)
+- **snapshot.json** (38698 bytes, 1264 lines)
+- **summary.md** (11411 bytes, 243 lines)
 
 ### .ma/planning
 
