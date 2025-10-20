@@ -1,3 +1,63 @@
+# Model Summary
+
+**Project Context Gathering**
+
+Based on the provided file scan summary, I will gather information about the project structure, roles of files, large files, size hotspots, and potential next steps.
+
+### Project Tree Sketch
+
+The project has the following top-level directories:
+
+* `.gitignore`
+* `.stylelintrc.json`
+* `index.html`
+* `package-lock.json`
+* `package.json`
+* `PROJECT_PLAN.md`
+* `README.md`
+* `tsconfig.json`
+* `vite.config.ts`
+
+### File Roles
+
+Based on the file names and extensions, the following roles can be inferred:
+
+* `.gitignore`: configuration for Git
+* `.stylelintrc.json`: stylelint configuration
+* `index.html`: entry point of the web application
+* `package-lock.json` and `package.json`: package management files
+* `PROJECT_PLAN.md`: project plan document
+* `README.md`: project README file
+* `tsconfig.json`: TypeScript configuration file
+* `vite.config.ts`: Vite configuration file
+
+### Large Files (>200 lines)
+
+The following files have more than 200 lines:
+
+* `.ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log` (25167 lines)
+* `.ma/qa/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log` (4544 lines)
+
+### Size Hotspots
+
+The following files are the largest:
+
+* `.ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log` (884282 bytes)
+* `package-lock.json` (125965 bytes)
+
+### Files Likely to Touch Next
+
+Based on the file names and extensions, the following files are likely to be touched next:
+
+* `.ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log`: This file is a plan log for a task, so it's likely that other files related to this task will be updated.
+* `package-lock.json`: As the package management files are often updated when new dependencies are added or removed.
+
+### Alembic Tree (Not Observed)
+
+Unfortunately, there is no information about an Alembic tree in the provided file scan summary.
+
+---
+
 # Context Snapshot (Scan)
 
 Repo: /Users/jamescoghlan/code/machine-client-log-summarizer
