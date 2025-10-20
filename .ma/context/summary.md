@@ -1,96 +1,26 @@
-# Model Summary
-
-Based on the provided file scan summary, I will gather context for the project.
-
-**Project Tree Sketch**
-
-The project tree can be sketched as follows:
-
-* Root directory
-	+ .gitignore
-	+ .stylelintrc.json
-	+ index.html
-	+ package-lock.json
-	+ package.json
-	+ PROJECT_PLAN.md
-	+ README.md
-	+ tsconfig.json
-	+ vite.config.ts
-* .ma/context
-	+ files.ndjson
-	+ snapshot.json
-	+ summary.md
-* .ma/planning
-	+ task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log
-	+ task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log
-	+ task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log
-	+ task-d2e4dcff-b4fa-483b-afff-d22f598b4803-plan.log
-* .ma/qa
-	+ task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log
-	+ ... (152 other qa logs)
-* .ma/reviews
-	+ task-0aac699c-2ce1-42bb-8190-bdb45aea7f4f-code-review.log
-	+ ... (6 other code review logs)
-
-**File Roles**
-
-Based on the file names and extensions, it appears that:
-
-* `.log` files in `.ma/planning` are planning logs.
-* `.log` files in `.ma/qa` are QA logs.
-* `.log` files in `.ma/reviews` are code review logs.
-
-**>200-line files**
-
-The following files have more than 200 lines:
-
-* .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (25167 lines)
-* package-lock.json (3711 lines)
-
-**Size Hotspots**
-
-The largest files are:
-
-* .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (884282 bytes)
-* package-lock.json (125965 bytes)
-
-**Files likely to touch next**
-
-Based on the file names and extensions, it appears that files in `.ma/planning` are related to planning tasks. Therefore, files in `.ma/qa` and `.ma/reviews` may be related to QA and code review tasks respectively.
-
-However, without more information about the project's workflow or dependencies between files, it is difficult to determine which specific files are likely to touch next.
-
-**Alembic Tree**
-
-An Alembic tree was not observed in the scan summary. Therefore, there is no migration count or latest migration file to report.
-
-Please note that this analysis is based solely on the provided file scan summary and may not be exhaustive or accurate without more context about the project.
-
----
-
 # Context Snapshot (Scan)
 
 Repo: /Users/jamescoghlan/code/machine-client-log-summarizer
-Generated: 2025-10-20T22:22:54.466Z
+Generated: 2025-10-20T22:25:24.417Z
 
 ## Totals
 - Files: 116
-- Bytes: 1437613
-- Lines: 40874
+- Bytes: 1437195
+- Lines: 40869
 
 ## Components
 ### .
 - Files: 116
-- Bytes: 1437613
-- Lines: 40874
+- Bytes: 1437195
+- Lines: 40869
 - Largest (top 10):
   - .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (884282 bytes)
   - .ma/qa/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log (150219 bytes)
   - package-lock.json (125965 bytes)
-  - .ma/context/snapshot.json (38864 bytes)
-  - .ma/context/files.ndjson (18300 bytes)
-  - .ma/context/summary.md (11901 bytes)
+  - .ma/context/snapshot.json (38693 bytes)
+  - .ma/context/files.ndjson (18308 bytes)
   - .ma/planning/task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log (11798 bytes)
+  - .ma/context/summary.md (11646 bytes)
   - .ma/reviews/task-c73e2214-3baa-438c-a7fb-519ba22a5b2d-code-review.log (8332 bytes)
   - .ma/planning/task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log (7206 bytes)
   - .ma/reviews/task-f8d78166-c4e5-4842-81e7-fbf220f1a1b0-code-review.log (5223 bytes)
@@ -100,7 +30,7 @@ Generated: 2025-10-20T22:22:54.466Z
   - package-lock.json (3711 lines)
   - .ma/context/snapshot.json (1264 lines)
   - .ma/planning/task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log (298 lines)
-  - .ma/context/summary.md (258 lines)
+  - .ma/context/summary.md (253 lines)
   - .ma/planning/task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log (204 lines)
   - src/styles/_migrated.scss (198 lines)
   - src/styles/_components.scss (182 lines)
@@ -122,9 +52,9 @@ Generated: 2025-10-20T22:22:54.466Z
 
 ### .ma/context
 
-- **files.ndjson** (18300 bytes, 117 lines)
-- **snapshot.json** (38864 bytes, 1264 lines)
-- **summary.md** (11901 bytes, 258 lines)
+- **files.ndjson** (18308 bytes, 117 lines)
+- **snapshot.json** (38693 bytes, 1264 lines)
+- **summary.md** (11646 bytes, 253 lines)
 
 ### .ma/planning
 
