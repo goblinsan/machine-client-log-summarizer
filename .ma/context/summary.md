@@ -1,3 +1,73 @@
+# Model Summary
+
+Based on the provided file scan summary, I will gather context for the project.
+
+**Project Tree Sketch**
+
+The project tree can be sketched as follows:
+
+* Root directory
+	+ .gitignore
+	+ .stylelintrc.json
+	+ index.html
+	+ package-lock.json
+	+ package.json
+	+ PROJECT_PLAN.md
+	+ README.md
+	+ tsconfig.json
+	+ vite.config.ts
+* .ma/context
+	+ files.ndjson
+	+ snapshot.json
+	+ summary.md
+* .ma/planning
+	+ task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log
+	+ task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log
+	+ task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log
+	+ task-d2e4dcff-b4fa-483b-afff-d22f598b4803-plan.log
+* .ma/qa
+	+ task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log
+	+ ... (152 other qa logs)
+* .ma/reviews
+	+ task-0aac699c-2ce1-42bb-8190-bdb45aea7f4f-code-review.log
+	+ ... (6 other code review logs)
+
+**File Roles**
+
+Based on the file names and extensions, it appears that:
+
+* `.log` files in `.ma/planning` are planning logs.
+* `.log` files in `.ma/qa` are QA logs.
+* `.log` files in `.ma/reviews` are code review logs.
+
+**>200-line files**
+
+The following files have more than 200 lines:
+
+* .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (25167 lines)
+* package-lock.json (3711 lines)
+
+**Size Hotspots**
+
+The largest files are:
+
+* .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (884282 bytes)
+* package-lock.json (125965 bytes)
+
+**Files likely to touch next**
+
+Based on the file names and extensions, it appears that files in `.ma/planning` are related to planning tasks. Therefore, files in `.ma/qa` and `.ma/reviews` may be related to QA and code review tasks respectively.
+
+However, without more information about the project's workflow or dependencies between files, it is difficult to determine which specific files are likely to touch next.
+
+**Alembic Tree**
+
+An Alembic tree was not observed in the scan summary. Therefore, there is no migration count or latest migration file to report.
+
+Please note that this analysis is based solely on the provided file scan summary and may not be exhaustive or accurate without more context about the project.
+
+---
+
 # Context Snapshot (Scan)
 
 Repo: /Users/jamescoghlan/code/machine-client-log-summarizer
