@@ -1,3 +1,78 @@
+# Model Summary
+
+**Project Context Gathering**
+
+Based on the provided file scan summary, I will gather information about the project structure, roles of files, size hotspots, and files likely to touch next.
+
+### Project Tree Sketch
+
+The project tree can be sketched as follows:
+
+```
+/
+|-- .gitignore
+|-- .stylelintrc.json
+|-- index.html
+|-- package-lock.json
+|-- package.json
+|-- PROJECT_PLAN.md
+|-- README.md
+|-- tsconfig.json
+|-- vite.config.ts
+|-- .ma/
+|   |-- context/
+|   |   |-- files.ndjson
+|   |   |-- snapshot.json
+|   |   |-- summary.md
+|   |-- planning/
+|   |   |-- task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log
+|   |   |-- task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log
+|   |   |-- task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log
+|   |   |-- task-d2e4dcff-b4fa-483b-afff-d22f598b4803-plan.log
+|   |-- qa/
+|       |-- task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log
+|       |-- ...
+|-- .ma/reviews/
+    |-- task-c73e2214-3baa-438c-a7fb-519ba22a5b2d-code-review.log
+    |-- ...
+```
+
+### File Roles
+
+Based on the file names and extensions, we can infer the following roles:
+
+* `.gitignore`: Ignore files in Git repository.
+* `.stylelintrc.json`: Style lint configuration file.
+* `index.html`: Main HTML entry point of the project.
+* `package-lock.json`: Lockfile for package dependencies.
+* `package.json`: Package metadata and dependencies.
+* `PROJECT_PLAN.md` and `README.md`: Project documentation files.
+* `tsconfig.json`: TypeScript configuration file.
+* `vite.config.ts`: Vite configuration file.
+
+### Size Hotspots
+
+The largest files in the project are:
+
+1. `.ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log` (884282 bytes)
+2. `package-lock.json` (125965 bytes)
+3. `.ma/qa/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log` (150219 bytes)
+
+### Files Likely to Touch Next
+
+Based on the file structure and dependencies, files likely to touch next are:
+
+1. `task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log` in `.ma/planning/`
+2. `task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log` in `.ma/qa/`
+
+These files are likely to be updated or modified next due to their large size and presence in the project's planning and QA directories.
+
+### Alembic Tree (Not Observed)
+
+Unfortunately, there is no information about an Alembic tree in the provided file scan summary.
+
+---
+
 # Context Snapshot (Scan)
 
 Repo: /Users/jamescoghlan/code/machine-client-log-summarizer
