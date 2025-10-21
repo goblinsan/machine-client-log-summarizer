@@ -1,18 +1,18 @@
 # Context Snapshot (Scan)
 
 Repo: /Users/jamescoghlan/code/machine-client-log-summarizer
-Generated: 2025-10-20T22:28:24.588Z
+Generated: 2025-10-21T02:53:06.781Z
 
 ## Totals
-- Files: 116
-- Bytes: 1436966
-- Lines: 40859
+- Files: 117
+- Bytes: 1440629
+- Lines: 40938
 
 ## Components
 ### .
-- Files: 116
-- Bytes: 1436966
-- Lines: 40859
+- Files: 117
+- Bytes: 1440629
+- Lines: 40938
 - Largest (top 10):
   - .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (884282 bytes)
   - .ma/qa/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log (150219 bytes)
@@ -20,19 +20,19 @@ Generated: 2025-10-20T22:28:24.588Z
   - .ma/context/snapshot.json (38698 bytes)
   - .ma/context/files.ndjson (18309 bytes)
   - .ma/planning/task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log (11798 bytes)
-  - .ma/context/summary.md (11411 bytes)
+  - .ma/context/summary.md (9522 bytes)
   - .ma/reviews/task-c73e2214-3baa-438c-a7fb-519ba22a5b2d-code-review.log (8332 bytes)
   - .ma/planning/task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log (7206 bytes)
-  - .ma/reviews/task-f8d78166-c4e5-4842-81e7-fbf220f1a1b0-code-review.log (5223 bytes)
+  - .ma/planning/task-b13a25e9-5a71-447e-83ae-d5186cc2f807-plan.log (5552 bytes)
 - Longest (top 10):
   - .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (25167 lines)
   - .ma/qa/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log (4544 lines)
   - package-lock.json (3711 lines)
   - .ma/context/snapshot.json (1264 lines)
   - .ma/planning/task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log (298 lines)
-  - .ma/context/summary.md (243 lines)
   - .ma/planning/task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log (204 lines)
   - src/styles/_migrated.scss (198 lines)
+  - .ma/context/summary.md (183 lines)
   - src/styles/_components.scss (182 lines)
   - .ma/reviews/task-c73e2214-3baa-438c-a7fb-519ba22a5b2d-code-review.log (144 lines)
 
@@ -54,13 +54,14 @@ Generated: 2025-10-20T22:28:24.588Z
 
 - **files.ndjson** (18309 bytes, 117 lines)
 - **snapshot.json** (38698 bytes, 1264 lines)
-- **summary.md** (11411 bytes, 243 lines)
+- **summary.md** (9522 bytes, 183 lines)
 
 ### .ma/planning
 
 - **task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log** (884282 bytes, 25167 lines)
 - **task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log** (7206 bytes, 204 lines)
 - **task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log** (11798 bytes, 298 lines)
+- **task-b13a25e9-5a71-447e-83ae-d5186cc2f807-plan.log** (5552 bytes, 139 lines)
 - **task-d2e4dcff-b4fa-483b-afff-d22f598b4803-plan.log** (4007 bytes, 119 lines)
 
 ### .ma/qa
