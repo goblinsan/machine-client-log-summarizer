@@ -1,3 +1,76 @@
+# Model Summary
+
+Based on the provided file scan summary, I will gather context for the project.
+
+**Project Tree Sketch**
+The project tree can be sketched as follows:
+
+- Root
+  - .gitignore
+  - .stylelintrc.json
+  - index.html
+  - package-lock.json
+  - package.json
+  - PROJECT_PLAN.md
+  - README.md
+  - tsconfig.json
+  - vite.config.ts
+
+- .ma/context
+  - files.ndjson
+  - snapshot.json
+  - summary.md
+
+- .ma/planning
+  - task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log
+  - task-373b4617-6076-4cd8-b71f-4c7f4d09871f-plan.log
+  - task-861641bf-e3c4-48a3-8114-c893843eb3ad-plan.log
+  - task-b13a25e9-5a71-447e-83ae-d5186cc2f807-plan.log
+  - task-d2e4dcff-b4fa-483b-afff-d22f598b4803-plan.log
+
+- .ma/qa
+  - task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log
+  - ... (many other qa log files)
+
+- .ma/reviews
+  - task-0aac699c-2ce1-42bb-8190-bdb45aea7f4f-code-review.log
+  - ... (many other code review log files)
+
+**File Roles**
+
+Based on the file names and extensions, it appears that:
+
+- `.log` files are likely logs of some sort.
+- `qa.log` files are likely related to quality assurance testing.
+- `code-review.log` files are likely related to code reviews.
+- `plan.log` files are likely related to planning or task management.
+
+**>200-line files**
+
+The following files have more than 200 lines:
+
+- .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (25167 lines)
+- package-lock.json (3711 lines)
+
+**Size Hotspots**
+
+The largest files are:
+
+- .ma/planning/task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log (884282 bytes)
+- package-lock.json (125965 bytes)
+
+**Files likely to touch next**
+
+Based on the file names and extensions, it is likely that files in the `.ma/planning` directory will be updated or modified after `task-004c60d8-68a8-4060-ab5c-e8a364fb085c-plan.log`. Similarly, files in the `.ma/qa` directory may be updated or modified after `task-004c60d8-68a8-4060-ab5c-e8a364fb085c-qa.log`.
+
+**Alembic Tree (not observed)**
+
+Unfortunately, there is no Alembic tree present in the scan summary.
+
+However, if an Alembic migration was performed, it would be stored as a file with a name like `001_initial_migration.py` or `002_create_table.py`. These files are not present in the scan summary.
+
+---
+
 # Context Snapshot (Scan)
 
 Repo: /Users/jamescoghlan/code/machine-client-log-summarizer
