@@ -1,74 +1,94 @@
-# Plan Iteration 2
+# Plan Iteration 1
 
-Generated: 2025-11-01T23:45:21.104Z
+Generated: 2025-11-02T00:32:37.277Z
 
 ## Implementation Plan
 
-### Step 1: Create initial config structure
+### Step 1: Define the structure of the configuration
 
-**Files:** `config.py`, `.env.example`
+**Files:** `config_schema.json`
 
-**Owners:** Engineer A
+**Owners:** Engineer A, Engineer B
 
 **Dependencies:**
 
 **Acceptance Criteria:**
-  - Config structure is defined with env, file, and CLI options
-  - Defaults are set for log paths, store, and LM Studio endpoint
+  - The config schema is defined in a separate JSON file (config_schema.json)
+  - The schema includes all required fields for the configuration
 
-### Step 2: Implement JSON schema validation for config
+### Step 2: Implement environment-specific configurations
 
-**Files:** `config.py`, `schema.json`
+**Files:** `env_config.py`
+
+**Owners:** Engineer A
+
+**Dependencies:**
+  - Define the structure of the configuration (Step 1)
+
+**Acceptance Criteria:**
+  - Environment-specific configurations are stored in a separate file (env_config.py)
+  - The file includes default values for log paths, store, and LM Studio endpoint
+
+### Step 3: Implement CLI-based configuration
+
+**Files:** `cli_config.py`
 
 **Owners:** Engineer B
 
 **Dependencies:**
-  - Initial config structure is in place
+  - Define the structure of the configuration (Step 1)
+  - Implement environment-specific configurations (Step 2)
 
 **Acceptance Criteria:**
-  - JSON schema validation is implemented using a library (e.g., Pydantic)
-  - Schema includes rules for env, file, and CLI options
+  - CLI-based configuration is implemented using a separate file (cli_config.py)
+  - The file includes logic to merge CLI arguments with environment-specific configurations
 
-### Step 3: Add default values for log paths, store, and LM Studio endpoint
+### Step 4: Implement hierarchical config loader
 
-**Files:** `config.py`
+**Files:** `config_loader.py`
+
+**Owners:** Engineer A, Engineer B
+
+**Dependencies:**
+  - Define the structure of the configuration (Step 1)
+  - Implement environment-specific configurations (Step 2)
+  - Implement CLI-based configuration (Step 3)
+
+**Acceptance Criteria:**
+  - The config loader merges all sources (env, file, CLI) into a single configuration
+  - The loader includes JSON schema validation for the merged configuration
+
+### Step 5: Create an example .example.env file
+
+**Files:** `.example.env`
 
 **Owners:** Engineer A
 
 **Dependencies:**
-  - JSON schema validation is implemented
+  - Implement hierarchical config loader (Step 4)
 
 **Acceptance Criteria:**
-  - Defaults are set for log paths, store, and LM Studio endpoint
-  - Config can be loaded from env, file, or CLI options
-
-### Step 4: Create .env.example file with example config
-
-**Files:** `.env.example`
-
-**Owners:** Engineer A
-
-**Dependencies:**
-  - Initial config structure is in place
-
-**Acceptance Criteria:**
-  - .env.example file contains example config with defaults
-  - Example config includes env, file, and CLI options
+  - The .example.env file includes default values for log paths, store, and LM Studio endpoint
+  - The file is properly formatted and easy to understand
 
 ## Risks
 
-1. **Schema validation errors due to incorrect library usage**
-   - Mitigation: Consult documentation for chosen library (e.g., Pydantic)
-2. **Config loading issues due to incorrect file handling**
-   - Mitigation: Use a library that handles file I/O correctly (e.g., Python's built-in `pathlib` module)
+1. **Schema validation errors due to incorrect configuration**
+   - Mitigation: Implement thorough testing of the config loader with various input scenarios
+2. **Inconsistent configuration across environments**
+   - Mitigation: Regularly review and update environment-specific configurations to ensure consistency
 
 ## Open Questions
 
-1. How will we handle conflicts between env, file, and CLI options?
-2. What are the implications of using a specific JSON schema library (e.g., Pydantic)?
+1. How will we handle conflicts between CLI arguments and environment-specific configurations?
+   - Answer: We will implement a logic to prioritize CLI arguments over environment-specific configurations
+2. What is the best way to store sensitive information (e.g. API keys) in the configuration?
+   - Answer: We will use environment variables or a secure storage solution for sensitive information
 
 ## Notes
 
-1. Consider using a config management tool (e.g., `python-dotenv`) for loading env variables.
-2. Ensure that the schema validation library is compatible with our chosen Python version.
+1. Consider using a library like `python-dotenv` to handle .env files
+   - By: Engineer A
+2. Think about implementing a config validation UI for easier debugging and testing
+   - By: Engineer B
 
