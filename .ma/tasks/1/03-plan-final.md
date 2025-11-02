@@ -1,94 +1,69 @@
 # Plan Iteration 1
 
-Generated: 2025-11-02T00:32:37.277Z
+Generated: 2025-11-02T02:54:34.078Z
 
 ## Implementation Plan
 
-### Step 1: Define the structure of the configuration
+### Step 1: Define the structure of the hierarchical config
 
-**Files:** `config_schema.json`
-
-**Owners:** Engineer A, Engineer B
-
-**Dependencies:**
-
-**Acceptance Criteria:**
-  - The config schema is defined in a separate JSON file (config_schema.json)
-  - The schema includes all required fields for the configuration
-
-### Step 2: Implement environment-specific configurations
-
-**Files:** `env_config.py`
+**Files:** `config.py`, `schema.json`
 
 **Owners:** Engineer A
 
 **Dependencies:**
-  - Define the structure of the configuration (Step 1)
 
 **Acceptance Criteria:**
-  - Environment-specific configurations are stored in a separate file (env_config.py)
-  - The file includes default values for log paths, store, and LM Studio endpoint
+  - The config structure is defined with env, file, and CLI sources
+  - The schema is correctly validated
 
-### Step 3: Implement CLI-based configuration
+### Step 2: Implement JSON schema validation for the hierarchical config
 
-**Files:** `cli_config.py`
+**Files:** `config.py`, `schema.json`
+
+**Owners:** Engineer A
+
+**Dependencies:**
+  - Step 1: Define the structure of the hierarchical config
+
+**Acceptance Criteria:**
+  - The config is validated against the schema on load
+  - Schema errors are properly handled and reported
+
+### Step 3: Create a .example.env file with default values for log paths, store, and LM Studio endpoint
+
+**Files:** `.env.example`
 
 **Owners:** Engineer B
 
 **Dependencies:**
-  - Define the structure of the configuration (Step 1)
-  - Implement environment-specific configurations (Step 2)
+  - Step 1: Implement JSON schema validation for the hierarchical config
 
 **Acceptance Criteria:**
-  - CLI-based configuration is implemented using a separate file (cli_config.py)
-  - The file includes logic to merge CLI arguments with environment-specific configurations
+  - .example.env file exists with default values
+  - Default values are correctly documented and formatted
 
-### Step 4: Implement hierarchical config loader
+### Step 4: Implement loading of the hierarchical config from env, file, and CLI sources
 
-**Files:** `config_loader.py`
-
-**Owners:** Engineer A, Engineer B
-
-**Dependencies:**
-  - Define the structure of the configuration (Step 1)
-  - Implement environment-specific configurations (Step 2)
-  - Implement CLI-based configuration (Step 3)
-
-**Acceptance Criteria:**
-  - The config loader merges all sources (env, file, CLI) into a single configuration
-  - The loader includes JSON schema validation for the merged configuration
-
-### Step 5: Create an example .example.env file
-
-**Files:** `.example.env`
+**Files:** `config.py`
 
 **Owners:** Engineer A
 
 **Dependencies:**
-  - Implement hierarchical config loader (Step 4)
+  - Step 2: Implement JSON schema validation for the hierarchical config
 
 **Acceptance Criteria:**
-  - The .example.env file includes default values for log paths, store, and LM Studio endpoint
-  - The file is properly formatted and easy to understand
+  - Config is loaded correctly from all sources
+  - Config values are properly merged and prioritized
 
 ## Risks
 
-1. **Schema validation errors due to incorrect configuration**
-   - Mitigation: Implement thorough testing of the config loader with various input scenarios
-2. **Inconsistent configuration across environments**
-   - Mitigation: Regularly review and update environment-specific configurations to ensure consistency
+1. **Schema complexity**
+   - Mitigation: Keep schema simple and modular
+2. **Config loading errors**
+   - Mitigation: Implement robust error handling and logging
 
 ## Open Questions
 
-1. How will we handle conflicts between CLI arguments and environment-specific configurations?
-   - Answer: We will implement a logic to prioritize CLI arguments over environment-specific configurations
-2. What is the best way to store sensitive information (e.g. API keys) in the configuration?
-   - Answer: We will use environment variables or a secure storage solution for sensitive information
-
-## Notes
-
-1. Consider using a library like `python-dotenv` to handle .env files
-   - By: Engineer A
-2. Think about implementing a config validation UI for easier debugging and testing
-   - By: Engineer B
+1. How to handle conflicts between config sources?
+   - Answer: To be discussed with team
 
