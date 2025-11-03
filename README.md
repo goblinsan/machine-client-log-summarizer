@@ -1,10 +1,24 @@
-# Machine Client Log Summarizer
+## Configuring Your Application
 
-A small starter dashboard scaffolded with Vite + React + TypeScript.
+Your application uses a hierarchical configuration file, which can be loaded from either an environment variables or a JSON file.
 
-Getting started
+### Environment Variables
 
-1. Install dependencies: npm install
-2. Run dev server: npm run dev
+You can set the following environment variables to customize your config:
 
-Build: npm run build
+* `CONFIG_FILE`: The path to your custom config file (default: `config.json`)
+
+### Config File
+
+Your application expects a JSON file with the following structure:
+
+```json
+{
+  "log": {
+    "path": ""
+  },
+  "store": {},
+  "lmStudio": {
+    "endpoint": ""
+  }
+}
