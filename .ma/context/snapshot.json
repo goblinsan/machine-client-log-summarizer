@@ -1,5 +1,5 @@
 {
-  "timestamp": 1762199736415,
+  "timestamp": 1763258734715,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -22,15 +22,33 @@
     },
     {
       "path": "README.md",
-      "bytes": 210,
-      "mtime": 1761999627139.4204,
-      "lines": 11
+      "bytes": 526,
+      "mtime": 1763258655521.9397,
+      "lines": 24
+    },
+    {
+      "path": "cli.ts",
+      "bytes": 148,
+      "mtime": 1763258655522.1018,
+      "lines": 7
+    },
+    {
+      "path": "config.json",
+      "bytes": 464,
+      "mtime": 1763258655522.42,
+      "lines": 22
     },
     {
       "path": "index.html",
       "bytes": 306,
       "mtime": 1759790612651.8906,
       "lines": 13
+    },
+    {
+      "path": "load-config.ts",
+      "bytes": 443,
+      "mtime": 1763258655522.651,
+      "lines": 18
     },
     {
       "path": "package-lock.json",
@@ -43,6 +61,12 @@
       "bytes": 817,
       "mtime": 1761999627139.5315,
       "lines": 31
+    },
+    {
+      "path": "schema.json",
+      "bytes": 464,
+      "mtime": 1763258655522.7515,
+      "lines": 22
     },
     {
       "path": "scripts/replace-colors.js",
@@ -123,6 +147,12 @@
       "lines": 19
     },
     {
+      "path": "validate-config.ts",
+      "bytes": 178,
+      "mtime": 1763258655522.9766,
+      "lines": 5
+    },
+    {
       "path": "vite.config.ts",
       "bytes": 194,
       "mtime": 1759790612653.979,
@@ -130,8 +160,8 @@
     }
   ],
   "totals": {
-    "files": 21,
-    "bytes": 157419,
+    "files": 26,
+    "bytes": 159432,
     "depth": 10
   }
 }

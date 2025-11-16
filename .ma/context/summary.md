@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2025-11-03T19:55:36.415Z
+Generated: 2025-11-16T02:05:34.715Z
 
 ## Overview
 
@@ -14,8 +14,8 @@ Generated: 2025-11-03T19:55:36.415Z
 
 ## Statistics
 
-- **Total Files**: 21
-- **Total Size**: 153.73 KB
+- **Total Files**: 26
+- **Total Size**: 155.70 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -25,11 +25,16 @@ Generated: 2025-11-03T19:55:36.415Z
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (10.5KB)
-  README.md (0.2KB)
+  README.md (0.5KB)
+  cli.ts (0.1KB)
+  config.json (0.5KB)
   index.html (0.3KB)
+  load-config.ts (0.4KB)
   package-lock.json (123.0KB)
   package.json (0.8KB)
+  schema.json (0.5KB)
   tsconfig.json (0.4KB)
+  validate-config.ts (0.2KB)
   vite.config.ts (0.2KB)
 scripts/
   replace-colors.js (4.4KB)
@@ -55,10 +60,10 @@ src/styles/
 ## File Types
 
 - .scss: 9 files
-- .json: 4 files
+- .json: 6 files
+- .ts: 4 files
 - .md: 2 files
 - .tsx: 2 files
 - (no extension): 1 file
 - .html: 1 file
 - .js: 1 file
-- .ts: 1 file
