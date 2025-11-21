@@ -13,6 +13,7 @@
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1761999627139.7048}
 {"path":"src/App.tsx","bytes":1970,"lines":78,"mtime":1761999627139.9312}
 {"path":"src/config/default.ts","bytes":353,"lines":17,"mtime":1763757512400.9172}
+{"path":"src/config/defaultConfig.ts","bytes":366,"lines":19,"mtime":1763758720768.8357}
 {"path":"src/config/index.ts","bytes":635,"lines":24,"mtime":1763737992063.3896}
 {"path":"src/config/loader.ts","bytes":655,"lines":25,"mtime":1763757573137.847}
 {"path":"src/config/schema.ts","bytes":356,"lines":12,"mtime":1763739770037.9731}
