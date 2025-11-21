@@ -1,5 +1,5 @@
 {
-  "timestamp": 1763091163073,
+  "timestamp": 1763686620449,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -23,7 +23,7 @@
     {
       "path": "README.md",
       "bytes": 210,
-      "mtime": 1763091162256.5793,
+      "mtime": 1763686619660.775,
       "lines": 11
     },
     {
