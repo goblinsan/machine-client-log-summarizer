@@ -1,23 +1,11 @@
-// config_loader.ts
-import { Config } from './types';
+import { Config } from './config_schema';
+import fs from 'fs';
+import path from 'path';
+import { defaultConfig } from './config_schema';
 
-const DEFAULT_LOG_PATH = './logs';
-const DEFAULT_STORE_CONFIG = {
-  type: 'memory',
-  path: './store'
-};
-const DEFAULT_LM_STUDIO_ENDPOINT = 'http://localhost:1234';
-
-export function loadConfig(): Config {
-  const config = {
-    // ... existing config loading logic
-    logPath: process.env.LOG_PATH || DEFAULT_LOG_PATH,
-    store: {
-      type: process.env.STORE_TYPE || DEFAULT_STORE_CONFIG.type,
-      path: process.env.STORE_PATH || DEFAULT_STORE_CONFIG.path
-    },
-    lmStudioEndpoint: process.env.LM_STUDIO_ENDPOINT || DEFAULT_LM_STUDIO_ENDPOINT
-  };
-
-  return config;
+export function loadConfig(configPath: string): Config {
+  const configContent = fs.readFileSync(configPath, 'utf-8');
+  const parsedConfig = JSON.parse(configContent);
+  const mergedConfig = { ...defaultConfig, ...parsedConfig };
+  return mergedConfig;
 }
