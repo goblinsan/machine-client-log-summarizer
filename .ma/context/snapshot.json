@@ -1,11 +1,11 @@
 {
-  "timestamp": 1763786917735,
+  "timestamp": 1763789489908,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".example.env",
       "bytes": 344,
-      "mtime": 1763758795416.1777,
+      "mtime": 1763789488418.727,
       "lines": 13
     },
     {
@@ -29,19 +29,19 @@
     {
       "path": "README.md",
       "bytes": 526,
-      "mtime": 1763737951267.4895,
+      "mtime": 1763789488438.44,
       "lines": 24
     },
     {
       "path": "cli.ts",
       "bytes": 148,
-      "mtime": 1763737951267.5786,
+      "mtime": 1763789488438.5974,
       "lines": 7
     },
     {
       "path": "config.json",
       "bytes": 464,
-      "mtime": 1763737951267.6755,
+      "mtime": 1763789488438.7754,
       "lines": 22
     },
     {
@@ -53,7 +53,7 @@
     {
       "path": "load-config.ts",
       "bytes": 443,
-      "mtime": 1763737951267.766,
+      "mtime": 1763789488438.9817,
       "lines": 18
     },
     {
@@ -71,7 +71,7 @@
     {
       "path": "schema.json",
       "bytes": 464,
-      "mtime": 1763737951267.8452,
+      "mtime": 1763789488439.0547,
       "lines": 22
     },
     {
@@ -89,49 +89,49 @@
     {
       "path": "src/config/default.ts",
       "bytes": 353,
-      "mtime": 1763757512400.9172,
+      "mtime": 1763789488439.4927,
       "lines": 17
     },
     {
       "path": "src/config/defaultConfig.ts",
       "bytes": 366,
-      "mtime": 1763758720768.8357,
+      "mtime": 1763789488439.8079,
       "lines": 19
     },
     {
       "path": "src/config/index.ts",
       "bytes": 78,
-      "mtime": 1763786894921.7908,
+      "mtime": 1763789488440.0137,
       "lines": 2
     },
     {
       "path": "src/config/loader.ts",
       "bytes": 655,
-      "mtime": 1763757573137.847,
+      "mtime": 1763789488440.3472,
       "lines": 25
     },
     {
       "path": "src/config/schema.ts",
       "bytes": 356,
-      "mtime": 1763739770037.9731,
+      "mtime": 1763789488440.6528,
       "lines": 12
     },
     {
       "path": "src/config/types.ts",
       "bytes": 302,
-      "mtime": 1763786650532.6943,
+      "mtime": 1763789488441.0278,
       "lines": 19
     },
     {
       "path": "src/config_loader.ts",
       "bytes": 417,
-      "mtime": 1763786848642.07,
+      "mtime": 1763789488441.214,
       "lines": 12
     },
     {
       "path": "src/config_schema.ts",
       "bytes": 256,
-      "mtime": 1763786848642.3413,
+      "mtime": 1763789488441.3845,
       "lines": 15
     },
     {
@@ -197,7 +197,7 @@
     {
       "path": "src/test_config_loader.ts",
       "bytes": 827,
-      "mtime": 1763786787110.3926,
+      "mtime": 1763789488441.747,
       "lines": 20
     },
     {
@@ -209,7 +209,7 @@
     {
       "path": "validate-config.ts",
       "bytes": 178,
-      "mtime": 1763737951267.938,
+      "mtime": 1763789488441.95,
       "lines": 5
     },
     {
