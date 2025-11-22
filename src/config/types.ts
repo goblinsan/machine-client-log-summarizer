@@ -1,19 +1,31 @@
-export interface Config {
+export type Config = {
   logPath: string;
-  storePath: string;
+  store: 'memory' | 'file';
   lmStudioEndpoint: string;
-  [key: string]: any;
-}
+  port: number;
+  host: string;
+  model: string;
+  maxTokens: number;
+  temperature: number;
+  topP: number;
+  frequencyPenalty: number;
+  presencePenalty: number;
+  apiKey: string;
+  apiEndpoint: string;
+};
 
-export interface ConfigSchema {
-  type: 'object';
-  properties: {
-    },
-  };
-}
-
-export interface DefaultConfig {
-  logPath: string;
-  storePath: string;
-  lmStudioEndpoint: string;
-}
+export type ConfigSchema = {
+  logPath?: string;
+  store?: 'memory' | 'file';
+  lmStudioEndpoint?: string;
+  port?: number;
+  host?: string;
+  model?: string;
+  maxTokens?: number;
+  temperature?: number;
+  topP?: number;
+  frequencyPenalty?: number;
+  presencePenalty?: number;
+  apiKey?: string;
+  apiEndpoint?: string;
+};
