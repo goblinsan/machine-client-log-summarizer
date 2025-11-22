@@ -1,5 +1,3 @@
-import { Config } from './types';
+import { loadConfig } from './loader';
 
-export const loadConfig = (): Config => {
-  // Placeholder implementation
-  return {
+export { loadConfig };
