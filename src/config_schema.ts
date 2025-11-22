@@ -1,7 +1,6 @@
 export interface Config {
   logPath?: string;
   store?: {
-    type: 'memory' | 'file';
     path?: string;
   };
   lmStudioEndpoint?: string;
@@ -10,8 +9,7 @@ export interface Config {
 export const defaultConfig: Config = {
   logPath: './logs',
   store: {
-    type: 'memory',
-    path: './store.json'
+    path: './store'
   },
-  lmStudioEndpoint: 'http://localhost:1234/v1'
+  lmStudioEndpoint: 'http://localhost:1234'
 };
