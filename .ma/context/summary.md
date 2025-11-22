@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2025-11-22T04:45:49.294Z
+Generated: 2025-11-22T04:46:54.772Z
 
 ## Overview
 
@@ -14,8 +14,8 @@ Generated: 2025-11-22T04:45:49.294Z
 
 ## Statistics
 
-- **Total Files**: 34
-- **Total Size**: 159.25 KB
+- **Total Files**: 36
+- **Total Size**: 160.13 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -41,8 +41,10 @@ scripts/
   replace-colors.js (4.4KB)
 src/
   App.tsx (1.9KB)
-  config_loader.ts (0.6KB)
+  config_loader.ts (0.4KB)
+  config_schema.ts (0.3KB)
   main.tsx (0.2KB)
+  test_config_loader.ts (0.8KB)
 src/config/
   default.ts (0.3KB)
   defaultConfig.ts (0.4KB)
@@ -68,7 +70,7 @@ src/styles/
 
 ## File Types
 
-- .ts: 11 files
+- .ts: 13 files
 - .scss: 9 files
 - .json: 6 files
 - .md: 2 files
