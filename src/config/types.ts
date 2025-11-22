@@ -1,17 +1,21 @@
 export interface Config {
   logPath: string;
-  store: {
-    type: string;
-    path: string;
-  };
+  storePath: string;
   lmStudioEndpoint: string;
 }
 
 export interface ConfigSchema {
-  logPath: string;
-  store: {
-    type: string;
-    path: string;
+  type: 'object';
+  properties: {
+    logPath: {
+      type: 'string';
+    };
+    storePath: {
+      type: 'string';
+    };
+    lmStudioEndpoint: {
+      type: 'string';
+    };
   };
-  lmStudioEndpoint: string;
+  required: ['logPath', 'storePath', 'lmStudioEndpoint'];
 }
