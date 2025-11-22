@@ -1,0 +1,8 @@
+{
+  "logPath": "./logs",
+  "storePath": "./store",
+  "lmStudioEndpoint": "http://localhost:1234",
+  "cli": {},
+  "env": {},
+  "file": {}
+}
