@@ -1,7 +1,7 @@
-export const defaultValues = {
-  logPath: './logs',
-  storePath: './store',
-  lmStudioEndpoint: 'http://localhost:1234'
-};
+import { Config } from './types';
 
-export type DefaultValues = typeof defaultValues;
+export const defaultValues: Config = {
+  logPath: './logs',
+  store: './store',
+  lmStudioEndpoint: 'http://localhost:1234/v1',
+};
