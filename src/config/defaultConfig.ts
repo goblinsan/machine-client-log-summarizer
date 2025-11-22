@@ -2,18 +2,11 @@ import { Config } from './types';
 
 export const defaultConfig: Config = {
   logPath: './logs',
-  store: {
-    type: 'memory',
-    path: './store.json',
+  storePath: './store',
+  lmStudioEndpoint: 'http://localhost:1234/v1',
+  cli: {
+    port: 3000,
+    host: 'localhost',
   },
-  lmStudioEndpoint: 'http://localhost:1234',
-  port: 3000,
-  host: 'localhost',
-  model: 'gpt-4',
-  apiKey: '',
-  maxTokens: 1000,
-  temperature: 0.7,
-  topP: 1,
-  frequencyPenalty: 0,
-  presencePenalty: 0,
+  env: 'development',
 };
