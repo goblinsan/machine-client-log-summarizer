@@ -1,4 +1,4 @@
-{"path":".example.env","bytes":344,"lines":13,"mtime":1763789488418.727}
+{"path":".example.env","bytes":73,"lines":3,"mtime":1763848458594.961}
 {"path":".gitignore","bytes":206,"lines":26,"mtime":1759790612651.1108}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1760209795183.0251}
 {"path":"PROJECT_PLAN.md","bytes":10758,"lines":144,"mtime":1761999627139.2666}
@@ -15,11 +15,11 @@
 {"path":"src/config/default.ts","bytes":353,"lines":17,"mtime":1763789488439.4927}
 {"path":"src/config/defaultConfig.json","bytes":138,"lines":8,"mtime":1763848358038.9705}
 {"path":"src/config/defaultConfig.ts","bytes":106,"lines":5,"mtime":1763848260748.7617}
-{"path":"src/config/defaultValues.ts","bytes":173,"lines":7,"mtime":1763847725137.0647}
+{"path":"src/config/defaultValues.ts","bytes":166,"lines":8,"mtime":1763848458593.7278}
 {"path":"src/config/index.ts","bytes":62,"lines":3,"mtime":1763848078196.3318}
-{"path":"src/config/loader.ts","bytes":655,"lines":25,"mtime":1763789488440.3472}
-{"path":"src/config/schema.ts","bytes":295,"lines":14,"mtime":1763847895413.0798}
-{"path":"src/config/types.ts","bytes":370,"lines":21,"mtime":1763848182330.3862}
+{"path":"src/config/loader.ts","bytes":1508,"lines":59,"mtime":1763848458593.9683}
+{"path":"src/config/schema.ts","bytes":606,"lines":22,"mtime":1763848458594.417}
+{"path":"src/config/types.ts","bytes":92,"lines":6,"mtime":1763848458594.6965}
 {"path":"src/config_loader.ts","bytes":417,"lines":12,"mtime":1763789488441.214}
 {"path":"src/config_schema.ts","bytes":256,"lines":15,"mtime":1763789488441.3845}
 {"path":"src/main.tsx","bytes":231,"lines":10,"mtime":1761999627140.1501}

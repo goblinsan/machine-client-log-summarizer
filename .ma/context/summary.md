@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2025-11-22T21:53:29.441Z
+Generated: 2025-11-22T21:54:58.926Z
 
 ## Overview
 
@@ -15,14 +15,14 @@ Generated: 2025-11-22T21:53:29.441Z
 ## Statistics
 
 - **Total Files**: 38
-- **Total Size**: 159.60 KB
+- **Total Size**: 160.19 KB
 - **Max Depth**: 10
 
 ## Directory Structure
 
 ```
 ./
-  .example.env (0.3KB)
+  .example.env (0.1KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (10.5KB)
@@ -51,9 +51,9 @@ src/config/
   defaultConfig.ts (0.1KB)
   defaultValues.ts (0.2KB)
   index.ts (0.1KB)
-  loader.ts (0.6KB)
-  schema.ts (0.3KB)
-  types.ts (0.4KB)
+  loader.ts (1.5KB)
+  schema.ts (0.6KB)
+  types.ts (0.1KB)
 src/styles/
   _base.scss (1.7KB)
   _components.scss (3.3KB)
