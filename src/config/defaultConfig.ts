@@ -1,5 +1,5 @@
 export default {
-  logPath: "logs/",
-  store: "local",
+  logPath: "logs",
+  storePath: "./store",
   lmStudioEndpoint: "http://localhost:1234"
 };
