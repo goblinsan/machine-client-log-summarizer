@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2025-11-22T05:31:29.908Z
+Generated: 2025-11-22T05:32:38.731Z
 
 ## Overview
 
@@ -15,7 +15,7 @@ Generated: 2025-11-22T05:31:29.908Z
 ## Statistics
 
 - **Total Files**: 36
-- **Total Size**: 159.56 KB
+- **Total Size**: 160.17 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -48,7 +48,7 @@ src/
 src/config/
   default.ts (0.3KB)
   defaultConfig.ts (0.4KB)
-  index.ts (0.1KB)
+  index.ts (0.7KB)
   loader.ts (0.6KB)
   schema.ts (0.3KB)
   types.ts (0.3KB)
