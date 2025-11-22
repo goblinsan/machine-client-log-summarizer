@@ -2,19 +2,18 @@ export interface Config {
   logPath: string;
   storePath: string;
   lmStudioEndpoint: string;
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 export interface ConfigSchema {
-  logPath: string;
-  storePath: string;
-  lmStudioEndpoint: string;
-  [key: string]: unknown;
+  type: 'object';
+  properties: {
+    },
+  };
 }
 
-export interface Config {
+export interface DefaultConfig {
   logPath: string;
   storePath: string;
   lmStudioEndpoint: string;
-  [key: string]: unknown;
 }
