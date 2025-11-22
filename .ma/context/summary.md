@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2025-11-22T21:51:48.005Z
+Generated: 2025-11-22T21:53:29.441Z
 
 ## Overview
 
@@ -14,8 +14,8 @@ Generated: 2025-11-22T21:51:48.005Z
 
 ## Statistics
 
-- **Total Files**: 37
-- **Total Size**: 159.46 KB
+- **Total Files**: 38
+- **Total Size**: 159.60 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -47,6 +47,7 @@ src/
   test_config_loader.ts (0.8KB)
 src/config/
   default.ts (0.3KB)
+  defaultConfig.json (0.1KB)
   defaultConfig.ts (0.1KB)
   defaultValues.ts (0.2KB)
   index.ts (0.1KB)
@@ -73,7 +74,7 @@ src/styles/
 
 - .ts: 14 files
 - .scss: 9 files
-- .json: 6 files
+- .json: 7 files
 - .md: 2 files
 - .tsx: 2 files
 - .env: 1 file
