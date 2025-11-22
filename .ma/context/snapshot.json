@@ -1,12 +1,12 @@
 {
-  "timestamp": 1763758767877,
+  "timestamp": 1763784886657,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".example.env",
-      "bytes": 535,
-      "mtime": 1763737951264.2036,
-      "lines": 26
+      "bytes": 344,
+      "mtime": 1763758795416.1777,
+      "lines": 13
     },
     {
       "path": ".gitignore",
@@ -197,7 +197,7 @@
   ],
   "totals": {
     "files": 32,
-    "bytes": 162332,
+    "bytes": 162141,
     "depth": 10
   }
 }
