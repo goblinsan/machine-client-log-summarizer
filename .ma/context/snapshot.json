@@ -1,5 +1,5 @@
 {
-  "timestamp": 1763821512127,
+  "timestamp": 1763824639404,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -94,9 +94,9 @@
     },
     {
       "path": "src/config/defaultConfig.ts",
-      "bytes": 366,
-      "mtime": 1763789488439.8079,
-      "lines": 19
+      "bytes": 245,
+      "mtime": 1763823612492.0696,
+      "lines": 13
     },
     {
       "path": "src/config/defaultValues.ts",
@@ -227,7 +227,7 @@
   ],
   "totals": {
     "files": 37,
-    "bytes": 164815,
+    "bytes": 164694,
     "depth": 10
   }
 }
