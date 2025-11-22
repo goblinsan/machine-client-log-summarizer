@@ -1,35 +1,22 @@
-import { config } from 'dotenv';
-import { resolve } from 'path';
-import { readFileSync } from 'fs';
 import { z } from 'zod';
-import { Config } from './types';
+import { configSchema } from './schema';
 
-// Load environment variables
-config();
-
-// Load and validate config from file
-const configFile = resolve(process.cwd(), 'config.json');
-let fileConfig: Partial<Config> = {};
-
-try {
-  const fileContent = readFileSync(configFile, 'utf-8');
-  fileConfig = JSON.parse(fileContent);
-} catch (e) {
-  // If config file doesn't exist or is invalid, continue with defaults
+export interface Config {
+  logPath: string;
+  storePath: string;
+  lmStudioEndpoint: string;
 }
 
-// Merge configs in hierarchy: CLI > file > env
-const mergedConfig = {
-  ...{
+export function loadConfig(): Config {
+  // Placeholder implementation - actual loading logic to be added
+  return {
     logPath: './logs',
-    storePath: './data',
-    lmStudioEndpoint: 'http://localhost:1234'
-  },
-  ...fileConfig,
-  ...process.env
-};
+    storePath: './store',
+    lmStudioEndpoint: 'http://localhost:1234/v1'
+  };
+}
 
-// Validate merged config against schema
-const parsedConfig = Config.parse(mergedConfig);
-
-export default parsedConfig;
+export function validateConfig(config: any): Config {
+  const parsed = configSchema.parse(config);
+  return parsed;
+}
