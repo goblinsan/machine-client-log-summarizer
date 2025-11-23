@@ -7,7 +7,7 @@
 {"path":"docs/qa_notes.md","bytes":167,"lines":9,"mtime":1763865271942.5042}
 {"path":"index.html","bytes":306,"lines":13,"mtime":1759790612651.8906}
 {"path":"package-lock.json","bytes":125965,"lines":3711,"mtime":1760794397346.6853}
-{"path":"package.json","bytes":817,"lines":31,"mtime":1761999627139.5315}
+{"path":"package.json","bytes":150,"lines":5,"mtime":1763865350998.7737}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1761999627139.7048}
 {"path":"src/App.tsx","bytes":1970,"lines":78,"mtime":1761999627139.9312}
 {"path":"src/components/ExampleComponent.tsx","bytes":122,"lines":5,"mtime":1763865271941.4817}

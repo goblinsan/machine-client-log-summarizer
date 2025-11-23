@@ -1,5 +1,5 @@
 {
-  "timestamp": 1763865318549,
+  "timestamp": 1763865396798,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -58,9 +58,9 @@
     },
     {
       "path": "package.json",
-      "bytes": 817,
-      "mtime": 1761999627139.5315,
-      "lines": 31
+      "bytes": 150,
+      "mtime": 1763865350998.7737,
+      "lines": 5
     },
     {
       "path": "scripts/replace-colors.js",
@@ -167,7 +167,7 @@
   ],
   "totals": {
     "files": 27,
-    "bytes": 159099,
+    "bytes": 158432,
     "depth": 10
   }
 }

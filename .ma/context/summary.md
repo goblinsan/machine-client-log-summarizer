@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2025-11-23T02:35:18.549Z
+Generated: 2025-11-23T02:36:36.798Z
 
 ## Overview
 
@@ -11,7 +11,7 @@ Generated: 2025-11-23T02:35:18.549Z
 ## Statistics
 
 - **Total Files**: 27
-- **Total Size**: 155.37 KB
+- **Total Size**: 154.72 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -26,7 +26,7 @@ Generated: 2025-11-23T02:35:18.549Z
   context_analysis.json (0.3KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
-  package.json (0.8KB)
+  package.json (0.1KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
 docs/
