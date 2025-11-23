@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2025-11-23T02:33:58.363Z
+Generated: 2025-11-23T02:35:18.549Z
 
 ## Overview
 
@@ -8,14 +8,10 @@ Generated: 2025-11-23T02:33:58.363Z
 - **Other Languages**: JavaScript
 - **Tooling & Frameworks**: Node.js (package.json), TypeScript compiler (tsconfig.json)
 
-## Potential Issues
-
-- No obvious test/spec files detected in scan results
-
 ## Statistics
 
-- **Total Files**: 23
-- **Total Size**: 154.54 KB
+- **Total Files**: 27
+- **Total Size**: 155.37 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -33,11 +29,15 @@ Generated: 2025-11-23T02:33:58.363Z
   package.json (0.8KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
+docs/
+  qa_notes.md (0.2KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
   App.tsx (1.9KB)
   main.tsx (0.2KB)
+src/components/
+  ExampleComponent.tsx (0.1KB)
 src/styles/
   _base.scss (1.7KB)
   _components.scss (3.3KB)
@@ -48,6 +48,10 @@ src/styles/
   _mixins.scss (0.2KB)
   _utils.scss (0.4KB)
   main.scss (0.3KB)
+tests/regression/
+  ExampleRegression.test.ts (0.3KB)
+tests/unit/
+  ExampleComponent.test.tsx (0.2KB)
 ```
 
 ## Large Files
@@ -58,10 +62,10 @@ src/styles/
 
 - .scss: 9 files
 - .json: 5 files
-- .md: 2 files
-- .tsx: 2 files
+- .tsx: 4 files
+- .md: 3 files
+- .ts: 2 files
 - .env: 1 file
 - (no extension): 1 file
 - .html: 1 file
 - .js: 1 file
-- .ts: 1 file
