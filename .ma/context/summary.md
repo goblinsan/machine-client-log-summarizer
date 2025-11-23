@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2025-11-21T15:10:29.647Z
+Generated: 2025-11-23T00:50:38.001Z
 
 ## Overview
 
@@ -14,14 +14,15 @@ Generated: 2025-11-21T15:10:29.647Z
 
 ## Statistics
 
-- **Total Files**: 21
-- **Total Size**: 153.73 KB
+- **Total Files**: 22
+- **Total Size**: 154.24 KB
 - **Max Depth**: 10
 
 ## Directory Structure
 
 ```
 ./
+  .example.env (0.5KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (10.5KB)
@@ -58,6 +59,7 @@ src/styles/
 - .json: 4 files
 - .md: 2 files
 - .tsx: 2 files
+- .env: 1 file
 - (no extension): 1 file
 - .html: 1 file
 - .js: 1 file
