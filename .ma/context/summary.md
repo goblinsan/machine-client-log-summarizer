@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2025-11-23T00:50:38.001Z
+Generated: 2025-11-23T02:33:58.363Z
 
 ## Overview
 
@@ -14,8 +14,8 @@ Generated: 2025-11-23T00:50:38.001Z
 
 ## Statistics
 
-- **Total Files**: 22
-- **Total Size**: 154.24 KB
+- **Total Files**: 23
+- **Total Size**: 154.54 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -27,6 +27,7 @@ Generated: 2025-11-23T00:50:38.001Z
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (10.5KB)
   README.md (0.2KB)
+  context_analysis.json (0.3KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
   package.json (0.8KB)
@@ -56,7 +57,7 @@ src/styles/
 ## File Types
 
 - .scss: 9 files
-- .json: 4 files
+- .json: 5 files
 - .md: 2 files
 - .tsx: 2 files
 - .env: 1 file

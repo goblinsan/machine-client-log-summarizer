@@ -1,5 +1,5 @@
 {
-  "timestamp": 1763859038001,
+  "timestamp": 1763865238363,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -31,6 +31,12 @@
       "bytes": 210,
       "mtime": 1763859036530.33,
       "lines": 11
+    },
+    {
+      "path": "context_analysis.json",
+      "bytes": 306,
+      "mtime": 1763859066163.0022,
+      "lines": 6
     },
     {
       "path": "index.html",
@@ -136,8 +142,8 @@
     }
   ],
   "totals": {
-    "files": 22,
-    "bytes": 157943,
+    "files": 23,
+    "bytes": 158249,
     "depth": 10
   }
 }
