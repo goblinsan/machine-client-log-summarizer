@@ -14,7 +14,7 @@
 {"path":"src/App.tsx","bytes":1970,"lines":78,"mtime":1761999627139.9312}
 {"path":"src/config/default.ts","bytes":353,"lines":17,"mtime":1763789488439.4927}
 {"path":"src/config/defaultConfig.json","bytes":138,"lines":8,"mtime":1763848358038.9705}
-{"path":"src/config/defaultConfig.ts","bytes":106,"lines":5,"mtime":1763848260748.7617}
+{"path":"src/config/defaultConfig.ts","bytes":305,"lines":18,"mtime":1763848634355.39}
 {"path":"src/config/defaultValues.ts","bytes":166,"lines":8,"mtime":1763848458593.7278}
 {"path":"src/config/index.ts","bytes":898,"lines":29,"mtime":1763848535625.4668}
 {"path":"src/config/loader.ts","bytes":1508,"lines":59,"mtime":1763848458593.9683}
