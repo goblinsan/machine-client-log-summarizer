@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T17:59:33.048Z
+Generated: 2026-03-08T18:07:50.636Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-08T17:59:33.048Z
 
 ## Statistics
 
-- **Total Files**: 36
-- **Total Size**: 191.38 KB
+- **Total Files**: 38
+- **Total Size**: 194.11 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -43,12 +43,14 @@ src/
 src/__tests__/
   config.test.ts (1.9KB)
   smoke.test.ts (0.5KB)
+  synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
   defaults.ts (0.3KB)
-  index.ts (18.6KB)
+  index.ts (18.7KB)
   schema.ts (1.8KB)
-  synthetic-logs.ts (3.6KB)
+  synthetic-logs-data.ts (1.1KB)
+  synthetic-logs.ts (3.8KB)
 src/config/prompts/
   context.md (1.2KB)
   coordinator.md (1.5KB)
@@ -72,11 +74,11 @@ src/test/
 ## Large Files
 
 - `package-lock.json` (123.0KB, 3711 lines)
-- `src/config/index.ts` (18.6KB, 643 lines)
+- `src/config/index.ts` (18.7KB, 644 lines)
 
 ## File Types
 
-- .ts: 10 files
+- .ts: 12 files
 - .scss: 9 files
 - .md: 7 files
 - .json: 4 files

@@ -1,5 +1,5 @@
 {
-  "timestamp": 1772992773048,
+  "timestamp": 1772993270636,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -75,6 +75,12 @@
       "lines": 22
     },
     {
+      "path": "src/__tests__/synthetic-logs-data.test.ts",
+      "bytes": 1406,
+      "mtime": 1772993060986.7004,
+      "lines": 34
+    },
+    {
       "path": "src/__tests__/synthetic-logs.test.ts",
       "bytes": 2094,
       "mtime": 1772992330531.3862,
@@ -88,9 +94,9 @@
     },
     {
       "path": "src/config/index.ts",
-      "bytes": 19031,
-      "mtime": 1772992330531.746,
-      "lines": 643
+      "bytes": 19120,
+      "mtime": 1772993060985.992,
+      "lines": 644
     },
     {
       "path": "src/config/prompts/context.md",
@@ -129,10 +135,16 @@
       "lines": 58
     },
     {
+      "path": "src/config/synthetic-logs-data.ts",
+      "bytes": 1168,
+      "mtime": 1772993060986.4946,
+      "lines": 50
+    },
+    {
       "path": "src/config/synthetic-logs.ts",
-      "bytes": 3730,
-      "mtime": 1772992330532.7036,
-      "lines": 146
+      "bytes": 3859,
+      "mtime": 1772993060984.932,
+      "lines": 149
     },
     {
       "path": "src/main.tsx",
@@ -220,8 +232,8 @@
     }
   ],
   "totals": {
-    "files": 36,
-    "bytes": 195978,
+    "files": 38,
+    "bytes": 198770,
     "depth": 10
   }
 }
