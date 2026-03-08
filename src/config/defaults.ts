@@ -1,6 +1,6 @@
-/**
- * Default configuration values
- */
+import { config } from './defaults';
+export { config };
+export { prompts };
 
 export const defaults = {
   // Logging
