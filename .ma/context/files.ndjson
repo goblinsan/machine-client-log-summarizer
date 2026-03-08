@@ -2,10 +2,10 @@
 {"path":".gitignore","bytes":206,"lines":26,"mtime":1772953851291.947}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1760209795183.0251}
 {"path":"PROJECT_PLAN.md","bytes":10758,"lines":144,"mtime":1772957062283.4468}
-{"path":"README.md","bytes":146,"lines":9,"mtime":1772957062283.715}
+{"path":"README.md","bytes":217,"lines":23,"mtime":1772978075001.4663}
 {"path":"index.html","bytes":306,"lines":13,"mtime":1759790612651.8906}
 {"path":"package-lock.json","bytes":125965,"lines":3711,"mtime":1772957062284.2668}
-{"path":"package.json","bytes":817,"lines":31,"mtime":1772977689541.6877}
+{"path":"package.json","bytes":817,"lines":31,"mtime":1772978075000.6018}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1761999627139.7048}
 {"path":"src/App.tsx","bytes":1970,"lines":78,"mtime":1772957062284.9753}
 {"path":"src/__tests__/smoke.test.ts","bytes":408,"lines":17,"mtime":1772957062285.3938}
