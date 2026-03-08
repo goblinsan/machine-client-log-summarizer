@@ -1,12 +1,12 @@
 {
-  "timestamp": 1772977305279,
+  "timestamp": 1772977801604,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".env.example",
-      "bytes": 440,
-      "mtime": 1772957062277.2852,
-      "lines": 29
+      "bytes": 481,
+      "mtime": 1772977689542.2354,
+      "lines": 33
     },
     {
       "path": ".gitignore",
@@ -47,7 +47,7 @@
     {
       "path": "package.json",
       "bytes": 817,
-      "mtime": 1772957062284.6038,
+      "mtime": 1772977689541.6877,
       "lines": 31
     },
     {
@@ -70,15 +70,15 @@
     },
     {
       "path": "src/config/defaults.ts",
-      "bytes": 589,
-      "mtime": 1772957831399.9067,
-      "lines": 36
+      "bytes": 292,
+      "mtime": 1772977689539.948,
+      "lines": 19
     },
     {
       "path": "src/config/index.ts",
-      "bytes": 16563,
-      "mtime": 1772957831399.2798,
-      "lines": 521
+      "bytes": 19050,
+      "mtime": 1772977689540.696,
+      "lines": 642
     },
     {
       "path": "src/config/prompts/context.md",
@@ -113,7 +113,7 @@
     {
       "path": "src/config/schema.ts",
       "bytes": 1820,
-      "mtime": 1772957705654.273,
+      "mtime": 1772977689539.134,
       "lines": 58
     },
     {
@@ -203,7 +203,7 @@
   ],
   "totals": {
     "files": 33,
-    "bytes": 183740,
+    "bytes": 185971,
     "depth": 10
   }
 }

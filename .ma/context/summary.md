@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T13:41:45.279Z
+Generated: 2026-03-08T13:50:01.604Z
 
 ## Overview
 
@@ -17,14 +17,14 @@ Generated: 2026-03-08T13:41:45.279Z
 ## Statistics
 
 - **Total Files**: 33
-- **Total Size**: 179.43 KB
+- **Total Size**: 181.61 KB
 - **Max Depth**: 10
 
 ## Directory Structure
 
 ```
 ./
-  .env.example (0.4KB)
+  .env.example (0.5KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (10.5KB)
@@ -43,8 +43,8 @@ src/
 src/__tests__/
   smoke.test.ts (0.4KB)
 src/config/
-  defaults.ts (0.6KB)
-  index.ts (16.2KB)
+  defaults.ts (0.3KB)
+  index.ts (18.6KB)
   schema.ts (1.8KB)
 src/config/prompts/
   context.md (1.2KB)
@@ -69,7 +69,7 @@ src/test/
 ## Large Files
 
 - `package-lock.json` (123.0KB, 3711 lines)
-- `src/config/index.ts` (16.2KB, 521 lines)
+- `src/config/index.ts` (18.6KB, 642 lines)
 
 ## File Types
 
