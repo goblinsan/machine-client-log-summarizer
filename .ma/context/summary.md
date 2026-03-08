@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T14:28:12.516Z
+Generated: 2026-03-08T16:37:44.196Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-08T14:28:12.516Z
 
 ## Statistics
 
-- **Total Files**: 33
-- **Total Size**: 182.29 KB
+- **Total Files**: 35
+- **Total Size**: 187.98 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -42,10 +42,12 @@ src/
   main.tsx (0.2KB)
 src/__tests__/
   smoke.test.ts (0.5KB)
+  synthetic-logs.test.ts (2.0KB)
 src/config/
   defaults.ts (0.3KB)
   index.ts (18.6KB)
   schema.ts (1.8KB)
+  synthetic-logs.ts (3.6KB)
 src/config/prompts/
   context.md (1.2KB)
   coordinator.md (1.3KB)
@@ -73,9 +75,9 @@ src/test/
 
 ## File Types
 
+- .ts: 9 files
 - .scss: 9 files
 - .md: 7 files
-- .ts: 7 files
 - .json: 4 files
 - .tsx: 2 files
 - .example: 1 file
