@@ -1,6 +1,6 @@
 # Plan Iteration 1
 
-Generated: 2026-03-08T13:52:49.177Z
+Generated: 2026-03-08T14:00:07.442Z
 
 ## Implementation Plan
 
@@ -20,66 +20,56 @@ Generated: 2026-03-08T13:52:49.177Z
 **Files:** `vitest.config.ts`
 
 **Dependencies:**
-  - vitest.config.ts must export a config object with test environment set to 'jsdom' or 'node'
+  - Existing vitest.config.ts file
 
 **Acceptance Criteria:**
-  - vitest.config.ts exists at repository root
-  - config includes test: { environment: 'jsdom' } or similar
-  - config includes include/exclude patterns for TypeScript files
+  - vitest.config.ts exports a valid config object
+  - environment is set to 'jsdom' or 'node'
+  - tsconfig paths are configured for TypeScript support
 
 ### Step 3: Create smoke test under src/__tests__/ to prove harness runs
 
 **Files:** `src/__tests__/smoke.test.ts`
 
 **Dependencies:**
-  - smoke.test.ts must import and test at least one module from src/
-  - test must use describe/it or test() syntax
-  - test must pass when run with npm test
+  - Existing smoke.test.ts file
 
 **Acceptance Criteria:**
-  - smoke.test.ts exists in src/__tests__/
-  - test file has at least one passing test case
-  - test imports from src/config/ or src/App.tsx to verify module resolution
+  - smoke.test.ts contains at least one passing test
+  - test imports and validates basic app functionality
+  - test runs successfully with npm test
 
-### Step 4: Add test script to package.json that invokes vitest
+### Step 4: Add 'test' script to package.json that invokes vitest
 
 **Files:** `package.json`
 
 **Dependencies:**
-  - package.json must have 'scripts.test' or 'scripts.test' field
-  - script must invoke 'vitest' or 'vitest run' command
+  - Existing package.json
 
 **Acceptance Criteria:**
-  - package.json contains 'scripts': { 'test': 'vitest run' } or equivalent
-  - npm test command executes vitest and exits 0 on success
+  - package.json contains '"test": "vitest"' or '"test": "vitest run"'
+  - npm test command executes successfully
 
-### Step 5: Update README.md with Vitest harness instructions
+### Step 5: Update README.md with test harness instructions for future tasks
 
 **Files:** `README.md`
 
 **Dependencies:**
-  - README.md must document how to run tests locally
-  - README.md must mention CI test gating requirements
+  - Existing README.md
 
 **Acceptance Criteria:**
-  - README.md includes 'npm test' command in setup/run section
-  - README.md mentions that CI runs 'npm test' before code reviews
+  - README.md includes section on running tests
+  - README.md mentions npm test command
+  - README.md references vitest.config.ts location
 
 ## Risks
 
-1. Existing vitest.config.ts may need modification to match jsdom environment
-2. src/__tests__/smoke.test.ts may already exist and needs review for compatibility
-3. CI configuration may need separate update if using GitHub Actions or similar
+1. Existing vitest.config.ts may need environment adjustments for jsdom
+2. src/__tests__/smoke.test.ts may need content updates to pass
+3. CI configuration may need separate setup if not present
 
 ## Open Questions
 
-1. What CI platform is being used (GitHub Actions, GitLab CI, etc.) for step 5?
-2. Should vitest.config.ts use 'jsdom' or 'node' environment for DOM-less app?
-
-## Notes
-
-1. Prefer vitest.config.ts over vitest.config.js since repo uses TypeScript
-2. Place smoke tests in src/__tests__/ to match existing test structure
-3. Ensure all test files use .ts extension for TypeScript compatibility
-4. Package.json scripts should use 'vitest run' for CI compatibility (exits non-zero on failure)
+1. Is there existing CI configuration in .github/workflows/ that needs updating?
+2. What specific app functionality should smoke.test.ts validate?
 
