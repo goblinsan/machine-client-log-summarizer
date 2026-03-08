@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773005722244,
+  "timestamp": 1773008433903,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -22,15 +22,15 @@
     },
     {
       "path": "PROJECT_PLAN.md",
-      "bytes": 10758,
-      "mtime": 1772957062283.4468,
-      "lines": 144
+      "bytes": 16063,
+      "mtime": 1773007738018.666,
+      "lines": 349
     },
     {
       "path": "README.md",
-      "bytes": 1280,
-      "mtime": 1772996426230.1194,
-      "lines": 111
+      "bytes": 2737,
+      "mtime": 1773007738018.9194,
+      "lines": 165
     },
     {
       "path": "index.html",
@@ -69,6 +69,18 @@
       "lines": 59
     },
     {
+      "path": "src/__tests__/qa-notes.md",
+      "bytes": 841,
+      "mtime": 1773007738019.1633,
+      "lines": 32
+    },
+    {
+      "path": "src/__tests__/regression-gap.test.ts",
+      "bytes": 1969,
+      "mtime": 1773007738019.423,
+      "lines": 52
+    },
+    {
       "path": "src/__tests__/smoke.test.ts",
       "bytes": 509,
       "mtime": 1772996426230.9255,
@@ -77,7 +89,7 @@
     {
       "path": "src/__tests__/synthetic-logs-data.test.ts",
       "bytes": 1406,
-      "mtime": 1772996426231.174,
+      "mtime": 1773007593732.102,
       "lines": 34
     },
     {
@@ -251,13 +263,13 @@
     {
       "path": "vitest.config.ts",
       "bytes": 571,
-      "mtime": 1772996426234.7373,
+      "mtime": 1773007593732.7205,
       "lines": 29
     }
   ],
   "totals": {
-    "files": 42,
-    "bytes": 204613,
+    "files": 44,
+    "bytes": 214185,
     "depth": 10
   }
 }
