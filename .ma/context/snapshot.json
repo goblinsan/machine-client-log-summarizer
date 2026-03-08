@@ -1,5 +1,5 @@
 {
-  "timestamp": 1772993350120,
+  "timestamp": 1772993703625,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -117,6 +117,30 @@
       "lines": 22
     },
     {
+      "path": "src/types/index.ts",
+      "bytes": 27,
+      "mtime": 1772993639768.1414,
+      "lines": 1
+    },
+    {
+      "path": "src/types/logEvent.ts",
+      "bytes": 1255,
+      "mtime": 1772993639767.5579,
+      "lines": 61
+    },
+    {
+      "path": "src/utils/index.ts",
+      "bytes": 107,
+      "mtime": 1772993639768.373,
+      "lines": 2
+    },
+    {
+      "path": "src/utils/logEventNormalizer.ts",
+      "bytes": 4562,
+      "mtime": 1772993639767.9312,
+      "lines": 134
+    },
+    {
       "path": "tsconfig.json",
       "bytes": 445,
       "mtime": 1761999627140.2886,
@@ -130,8 +154,8 @@
     }
   ],
   "totals": {
-    "files": 21,
-    "bytes": 157419,
+    "files": 25,
+    "bytes": 163370,
     "depth": 10
   }
 }

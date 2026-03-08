@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T18:09:10.120Z
+Generated: 2026-03-08T18:15:03.625Z
 
 ## Overview
 
@@ -20,8 +20,8 @@ Generated: 2026-03-08T18:09:10.120Z
 
 ## Statistics
 
-- **Total Files**: 21
-- **Total Size**: 153.73 KB
+- **Total Files**: 25
+- **Total Size**: 159.54 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -52,6 +52,12 @@ src/styles/
   _mixins.scss (0.2KB)
   _utils.scss (0.4KB)
   main.scss (0.3KB)
+src/types/
+  index.ts (0.0KB)
+  logEvent.ts (1.2KB)
+src/utils/
+  index.ts (0.1KB)
+  logEventNormalizer.ts (4.5KB)
 ```
 
 ## Large Files
@@ -61,10 +67,10 @@ src/styles/
 ## File Types
 
 - .scss: 9 files
+- .ts: 5 files
 - .json: 4 files
 - .md: 2 files
 - .tsx: 2 files
 - (no extension): 1 file
 - .html: 1 file
 - .js: 1 file
-- .ts: 1 file
