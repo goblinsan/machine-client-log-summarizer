@@ -1,15 +1,24 @@
 import { z } from 'zod';
 
-/**
+export const configSchema = z.object({
+  name: z.string(),
  * JSON Schema for configuration validation
  */
 export const schema = z.object({
   // Logging
   logPath: z.string().min(1),
   logLevel: z.enum(['debug', 'info', 'warn', 'error']).default('info'),
-  
-  // Data store
-  storePath: z.string().min(1),
+  timeout: z.number().default(30000),
+});
+
+export const prompts = {
+  coordinator: require('./prompts/coordinator.md'),
+  context: require('./prompts/context.md'),
+  leadEngineer: require('./prompts/lead-engineer.md'),
+  qa: require('./prompts/qa.md'),
+  security: require('./prompts/security.md'),
+};
+
   storeType: z.enum(['json', 'sqlite', 'mongodb']).default('json'),
   
   // LM Studio endpoint

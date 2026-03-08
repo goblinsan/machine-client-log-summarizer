@@ -1,6 +1,8 @@
-export { defaultConfig } from './defaults';
-export { schema } from './schema';
-export { prompts } from './prompts';
+import { configSchema, prompts } from './schema';
+import { defaults } from './defaults';
+
+export { configSchema, defaults };
+export { prompts };
 
 export type { Config } from './schema';
 
@@ -342,3 +344,4 @@ export function loadConfig(): Config {
  * Export default config for use without loading
  */
 export const config = loadConfig();
+
