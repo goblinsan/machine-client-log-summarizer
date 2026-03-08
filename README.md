@@ -1,9 +1,23 @@
-# Testing
+# Machine Client Log Summarizer
 
-Run tests locally:
+## Development
+
+```bash
+npm run dev
+```
+
+## Testing
 
 ```bash
 npm test
 ```
 
-Tests are run with Vitest in jsdom environment. CI runs the same command before code reviews.
+## Building
+
+```bash
+npm run build
+```
+
+## CI/CD
+
+Tests run automatically before code reviews via `npm test`.
