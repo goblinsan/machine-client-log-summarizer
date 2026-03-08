@@ -1,0 +1,4 @@
+{
+  "output": "{\n  \"status\": \"complete\",\n  \"summary\": {\n    \"pipeline_status\": \"not_run\",\n    \"plan_alignment\": \"drift\",\n    \"pr_url\": \"\",\n    \"risks\": [\n      \"Missing 'test' script in package.json\",\n      \"Failed to retrieve Vitest setup documentation due to 404 error\"\n    ],\n    \"action_items\": [\n      \"Update package.json with a valid 'test' script\",\n      \"Install Vitest and @types/node via npm add -D vitest @types/node\",\n      \"Create a vitest.config.(ts|js) file with jsdom/node test environment\",\n      \"Add at least one smoke test under src or tests to prove the harness runs\"\n    ],\n    \"notes\": [\n      \"Review README or CONTRIBUTING for instructions on reusing the Vitest harness in future tasks.\",\n      \"Consider adding a 'test' script to package.json that invokes npm test, and ensure CI runs the same command.\"\n    ]\n  }\n}",
+  "duration_ms": 7822
+}
