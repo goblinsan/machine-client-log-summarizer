@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T13:57:18.183Z
+Generated: 2026-03-08T14:22:24.353Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-08T13:57:18.183Z
 ## Statistics
 
 - **Total Files**: 33
-- **Total Size**: 181.68 KB
+- **Total Size**: 182.18 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -28,20 +28,20 @@ Generated: 2026-03-08T13:57:18.183Z
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (10.5KB)
-  README.md (0.2KB)
+  README.md (0.4KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
   package.json (0.8KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
-  vitest.config.ts (0.4KB)
+  vitest.config.ts (0.6KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
   App.tsx (1.9KB)
   main.tsx (0.2KB)
 src/__tests__/
-  smoke.test.ts (0.4KB)
+  smoke.test.ts (0.5KB)
 src/config/
   defaults.ts (0.3KB)
   index.ts (18.6KB)
