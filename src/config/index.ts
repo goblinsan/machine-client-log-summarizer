@@ -1,6 +1,6 @@
-import { DEFAULTS, PROMPTS } from './defaults';
-
-export { DEFAULTS, PROMPTS };
+// Config exports including synthetic log data packs
+export { SyntheticLogSchema } from './synthetic-logs';
+export { syntheticLogsData } from './synthetic-logs-data';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -635,6 +635,7 @@ export function loadConfig(): Config {
  * Export default config for use without loading
  */
 export const config = loadConfig();
+
 
 
 

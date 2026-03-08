@@ -1,6 +1,7 @@
-import { schema } from './schema';
+// Synthetic log schema and data pack definitions
+import { z } from 'zod';
 
-/**
+export const SyntheticLogSchema = z.object({
  * Synthetic log entry interface for demo/test data
  */
 export interface LogEntry {
@@ -12,9 +13,10 @@ export interface LogEntry {
   durationMs: number;
   error?: string;
 }
+  status: z.enum(['ok', 'flaky', 'fail', 'timeout']),
+});
 
-/**
- * Generate synthetic log entries for demo, test, and documentation
+// Data pack exports will be added in synthetic-logs-data.ts
  */
 export const syntheticLogs: LogEntry[] = [
   // OK status - successful workflow completion
