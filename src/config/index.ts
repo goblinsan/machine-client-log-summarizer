@@ -1,6 +1,6 @@
-import { z } from 'zod';
-import { schema } from './schema';
-import { defaults } from './defaults';
+import { DEFAULTS, PROMPTS } from './defaults';
+
+export { DEFAULTS, PROMPTS };
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -635,6 +635,7 @@ export function loadConfig(): Config {
  * Export default config for use without loading
  */
 export const config = loadConfig();
+
 
 
 
