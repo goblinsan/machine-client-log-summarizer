@@ -1,8 +1,19 @@
-# Multi-Agent Log Summarizer
+# Machine Client Log Summarizer
 
-## Development & Testing
+## Testing
 
 Run tests locally:
+
+```bash
+npm test
+```
+
+Tests are run with Vitest and can be executed before code reviews.
+
+## Installation
+
+
+
 
 ```bash
 npm test
@@ -93,5 +104,7 @@ npm run build
 ## CI/CD
 
 Tests run automatically before code reviews via `npm test`.
+
+
 
 
