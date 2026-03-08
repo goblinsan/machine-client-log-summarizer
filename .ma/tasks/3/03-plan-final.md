@@ -1,53 +1,69 @@
 # Plan Iteration 1
 
-Generated: 2026-03-08T14:30:46.655Z
+Generated: 2026-03-08T18:02:49.716Z
 
 ## Implementation Plan
 
-### Step 1: Create synthetic log data generator module with sample entries for ok, flaky, fail, and timeout statuses
+### Step 1: Review existing synthetic-logs.ts structure to understand current data model and export patterns
 
-**Files:** `src/config/synthetic-logs.ts`
-
-**Dependencies:**
-  - src/config/schema.ts
-  - src/config/defaults.ts
-
-**Acceptance Criteria:**
-  - File src/config/synthetic-logs.ts created with TypeScript
-  - Contains sample log entries for all 4 statuses (ok, flaky, fail, timeout)
-  - Each entry includes persona, workflowId, and intent fields
-  - File exports types and sample data for use in tests/docs
-
-### Step 2: Add type definitions for log entry schema to support workflow fields
-
-**Files:** `src/config/synthetic-logs.ts`
+**Files:** `src/config/synthetic-logs.ts`, `src/config/index.ts`
 
 **Dependencies:**
-  - src/config/schema.ts
+  - context_analysis/summary
 
 **Acceptance Criteria:**
-  - LogEntry interface defined with persona, workflowId, intent, status fields
-  - Type-safe exports for use across the codebase
+  - Understand existing synthetic log schema
+  - Identify current export patterns in index.ts
+  - Confirm TypeScript is the only language used for new files
 
-### Step 3: Create test file to validate synthetic log data structure
+### Step 2: Create synthetic log data pack file with four scenario types (ok, flaky, fail, timeout)
 
-**Files:** `src/__tests__/synthetic-logs.test.ts`
+**Files:** `src/config/synthetic-logs-data.ts`
 
 **Dependencies:**
   - src/config/synthetic-logs.ts
 
 **Acceptance Criteria:**
-  - Test file validates all 4 status types are present
-  - Test verifies persona, workflowId, intent fields are populated
-  - Test runs with Vitest in existing test suite
+  - File contains ok, flaky, fail, timeout scenarios
+  - Each scenario includes persona, workflowId, intent fields
+  - File uses TypeScript with .ts extension
+  - File located in src/config/ directory
+
+### Step 3: Add test coverage for synthetic log data packs
+
+**Files:** `src/__tests__/synthetic-logs-data.test.ts`
+
+**Dependencies:**
+  - src/config/synthetic-logs-data.ts
+
+**Acceptance Criteria:**
+  - Tests verify all four scenario types exist
+  - Tests validate persona, workflowId, intent fields are present
+  - Tests use Vitest framework
+  - Tests located in src/__tests__/ directory
+
+### Step 4: Export synthetic log data packs from config index
+
+**Files:** `src/config/index.ts`
+
+**Dependencies:**
+  - src/config/synthetic-logs-data.ts
+
+**Acceptance Criteria:**
+  - synthetic-logs-data.ts is exported from index.ts
+  - Export follows existing pattern in index.ts
+  - No duplicate exports or conflicting paths
 
 ## Risks
 
-1. May need to align with existing log format conventions in src/config/index.ts
-2. File naming should not conflict with existing src/config/ files
+1. Existing synthetic-logs.ts may have conflicting exports that need to be reviewed
+2. Schema validation in synthetic-logs.ts may need updates to accommodate new data packs
+3. File size limits may apply (package-lock.json is 123KB, keep new files reasonable)
 
 ## Open Questions
 
-1. What specific format should log entries follow (JSON, plain text, etc.)?
-2. Are there existing log entry conventions in src/config/index.ts to follow?
+1. What is the expected size limit for synthetic log entries?
+2. Are there specific persona values that must be included?
+3. What workflowId format is expected (UUID, string, number)?
+4. What intent values should be represented in the data packs?
 
