@@ -1,13 +1,133 @@
-import { config, prompts } from './defaults';
-export { config };
-export { prompts };
-You are the **Coordinator**, the central orchestrator for the Multi-Agent Log Summarizer system. You manage workflow execution, delegate tasks to specialized agents, and ensure coherent collaboration across the agent team.
+import { z } from 'zod';
+import { schema } from './schema';
+import { defaults } from './defaults';
+import * as fs from 'fs';
+import * as path from 'path';
 
-## Scope
-- Workflow orchestration and task delegation
-- Agent communication routing
-- Progress tracking and milestone management
-- Conflict resolution between agents
+/**
+ * Configuration loader with hierarchical support:
+ * 1. Environment variables (highest priority)
+ * 2. Config file (src/config.json)
+ * 3. CLI flags (lowest priority)
+ */
+
+/**
+ * Parse CLI arguments into config overrides
+ */
+function parseCliArgs(): Partial<Config> {
+  const args = process.argv.slice(2);
+  const cliConfig: Partial<Config> = {};
+
+  for (const arg of args) {
+    if (arg.startsWith('--')) {
+      const [key, value] = arg.slice(2).split('=');
+      if (key && value) {
+        const camelKey = key.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+        cliConfig[camelKey as keyof Config] = value;
+      }
+    }
+  }
+
+  return cliConfig;
+}
+
+/**
+ * Load configuration from environment variables
+ */
+function loadFromEnv(): Partial<Config> {
+  const envConfig: Partial<Config> = {};
+
+  const envKeys: Array<keyof Config> = [
+    'logPath',
+    'logLevel',
+    'timeout',
+    'storePath',
+    'storeType',
+    'lmStudioEndpoint',
+    'appName',
+    'version',
+    'batchSize',
+    'maxRetries',
+    'env',
+    'enableStreaming',
+    'enableCache',
+    'allowCors',
+    'corsOrigins',
+  ];
+
+  for (const key of envKeys) {
+    const envKey = key.toUpperCase().replace(/([A-Z])/g, '_$1').toUpperCase();
+    const value = process.env[envKey];
+    if (value !== undefined) {
+      envConfig[key] = value;
+    }
+  }
+
+  return envConfig;
+}
+
+/**
+ * Load configuration from JSON file
+ */
+function loadFromFile(): Partial<Config> {
+  const configPath = path.join(process.cwd(), 'src/config.json');
+  if (!fs.existsSync(configPath)) {
+    return {};
+  }
+
+  try {
+    const fileContent = fs.readFileSync(configPath, 'utf-8');
+    return JSON.parse(fileContent);
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Merge configurations with priority: env > file > defaults
+ */
+function mergeConfigs(
+  envConfig: Partial<Config>,
+  fileConfig: Partial<Config>,
+  cliConfig: Partial<Config>
+): Partial<Config> {
+  const merged: Partial<Config> = {};
+
+  const allKeys = Object.keys(schema.shape) as Array<keyof Config>;
+
+  for (const key of allKeys) {
+    const envValue = envConfig[key];
+    const fileValue = fileConfig[key];
+    const cliValue = cliConfig[key];
+    const defaultValue = defaults[key];
+
+    if (cliValue !== undefined) {
+      merged[key] = cliValue;
+    } else if (envValue !== undefined) {
+      merged[key] = envValue;
+    } else if (fileValue !== undefined) {
+      merged[key] = fileValue;
+    } else {
+      merged[key] = defaultValue;
+    }
+  }
+
+  return merged;
+}
+
+/**
+ * Load and validate configuration
+ */
+export function loadConfig(): Config {
+  const envConfig = loadFromEnv();
+  const fileConfig = loadFromFile();
+  const cliConfig = parseCliArgs();
+  const merged = mergeConfigs(envConfig, fileConfig, cliConfig);
+
+  return schema.parse(merged);
+}
+
+export { schema, defaults };
 - Final output synthesis and delivery
 
 ## Escalation Rules
@@ -515,6 +635,7 @@ export function loadConfig(): Config {
  * Export default config for use without loading
  */
 export const config = loadConfig();
+
 
 
 
