@@ -1,7 +1,13 @@
 {
-  "timestamp": 1772993703625,
+  "timestamp": 1773005722244,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
+    {
+      "path": ".env.example",
+      "bytes": 567,
+      "mtime": 1773005718125.3445,
+      "lines": 33
+    },
     {
       "path": ".gitignore",
       "bytes": 206,
@@ -22,9 +28,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 210,
-      "mtime": 1772993349329.347,
-      "lines": 11
+      "bytes": 1280,
+      "mtime": 1772996426230.1194,
+      "lines": 111
     },
     {
       "path": "index.html",
@@ -40,9 +46,9 @@
     },
     {
       "path": "package.json",
-      "bytes": 817,
-      "mtime": 1772993349329.5574,
-      "lines": 31
+      "bytes": 912,
+      "mtime": 1772996426230.4531,
+      "lines": 40
     },
     {
       "path": "scripts/replace-colors.js",
@@ -55,6 +61,90 @@
       "bytes": 1970,
       "mtime": 1772957062284.9753,
       "lines": 78
+    },
+    {
+      "path": "src/__tests__/config.test.ts",
+      "bytes": 1984,
+      "mtime": 1773005584658.6921,
+      "lines": 59
+    },
+    {
+      "path": "src/__tests__/smoke.test.ts",
+      "bytes": 509,
+      "mtime": 1772996426230.9255,
+      "lines": 22
+    },
+    {
+      "path": "src/__tests__/synthetic-logs-data.test.ts",
+      "bytes": 1406,
+      "mtime": 1772996426231.174,
+      "lines": 34
+    },
+    {
+      "path": "src/__tests__/synthetic-logs.test.ts",
+      "bytes": 2094,
+      "mtime": 1772996426231.4922,
+      "lines": 76
+    },
+    {
+      "path": "src/config/defaults.ts",
+      "bytes": 292,
+      "mtime": 1773005584659.3896,
+      "lines": 19
+    },
+    {
+      "path": "src/config/index.ts",
+      "bytes": 19120,
+      "mtime": 1773005584657.875,
+      "lines": 644
+    },
+    {
+      "path": "src/config/prompts/context.md",
+      "bytes": 1196,
+      "mtime": 1772996426232.3662,
+      "lines": 39
+    },
+    {
+      "path": "src/config/prompts/coordinator.md",
+      "bytes": 1546,
+      "mtime": 1772996426232.575,
+      "lines": 48
+    },
+    {
+      "path": "src/config/prompts/lead-engineer.md",
+      "bytes": 1358,
+      "mtime": 1772996426233.0083,
+      "lines": 43
+    },
+    {
+      "path": "src/config/prompts/qa.md",
+      "bytes": 1229,
+      "mtime": 1772996426233.1494,
+      "lines": 43
+    },
+    {
+      "path": "src/config/prompts/security.md",
+      "bytes": 1265,
+      "mtime": 1772996426233.4246,
+      "lines": 43
+    },
+    {
+      "path": "src/config/schema.ts",
+      "bytes": 1820,
+      "mtime": 1773005584656.6975,
+      "lines": 58
+    },
+    {
+      "path": "src/config/synthetic-logs-data.ts",
+      "bytes": 1168,
+      "mtime": 1772996426233.9858,
+      "lines": 50
+    },
+    {
+      "path": "src/config/synthetic-logs.ts",
+      "bytes": 3859,
+      "mtime": 1772996426234.241,
+      "lines": 149
     },
     {
       "path": "src/main.tsx",
@@ -117,27 +207,33 @@
       "lines": 22
     },
     {
+      "path": "src/test/setup.ts",
+      "bytes": 94,
+      "mtime": 1772996426234.4863,
+      "lines": 3
+    },
+    {
       "path": "src/types/index.ts",
       "bytes": 27,
-      "mtime": 1772993639768.1414,
+      "mtime": 1773005717356.2988,
       "lines": 1
     },
     {
       "path": "src/types/logEvent.ts",
       "bytes": 1255,
-      "mtime": 1772993639767.5579,
+      "mtime": 1773005717356.4465,
       "lines": 61
     },
     {
       "path": "src/utils/index.ts",
       "bytes": 107,
-      "mtime": 1772993639768.373,
+      "mtime": 1773005717356.616,
       "lines": 2
     },
     {
       "path": "src/utils/logEventNormalizer.ts",
       "bytes": 4562,
-      "mtime": 1772993639767.9312,
+      "mtime": 1773005717356.8042,
       "lines": 134
     },
     {
@@ -151,11 +247,17 @@
       "bytes": 194,
       "mtime": 1772979282796.1333,
       "lines": 11
+    },
+    {
+      "path": "vitest.config.ts",
+      "bytes": 571,
+      "mtime": 1772996426234.7373,
+      "lines": 29
     }
   ],
   "totals": {
-    "files": 25,
-    "bytes": 163370,
+    "files": 42,
+    "bytes": 204613,
     "depth": 10
   }
 }
