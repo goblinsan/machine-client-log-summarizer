@@ -2,10 +2,10 @@
 {"path":".gitignore","bytes":206,"lines":26,"mtime":1772953851291.947}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1760209795183.0251}
 {"path":"PROJECT_PLAN.md","bytes":10758,"lines":144,"mtime":1772957062283.4468}
-{"path":"README.md","bytes":1179,"lines":98,"mtime":1772989077224.7717}
+{"path":"README.md","bytes":1280,"lines":111,"mtime":1772989920316.8567}
 {"path":"index.html","bytes":306,"lines":13,"mtime":1759790612651.8906}
 {"path":"package-lock.json","bytes":125965,"lines":3711,"mtime":1772957062284.2668}
-{"path":"package.json","bytes":817,"lines":31,"mtime":1772989077222.9167}
+{"path":"package.json","bytes":912,"lines":40,"mtime":1772989920316.5134}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1761999627139.7048}
 {"path":"src/App.tsx","bytes":1970,"lines":78,"mtime":1772957062284.9753}
 {"path":"src/__tests__/config.test.ts","bytes":1984,"lines":59,"mtime":1772988515293.8604}
@@ -33,4 +33,4 @@
 {"path":"src/test/setup.ts","bytes":94,"lines":3,"mtime":1772987863418.0532}
 {"path":"tsconfig.json","bytes":445,"lines":19,"mtime":1761999627140.2886}
 {"path":"vite.config.ts","bytes":194,"lines":11,"mtime":1772979282796.1333}
-{"path":"vitest.config.ts","bytes":571,"lines":29,"mtime":1772989077223.558}
+{"path":"vitest.config.ts","bytes":571,"lines":29,"mtime":1772989920315.481}
