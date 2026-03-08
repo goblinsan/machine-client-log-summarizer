@@ -1,12 +1,16 @@
+{"path":".env.example","bytes":440,"lines":29,"mtime":1772954442377.6833}
 {"path":".gitignore","bytes":206,"lines":26,"mtime":1772953851291.947}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1760209795183.0251}
 {"path":"PROJECT_PLAN.md","bytes":10758,"lines":144,"mtime":1761999627139.2666}
 {"path":"README.md","bytes":210,"lines":11,"mtime":1772953851292.5093}
 {"path":"index.html","bytes":306,"lines":13,"mtime":1759790612651.8906}
 {"path":"package-lock.json","bytes":125965,"lines":3711,"mtime":1764474787255.5813}
-{"path":"package.json","bytes":817,"lines":31,"mtime":1772953851292.7415}
+{"path":"package.json","bytes":817,"lines":31,"mtime":1772954442376.6123}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1761999627139.7048}
 {"path":"src/App.tsx","bytes":1970,"lines":78,"mtime":1772952312824.5593}
+{"path":"src/config/defaults.ts","bytes":552,"lines":35,"mtime":1772954442376.9653}
+{"path":"src/config/index.ts","bytes":4685,"lines":159,"mtime":1772954442377.208}
+{"path":"src/config/schema.ts","bytes":1512,"lines":48,"mtime":1772954442377.4385}
 {"path":"src/main.tsx","bytes":231,"lines":10,"mtime":1761999627140.1501}
 {"path":"src/styles/_base.scss","bytes":1700,"lines":79,"mtime":1760209795185.387}
 {"path":"src/styles/_components.scss","bytes":3399,"lines":182,"mtime":1760209795185.4695}

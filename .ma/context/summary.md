@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T07:14:02.685Z
+Generated: 2026-03-08T07:23:13.910Z
 
 ## Overview
 
@@ -20,14 +20,15 @@ Generated: 2026-03-08T07:14:02.685Z
 
 ## Statistics
 
-- **Total Files**: 21
-- **Total Size**: 153.73 KB
+- **Total Files**: 25
+- **Total Size**: 160.75 KB
 - **Max Depth**: 10
 
 ## Directory Structure
 
 ```
 ./
+  .env.example (0.4KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (10.5KB)
@@ -42,6 +43,10 @@ scripts/
 src/
   App.tsx (1.9KB)
   main.tsx (0.2KB)
+src/config/
+  defaults.ts (0.5KB)
+  index.ts (4.6KB)
+  schema.ts (1.5KB)
 src/styles/
   _base.scss (1.7KB)
   _components.scss (3.3KB)
@@ -62,9 +67,10 @@ src/styles/
 
 - .scss: 9 files
 - .json: 4 files
+- .ts: 4 files
 - .md: 2 files
 - .tsx: 2 files
+- .example: 1 file
 - (no extension): 1 file
 - .html: 1 file
 - .js: 1 file
-- .ts: 1 file
