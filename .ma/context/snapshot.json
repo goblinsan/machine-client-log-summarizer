@@ -1,5 +1,5 @@
 {
-  "timestamp": 1772988732876,
+  "timestamp": 1772989354467,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -28,9 +28,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 1097,
-      "mtime": 1772988515298.3513,
-      "lines": 88
+      "bytes": 1179,
+      "mtime": 1772989077224.7717,
+      "lines": 98
     },
     {
       "path": "index.html",
@@ -47,7 +47,7 @@
     {
       "path": "package.json",
       "bytes": 817,
-      "mtime": 1772979282795.452,
+      "mtime": 1772989077222.9167,
       "lines": 31
     },
     {
@@ -71,7 +71,7 @@
     {
       "path": "src/__tests__/smoke.test.ts",
       "bytes": 509,
-      "mtime": 1772987863414.8452,
+      "mtime": 1772989077224.2104,
       "lines": 22
     },
     {
@@ -215,13 +215,13 @@
     {
       "path": "vitest.config.ts",
       "bytes": 571,
-      "mtime": 1772987863418.2642,
+      "mtime": 1772989077223.558,
       "lines": 29
     }
   ],
   "totals": {
     "files": 36,
-    "bytes": 195330,
+    "bytes": 195412,
     "depth": 10
   }
 }
