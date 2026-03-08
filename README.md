@@ -1,6 +1,46 @@
-# Machine Client Log Summarizer
+## Configuration
 
-## Testing
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| LOG_PATH | Path to log files | /var/log/machine-client |
+| STORE_PATH | Path to store data | /var/store/machine-client |
+| LM_STUDIO_ENDPOINT | LM Studio API endpoint | http://localhost:1234/v1 |
+
+### Config File
+
+Create a `config.json` file in the project root to override defaults:
+
+```json
+{
+  "logPath": "/custom/logs",
+  "storePath": "/custom/store"
+}
+```
+
+### CLI Arguments
+
+Override config with CLI flags:
+
+```bash
+node dist/index.js --log-path /custom/logs --store-path /custom/store
+```
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+## License
+
+MIT
+
+## License
+
+MIT
 
 Run tests locally:
 
@@ -44,3 +84,4 @@ npm run build
 ## CI/CD
 
 Tests run automatically before code reviews via `npm test`.
+
