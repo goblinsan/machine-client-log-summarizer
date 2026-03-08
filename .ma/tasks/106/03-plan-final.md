@@ -1,6 +1,6 @@
-# Plan Iteration 1
+# Plan Iteration 3
 
-Generated: 2026-03-08T16:55:20.418Z
+Generated: 2026-03-08T17:11:10.875Z
 
 ## Implementation Plan
 
@@ -12,65 +12,71 @@ Generated: 2026-03-08T16:55:20.418Z
   - npm add -D vitest @types/node
 
 **Acceptance Criteria:**
-  - vitest and @types/node appear in package.json devDependencies
+  - package.json includes vitest and @types/node in devDependencies
   - npm install completes without errors
 
-### Step 2: Configure vitest.config.ts with jsdom environment and proper TypeScript support
+### Step 2: Configure vitest.config.ts with jsdom environment and proper resolver settings
 
 **Files:** `vitest.config.ts`
 
 **Dependencies:**
-  - Existing vitest.config.ts (0.2KB)
+  - vitest.config.ts must exist and be configured
 
 **Acceptance Criteria:**
-  - vitest.config.ts exports a valid config object
-  - environment set to 'jsdom' or 'node'
-  - include option configured for TypeScript support
-  - testTimeout and pool settings appropriate for CI
+  - vitest.config.ts exports a config object with test: { environment: 'jsdom' }
+  - vitest.config.ts includes resolve: { extensions: ['.ts', '.js', '.tsx', '.jsx'] }
+  - vitest.config.ts includes include: ['src/**/*.{ts,js,tsx,jsx}']
 
-### Step 3: Create smoke test to verify harness runs
+### Step 3: Create smoke test in src/__tests__/smoke.test.ts to verify harness runs
 
 **Files:** `src/__tests__/smoke.test.ts`
 
 **Dependencies:**
-  - src/config/index.ts (existing test target)
+  - vitest.config.ts must be configured first
 
 **Acceptance Criteria:**
-  - smoke.test.ts imports and runs a basic assertion
-  - test passes when run with npm test
-  - test file uses TypeScript syntax
+  - smoke.test.ts imports and tests src/config/index.ts exports
+  - smoke.test.ts includes at least one describe block with it.test()
+  - test file uses TypeScript syntax and imports from src/
 
-### Step 4: Add 'test' script to package.json
+### Step 4: Add 'test' script to package.json that invokes vitest
 
 **Files:** `package.json`
 
 **Dependencies:**
-  - Existing package.json (0.8KB)
+  - vitest must be installed first
 
 **Acceptance Criteria:**
-  - scripts.test field added with 'vitest'
-  - npm test command executes vitest
-  - exit code 0 on success
+  - package.json includes '"test": "vitest"' or '"test": "vitest run"'
+  - script exits with non-zero code on test failures
 
-### Step 5: Update README.md with test harness documentation
+### Step 5: Update README.md with Vitest harness setup instructions
 
 **Files:** `README.md`
 
 **Dependencies:**
-  - Existing README.md (1.1KB)
+  - vitest.config.ts must be configured first
 
 **Acceptance Criteria:**
-  - README includes 'npm test' command
-  - README mentions Vitest harness location
-  - README includes CI integration note
+  - README.md includes section on running tests with npm test
+  - README.md mentions vitest.config.ts configuration
+  - README.md includes note about CI integration
 
 ## Risks
 
-1. Existing vitest.config.ts may need significant updates if it's minimal (0.2KB)
-2. src/__tests__/ directory structure may need consolidation if tests are scattered
+1. Existing vitest.config.ts may need significant restructuring if it uses incompatible settings
+2. src/config/index.ts exports may not be directly testable without additional mocking
+3. CI configuration may need separate updates if not already present in repository
 
 ## Open Questions
 
-1. Should smoke test target src/config/index.ts or a simpler entry point?
-2. What CI runner is being used for the 'npm test' integration step?
+1. Is there an existing CI configuration file (e.g., .github/workflows/*.yml) that needs updating?
+2. What specific exports from src/config/index.ts should the smoke test validate?
+
+## Notes
+
+1. Repository already has vitest.config.ts (0.2KB) and src/__tests__/ directory with existing test files
+2. Primary focus is adding test script to package.json and ensuring proper vitest configuration
+3. All test files should use TypeScript (.ts) to match repo's primary language
+4. Smoke test should verify basic config module functionality to prove harness works
 
