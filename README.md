@@ -1,8 +1,17 @@
-## Configuration
+# Multi-Agent Log Summarizer
 
-### Environment Variables
+## Development & Testing
 
-| Variable | Description | Default |
+Run tests locally:
+
+```bash
+npm test
+```
+
+CI will run `npm test` before code reviews.
+
+## Getting Started
+
 |----------|-------------|---------|
 | LOG_PATH | Path to log files | /var/log/machine-client |
 | STORE_PATH | Path to store data | /var/store/machine-client |
@@ -84,4 +93,5 @@ npm run build
 ## CI/CD
 
 Tests run automatically before code reviews via `npm test`.
+
 
