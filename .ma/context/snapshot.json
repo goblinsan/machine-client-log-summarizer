@@ -1,5 +1,5 @@
 {
-  "timestamp": 1772957063054,
+  "timestamp": 1772977305279,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -70,21 +70,51 @@
     },
     {
       "path": "src/config/defaults.ts",
-      "bytes": 552,
-      "mtime": 1772957062285.6555,
-      "lines": 35
+      "bytes": 589,
+      "mtime": 1772957831399.9067,
+      "lines": 36
     },
     {
       "path": "src/config/index.ts",
-      "bytes": 4685,
-      "mtime": 1772957062285.9048,
-      "lines": 159
+      "bytes": 16563,
+      "mtime": 1772957831399.2798,
+      "lines": 521
+    },
+    {
+      "path": "src/config/prompts/context.md",
+      "bytes": 1257,
+      "mtime": 1772957831400.457,
+      "lines": 34
+    },
+    {
+      "path": "src/config/prompts/coordinator.md",
+      "bytes": 1379,
+      "mtime": 1772957831400.238,
+      "lines": 34
+    },
+    {
+      "path": "src/config/prompts/lead-engineer.md",
+      "bytes": 1181,
+      "mtime": 1772957831400.703,
+      "lines": 34
+    },
+    {
+      "path": "src/config/prompts/qa.md",
+      "bytes": 1093,
+      "mtime": 1772957831400.9094,
+      "lines": 34
+    },
+    {
+      "path": "src/config/prompts/security.md",
+      "bytes": 1185,
+      "mtime": 1772957831401.1228,
+      "lines": 34
     },
     {
       "path": "src/config/schema.ts",
-      "bytes": 1512,
-      "mtime": 1772957062286.1296,
-      "lines": 48
+      "bytes": 1820,
+      "mtime": 1772957705654.273,
+      "lines": 58
     },
     {
       "path": "src/main.tsx",
@@ -172,8 +202,8 @@
     }
   ],
   "totals": {
-    "files": 28,
-    "bytes": 165422,
+    "files": 33,
+    "bytes": 183740,
     "depth": 10
   }
 }
