@@ -1,5 +1,5 @@
 {
-  "timestamp": 1772992336109,
+  "timestamp": 1772992773048,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -94,33 +94,33 @@
     },
     {
       "path": "src/config/prompts/context.md",
-      "bytes": 1257,
-      "mtime": 1772992330531.943,
-      "lines": 34
+      "bytes": 1196,
+      "mtime": 1772992635169.7058,
+      "lines": 39
     },
     {
       "path": "src/config/prompts/coordinator.md",
-      "bytes": 1379,
-      "mtime": 1772992330532.0645,
-      "lines": 34
+      "bytes": 1546,
+      "mtime": 1772992635170.0073,
+      "lines": 48
     },
     {
       "path": "src/config/prompts/lead-engineer.md",
-      "bytes": 1181,
-      "mtime": 1772992330532.1848,
-      "lines": 34
+      "bytes": 1358,
+      "mtime": 1772992635170.253,
+      "lines": 43
     },
     {
       "path": "src/config/prompts/qa.md",
-      "bytes": 1197,
-      "mtime": 1772992330532.3103,
-      "lines": 35
+      "bytes": 1229,
+      "mtime": 1772992635170.4958,
+      "lines": 43
     },
     {
       "path": "src/config/prompts/security.md",
-      "bytes": 1210,
-      "mtime": 1772992330532.4294,
-      "lines": 35
+      "bytes": 1265,
+      "mtime": 1772992635170.8123,
+      "lines": 43
     },
     {
       "path": "src/config/schema.ts",
@@ -221,7 +221,7 @@
   ],
   "totals": {
     "files": 36,
-    "bytes": 195608,
+    "bytes": 195978,
     "depth": 10
   }
 }

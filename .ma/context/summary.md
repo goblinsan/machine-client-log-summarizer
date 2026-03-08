@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T17:52:16.109Z
+Generated: 2026-03-08T17:59:33.048Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-08T17:52:16.109Z
 ## Statistics
 
 - **Total Files**: 36
-- **Total Size**: 191.02 KB
+- **Total Size**: 191.38 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -51,8 +51,8 @@ src/config/
   synthetic-logs.ts (3.6KB)
 src/config/prompts/
   context.md (1.2KB)
-  coordinator.md (1.3KB)
-  lead-engineer.md (1.2KB)
+  coordinator.md (1.5KB)
+  lead-engineer.md (1.3KB)
   qa.md (1.2KB)
   security.md (1.2KB)
 src/styles/

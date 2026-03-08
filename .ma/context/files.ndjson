@@ -13,11 +13,11 @@
 {"path":"src/__tests__/synthetic-logs.test.ts","bytes":2094,"lines":76,"mtime":1772992330531.3862}
 {"path":"src/config/defaults.ts","bytes":292,"lines":19,"mtime":1772992330531.5618}
 {"path":"src/config/index.ts","bytes":19031,"lines":643,"mtime":1772992330531.746}
-{"path":"src/config/prompts/context.md","bytes":1257,"lines":34,"mtime":1772992330531.943}
-{"path":"src/config/prompts/coordinator.md","bytes":1379,"lines":34,"mtime":1772992330532.0645}
-{"path":"src/config/prompts/lead-engineer.md","bytes":1181,"lines":34,"mtime":1772992330532.1848}
-{"path":"src/config/prompts/qa.md","bytes":1197,"lines":35,"mtime":1772992330532.3103}
-{"path":"src/config/prompts/security.md","bytes":1210,"lines":35,"mtime":1772992330532.4294}
+{"path":"src/config/prompts/context.md","bytes":1196,"lines":39,"mtime":1772992635169.7058}
+{"path":"src/config/prompts/coordinator.md","bytes":1546,"lines":48,"mtime":1772992635170.0073}
+{"path":"src/config/prompts/lead-engineer.md","bytes":1358,"lines":43,"mtime":1772992635170.253}
+{"path":"src/config/prompts/qa.md","bytes":1229,"lines":43,"mtime":1772992635170.4958}
+{"path":"src/config/prompts/security.md","bytes":1265,"lines":43,"mtime":1772992635170.8123}
 {"path":"src/config/schema.ts","bytes":1820,"lines":58,"mtime":1772992330532.5535}
 {"path":"src/config/synthetic-logs.ts","bytes":3730,"lines":146,"mtime":1772992330532.7036}
 {"path":"src/main.tsx","bytes":231,"lines":10,"mtime":1761999627140.1501}
