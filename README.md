@@ -1,10 +1,9 @@
-# Machine Client Log Summarizer
+# Testing
 
-A small starter dashboard scaffolded with Vite + React + TypeScript.
+Run tests locally:
 
-Getting started
+```bash
+npm test
+```
 
-1. Install dependencies: npm install
-2. Run dev server: npm run dev
-
-Build: npm run build
+Tests are run with Vitest in jsdom environment. CI runs the same command before code reviews.
