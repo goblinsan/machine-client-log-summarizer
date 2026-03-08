@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T16:37:44.196Z
+Generated: 2026-03-08T16:52:12.876Z
 
 ## Overview
 
@@ -16,19 +16,19 @@ Generated: 2026-03-08T16:37:44.196Z
 
 ## Statistics
 
-- **Total Files**: 35
-- **Total Size**: 187.98 KB
+- **Total Files**: 36
+- **Total Size**: 190.75 KB
 - **Max Depth**: 10
 
 ## Directory Structure
 
 ```
 ./
-  .env.example (0.5KB)
+  .env.example (0.7KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (10.5KB)
-  README.md (0.4KB)
+  README.md (1.1KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
   package.json (0.8KB)
@@ -41,6 +41,7 @@ src/
   App.tsx (1.9KB)
   main.tsx (0.2KB)
 src/__tests__/
+  config.test.ts (1.9KB)
   smoke.test.ts (0.5KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
@@ -75,7 +76,7 @@ src/test/
 
 ## File Types
 
-- .ts: 9 files
+- .ts: 10 files
 - .scss: 9 files
 - .md: 7 files
 - .json: 4 files
