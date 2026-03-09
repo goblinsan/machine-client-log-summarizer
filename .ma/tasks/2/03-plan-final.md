@@ -1,101 +1,46 @@
-# Plan Iteration 1
+# Plan Iteration 2
 
-Generated: 2026-03-08T22:24:54.626Z
+Generated: 2026-03-09T14:50:15.434Z
 
 ## Implementation Plan
 
-### Step 1: Review existing prompt files in src/config/prompts/ to assess current content and identify gaps in scope, escalation rules, and safety limits
+### Step 1: Verify existing prompt files in src/config/prompts/ directory and assess completeness against task requirements
 
 **Files:** `src/config/prompts/context.md`, `src/config/prompts/coordinator.md`, `src/config/prompts/lead-engineer.md`, `src/config/prompts/qa.md`, `src/config/prompts/security.md`
 
-**Dependencies:**
-  - Repository context scan completed
-
-**Acceptance Criteria:**
-  - All 5 persona files exist in src/config/prompts/
-  - Each file contains clear scope definition
-  - Each file contains escalation rules section
-  - Each file contains safety limits section
-
-### Step 2: Update context.md with scope definition for model context awareness and safety limits for context injection
+### Step 2: Update context.md to include clear scope boundaries and safety limits for model behavior
 
 **Files:** `src/config/prompts/context.md`
 
-**Dependencies:**
-  - Step 1: Review existing content
-
-**Acceptance Criteria:**
-  - File contains scope section defining context boundaries
-  - File contains safety limits for context data handling
-  - File remains under 2KB to maintain performance
-
-### Step 3: Update coordinator.md with scope for orchestration tasks, escalation rules for task delegation, and safety limits for coordinator actions
+### Step 3: Update coordinator.md with escalation rules and coordination scope definitions
 
 **Files:** `src/config/prompts/coordinator.md`
 
-**Dependencies:**
-  - Step 1: Review existing content
-
-**Acceptance Criteria:**
-  - File contains scope section for coordinator responsibilities
-  - File contains escalation rules for task delegation
-  - File contains safety limits for coordinator actions
-
-### Step 4: Update lead-engineer.md with scope for engineering decisions, escalation rules for technical blockers, and safety limits for code generation
+### Step 4: Update lead-engineer.md with technical scope and escalation pathways for engineering decisions
 
 **Files:** `src/config/prompts/lead-engineer.md`
 
-**Dependencies:**
-  - Step 1: Review existing content
-
-**Acceptance Criteria:**
-  - File contains scope section for engineering responsibilities
-  - File contains escalation rules for technical issues
-  - File contains safety limits for code generation and review
-
-### Step 5: Update qa.md with scope for quality assurance tasks, escalation rules for defect severity, and safety limits for test execution
+### Step 5: Update qa.md with testing scope, bug triage escalation rules, and quality safety limits
 
 **Files:** `src/config/prompts/qa.md`
 
-**Dependencies:**
-  - Step 1: Review existing content
-
-**Acceptance Criteria:**
-  - File contains scope section for QA responsibilities
-  - File contains escalation rules for defect handling
-  - File contains safety limits for test execution and reporting
-
-### Step 6: Update security.md with scope for security review tasks, escalation rules for vulnerability severity, and safety limits for security-sensitive operations
+### Step 6: Update security.md with security review scope, incident escalation rules, and safety limits for security tasks
 
 **Files:** `src/config/prompts/security.md`
 
-**Dependencies:**
-  - Step 1: Review existing content
+### Step 7: Run smoke tests to verify prompt files are properly integrated and accessible
 
-**Acceptance Criteria:**
-  - File contains scope section for security responsibilities
-  - File contains escalation rules for vulnerability handling
-  - File contains safety limits for security-sensitive operations
-
-### Step 7: Verify all prompt files are properly formatted and accessible from src/config/prompts/ directory
-
-**Files:** `src/config/prompts/context.md`, `src/config/prompts/coordinator.md`, `src/config/prompts/lead-engineer.md`, `src/config/prompts/qa.md`, `src/config/prompts/security.md`
-
-**Dependencies:**
-  - Steps 2-6 completed
-
-**Acceptance Criteria:**
-  - All files are valid markdown
-  - All files are accessible from repository root
-  - No syntax errors in markdown files
+**Files:** `src/__tests__/smoke.test.ts`
 
 ## Risks
 
-1. Existing prompt files may already contain sufficient content requiring minimal updates
-2. Scope definitions may conflict with existing repository patterns in src/config/index.ts
+1. Existing prompt files may already meet requirements - verify before making changes
+2. Prompt content may need to align with existing codebase patterns and conventions
+3. Escalation rules may need to match actual team structure and tooling
 
 ## Open Questions
 
-1. What specific escalation thresholds should be defined for each persona?
-2. Are there existing safety limit patterns in src/config/index.ts that should be referenced?
+1. What is the current escalation hierarchy for this repository?
+2. Are there existing safety limits or guardrails already defined elsewhere?
+3. What specific scope boundaries should each persona respect?
 
