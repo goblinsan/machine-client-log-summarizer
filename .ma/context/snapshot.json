@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773063665743,
+  "timestamp": 1773067542001,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".env.example",
       "bytes": 583,
-      "mtime": 1773063661133.1958,
+      "mtime": 1773067395947.0537,
       "lines": 33
     },
     {
@@ -23,14 +23,14 @@
     {
       "path": "PROJECT_PLAN.md",
       "bytes": 16063,
-      "mtime": 1773053213109.068,
+      "mtime": 1773067541111.5378,
       "lines": 349
     },
     {
       "path": "README.md",
-      "bytes": 2615,
-      "mtime": 1773063661136.2588,
-      "lines": 104
+      "bytes": 2604,
+      "mtime": 1773067395952.911,
+      "lines": 107
     },
     {
       "path": "index.html",
@@ -47,7 +47,7 @@
     {
       "path": "package.json",
       "bytes": 996,
-      "mtime": 1773063661136.5754,
+      "mtime": 1773067395953.169,
       "lines": 46
     },
     {
@@ -65,26 +65,26 @@
     {
       "path": "src/__tests__/config.test.ts",
       "bytes": 4496,
-      "mtime": 1773063661137.4102,
+      "mtime": 1773067395953.4192,
       "lines": 132
     },
     {
       "path": "src/__tests__/qa-notes.md",
       "bytes": 841,
-      "mtime": 1773053213109.5955,
+      "mtime": 1773067541111.9268,
       "lines": 32
     },
     {
       "path": "src/__tests__/regression-gap.test.ts",
       "bytes": 1969,
-      "mtime": 1773053213110.0813,
+      "mtime": 1773067106415.0544,
       "lines": 52
     },
     {
       "path": "src/__tests__/smoke.test.ts",
-      "bytes": 509,
-      "mtime": 1772996426230.9255,
-      "lines": 22
+      "bytes": 440,
+      "mtime": 1773067395953.688,
+      "lines": 17
     },
     {
       "path": "src/__tests__/synthetic-logs-data.test.ts",
@@ -101,7 +101,7 @@
     {
       "path": "src/config/defaults.ts",
       "bytes": 1148,
-      "mtime": 1773063568866.3853,
+      "mtime": 1773067395954.0215,
       "lines": 75
     },
     {
@@ -143,7 +143,7 @@
     {
       "path": "src/config/schema.ts",
       "bytes": 1266,
-      "mtime": 1773062138464.2632,
+      "mtime": 1773067395954.3562,
       "lines": 49
     },
     {
@@ -263,13 +263,13 @@
     {
       "path": "vitest.config.ts",
       "bytes": 571,
-      "mtime": 1773021664071.7097,
+      "mtime": 1773066660614.397,
       "lines": 29
     }
   ],
   "totals": {
     "files": 44,
-    "bytes": 234261,
+    "bytes": 234181,
     "depth": 10
   }
 }

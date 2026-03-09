@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-09T13:41:05.743Z
+Generated: 2026-03-09T14:45:42.001Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-09T13:41:05.743Z
 ## Statistics
 
 - **Total Files**: 44
-- **Total Size**: 228.77 KB
+- **Total Size**: 228.69 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -28,7 +28,7 @@ Generated: 2026-03-09T13:41:05.743Z
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (15.7KB)
-  README.md (2.6KB)
+  README.md (2.5KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
   package.json (1.0KB)
@@ -44,7 +44,7 @@ src/__tests__/
   config.test.ts (4.4KB)
   qa-notes.md (0.8KB)
   regression-gap.test.ts (1.9KB)
-  smoke.test.ts (0.5KB)
+  smoke.test.ts (0.4KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
