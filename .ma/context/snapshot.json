@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773064583912,
+  "timestamp": 1773064884578,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".env.example",
-      "bytes": 583,
-      "mtime": 1773063661133.1958,
+      "bytes": 1133,
+      "mtime": 1773064884523.731,
       "lines": 33
     },
     {
@@ -28,9 +28,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 2604,
-      "mtime": 1773064581923.5757,
-      "lines": 107
+      "bytes": 2737,
+      "mtime": 1773064884527.1362,
+      "lines": 165
     },
     {
       "path": "index.html",
@@ -46,9 +46,9 @@
     },
     {
       "path": "package.json",
-      "bytes": 996,
-      "mtime": 1773064257167.3384,
-      "lines": 46
+      "bytes": 912,
+      "mtime": 1773064884527.3782,
+      "lines": 40
     },
     {
       "path": "scripts/replace-colors.js",
@@ -64,9 +64,9 @@
     },
     {
       "path": "src/__tests__/config.test.ts",
-      "bytes": 4496,
-      "mtime": 1773063661137.4102,
-      "lines": 132
+      "bytes": 1984,
+      "mtime": 1773064884527.5137,
+      "lines": 59
     },
     {
       "path": "src/__tests__/qa-notes.md",
@@ -82,9 +82,9 @@
     },
     {
       "path": "src/__tests__/smoke.test.ts",
-      "bytes": 440,
-      "mtime": 1773064581923.8267,
-      "lines": 17
+      "bytes": 509,
+      "mtime": 1773064884527.6128,
+      "lines": 22
     },
     {
       "path": "src/__tests__/synthetic-logs-data.test.ts",
@@ -100,9 +100,9 @@
     },
     {
       "path": "src/config/defaults.ts",
-      "bytes": 1148,
-      "mtime": 1773063568866.3853,
-      "lines": 75
+      "bytes": 782,
+      "mtime": 1773064884528.068,
+      "lines": 51
     },
     {
       "path": "src/config/index.ts",
@@ -142,9 +142,9 @@
     },
     {
       "path": "src/config/schema.ts",
-      "bytes": 1266,
-      "mtime": 1773062138464.2632,
-      "lines": 49
+      "bytes": 1820,
+      "mtime": 1773064884528.4492,
+      "lines": 58
     },
     {
       "path": "src/config/synthetic-logs-data.ts",
@@ -269,7 +269,7 @@
   ],
   "totals": {
     "files": 44,
-    "bytes": 234181,
+    "bytes": 232525,
     "depth": 10
   }
 }
