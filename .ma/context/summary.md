@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-09T15:24:33.022Z
+Generated: 2026-03-09T15:53:13.324Z
 
 ## Overview
 
@@ -20,8 +20,8 @@ Generated: 2026-03-09T15:24:33.022Z
 
 ## Statistics
 
-- **Total Files**: 26
-- **Total Size**: 161.47 KB
+- **Total Files**: 28
+- **Total Size**: 160.32 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -40,8 +40,8 @@ Generated: 2026-03-09T15:24:33.022Z
 scripts/
   replace-colors.js (4.4KB)
 src/
-  App.tsx (1.9KB)
-  main.tsx (0.2KB)
+  App.tsx (2.2KB)
+  main.tsx (0.6KB)
 src/styles/
   _base.scss (1.7KB)
   _components.scss (3.3KB)
@@ -51,14 +51,16 @@ src/styles/
   _migrated.scss (3.4KB)
   _mixins.scss (0.2KB)
   _utils.scss (0.4KB)
-  main.scss (0.3KB)
+  main.scss (0.4KB)
 src/types/
   index.ts (0.2KB)
   logEvent.ts (1.2KB)
+  pathData.ts (0.7KB)
 src/utils/
   index.ts (0.0KB)
-  jsonPreviewParser.ts (3.2KB)
-  logEventNormalizer.ts (3.7KB)
+  jsonPreviewParser.ts (1.3KB)
+  logEventNormalizer.ts (1.3KB)
+  pathExtractor.ts (1.9KB)
 ```
 
 ## Large Files
@@ -68,7 +70,7 @@ src/utils/
 ## File Types
 
 - .scss: 9 files
-- .ts: 6 files
+- .ts: 8 files
 - .json: 4 files
 - .md: 2 files
 - .tsx: 2 files
