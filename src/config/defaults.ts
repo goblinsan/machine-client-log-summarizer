@@ -4,7 +4,7 @@ import { z } from 'zod';
 /**
  * Default configuration values
  */
-export const defaults = schema.parse({
+export const defaults: Partial<Config> = {
   // Logging
   logPath: './logs',
   logLevel: 'info',
@@ -13,6 +13,29 @@ export const defaults = schema.parse({
   // Storage
   storePath: './data',
   storeType: 'json',
+
+  // LM Studio endpoint
+  lmStudioEndpoint: 'http://localhost:1234/v1',
+
+  // Application
+  appName: 'Multi-Agent Log Summarizer',
+  version: '1.0.0',
+
+  // Processing
+  batchSize: 10,
+  maxRetries: 3,
+
+  // Environment
+  env: 'development',
+
+  // Features
+  enableStreaming: true,
+  enableCache: true,
+
+  // Security
+  allowCors: true,
+  corsOrigins: '*',
+};
 
   // LM Studio endpoint
   lmStudioEndpoint: 'http://localhost:1234/v1',
@@ -46,5 +69,6 @@ export type Config = z.infer<typeof schema>;
   allowCors: true,
   corsOrigins: '*',
 } as const;
+
 
 
