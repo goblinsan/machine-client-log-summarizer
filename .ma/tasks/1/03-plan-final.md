@@ -1,101 +1,109 @@
 # Plan Iteration 1
 
-Generated: 2026-03-08T21:17:16.955Z
+Generated: 2026-03-09T00:41:26.512Z
 
 ## Implementation Plan
 
-### Step 1: Define JSON schema for configuration with required fields for log paths, store, and LM Studio endpoint
+### Step 1: Review existing config structure and understand current implementation in src/config/index.ts, defaults.ts, and schema.ts
+
+**Files:** `src/config/index.ts`, `src/config/defaults.ts`, `src/config/schema.ts`, `.env.example`
+
+**Dependencies:**
+
+**Acceptance Criteria:**
+  - Understand current config loading mechanism
+  - Identify existing schema validation approach
+  - Document current defaults structure
+
+### Step 2: Update schema.ts with JSON Schema v7 specification for hierarchical config validation
 
 **Files:** `src/config/schema.ts`
 
 **Dependencies:**
+  - Step 1 complete
 
 **Acceptance Criteria:**
-  - schema.ts exports a valid JSON Schema object
-  - Schema includes fields: logPath, store, lmStudioEndpoint
-  - Schema has required field validation enabled
+  - Schema defines logPaths, store, lmStudioEndpoint properties
+  - Schema includes required fields and type constraints
+  - Schema supports nested configuration objects
 
-### Step 2: Implement default configuration values for all config fields
+### Step 3: Update defaults.ts with default values for all config properties
 
 **Files:** `src/config/defaults.ts`
 
 **Dependencies:**
-  - schema.ts updated with field definitions
+  - Step 2 complete
 
 **Acceptance Criteria:**
-  - defaults.ts exports default values for all schema fields
-  - Defaults include sensible paths for logs directory
-  - Defaults include store configuration (e.g., 'memory' or 'sqlite')
-  - Defaults include LM Studio endpoint placeholder (e.g., 'http://localhost:1234/v1')
-  - File exports named exports and default export for compatibility
+  - Defaults include log paths (logs, temp, data directories)
+  - Defaults include store configuration
+  - Defaults include LM Studio endpoint URL
+  - All defaults are typed and exported
 
-### Step 3: Implement hierarchical config loader (CLI > file > env > defaults)
+### Step 4: Implement config loader with hierarchical precedence (CLI > file > env > defaults)
 
 **Files:** `src/config/index.ts`
 
 **Dependencies:**
-  - schema.ts with validation rules
-  - defaults.ts with default values
+  - Step 3 complete
 
 **Acceptance Criteria:**
-  - Config loader reads CLI arguments first
-  - Config loader reads .env file second (if exists)
-  - Config loader reads config file third (if exists)
-  - Config loader falls back to defaults.ts fourth
-  - Schema validation runs after all sources merged
-  - Validation errors throw descriptive errors with field names
-  - Exports merged config object and validation errors
+  - Loader reads .env file using dotenv
+  - Loader parses config.json if present
+  - Loader processes CLI arguments
+  - Higher precedence values override lower ones
+  - Validation runs against schema after merging
 
-### Step 4: Create .env.example file with documented configuration options
+### Step 5: Create/update .example.env with documented configuration options
 
 **Files:** `.env.example`
 
 **Dependencies:**
-  - schema.ts field definitions
-  - defaults.ts default values
+  - Step 4 complete
 
 **Acceptance Criteria:**
-  - .env.example exists at repository root
-  - File includes all configurable fields from schema
-  - Each field has comment explaining purpose and example value
-  - File uses .env.example extension (not .env to avoid accidental commit)
-  - File is readable and follows standard .env format
+  - File contains all environment variable keys
+  - Comments explain each variable's purpose
+  - Includes log paths, store, and LM Studio endpoint examples
+  - File is properly formatted and readable
 
-### Step 5: Add config loading tests to verify hierarchical merging and validation
+### Step 6: Add unit tests for config loading, validation, and hierarchy precedence
 
 **Files:** `src/__tests__/config.test.ts`
 
 **Dependencies:**
-  - index.ts config loader implementation
-  - schema.ts validation implementation
-  - defaults.ts defaults implementation
+  - Step 4 complete
 
 **Acceptance Criteria:**
-  - Tests verify CLI args override file config
-  - Tests verify file config overrides env
-  - Tests verify env overrides defaults
-  - Tests verify schema validation catches invalid values
-  - Tests verify validation errors include field names
-  - Tests use Vitest test runner with existing test setup
+  - Tests cover env file loading
+  - Tests cover config file loading
+  - Tests cover CLI argument parsing
+  - Tests verify schema validation errors
+  - Tests verify hierarchy precedence (CLI > file > env > defaults)
+
+### Step 7: Update main config export to use new loader and ensure backward compatibility
+
+**Files:** `src/config/index.ts`
+
+**Dependencies:**
+  - Step 5 complete
+  - Step 6 complete
+
+**Acceptance Criteria:**
+  - Config export returns merged and validated configuration
+  - Existing imports continue to work
+  - Type exports are properly defined
+  - No breaking changes to public API
 
 ## Risks
 
-1. Existing src/config/index.ts is 18.7KB - may need significant refactoring to support new loader pattern
-2. CLI argument parsing requires additional dependencies (e.g., yargs, commander, or simple process.argv parsing)
-3. Schema validation library choice impacts bundle size and compatibility
-4. Existing tests in src/__tests__/ may need updates to reflect new config structure
+1. Existing code may depend on specific config structure that changes with new schema
+2. CLI argument parsing may conflict with existing CLI implementation
+3. Schema validation errors need clear error messages for debugging
 
 ## Open Questions
 
-1. Which CLI argument parsing library to use (yargs, commander, or minimal process.argv)?
-2. Should config file be JSON or TypeScript (.ts)?
-3. What store backend to default to (memory, sqlite, redis)?
-4. Should validation errors be thrown or returned as object?
-
-## Notes
-
-1. Prioritize minimal dependencies - prefer built-in Node.js modules where possible
-2. Maintain backward compatibility with existing config usage in App.tsx/main.tsx
-3. Keep config loading in src/config/ directory to maintain separation of concerns
-4. Ensure all config values are typed with TypeScript interfaces matching schema
+1. What CLI framework is currently used (if any)?
+2. Are there any existing config files in the repository root?
+3. What is the expected config file name and location?
 
