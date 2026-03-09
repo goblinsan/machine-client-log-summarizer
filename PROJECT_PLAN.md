@@ -1,18 +1,20 @@
-# Project Plan: Multi-Agent Log Summarizer
+# Multi-Agent Log Summarizer - Project Plan
 
-## Regression Tests & QA Notes
+## Overview
 
 ### New Test Files Created
 - `src/__tests__/regression-gap.test.ts`: Regression tests for reported gap
 - `src/__tests__/qa-notes.md`: Verification steps documentation
 
 ### Verification Steps
-1. Run `vitest run` to execute all tests
-2. Verify new test file passes without errors
-3. Confirm QA notes are updated with verification steps
 
-### Acceptance Criteria
-- New test file covers reported gap and passes without errors
+## Security Documentation
+
+### Security Guidelines
+The project includes `SECURITY_GUIDELINES.md` in the repository root which outlines security standards and guidelines for code review and development. This documentation ensures reviewers can assess code quality and security posture before merging changes.
+
+## Project Structure
+
 - Verification steps documented in QA notes
 
 ### Validation Plan
@@ -344,5 +346,6 @@ Notes
 - Start small: get file ingestion + store + a simple summarizer prompt working end-to-end with a mocked LM Studio before integrating the live LM Studio host.
 - Maintain the TDD discipline: each feature begins with a small failing test that expresses the expectation and is quick to run.
 - Keep the `_extras.scss` partial minimal — migrate rules into primary partials as components stabilize.
+
 
 
