@@ -1,7 +1,12 @@
 {
-  "name": "machine-client-log-summarizer",
+  "name": "multi-agent-log-summarizer",
   "version": "1.0.0",
-  "scripts": {
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+
     "test": "vitest"
   },
   "type": "module",
@@ -35,5 +40,6 @@
     "stylelint-scss": "^6.12.1"
   }
 }
+
 
 

@@ -1,164 +1,104 @@
 # Multi-Agent Log Summarizer
 
-## Regression Tests & QA Notes
+## Configuration
 
-### New Test Files
-- `src/__tests__/regression-gap.test.ts`: Regression tests for reported gap
-- `src/__tests__/qa-notes.md`: Verification steps documentation
+The application uses hierarchical configuration with the following priority:
+1. **CLI arguments** (highest priority)
+2. **Config file** (`src/config.json`)
+3. **Environment variables**
+4. **Default values** (lowest priority)
 
-### Verification Steps
-1. Run `vitest run` to execute all tests
-2. Verify new test file passes without errors
-3. Confirm QA notes are updated with verification steps
+### Environment Variables
 
-### Acceptance Criteria
-- New test file covers reported gap and passes without errors
-- Verification steps documented in QA notes
-
-### Validation Plan
-- Run `vitest run` command to execute all tests
-- Verify newly created test file passes without errors
-
-### Key Files
-- `src/__tests__/regression-gap.test.ts`
-- `src/__tests__/qa-notes.md`
-
-### Source Hypothesis
-The code review failed because the repository lacks regression tests for the reported gap, and there are no verification steps documented in QA notes.
-
-### Generated for parent task #110
-
-## Existing Test Files
-- `src/__tests__/synthetic-logs-data.test.ts`
-- `src/__tests__/synthetic-logs.test.ts`
-- `src/__tests__/config.test.ts`
-- `src/__tests__/smoke.test.ts`
-
-## Test Configuration
-- Vitest test runner
-- TypeScript compiler
-- Node.js dependencies
-
-## Repository Context
-- Primary Language: TypeScript
-- Other Languages: JavaScript
-- Tooling & Frameworks: Node.js, TypeScript, Vitest
-
-## Local Environment Setup
-- `npm install --no-package-lock`
-
-## Statistics
-- Total Files: 42
-- Total Size: 199.82 KB
-- Max Depth: 10
-
-## Directory Structure
-
-
-Run tests locally:
+Copy `.env.example` to `.env` and configure:
 
 ```bash
-npm test
+cp .env.example .env
 ```
 
-Tests are run with Vitest and can be executed before code reviews.
+#### Logging
 
-## Installation
-
-
-
-
-```bash
-npm test
-```
-
-CI will run `npm test` before code reviews.
-
-## Getting Started
-
+| Variable | Description | Default |
 |----------|-------------|---------|
-| LOG_PATH | Path to log files | /var/log/machine-client |
-| STORE_PATH | Path to store data | /var/store/machine-client |
-| LM_STUDIO_ENDPOINT | LM Studio API endpoint | http://localhost:1234/v1 |
+| `LOG_PATH` | Directory for log files | `./logs` |
+| `LOG_LEVEL` | Log level (debug, info, warn, error) | `info` |
+| `TIMEOUT` | Request timeout in milliseconds | `30000` |
 
-### Config File
+#### Storage
 
-Create a `config.json` file in the project root to override defaults:
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `STORE_PATH` | Directory for data storage | `./data` |
+| `STORE_TYPE` | Storage type (json, sqlite, mongodb) | `json` |
 
-```json
-{
-  "logPath": "/custom/logs",
-  "storePath": "/custom/store"
-}
-```
+#### LM Studio
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `LM_STUDIO_ENDPOINT` | LM Studio API endpoint | `http://localhost:1234/v1` |
+
+#### Application
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `APP_NAME` | Application name | `Multi-Agent Log Summarizer` |
+| `VERSION` | Application version | `1.0.0` |
+
+#### Processing
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `BATCH_SIZE` | Number of logs to process per batch | `10` |
+| `MAX_RETRIES` | Maximum retry attempts | `3` |
+
+#### Environment Mode
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `ENV` | Environment mode (development, production, test) | `development` |
+
+#### Features
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `ENABLE_STREAMING` | Enable streaming responses | `true` |
+| `ENABLE_CACHE` | Enable caching | `true` |
+
+#### Security
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `ALLOW_CORS` | Allow CORS requests | `true` |
+| `CORS_ORIGINS` | Allowed CORS origins (`*` or comma-separated) | `*` |
 
 ### CLI Arguments
 
-Override config with CLI flags:
+Use `--` prefix for CLI arguments:
 
 ```bash
-node dist/index.js --log-path /custom/logs --store-path /custom/store
+npx ts-node src/main.tsx --log-level=debug --log-path=/var/log
 ```
 
-## Getting Started
+### Config File
 
-```bash
-npm install
-npm run dev
+Create `src/config.json` for persistent configuration:
+
+```json
+{
+  "logPath": "./logs",
+  "logLevel": "info",
+  "timeout": 30000,
+  "storePath": "./data",
+  "storeType": "json",
+  "lmStudioEndpoint": "http://localhost:1234/v1",
+  "appName": "Multi-Agent Log Summarizer",
+  "version": "1.0.0",
+  "batchSize": 10,
+  "maxRetries": 3,
+  "env": "development",
+  "enableStreaming": true,
+  "enableCache": true,
+  "allowCors": true,
+  "corsOrigins": "*"
+}
 ```
-
-## License
-
-MIT
-
-## License
-
-MIT
-
-Run tests locally:
-
-```bash
-npm test
-```
-
-Tests are run with Vitest in jsdom environment. CI will run the same command.
-
-## Development
-
-```bash
-npm run dev
-```
-
-## Building
-
-```bash
-npm run build
-```
-
-## License
-
-MIT
-```bash
-npm run dev
-```
-
-## Testing
-
-```bash
-npm test
-```
-
-## Building
-
-```bash
-npm run build
-```
-
-## CI/CD
-
-Tests run automatically before code reviews via `npm test`.
-
-
-
-
-
