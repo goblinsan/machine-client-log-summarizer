@@ -1,107 +1,83 @@
 # Plan Iteration 1
 
-Generated: 2026-03-09T10:54:34.338Z
+Generated: 2026-03-09T13:32:40.774Z
 
 ## Implementation Plan
 
-### Step 1: Review existing config structure and schema definitions
+### Step 1: Review existing config module structure and identify current implementation gaps
 
 **Files:** `src/config/index.ts`, `src/config/defaults.ts`, `src/config/schema.ts`, `.env.example`
 
 **Dependencies:**
 
 **Acceptance Criteria:**
-  - Understand current config loading mechanism
-  - Identify existing schema validation approach
-  - Document current defaults structure
+  - Identify current config loading mechanism
+  - Determine what hierarchical layers are missing
+  - Map existing defaults vs required defaults (log paths, store, LM Studio endpoint)
 
-### Step 2: Implement hierarchical config loading (env → file → CLI)
+### Step 2: Implement hierarchical config loading (environment → file → CLI)
 
 **Files:** `src/config/index.ts`
 
 **Dependencies:**
-  - Step 1: Review existing config structure
+  - Review existing config module structure
 
 **Acceptance Criteria:**
   - Config loads from .env file first
-  - Config can be overridden via config file (JSON)
-  - CLI flags can override file/env values
-  - Priority order: CLI > file > env > defaults
+  - Config can be overridden via CLI flags
+  - Environment variables take precedence over file defaults
+  - No breaking changes to existing config API
 
-### Step 3: Add JSON schema validation to config
+### Step 3: Add JSON schema validation for config structure
 
 **Files:** `src/config/schema.ts`, `src/config/index.ts`
 
 **Dependencies:**
-  - Step 2: Implement hierarchical config loading
+  - Implement hierarchical config loading
 
 **Acceptance Criteria:**
-  - Schema validates config structure
-  - Validation errors are logged clearly
-  - Invalid config throws descriptive error
-  - Schema covers all config keys
+  - Schema validates all config keys
+  - Validation errors are reported clearly
+  - Invalid config throws descriptive errors
+  - Schema includes log paths, store, and LM Studio endpoint definitions
 
-### Step 4: Update .env.example with required defaults
+### Step 4: Create/update .env.example with required defaults
 
 **Files:** `.env.example`
 
 **Dependencies:**
-  - Step 3: Add JSON schema validation
+  - Implement hierarchical config loading
+  - Add JSON schema validation
 
 **Acceptance Criteria:**
-  - Contains log path defaults
-  - Contains store configuration defaults
-  - Contains LM Studio endpoint default
-  - All required environment variables documented
+  - File includes log paths default
+  - File includes store default
+  - File includes LM Studio endpoint default
+  - File includes all required environment variables with comments
 
-### Step 5: Update defaults.ts with config defaults
-
-**Files:** `src/config/defaults.ts`
-
-**Dependencies:**
-  - Step 4: Update .env.example
-
-**Acceptance Criteria:**
-  - Log paths have sensible defaults
-  - Store configuration has defaults
-  - LM Studio endpoint has default value
-  - All defaults match schema requirements
-
-### Step 6: Add unit tests for config loading and validation
+### Step 5: Add unit tests for config loading and validation
 
 **Files:** `src/__tests__/config.test.ts`
 
 **Dependencies:**
-  - Step 5: Update defaults.ts
+  - Implement hierarchical config loading
+  - Add JSON schema validation
 
 **Acceptance Criteria:**
-  - Tests verify hierarchical loading order
-  - Tests verify schema validation works
-  - Tests verify defaults are applied correctly
-  - Tests verify CLI overrides work
-
-### Step 7: Run tests and verify config system works end-to-end
-
-**Files:** `src/__tests__/config.test.ts`, `src/config/index.ts`, `src/config/defaults.ts`, `.env.example`
-
-**Dependencies:**
-  - Step 6: Add unit tests for config loading and validation
-
-**Acceptance Criteria:**
-  - All config tests pass
-  - Config loads correctly with defaults
-  - Config overrides work as expected
-  - Validation errors are caught properly
+  - Tests cover env file loading
+  - Tests cover CLI override behavior
+  - Tests cover schema validation errors
+  - Tests cover default value fallback
 
 ## Risks
 
-1. Existing config structure may conflict with new hierarchical approach
-2. Schema validation library may need to be added to dependencies
+1. Existing config API may need breaking changes to support new hierarchical loading
+2. Schema validation library may not be in package.json dependencies
 3. CLI argument parsing may require additional dependencies
 
 ## Open Questions
 
-1. What CLI framework should be used for argument parsing?
-2. What JSON schema validation library should be used?
-3. Are there any existing config files that need migration?
+1. What CLI framework is currently used (if any)?
+2. What schema validation library should be used (zod, yup, ajv)?
+3. Are there any existing config file formats (JSON, YAML) already supported?
 
