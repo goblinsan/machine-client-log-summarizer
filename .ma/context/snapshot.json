@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773065576826,
+  "timestamp": 1773065757437,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".env.example",
-      "bytes": 583,
-      "mtime": 1773065574096.0315,
+      "bytes": 1133,
+      "mtime": 1773065756654.6904,
       "lines": 33
     },
     {
@@ -28,9 +28,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 2604,
-      "mtime": 1773065574107.4082,
-      "lines": 107
+      "bytes": 2737,
+      "mtime": 1773065756658.5005,
+      "lines": 165
     },
     {
       "path": "SECURITY_GUIDELINES.md",
@@ -52,9 +52,9 @@
     },
     {
       "path": "package.json",
-      "bytes": 996,
-      "mtime": 1773065574107.8228,
-      "lines": 46
+      "bytes": 912,
+      "mtime": 1773065756658.6228,
+      "lines": 40
     },
     {
       "path": "scripts/replace-colors.js",
@@ -70,9 +70,9 @@
     },
     {
       "path": "src/__tests__/config.test.ts",
-      "bytes": 4496,
-      "mtime": 1773065574108.2239,
-      "lines": 132
+      "bytes": 1984,
+      "mtime": 1773065756658.7634,
+      "lines": 59
     },
     {
       "path": "src/__tests__/qa-notes.md",
@@ -88,9 +88,9 @@
     },
     {
       "path": "src/__tests__/smoke.test.ts",
-      "bytes": 440,
-      "mtime": 1773065574108.5554,
-      "lines": 17
+      "bytes": 509,
+      "mtime": 1773065756658.9048,
+      "lines": 22
     },
     {
       "path": "src/__tests__/synthetic-logs-data.test.ts",
@@ -106,9 +106,9 @@
     },
     {
       "path": "src/config/defaults.ts",
-      "bytes": 1148,
-      "mtime": 1773065574108.907,
-      "lines": 75
+      "bytes": 782,
+      "mtime": 1773065756659.2266,
+      "lines": 51
     },
     {
       "path": "src/config/index.ts",
@@ -148,9 +148,9 @@
     },
     {
       "path": "src/config/schema.ts",
-      "bytes": 1266,
-      "mtime": 1773065574109.446,
-      "lines": 49
+      "bytes": 1820,
+      "mtime": 1773065756659.341,
+      "lines": 58
     },
     {
       "path": "src/config/synthetic-logs-data.ts",
@@ -275,7 +275,7 @@
   ],
   "totals": {
     "files": 45,
-    "bytes": 236725,
+    "bytes": 235069,
     "depth": 10
   }
 }

@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-09T14:12:56.826Z
+Generated: 2026-03-09T14:15:57.437Z
 
 ## Overview
 
@@ -17,22 +17,22 @@ Generated: 2026-03-09T14:12:56.826Z
 ## Statistics
 
 - **Total Files**: 45
-- **Total Size**: 231.18 KB
+- **Total Size**: 229.56 KB
 - **Max Depth**: 10
 
 ## Directory Structure
 
 ```
 ./
-  .env.example (0.6KB)
+  .env.example (1.1KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (15.9KB)
-  README.md (2.5KB)
+  README.md (2.7KB)
   SECURITY_GUIDELINES.md (2.2KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
-  package.json (1.0KB)
+  package.json (0.9KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
   vitest.config.ts (0.6KB)
@@ -42,16 +42,16 @@ src/
   App.tsx (1.9KB)
   main.tsx (0.2KB)
 src/__tests__/
-  config.test.ts (4.4KB)
+  config.test.ts (1.9KB)
   qa-notes.md (0.8KB)
   regression-gap.test.ts (1.9KB)
-  smoke.test.ts (0.4KB)
+  smoke.test.ts (0.5KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
-  defaults.ts (1.1KB)
+  defaults.ts (0.8KB)
   index.ts (18.7KB)
-  schema.ts (1.2KB)
+  schema.ts (1.8KB)
   synthetic-logs-data.ts (1.1KB)
   synthetic-logs.ts (3.8KB)
 src/config/prompts/
