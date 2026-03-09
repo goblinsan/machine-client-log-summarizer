@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T22:20:33.903Z
+Generated: 2026-03-08T22:21:55.999Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-08T22:20:33.903Z
 
 ## Statistics
 
-- **Total Files**: 44
-- **Total Size**: 209.17 KB
+- **Total Files**: 38
+- **Total Size**: 194.01 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -27,8 +27,8 @@ Generated: 2026-03-08T22:20:33.903Z
   .env.example (0.6KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
-  PROJECT_PLAN.md (15.7KB)
-  README.md (2.7KB)
+  PROJECT_PLAN.md (10.5KB)
+  README.md (1.3KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
   package.json (0.9KB)
@@ -42,8 +42,6 @@ src/
   main.tsx (0.2KB)
 src/__tests__/
   config.test.ts (1.9KB)
-  qa-notes.md (0.8KB)
-  regression-gap.test.ts (1.9KB)
   smoke.test.ts (0.5KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
@@ -71,25 +69,18 @@ src/styles/
   main.scss (0.3KB)
 src/test/
   setup.ts (0.1KB)
-src/types/
-  index.ts (0.0KB)
-  logEvent.ts (1.2KB)
-src/utils/
-  index.ts (0.1KB)
-  logEventNormalizer.ts (4.5KB)
 ```
 
 ## Large Files
 
-- `PROJECT_PLAN.md` (15.7KB, 349 lines)
 - `package-lock.json` (123.0KB, 3711 lines)
 - `src/config/index.ts` (18.7KB, 644 lines)
 
 ## File Types
 
-- .ts: 17 files
+- .ts: 12 files
 - .scss: 9 files
-- .md: 8 files
+- .md: 7 files
 - .json: 4 files
 - .tsx: 2 files
 - .example: 1 file

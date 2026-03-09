@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773008433903,
+  "timestamp": 1773008515999,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -22,15 +22,15 @@
     },
     {
       "path": "PROJECT_PLAN.md",
-      "bytes": 16063,
-      "mtime": 1773007738018.666,
-      "lines": 349
+      "bytes": 10758,
+      "mtime": 1773008515275.8687,
+      "lines": 144
     },
     {
       "path": "README.md",
-      "bytes": 2737,
-      "mtime": 1773007738018.9194,
-      "lines": 165
+      "bytes": 1280,
+      "mtime": 1773008515276.1846,
+      "lines": 111
     },
     {
       "path": "index.html",
@@ -67,18 +67,6 @@
       "bytes": 1984,
       "mtime": 1773005584658.6921,
       "lines": 59
-    },
-    {
-      "path": "src/__tests__/qa-notes.md",
-      "bytes": 841,
-      "mtime": 1773007738019.1633,
-      "lines": 32
-    },
-    {
-      "path": "src/__tests__/regression-gap.test.ts",
-      "bytes": 1969,
-      "mtime": 1773007738019.423,
-      "lines": 52
     },
     {
       "path": "src/__tests__/smoke.test.ts",
@@ -225,30 +213,6 @@
       "lines": 3
     },
     {
-      "path": "src/types/index.ts",
-      "bytes": 27,
-      "mtime": 1773005717356.2988,
-      "lines": 1
-    },
-    {
-      "path": "src/types/logEvent.ts",
-      "bytes": 1255,
-      "mtime": 1773005717356.4465,
-      "lines": 61
-    },
-    {
-      "path": "src/utils/index.ts",
-      "bytes": 107,
-      "mtime": 1773005717356.616,
-      "lines": 2
-    },
-    {
-      "path": "src/utils/logEventNormalizer.ts",
-      "bytes": 4562,
-      "mtime": 1773005717356.8042,
-      "lines": 134
-    },
-    {
       "path": "tsconfig.json",
       "bytes": 445,
       "mtime": 1761999627140.2886,
@@ -268,8 +232,8 @@
     }
   ],
   "totals": {
-    "files": 44,
-    "bytes": 214185,
+    "files": 38,
+    "bytes": 198662,
     "depth": 10
   }
 }
