@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-08T22:21:55.999Z
+Generated: 2026-03-09T00:38:39.660Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-08T22:21:55.999Z
 ## Statistics
 
 - **Total Files**: 38
-- **Total Size**: 194.01 KB
+- **Total Size**: 210.88 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -52,11 +52,11 @@ src/config/
   synthetic-logs-data.ts (1.1KB)
   synthetic-logs.ts (3.8KB)
 src/config/prompts/
-  context.md (1.2KB)
-  coordinator.md (1.5KB)
-  lead-engineer.md (1.3KB)
-  qa.md (1.2KB)
-  security.md (1.2KB)
+  context.md (10.8KB)
+  coordinator.md (3.0KB)
+  lead-engineer.md (3.1KB)
+  qa.md (3.0KB)
+  security.md (3.3KB)
 src/styles/
   _base.scss (1.7KB)
   _components.scss (3.3KB)
@@ -75,6 +75,7 @@ src/test/
 
 - `package-lock.json` (123.0KB, 3711 lines)
 - `src/config/index.ts` (18.7KB, 644 lines)
+- `src/config/prompts/context.md` (10.8KB, 273 lines)
 
 ## File Types
 

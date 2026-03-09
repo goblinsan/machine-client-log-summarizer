@@ -1,8 +1,8 @@
 {"path":".env.example","bytes":567,"lines":33,"mtime":1773005718125.3445}
 {"path":".gitignore","bytes":206,"lines":26,"mtime":1772953851291.947}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1760209795183.0251}
-{"path":"PROJECT_PLAN.md","bytes":10758,"lines":144,"mtime":1773008515275.8687}
-{"path":"README.md","bytes":1280,"lines":111,"mtime":1773008515276.1846}
+{"path":"PROJECT_PLAN.md","bytes":10758,"lines":144,"mtime":1773016718911.9956}
+{"path":"README.md","bytes":1280,"lines":111,"mtime":1773016718912.1494}
 {"path":"index.html","bytes":306,"lines":13,"mtime":1759790612651.8906}
 {"path":"package-lock.json","bytes":125965,"lines":3711,"mtime":1772957062284.2668}
 {"path":"package.json","bytes":912,"lines":40,"mtime":1772996426230.4531}
@@ -14,11 +14,11 @@
 {"path":"src/__tests__/synthetic-logs.test.ts","bytes":2094,"lines":76,"mtime":1772996426231.4922}
 {"path":"src/config/defaults.ts","bytes":292,"lines":19,"mtime":1773005584659.3896}
 {"path":"src/config/index.ts","bytes":19120,"lines":644,"mtime":1773005584657.875}
-{"path":"src/config/prompts/context.md","bytes":1196,"lines":39,"mtime":1772996426232.3662}
-{"path":"src/config/prompts/coordinator.md","bytes":1546,"lines":48,"mtime":1772996426232.575}
-{"path":"src/config/prompts/lead-engineer.md","bytes":1358,"lines":43,"mtime":1772996426233.0083}
-{"path":"src/config/prompts/qa.md","bytes":1229,"lines":43,"mtime":1772996426233.1494}
-{"path":"src/config/prompts/security.md","bytes":1265,"lines":43,"mtime":1772996426233.4246}
+{"path":"src/config/prompts/context.md","bytes":11080,"lines":273,"mtime":1773016503594.5361}
+{"path":"src/config/prompts/coordinator.md","bytes":3076,"lines":88,"mtime":1773016503594.7683}
+{"path":"src/config/prompts/lead-engineer.md","bytes":3200,"lines":87,"mtime":1773016503594.9832}
+{"path":"src/config/prompts/qa.md","bytes":3113,"lines":88,"mtime":1773016503595.3296}
+{"path":"src/config/prompts/security.md","bytes":3409,"lines":95,"mtime":1773016503595.5068}
 {"path":"src/config/schema.ts","bytes":1820,"lines":58,"mtime":1773005584656.6975}
 {"path":"src/config/synthetic-logs-data.ts","bytes":1168,"lines":50,"mtime":1772996426233.9858}
 {"path":"src/config/synthetic-logs.ts","bytes":3859,"lines":149,"mtime":1772996426234.241}
