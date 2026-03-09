@@ -1,61 +1,46 @@
 /**
  * LogEvent schema for Multi-Agent Log Summarizer
- * Captures structured log events from agent workflows
+ * Captures all required fields for log event normalization
  */
 
-export type LogEventType = 
-  | 'worker_ready'
-  | 'request_started'
-  | 'git_op'
-  | 'persona_response'
-  | 'persona_apply'
-  | 'persona_completed'
-  | 'unknown';
+export type LogLevel = 'info' | 'warn' | 'error' | 'debug';
+
+export type PersonaType = 'worker' | 'request' | 'git' | 'persona_response' | 'persona_apply' | 'persona_completed' | 'unknown';
+
+export type WorkflowIntent = 'prepare' | 'execute' | 'analyze' | 'summarize' | 'unknown';
 
 export interface LogEvent {
+  ts: string; // ISO timestamp
+  level: LogLevel;
+  persona: PersonaType;
+  workflowId: string;
+  intent: WorkflowIntent;
+  repo: string;
+  branch: string;
+  projectId: string;
+  corrId: string;
+  duration_ms: number;
+  preview_raw: string; // JSON string representation of raw message
+  preview_json: Record<string, unknown>; // Parsed JSON object
+  paths: string[]; // File paths involved
+  source: string; // Source of the log event
+  hash: string; // Message hash for deduplication
+}
+
+export type LogEventPreview = {
   ts: string;
-  level: string;
-  persona?: string;
-  workflowId?: string;
-  intent?: string;
-  repo?: string;
-  branch?: string;
-  projectId?: string;
-  corrId?: string;
-  duration_ms?: number;
-  preview?: string;
-  raw?: string;
-  json?: Record<string, unknown>;
-  paths?: string[];
-  source?: string;
-  hash?: string;
-}
-
-export interface RawLogMessage {
-  [key: string]: unknown;
-}
-
-export interface LogEventMapping {
-  type: LogEventType;
-  event: LogEvent;
-}
-
-export const LOG_EVENT_TYPES: LogEventType[] = [
-  'worker_ready',
-  'request_started',
-  'git_op',
-  'persona_response',
-  'persona_apply',
-  'persona_completed',
-  'unknown'
-];
-
-export const LOG_EVENT_TYPE_NAMES: Record<LogEventType, string> = {
-  worker_ready: 'Worker Ready',
-  request_started: 'Request Started',
-  git_op: 'Git Operation',
-  persona_response: 'Persona Response',
-  persona_apply: 'Persona Apply',
-  persona_completed: 'Persona Completed',
-  unknown: 'Unknown'
+  level: LogLevel;
+  persona: PersonaType;
+  workflowId: string;
+  intent: WorkflowIntent;
+  repo: string;
+  branch: string;
+  projectId: string;
+  corrId: string;
+  duration_ms: number;
+  preview_raw: string;
+  preview_json: Record<string, unknown>;
+  paths: string[];
+  source: string;
+  hash: string;
 };

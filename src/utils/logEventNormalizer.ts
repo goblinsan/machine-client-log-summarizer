@@ -1,134 +1,149 @@
-import { 
-  LogEvent, 
-  RawLogMessage, 
-  LogEventMapping, 
-  LogEventType,
-  LOG_EVENT_TYPES
-} from '../types/logEvent';
+import { LogEvent, LogLevel, PersonaType, WorkflowIntent } from '../types/logEvent';
 
 /**
- * Normalizer for raw log messages to structured LogEvent objects
- * Maps raw messages to their appropriate event types
+ * LogEventNormalizer - Maps raw log messages to typed LogEvent objects
  */
 
-export class LogEventNormalizer {
-  private readonly requiredFields = ['ts', 'level'];
-  private readonly optionalFields = [
-    'persona', 'workflowId', 'intent', 'repo', 'branch',
-    'projectId', 'corrId', 'duration_ms', 'preview', 'raw',
-    'json', 'paths', 'source', 'hash'
-  ];
+const MESSAGE_PATTERNS: Record<PersonaType, RegExp> = {
+  worker_ready: /worker_ready/i,
+  request_started: /request_started/i,
+  git_op: /git_op/i,
+  persona_response: /persona_response/i,
+  persona_apply: /persona_apply/i,
+  persona_completed: /persona_completed/i,
+  unknown: /unknown/i,
+};
 
-  /**
-   * Normalize a raw log message to a structured LogEvent
-   */
-  normalize(rawMessage: RawLogMessage): LogEvent {
-    const event: LogEvent = {
-      ts: this.extractField(rawMessage, 'ts', ''),
-      level: this.extractField(rawMessage, 'level', 'info'),
-      preview: this.extractField(rawMessage, 'preview', ''),
-      raw: this.extractField(rawMessage, 'raw', ''),
-      json: this.extractField(rawMessage, 'json', {}) as Record<string, unknown>,
-      paths: this.extractField(rawMessage, 'paths', []) as string[],
-      source: this.extractField(rawMessage, 'source', ''),
-      hash: this.extractField(rawMessage, 'hash', '')
-    };
+const INTENT_PATTERNS: Record<WorkflowIntent, RegExp> = {
+  prepare: /prepare/i,
+  execute: /execute/i,
+  analyze: /analyze/i,
+  summarize: /summarize/i,
+  unknown: /unknown/i,
+};
 
-    // Add optional fields if present
-    if (rawMessage.persona) event.persona = rawMessage.persona as string;
-    if (rawMessage.workflowId) event.workflowId = rawMessage.workflowId as string;
-    if (rawMessage.intent) event.intent = rawMessage.intent as string;
-    if (rawMessage.repo) event.repo = rawMessage.repo as string;
-    if (rawMessage.branch) event.branch = rawMessage.branch as string;
-    if (rawMessage.projectId) event.projectId = rawMessage.projectId as string;
-    if (rawMessage.corrId) event.corrId = rawMessage.corrId as string;
-    if (rawMessage.duration_ms) event.duration_ms = rawMessage.duration_ms as number;
-
-    return event;
-  }
-
-  /**
-   * Map a raw log message to its appropriate event type
-   */
-  mapToType(rawMessage: RawLogMessage): LogEventMapping {
-    const eventType = this.determineEventType(rawMessage);
-    const event = this.normalize(rawMessage);
-
-    return {
-      type: eventType,
-      event
-    };
-  }
-
-  /**
-   * Determine the event type based on message content
-   */
-  private determineEventType(rawMessage: RawLogMessage): LogEventType {
-    const message = rawMessage as Record<string, unknown>;
-    const messageStr = typeof message.message === 'string' 
-      ? message.message 
-      : typeof message.msg === 'string' 
-      ? message.msg 
-      : '';
-
-    const preview = typeof message.preview === 'string' ? message.preview : '';
-    const raw = typeof message.raw === 'string' ? message.raw : '';
-
-    // worker_ready
-    if (messageStr.includes('ready') || messageStr.includes('initialized') || 
-        preview.includes('ready') || preview.includes('initialized')) {
-      return 'worker_ready';
-    }
-
-    // request_started
-    if (messageStr.includes('request') || messageStr.includes('started') ||
-        preview.includes('request') || preview.includes('started')) {
-      return 'request_started';
-    }
-
-    // git_op
-    if (messageStr.includes('git') || messageStr.includes('clone') || 
-        messageStr.includes('push') || messageStr.includes('pull') ||
-        messageStr.includes('commit') || messageStr.includes('branch') ||
-        preview.includes('git') || preview.includes('clone') || 
-        preview.includes('push') || preview.includes('pull') ||
-        preview.includes('commit') || preview.includes('branch')) {
-      return 'git_op';
-    }
-
-    // persona_response
-    if (messageStr.includes('response') || messageStr.includes('answer') ||
-        preview.includes('response') || preview.includes('answer')) {
-      return 'persona_response';
-    }
-
-    // persona_apply
-    if (messageStr.includes('apply') || messageStr.includes('applied') ||
-        preview.includes('apply') || preview.includes('applied')) {
-      return 'persona_apply';
-    }
-
-    // persona_completed
-    if (messageStr.includes('completed') || messageStr.includes('finished') ||
-        preview.includes('completed') || preview.includes('finished')) {
-      return 'persona_completed';
-    }
-
-    // unknown
-    return 'unknown';
-  }
-
-  /**
-   * Extract a field value with fallback
-   */
-  private extractField<T>(obj: Record<string, unknown>, key: string, fallback: T): T {
-    const value = obj[key];
-    if (value === undefined || value === null) {
-      return fallback;
-    }
-    return value as T;
-  }
+/**
+ * Extract timestamp from raw message
+ */
+function extractTimestamp(raw: string): string {
+  const match = raw.match(/\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}/);
+  return match ? match[0] : new Date().toISOString();
 }
 
-export const logEventNormalizer = new LogEventNormalizer();
-export default logEventNormalizer;
+/**
+ * Extract duration from raw message
+ */
+function extractDuration(raw: string): number {
+  const match = raw.match(/duration_ms[:\s]+(\d+)/i);
+  return match ? parseInt(match[1], 10) : 0;
+}
+
+/**
+ * Extract hash from raw message
+ */
+function extractHash(raw: string): string {
+  const match = raw.match(/hash[:\s]+["']?([^"'\s]+)["']?/i);
+  return match ? match[1] : '';
+}
+
+/**
+ * Extract paths from raw message
+ */
+function extractPaths(raw: string): string[] {
+  const matches = raw.matchAll(/["']([^"'\s]+\.ts|[^"'\s]+\.js)["']/g);
+  return Array.from(matches).map(m => m[1]);
+}
+
+/**
+ * Extract source from raw message
+ */
+function extractSource(raw: string): string {
+  const match = raw.match(/source[:\s]+["']([^"'\s]+)["']/i);
+  return match ? match[1] : 'unknown';
+}
+
+/**
+ * Determine persona type from raw message
+ */
+function determinePersona(raw: string): PersonaType {
+  for (const [type, pattern] of Object.entries(MESSAGE_PATTERNS) as [PersonaType, RegExp][]) {
+    if (pattern.test(raw)) {
+      return type;
+    }
+  }
+  return 'unknown';
+}
+
+/**
+ * Determine workflow intent from raw message
+ */
+function determineIntent(raw: string): WorkflowIntent {
+  for (const [intent, pattern] of Object.entries(INTENT_PATTERNS) as [WorkflowIntent, RegExp][]) {
+    if (pattern.test(raw)) {
+      return intent;
+    }
+  }
+  return 'unknown';
+}
+
+/**
+ * Determine log level from raw message
+ */
+function determineLevel(raw: string): LogLevel {
+  if (/error/i.test(raw)) return 'error';
+  if (/warn/i.test(raw)) return 'warn';
+  if (/debug/i.test(raw)) return 'debug';
+  return 'info';
+}
+
+/**
+ * Normalize raw log message to typed LogEvent
+ */
+export function normalizeLogEvent(raw: string): LogEvent {
+  const preview_json: Record<string, unknown> = {};
+  try {
+    preview_json.raw = raw;
+  } catch (e) {
+    preview_json.raw = raw;
+  }
+
+  return {
+    ts: extractTimestamp(raw),
+    level: determineLevel(raw),
+    persona: determinePersona(raw),
+    workflowId: raw.match(/workflowId[:\s]+["']([^"'\s]+)["']/)?.[1] || '',
+    intent: determineIntent(raw),
+    repo: raw.match(/repo[:\s]+["']([^"'\s]+)["']/)?.[1] || '',
+    branch: raw.match(/branch[:\s]+["']([^"'\s]+)["']/)?.[1] || '',
+    projectId: raw.match(/projectId[:\s]+["']([^"'\s]+)["']/)?.[1] || '',
+    corrId: raw.match(/corrId[:\s]+["']([^"'\s]+)["']/)?.[1] || '',
+    duration_ms: extractDuration(raw),
+    preview_raw: raw,
+    preview_json,
+    paths: extractPaths(raw),
+    source: extractSource(raw),
+    hash: extractHash(raw),
+  };
+}
+
+/**
+ * Validate LogEvent structure
+ */
+export function validateLogEvent(event: LogEvent): boolean {
+  return (
+    !!event.ts &&
+    !!event.level &&
+    !!event.persona &&
+    !!event.workflowId &&
+    !!event.repo &&
+    !!event.branch &&
+    !!event.projectId &&
+    !!event.corrId &&
+    event.duration_ms >= 0 &&
+    !!event.preview_raw &&
+    !!event.preview_json &&
+    Array.isArray(event.paths) &&
+    !!event.source &&
+    !!event.hash
+  );
+}
