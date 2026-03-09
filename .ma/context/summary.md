@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-09T14:01:24.578Z
+Generated: 2026-03-09T14:08:11.372Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-09T14:01:24.578Z
 
 ## Statistics
 
-- **Total Files**: 44
-- **Total Size**: 227.08 KB
+- **Total Files**: 45
+- **Total Size**: 229.39 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -27,8 +27,9 @@ Generated: 2026-03-09T14:01:24.578Z
   .env.example (1.1KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
-  PROJECT_PLAN.md (15.7KB)
+  PROJECT_PLAN.md (15.8KB)
   README.md (2.7KB)
+  SECURITY_GUIDELINES.md (2.2KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
   package.json (0.9KB)
@@ -81,7 +82,7 @@ src/utils/
 
 ## Large Files
 
-- `PROJECT_PLAN.md` (15.7KB, 349 lines)
+- `PROJECT_PLAN.md` (15.8KB, 352 lines)
 - `package-lock.json` (123.0KB, 3711 lines)
 - `src/config/index.ts` (18.7KB, 644 lines)
 - `src/config/prompts/context.md` (10.8KB, 273 lines)
@@ -89,8 +90,8 @@ src/utils/
 ## File Types
 
 - .ts: 17 files
+- .md: 9 files
 - .scss: 9 files
-- .md: 8 files
 - .json: 4 files
 - .tsx: 2 files
 - .example: 1 file
