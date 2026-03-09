@@ -1,101 +1,77 @@
 # Plan Iteration 2
 
-Generated: 2026-03-08T07:17:30.784Z
+Generated: 2026-03-09T13:34:08.402Z
 
 ## Implementation Plan
 
-### Step 1: Create JSON schema definition for configuration validation
+### Step 1: Review existing config structure and schema definitions
+
+**Files:** `src/config/schema.ts`, `src/config/defaults.ts`, `src/config/index.ts`, `.env.example`
+
+**Dependencies:**
+
+### Step 2: Update JSON schema to include log paths, store, and LM Studio endpoint fields
 
 **Files:** `src/config/schema.ts`
 
 **Dependencies:**
+  - Review existing config structure
 
-**Acceptance Criteria:**
-  - Schema defines all config keys: logPath, store, lmStudioEndpoint, and any future keys
-  - Schema includes type definitions, required fields, and default values
-  - File uses TypeScript with proper JSDoc comments for schema properties
-
-### Step 2: Create default configuration values module
+### Step 3: Update defaults.ts with default values for all config fields
 
 **Files:** `src/config/defaults.ts`
 
 **Dependencies:**
-  - src/config/schema.ts
+  - Update JSON schema
 
-**Acceptance Criteria:**
-  - Defines default values for logPath, store, lmStudioEndpoint
-  - Defaults are exported as const objects for immutability
-  - File includes comments explaining each default's purpose
-
-### Step 3: Create hierarchical config loader combining env, file, and CLI sources
-
-**Files:** `src/config/index.ts`
-
-**Dependencies:**
-  - src/config/schema.ts
-  - src/config/defaults.ts
-
-**Acceptance Criteria:**
-  - Loader reads .env file using dotenv or similar
-  - Loader parses command-line arguments for CLI overrides
-  - Loader applies hierarchy: CLI > file > env > defaults
-  - Loader validates config against JSON schema before export
-  - Exports validated config object with type safety
-
-### Step 4: Create .env.example file with documented configuration options
+### Step 4: Create/update .env.example with all environment variables
 
 **Files:** `.env.example`
 
 **Dependencies:**
-  - src/config/defaults.ts
+  - Update JSON schema
+  - Update defaults.ts
 
-**Acceptance Criteria:**
-  - File lists all configurable environment variables
-  - Each variable includes description and example value
-  - File uses standard .env.example naming convention
-  - File is placed at repository root
-
-### Step 5: Update package.json with required dependencies
-
-**Files:** `package.json`
-
-**Dependencies:**
-
-**Acceptance Criteria:**
-  - Add dotenv dependency for env file parsing
-  - Add zod or ajv for JSON schema validation
-  - Dependencies listed in devDependencies or dependencies appropriately
-  - No breaking changes to existing package structure
-
-### Step 6: Add TypeScript declarations for config module exports
+### Step 5: Implement hierarchical config loader (CLI > file > env > defaults)
 
 **Files:** `src/config/index.ts`
 
 **Dependencies:**
-  - src/config/schema.ts
-  - src/config/defaults.ts
+  - Update JSON schema
+  - Update defaults.ts
+  - Create .env.example
 
-**Acceptance Criteria:**
-  - Config interface exported with proper type definitions
-  - TypeScript compiles without errors
-  - IDE autocomplete works for config exports
+### Step 6: Add JSON schema validation to config loader
+
+**Files:** `src/config/index.ts`
+
+**Dependencies:**
+  - Implement hierarchical config loader
+
+### Step 7: Write unit tests for config loader and validation
+
+**Files:** `src/__tests__/config.test.ts`
+
+**Dependencies:**
+  - Implement hierarchical config loader
+  - Add JSON schema validation
+
+### Step 8: Update README with config usage documentation
+
+**Files:** `README.md`
+
+**Dependencies:**
+  - Write unit tests
 
 ## Risks
 
-1. JSON schema validation library choice (zod vs ajv) may affect bundle size
-2. CLI argument parsing may conflict with existing CLI patterns in repo
-3. SCSS files may need updates if config affects styling paths
+1. Existing config structure may conflict with new hierarchical approach
+2. Schema validation library may not be in package.json dependencies
+3. CLI argument parsing may require additional dependencies
 
 ## Open Questions
 
-1. Should config be exported as singleton or function returning fresh instance?
-2. What error handling strategy for invalid schema validation?
-3. Should .env.example be committed or kept as template?
-
-## Notes
-
-1. Prioritize TypeScript type safety throughout config module
-2. Keep config module independent of Vite build configuration
-3. Ensure defaults are clearly separated from environment overrides
-4. Consider adding config versioning for future schema changes
+1. What config file format is preferred (JSON, YAML)?
+2. What CLI framework to use (yargs, commander, or native)?
+3. Should validation errors be thrown or logged?
 
