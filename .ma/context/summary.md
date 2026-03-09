@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-09T10:51:57.623Z
+Generated: 2026-03-09T13:30:21.076Z
 
 ## Overview
 
@@ -17,14 +17,14 @@ Generated: 2026-03-09T10:51:57.623Z
 ## Statistics
 
 - **Total Files**: 44
-- **Total Size**: 227.08 KB
+- **Total Size**: 226.27 KB
 - **Max Depth**: 10
 
 ## Directory Structure
 
 ```
 ./
-  .env.example (1.1KB)
+  .env.example (0.5KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (15.7KB)
@@ -48,9 +48,9 @@ src/__tests__/
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
-  defaults.ts (0.8KB)
+  defaults.ts (1.1KB)
   index.ts (18.7KB)
-  schema.ts (1.8KB)
+  schema.ts (1.2KB)
   synthetic-logs-data.ts (1.1KB)
   synthetic-logs.ts (3.8KB)
 src/config/prompts/
