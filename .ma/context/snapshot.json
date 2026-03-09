@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773067542001,
+  "timestamp": 1773068080411,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -23,7 +23,7 @@
     {
       "path": "PROJECT_PLAN.md",
       "bytes": 16063,
-      "mtime": 1773067541111.5378,
+      "mtime": 1773068079611.0996,
       "lines": 349
     },
     {
@@ -71,7 +71,7 @@
     {
       "path": "src/__tests__/qa-notes.md",
       "bytes": 841,
-      "mtime": 1773067541111.9268,
+      "mtime": 1773068079611.3643,
       "lines": 32
     },
     {
@@ -82,9 +82,9 @@
     },
     {
       "path": "src/__tests__/smoke.test.ts",
-      "bytes": 440,
-      "mtime": 1773067395953.688,
-      "lines": 17
+      "bytes": 1805,
+      "mtime": 1773068052526.5935,
+      "lines": 55
     },
     {
       "path": "src/__tests__/synthetic-logs-data.test.ts",
@@ -112,33 +112,33 @@
     },
     {
       "path": "src/config/prompts/context.md",
-      "bytes": 11080,
-      "mtime": 1773021664070.8188,
-      "lines": 273
+      "bytes": 16610,
+      "mtime": 1773068052526.9092,
+      "lines": 448
     },
     {
       "path": "src/config/prompts/coordinator.md",
-      "bytes": 3076,
-      "mtime": 1773021664071.0518,
-      "lines": 88
+      "bytes": 3794,
+      "mtime": 1773068052527.1587,
+      "lines": 110
     },
     {
       "path": "src/config/prompts/lead-engineer.md",
-      "bytes": 3200,
-      "mtime": 1773021664071.2468,
-      "lines": 87
+      "bytes": 3992,
+      "mtime": 1773068052527.4207,
+      "lines": 116
     },
     {
       "path": "src/config/prompts/qa.md",
-      "bytes": 3113,
-      "mtime": 1773021664071.401,
-      "lines": 88
+      "bytes": 3698,
+      "mtime": 1773068052528.4363,
+      "lines": 110
     },
     {
       "path": "src/config/prompts/security.md",
-      "bytes": 3409,
-      "mtime": 1773021664071.572,
-      "lines": 95
+      "bytes": 4026,
+      "mtime": 1773068052528.7253,
+      "lines": 117
     },
     {
       "path": "src/config/schema.ts",
@@ -269,7 +269,7 @@
   ],
   "totals": {
     "files": 44,
-    "bytes": 234181,
+    "bytes": 243788,
     "depth": 10
   }
 }
