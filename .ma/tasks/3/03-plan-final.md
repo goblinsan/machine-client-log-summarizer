@@ -1,69 +1,43 @@
-# Plan Iteration 1
+# Plan Iteration 2
 
-Generated: 2026-03-08T18:02:49.716Z
+Generated: 2026-03-09T14:58:40.952Z
 
 ## Implementation Plan
 
-### Step 1: Review existing synthetic-logs.ts structure to understand current data model and export patterns
+### Step 1: Examine existing synthetic log data structure and workflow field definitions
 
-**Files:** `src/config/synthetic-logs.ts`, `src/config/index.ts`
+**Files:** `src/config/synthetic-logs-data.ts`, `src/config/synthetic-logs.ts`, `src/types/logEvent.ts`
 
 **Dependencies:**
-  - context_analysis/summary
 
-**Acceptance Criteria:**
-  - Understand existing synthetic log schema
-  - Identify current export patterns in index.ts
-  - Confirm TypeScript is the only language used for new files
-
-### Step 2: Create synthetic log data pack file with four scenario types (ok, flaky, fail, timeout)
+### Step 2: Design curated synthetic log data packs with varied statuses (ok, flaky, fail, timeout)
 
 **Files:** `src/config/synthetic-logs-data.ts`
 
 **Dependencies:**
-  - src/config/synthetic-logs.ts
+  - step_1
 
-**Acceptance Criteria:**
-  - File contains ok, flaky, fail, timeout scenarios
-  - Each scenario includes persona, workflowId, intent fields
-  - File uses TypeScript with .ts extension
-  - File located in src/config/ directory
+### Step 3: Update or create synthetic log data export for curated packs
 
-### Step 3: Add test coverage for synthetic log data packs
+**Files:** `src/config/synthetic-logs-data.ts`
+
+**Dependencies:**
+  - step_2
+
+### Step 4: Add/update tests to validate curated synthetic log data
 
 **Files:** `src/__tests__/synthetic-logs-data.test.ts`
 
 **Dependencies:**
-  - src/config/synthetic-logs-data.ts
-
-**Acceptance Criteria:**
-  - Tests verify all four scenario types exist
-  - Tests validate persona, workflowId, intent fields are present
-  - Tests use Vitest framework
-  - Tests located in src/__tests__/ directory
-
-### Step 4: Export synthetic log data packs from config index
-
-**Files:** `src/config/index.ts`
-
-**Dependencies:**
-  - src/config/synthetic-logs-data.ts
-
-**Acceptance Criteria:**
-  - synthetic-logs-data.ts is exported from index.ts
-  - Export follows existing pattern in index.ts
-  - No duplicate exports or conflicting paths
+  - step_3
 
 ## Risks
 
-1. Existing synthetic-logs.ts may have conflicting exports that need to be reviewed
-2. Schema validation in synthetic-logs.ts may need updates to accommodate new data packs
-3. File size limits may apply (package-lock.json is 123KB, keep new files reasonable)
+1. Existing synthetic-logs-data.ts may have different schema expectations - need to ensure compatibility
+2. Data pack size may grow if too many status variants are included - keep curated and minimal
 
 ## Open Questions
 
-1. What is the expected size limit for synthetic log entries?
-2. Are there specific persona values that must be included?
-3. What workflowId format is expected (UUID, string, number)?
-4. What intent values should be represented in the data packs?
+1. What is the expected output format for synthetic logs (JSON array, single file, or multiple files)?
+2. Are there specific persona/workflowId/intent combinations that must be represented?
 
