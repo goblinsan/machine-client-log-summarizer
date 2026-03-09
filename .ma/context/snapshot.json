@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773063021076,
+  "timestamp": 1773063665743,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".env.example",
-      "bytes": 495,
-      "mtime": 1773062138460.8662,
+      "bytes": 583,
+      "mtime": 1773063661133.1958,
       "lines": 33
     },
     {
@@ -28,9 +28,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 2737,
-      "mtime": 1773053213109.3281,
-      "lines": 165
+      "bytes": 2615,
+      "mtime": 1773063661136.2588,
+      "lines": 104
     },
     {
       "path": "index.html",
@@ -46,9 +46,9 @@
     },
     {
       "path": "package.json",
-      "bytes": 912,
-      "mtime": 1772996426230.4531,
-      "lines": 40
+      "bytes": 996,
+      "mtime": 1773063661136.5754,
+      "lines": 46
     },
     {
       "path": "scripts/replace-colors.js",
@@ -64,9 +64,9 @@
     },
     {
       "path": "src/__tests__/config.test.ts",
-      "bytes": 1984,
-      "mtime": 1773054309153.472,
-      "lines": 59
+      "bytes": 4496,
+      "mtime": 1773063661137.4102,
+      "lines": 132
     },
     {
       "path": "src/__tests__/qa-notes.md",
@@ -101,13 +101,13 @@
     {
       "path": "src/config/defaults.ts",
       "bytes": 1148,
-      "mtime": 1773062138464.0437,
+      "mtime": 1773063568866.3853,
       "lines": 75
     },
     {
       "path": "src/config/index.ts",
       "bytes": 19120,
-      "mtime": 1773054309152.0032,
+      "mtime": 1773063568867.2559,
       "lines": 644
     },
     {
@@ -269,7 +269,7 @@
   ],
   "totals": {
     "files": 44,
-    "bytes": 231699,
+    "bytes": 234261,
     "depth": 10
   }
 }

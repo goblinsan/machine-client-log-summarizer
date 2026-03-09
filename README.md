@@ -1,8 +1,10 @@
-# Multi-Agent Log Summarizer
+# Machine Client Log Summarizer
 
-## Configuration
+## Testing
 
-The application uses hierarchical configuration with the following priority:
+Run `npm test` to execute the Vitest test harness.
+
+## Installation
 1. **CLI arguments** (highest priority)
 2. **Config file** (`src/config.json`)
 3. **Environment variables**
