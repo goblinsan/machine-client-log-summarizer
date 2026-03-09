@@ -1,57 +1,49 @@
 import { z } from 'zod';
 
-export const configSchema = z.object({
-  name: z.string(),
+/**
  * JSON Schema for configuration validation
  */
 export const schema = z.object({
   // Logging
-  logPath: z.string().min(1),
+  logPath: z.string().default('./logs'),
   logLevel: z.enum(['debug', 'info', 'warn', 'error']).default('info'),
-  timeout: z.number().default(30000),
-});
+  timeout: z.number().positive().default(30000),
 
-export const prompts = {
-  coordinator: require('./prompts/coordinator.md'),
-  context: require('./prompts/context.md'),
-  leadEngineer: require('./prompts/lead-engineer.md'),
-  qa: require('./prompts/qa.md'),
-  security: require('./prompts/security.md'),
-};
-
+  // Storage
+  storePath: z.string().default('./data'),
   storeType: z.enum(['json', 'sqlite', 'mongodb']).default('json'),
-  
+
   // LM Studio endpoint
-  lmStudioEndpoint: z.string().url().or(z.string().min(1)),
-  
+  lmStudioEndpoint: z.string().url().default('http://localhost:1234/v1'),
+
   // Application
-  appName: z.string().min(1),
-  version: z.string().min(1),
-  
+  appName: z.string().default('Multi-Agent Log Summarizer'),
+  version: z.string().default('1.0.0'),
+
   // Processing
-  batchSize: z.number().int().positive().default(10),
-  maxRetries: z.number().int().positive().default(3),
-  
+  batchSize: z.number().positive().default(10),
+  maxRetries: z.number().positive().default(3),
+
   // Environment
   env: z.enum(['development', 'production', 'test']).default('development'),
-  
+
   // Features
   enableStreaming: z.boolean().default(true),
   enableCache: z.boolean().default(true),
-  
+
   // Security
   allowCors: z.boolean().default(true),
-  corsOrigins: z.string().min(1),
+  corsOrigins: z.string().default('*'),
 });
 
 /**
- * Export individual schema components for reuse
+ * Type for configuration
  */
-export const logSchema = schema.pick({ logPath, logLevel });
-export const storeSchema = schema.pick({ storePath, storeType });
-export const lmStudioSchema = schema.pick({ lmStudioEndpoint });
-export const appSchema = schema.pick({ appName, version });
-export const processingSchema = schema.pick({ batchSize, maxRetries });
-export const envSchema = schema.pick({ env });
-export const featuresSchema = schema.pick({ enableStreaming, enableCache });
-export const securitySchema = schema.pick({ allowCors, corsOrigins });
+export type Config = z.infer<typeof schema>;
+
+/**
+ * Parse and validate configuration object
+ */
+export function parseConfig(config: Partial<Config>): Config {
+  return schema.parse(config);
+}
