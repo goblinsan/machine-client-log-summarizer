@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773069401224,
+  "timestamp": 1773069873022,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -17,13 +17,13 @@
     {
       "path": "PROJECT_PLAN.md",
       "bytes": 10758,
-      "mtime": 1773069400445.5354,
+      "mtime": 1773069872248.1309,
       "lines": 144
     },
     {
       "path": "README.md",
       "bytes": 210,
-      "mtime": 1773069400445.787,
+      "mtime": 1773069872248.407,
       "lines": 11
     },
     {
@@ -118,9 +118,9 @@
     },
     {
       "path": "src/types/index.ts",
-      "bytes": 27,
-      "mtime": 1773053213110.2244,
-      "lines": 1
+      "bytes": 235,
+      "mtime": 1773069867265.7014,
+      "lines": 12
     },
     {
       "path": "src/types/logEvent.ts",
@@ -130,9 +130,15 @@
     },
     {
       "path": "src/utils/index.ts",
-      "bytes": 107,
-      "mtime": 1773053213110.3982,
-      "lines": 2
+      "bytes": 36,
+      "mtime": 1773069867266.038,
+      "lines": 1
+    },
+    {
+      "path": "src/utils/jsonPreviewParser.ts",
+      "bytes": 3241,
+      "mtime": 1773069867266.2524,
+      "lines": 130
     },
     {
       "path": "src/utils/logEventNormalizer.ts",
@@ -154,8 +160,8 @@
     }
   ],
   "totals": {
-    "files": 25,
-    "bytes": 161972,
+    "files": 26,
+    "bytes": 165350,
     "depth": 10
   }
 }
