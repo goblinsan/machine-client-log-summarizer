@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773064884578,
+  "timestamp": 1773065291372,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".env.example",
       "bytes": 1133,
-      "mtime": 1773064884523.731,
+      "mtime": 1773065290545.7466,
       "lines": 33
     },
     {
@@ -22,15 +22,21 @@
     },
     {
       "path": "PROJECT_PLAN.md",
-      "bytes": 16063,
-      "mtime": 1773053213109.068,
-      "lines": 349
+      "bytes": 16148,
+      "mtime": 1773065286917.0078,
+      "lines": 352
     },
     {
       "path": "README.md",
       "bytes": 2737,
-      "mtime": 1773064884527.1362,
+      "mtime": 1773065290548.9407,
       "lines": 165
+    },
+    {
+      "path": "SECURITY_GUIDELINES.md",
+      "bytes": 2290,
+      "mtime": 1773065286917.2583,
+      "lines": 73
     },
     {
       "path": "index.html",
@@ -47,7 +53,7 @@
     {
       "path": "package.json",
       "bytes": 912,
-      "mtime": 1773064884527.3782,
+      "mtime": 1773065290549.0757,
       "lines": 40
     },
     {
@@ -65,7 +71,7 @@
     {
       "path": "src/__tests__/config.test.ts",
       "bytes": 1984,
-      "mtime": 1773064884527.5137,
+      "mtime": 1773065290549.2183,
       "lines": 59
     },
     {
@@ -83,7 +89,7 @@
     {
       "path": "src/__tests__/smoke.test.ts",
       "bytes": 509,
-      "mtime": 1773064884527.6128,
+      "mtime": 1773065290549.3413,
       "lines": 22
     },
     {
@@ -101,7 +107,7 @@
     {
       "path": "src/config/defaults.ts",
       "bytes": 782,
-      "mtime": 1773064884528.068,
+      "mtime": 1773065290549.678,
       "lines": 51
     },
     {
@@ -143,7 +149,7 @@
     {
       "path": "src/config/schema.ts",
       "bytes": 1820,
-      "mtime": 1773064884528.4492,
+      "mtime": 1773065290549.8074,
       "lines": 58
     },
     {
@@ -268,8 +274,8 @@
     }
   ],
   "totals": {
-    "files": 44,
-    "bytes": 232525,
+    "files": 45,
+    "bytes": 234900,
     "depth": 10
   }
 }

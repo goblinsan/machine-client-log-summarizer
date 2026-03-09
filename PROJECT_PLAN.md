@@ -1,4 +1,4 @@
-# Multi-Agent Log Summarizer - Project Plan
+# Multi-Agent Log Summarizer Project Plan
 
 ## Overview
 
@@ -8,10 +8,16 @@
 
 ### Verification Steps
 
-## Security Documentation
+### Security Standards
+The project adheres to the following security standards:
 
-### Security Guidelines
-The project includes `SECURITY_GUIDELINES.md` in the repository root which outlines security standards and guidelines for code review and development. This documentation ensures reviewers can assess code quality and security posture before merging changes.
+- **Dependency Management**: All dependencies are pinned in `package-lock.json` to prevent supply chain attacks.
+- **Code Review**: All code changes must pass security review before merging.
+- **Documentation**: Security guidelines are documented in `SECURITY_GUIDELINES.md`.
+
+See [SECURITY_GUIDELINES.md](./SECURITY_GUIDELINES.md) for detailed security standards and guidelines.
+
+## Architecture
 
 ## Project Structure
 
@@ -346,6 +352,7 @@ Notes
 - Start small: get file ingestion + store + a simple summarizer prompt working end-to-end with a mocked LM Studio before integrating the live LM Studio host.
 - Maintain the TDD discipline: each feature begins with a small failing test that expresses the expectation and is quick to run.
 - Keep the `_extras.scss` partial minimal — migrate rules into primary partials as components stabilize.
+
 
 
 
