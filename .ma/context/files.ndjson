@@ -1,10 +1,10 @@
 {"path":".gitignore","bytes":206,"lines":26,"mtime":1772953851291.947}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1760209795183.0251}
-{"path":"PROJECT_PLAN.md","bytes":10758,"lines":144,"mtime":1773068942887.7341}
-{"path":"README.md","bytes":210,"lines":11,"mtime":1773068942887.9578}
+{"path":"PROJECT_PLAN.md","bytes":10758,"lines":144,"mtime":1773069400445.5354}
+{"path":"README.md","bytes":210,"lines":11,"mtime":1773069400445.787}
 {"path":"index.html","bytes":306,"lines":13,"mtime":1759790612651.8906}
 {"path":"package-lock.json","bytes":125965,"lines":3711,"mtime":1772957062284.2668}
-{"path":"package.json","bytes":817,"lines":31,"mtime":1773068942888.2532}
+{"path":"package.json","bytes":320,"lines":17,"mtime":1773069395690.7349}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1761999627139.7048}
 {"path":"src/App.tsx","bytes":1970,"lines":78,"mtime":1772957062284.9753}
 {"path":"src/main.tsx","bytes":231,"lines":10,"mtime":1761999627140.1501}
@@ -18,8 +18,8 @@
 {"path":"src/styles/_utils.scss","bytes":361,"lines":10,"mtime":1760209795185.824}
 {"path":"src/styles/main.scss","bytes":313,"lines":22,"mtime":1760209795185.882}
 {"path":"src/types/index.ts","bytes":27,"lines":1,"mtime":1773053213110.2244}
-{"path":"src/types/logEvent.ts","bytes":1255,"lines":61,"mtime":1773053213110.3022}
+{"path":"src/types/logEvent.ts","bytes":1270,"lines":46,"mtime":1773069395633.503}
 {"path":"src/utils/index.ts","bytes":107,"lines":2,"mtime":1773053213110.3982}
-{"path":"src/utils/logEventNormalizer.ts","bytes":4562,"lines":134,"mtime":1773053213110.48}
-{"path":"tsconfig.json","bytes":445,"lines":19,"mtime":1761999627140.2886}
+{"path":"src/utils/logEventNormalizer.ts","bytes":3831,"lines":149,"mtime":1773069395633.7627}
+{"path":"tsconfig.json","bytes":260,"lines":12,"mtime":1773069395634.009}
 {"path":"vite.config.ts","bytes":194,"lines":11,"mtime":1772979282796.1333}
