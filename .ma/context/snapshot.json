@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773065757437,
+  "timestamp": 1773066731934,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".env.example",
       "bytes": 1133,
-      "mtime": 1773065756654.6904,
+      "mtime": 1773066731097.15,
       "lines": 33
     },
     {
@@ -29,7 +29,7 @@
     {
       "path": "README.md",
       "bytes": 2737,
-      "mtime": 1773065756658.5005,
+      "mtime": 1773066731099.988,
       "lines": 165
     },
     {
@@ -53,7 +53,7 @@
     {
       "path": "package.json",
       "bytes": 912,
-      "mtime": 1773065756658.6228,
+      "mtime": 1773066731100.14,
       "lines": 40
     },
     {
@@ -71,25 +71,25 @@
     {
       "path": "src/__tests__/config.test.ts",
       "bytes": 1984,
-      "mtime": 1773065756658.7634,
+      "mtime": 1773066731100.2883,
       "lines": 59
     },
     {
       "path": "src/__tests__/qa-notes.md",
-      "bytes": 841,
-      "mtime": 1773053213109.5955,
-      "lines": 32
+      "bytes": 1517,
+      "mtime": 1773066727536.7705,
+      "lines": 69
     },
     {
       "path": "src/__tests__/regression-gap.test.ts",
       "bytes": 1969,
-      "mtime": 1773053213110.0813,
+      "mtime": 1773066660609.4863,
       "lines": 52
     },
     {
       "path": "src/__tests__/smoke.test.ts",
       "bytes": 509,
-      "mtime": 1773065756658.9048,
+      "mtime": 1773066731100.4202,
       "lines": 22
     },
     {
@@ -107,7 +107,7 @@
     {
       "path": "src/config/defaults.ts",
       "bytes": 782,
-      "mtime": 1773065756659.2266,
+      "mtime": 1773066731100.7034,
       "lines": 51
     },
     {
@@ -149,7 +149,7 @@
     {
       "path": "src/config/schema.ts",
       "bytes": 1820,
-      "mtime": 1773065756659.341,
+      "mtime": 1773066731100.8647,
       "lines": 58
     },
     {
@@ -269,13 +269,13 @@
     {
       "path": "vitest.config.ts",
       "bytes": 571,
-      "mtime": 1773064257169.566,
+      "mtime": 1773066660614.397,
       "lines": 29
     }
   ],
   "totals": {
     "files": 45,
-    "bytes": 235069,
+    "bytes": 235745,
     "depth": 10
   }
 }
