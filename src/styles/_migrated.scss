@@ -1,7 +1,8 @@
-@use "mixins" as mixins;
-
-/* Consolidated styles migrated from the old styles.css
-  Cleaned, de-duplicated and converted to kebab-case where appropriate.
+// Path info styling
+.path-info {
+  font-size: 0.875rem;
+  color: #666;
+  background: #f5f5f5;
   This is an intermediate aggregation — we can later split rules into
   _components/_layout/_utils as we refine. */
 
@@ -195,3 +196,4 @@
 .hidden {
   display: none !important;
 }
+

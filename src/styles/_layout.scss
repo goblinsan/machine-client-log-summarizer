@@ -1,7 +1,8 @@
-/* Layout (containers, spacing, structural patterns) */
-.center { text-align: center; }
-
-.card {
+// App layout with path info
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: var(--card);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgb(16 24 40 / 6%);
@@ -52,3 +53,4 @@
   overflow-x: auto;
   font-family: monospace;
 }
+
