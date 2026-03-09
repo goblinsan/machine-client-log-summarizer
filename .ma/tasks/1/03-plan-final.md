@@ -1,10 +1,10 @@
 # Plan Iteration 1
 
-Generated: 2026-03-09T00:41:26.512Z
+Generated: 2026-03-09T10:55:00.925Z
 
 ## Implementation Plan
 
-### Step 1: Review existing config structure and understand current implementation in src/config/index.ts, defaults.ts, and schema.ts
+### Step 1: Review existing config structure and schema definitions
 
 **Files:** `src/config/index.ts`, `src/config/defaults.ts`, `src/config/schema.ts`, `.env.example`
 
@@ -15,95 +15,93 @@ Generated: 2026-03-09T00:41:26.512Z
   - Identify existing schema validation approach
   - Document current defaults structure
 
-### Step 2: Update schema.ts with JSON Schema v7 specification for hierarchical config validation
-
-**Files:** `src/config/schema.ts`
-
-**Dependencies:**
-  - Step 1 complete
-
-**Acceptance Criteria:**
-  - Schema defines logPaths, store, lmStudioEndpoint properties
-  - Schema includes required fields and type constraints
-  - Schema supports nested configuration objects
-
-### Step 3: Update defaults.ts with default values for all config properties
-
-**Files:** `src/config/defaults.ts`
-
-**Dependencies:**
-  - Step 2 complete
-
-**Acceptance Criteria:**
-  - Defaults include log paths (logs, temp, data directories)
-  - Defaults include store configuration
-  - Defaults include LM Studio endpoint URL
-  - All defaults are typed and exported
-
-### Step 4: Implement config loader with hierarchical precedence (CLI > file > env > defaults)
+### Step 2: Implement hierarchical config loading (env → file → CLI)
 
 **Files:** `src/config/index.ts`
 
 **Dependencies:**
-  - Step 3 complete
+  - Step 1: Review existing config structure
 
 **Acceptance Criteria:**
-  - Loader reads .env file using dotenv
-  - Loader parses config.json if present
-  - Loader processes CLI arguments
-  - Higher precedence values override lower ones
-  - Validation runs against schema after merging
+  - Config loads from .env file first
+  - Config can be overridden via config file (JSON)
+  - CLI flags can override file/env values
+  - Priority order: CLI > file > env > defaults
 
-### Step 5: Create/update .example.env with documented configuration options
+### Step 3: Add JSON schema validation to config
+
+**Files:** `src/config/schema.ts`, `src/config/index.ts`
+
+**Dependencies:**
+  - Step 2: Implement hierarchical config loading
+
+**Acceptance Criteria:**
+  - Schema validates config structure
+  - Validation errors are logged clearly
+  - Invalid config throws descriptive error
+  - Schema covers all config keys
+
+### Step 4: Update .env.example with required defaults
 
 **Files:** `.env.example`
 
 **Dependencies:**
-  - Step 4 complete
+  - Step 3: Add JSON schema validation
 
 **Acceptance Criteria:**
-  - File contains all environment variable keys
-  - Comments explain each variable's purpose
-  - Includes log paths, store, and LM Studio endpoint examples
-  - File is properly formatted and readable
+  - Contains log path defaults
+  - Contains store configuration defaults
+  - Contains LM Studio endpoint default
+  - All required environment variables documented
 
-### Step 6: Add unit tests for config loading, validation, and hierarchy precedence
+### Step 5: Update defaults.ts with config defaults
+
+**Files:** `src/config/defaults.ts`
+
+**Dependencies:**
+  - Step 4: Update .env.example
+
+**Acceptance Criteria:**
+  - Log paths have sensible defaults
+  - Store configuration has defaults
+  - LM Studio endpoint has default value
+  - All defaults match schema requirements
+
+### Step 6: Add unit tests for config loading and validation
 
 **Files:** `src/__tests__/config.test.ts`
 
 **Dependencies:**
-  - Step 4 complete
+  - Step 5: Update defaults.ts
 
 **Acceptance Criteria:**
-  - Tests cover env file loading
-  - Tests cover config file loading
-  - Tests cover CLI argument parsing
-  - Tests verify schema validation errors
-  - Tests verify hierarchy precedence (CLI > file > env > defaults)
+  - Tests verify hierarchical loading order
+  - Tests verify schema validation works
+  - Tests verify defaults are applied correctly
+  - Tests verify CLI overrides work
 
-### Step 7: Update main config export to use new loader and ensure backward compatibility
+### Step 7: Run tests and verify config system works end-to-end
 
-**Files:** `src/config/index.ts`
+**Files:** `src/__tests__/config.test.ts`, `src/config/index.ts`, `src/config/defaults.ts`, `.env.example`
 
 **Dependencies:**
-  - Step 5 complete
-  - Step 6 complete
+  - Step 6: Add unit tests for config loading and validation
 
 **Acceptance Criteria:**
-  - Config export returns merged and validated configuration
-  - Existing imports continue to work
-  - Type exports are properly defined
-  - No breaking changes to public API
+  - All config tests pass
+  - Config loads correctly with defaults
+  - Config overrides work as expected
+  - Validation errors are caught properly
 
 ## Risks
 
-1. Existing code may depend on specific config structure that changes with new schema
-2. CLI argument parsing may conflict with existing CLI implementation
-3. Schema validation errors need clear error messages for debugging
+1. Existing config structure may conflict with new hierarchical approach
+2. Schema validation library may need to be added to dependencies
+3. CLI argument parsing may require additional dependencies
 
 ## Open Questions
 
-1. What CLI framework is currently used (if any)?
-2. Are there any existing config files in the repository root?
-3. What is the expected config file name and location?
+1. What CLI framework should be used for argument parsing?
+2. What JSON schema validation library should be used?
+3. Are there any existing config files that need migration?
 
