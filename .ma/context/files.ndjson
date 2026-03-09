@@ -2,16 +2,16 @@
 {"path":".gitignore","bytes":206,"lines":26,"mtime":1772953851291.947}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1760209795183.0251}
 {"path":"PROJECT_PLAN.md","bytes":16063,"lines":349,"mtime":1773053213109.068}
-{"path":"README.md","bytes":2615,"lines":104,"mtime":1773063661136.2588}
+{"path":"README.md","bytes":2604,"lines":107,"mtime":1773064581923.5757}
 {"path":"index.html","bytes":306,"lines":13,"mtime":1759790612651.8906}
 {"path":"package-lock.json","bytes":125965,"lines":3711,"mtime":1772957062284.2668}
-{"path":"package.json","bytes":996,"lines":46,"mtime":1773063661136.5754}
+{"path":"package.json","bytes":996,"lines":46,"mtime":1773064257167.3384}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1761999627139.7048}
 {"path":"src/App.tsx","bytes":1970,"lines":78,"mtime":1772957062284.9753}
 {"path":"src/__tests__/config.test.ts","bytes":4496,"lines":132,"mtime":1773063661137.4102}
 {"path":"src/__tests__/qa-notes.md","bytes":841,"lines":32,"mtime":1773053213109.5955}
 {"path":"src/__tests__/regression-gap.test.ts","bytes":1969,"lines":52,"mtime":1773053213110.0813}
-{"path":"src/__tests__/smoke.test.ts","bytes":509,"lines":22,"mtime":1772996426230.9255}
+{"path":"src/__tests__/smoke.test.ts","bytes":440,"lines":17,"mtime":1773064581923.8267}
 {"path":"src/__tests__/synthetic-logs-data.test.ts","bytes":1406,"lines":34,"mtime":1773007593732.102}
 {"path":"src/__tests__/synthetic-logs.test.ts","bytes":2094,"lines":76,"mtime":1772996426231.4922}
 {"path":"src/config/defaults.ts","bytes":1148,"lines":75,"mtime":1773063568866.3853}
@@ -41,4 +41,4 @@
 {"path":"src/utils/logEventNormalizer.ts","bytes":4562,"lines":134,"mtime":1773053213110.48}
 {"path":"tsconfig.json","bytes":445,"lines":19,"mtime":1761999627140.2886}
 {"path":"vite.config.ts","bytes":194,"lines":11,"mtime":1772979282796.1333}
-{"path":"vitest.config.ts","bytes":571,"lines":29,"mtime":1773021664071.7097}
+{"path":"vitest.config.ts","bytes":571,"lines":29,"mtime":1773064257169.566}
