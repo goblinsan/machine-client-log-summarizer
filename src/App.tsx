@@ -1,18 +1,23 @@
-import React, { useState, useRef } from 'react';
+import { App } from './App';
+import { normalizeLogEvent } from './utils/logEventNormalizer';
 
-const App = () => {
-  const [file, setFile] = useState<File | null>(null);
+function App() {
+  return (
   const [ingestionResult, setIngestionResult] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-      processFile(selectedFile);
-    }
-  };
-
+    <div className="app">
+      <header>
+        <h1>Multi-Agent Log Summarizer</h1>
+        <div className="path-info">
+          <span>Windows Path: {normalizedWindowsPath || 'N/A'}</span>
+          <span>Repo URL: {normalizedRepoUrl || 'N/A'}</span>
+        </div>
+      </header>
+      <main>
+        <div className="log-container">
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files?.[0];
@@ -75,3 +80,4 @@ const App = () => {
 };
 
 export default App;
+

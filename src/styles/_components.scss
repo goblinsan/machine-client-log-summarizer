@@ -1,7 +1,8 @@
-/* Components (reusable UI pieces: buttons, pickers, status badges) */
-@use "mixins" as mixins;
-/* Button styles now provided by mixin in _mixins.scss */
-.btn {
+// Path info display component
+.path-info {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
   @include mixins.btn();
 }
 
@@ -179,3 +180,4 @@
   background: var(--error-bg);
   color: var(--error-text);
 }
+

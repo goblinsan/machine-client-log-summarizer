@@ -1,7 +1,8 @@
-@use "sass:color";
-@use "index";
-
-/* Log list styles */
+// Main stylesheet with path info
+.path-info {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
 .log-list {
   list-style: none;
   padding: 0;
@@ -19,3 +20,4 @@
   max-height: 48px;
   overflow: hidden;
 }
+
