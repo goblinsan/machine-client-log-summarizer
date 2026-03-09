@@ -1,0 +1,4 @@
+{
+  "output": "{\"status\":\"fail\",\"summary\":\"Insufficient context for review\",\"findings\":{\"severe\":[{\"file\":\"package.json\",\"line\":null,\"issue\":\"Vitest installation and configuration unclear due to missing information on vitest.config.(ts|js) file\",\"recommendation\":\"Please provide the contents of the vitest.config.(ts|js) file or clarify how Vitest is being used in this project\"}],\"high\":[],\"medium\":[],\"low\":[]}}\n\nI need more context before proceeding with the review. Please provide the following:\n\n1. The contents of the `vitest.config.(ts|js)` file (if it exists)\n2. Clarification on how Vitest is being used in this project\n\nAdditionally, I would like to request information on the CI setup and configuration to understand how the \"npm test\" command is executed and what environment it runs in.\n\nPlease respond with JSON containing the requested information or additional context.",
+  "duration_ms": 13460
+}
