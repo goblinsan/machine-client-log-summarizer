@@ -1,60 +1,59 @@
 # Plan Iteration 1
 
-Generated: 2026-03-08T18:17:06.152Z
+Generated: 2026-03-09T15:21:19.505Z
 
 ## Implementation Plan
 
-### Step 1: Define TypeScript types for preview content structure (preview_json, preview_raw, status)
+### Step 1: Create JSON preview parser utility function in src/utils/
 
-**Files:** `src/types/preview.ts`
-
-**Dependencies:**
-  - src/types/index.ts
-
-**Acceptance Criteria:**
-  - Types exported for PreviewData, PreviewStatus (pass|fail)
-  - Type definitions match task requirements for preview_json and preview_raw
-
-### Step 2: Implement preview content parser utility that handles both fenced and bare JSON formats
-
-**Files:** `src/utils/previewParser.ts`
+**Files:** `src/utils/jsonPreviewParser.ts`
 
 **Dependencies:**
-  - src/types/preview.ts
   - src/utils/index.ts
 
 **Acceptance Criteria:**
-  - Parser detects ```json fences and extracts inner content
-  - Parser handles bare JSON without fences
-  - Returns {preview_json, status: 'pass'} on valid JSON
-  - Returns {preview_raw, status: 'fail'} on invalid JSON
-  - Uses JSON.parse for validation
+  - Function parses JSON from fenced (```json) and bare JSON content
+  - Returns preview_json object with status (pass|fail) on valid parse
+  - Returns preview_raw string on invalid parse
+  - Type-safe TypeScript implementation with proper error handling
 
-### Step 3: Export preview parser from utils index
+### Step 2: Export new utility from utils index barrel file
 
 **Files:** `src/utils/index.ts`
 
 **Dependencies:**
-  - src/utils/previewParser.ts
+  - src/utils/jsonPreviewParser.ts
 
 **Acceptance Criteria:**
-  - previewParser exported from utils index
+  - jsonPreviewParser exported from index.ts
   - No breaking changes to existing exports
+
+### Step 3: Add TypeScript type definitions for preview data structures
+
+**Files:** `src/types/index.ts`
+
+**Dependencies:**
+  - src/utils/jsonPreviewParser.ts
+
+**Acceptance Criteria:**
+  - PreviewJson interface defined with status field
+  - PreviewRaw type for raw string content
+  - Types exported from index.ts
 
 ## Risks
 
-1. JSON.parse may throw on malformed JSON - must catch and return preview_raw
-2. Fenced JSON may have trailing content after closing fence - must extract only fenced portion
+1. JSON parsing edge cases with malformed content
+2. Nested JSON structures with status at different levels
 
 ## Open Questions
 
-1. Should parser handle escaped newlines in fenced JSON content?
-2. What is the expected output shape for preview_json vs preview_raw?
+1. Should the parser handle minified vs pretty-printed JSON?
+2. What status values are valid beyond pass/fail?
 
 ## Notes
 
-1. All files must be in src/ directory structure
-2. Use TypeScript only (no JavaScript files)
-3. Parser should be pure function with no side effects
-4. Consider adding JSDoc comments for API documentation
+1. Must handle both fenced (```json) and bare JSON formats
+2. Keep implementation small and focused on parsing logic
+3. Follow existing TypeScript patterns in src/utils/
+4. No .ma/ or automation artifacts as deliverables
 
