@@ -2,6 +2,21 @@
 
 ## Overview
 
+### Security Documentation
+The project maintains comprehensive security guidelines in `SECURITY_GUIDELINES.md` covering:
+
+- **Input Validation**: All external inputs are validated against schemas before processing
+- **Dependency Management**: Dependencies are pinned and audited regularly using `npm audit`
+- **Environment Security**: Sensitive data is stored in environment variables, never committed
+- **Code Review**: All PRs undergo security review for sensitive data exposure and proper error handling
+- **Logging**: Security events are logged appropriately without exposing PII or credentials
+- **Type Safety**: TypeScript strict mode is enforced to prevent runtime type errors
+- **Testing**: Security-focused tests are included in the test suite
+
+See [SECURITY_GUIDELINES.md](./SECURITY_GUIDELINES.md) for detailed security standards and guidelines.
+
+### New Test Files Created
+
 ### New Test Files Created
 - `src/__tests__/regression-gap.test.ts`: Regression tests for reported gap
 - `src/__tests__/qa-notes.md`: Verification steps documentation
@@ -352,6 +367,7 @@ Notes
 - Start small: get file ingestion + store + a simple summarizer prompt working end-to-end with a mocked LM Studio before integrating the live LM Studio host.
 - Maintain the TDD discipline: each feature begins with a small failing test that expresses the expectation and is quick to run.
 - Keep the `_extras.scss` partial minimal — migrate rules into primary partials as components stabilize.
+
 
 
 
