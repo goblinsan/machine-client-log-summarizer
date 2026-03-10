@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-10T21:01:26.122Z
+Generated: 2026-03-10T21:15:41.294Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-10T21:01:26.122Z
 ## Statistics
 
 - **Total Files**: 45
-- **Total Size**: 231.80 KB
+- **Total Size**: 234.75 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -43,14 +43,14 @@ src/
   main.tsx (0.2KB)
 src/__tests__/
   config.test.ts (1.9KB)
-  qa-notes.md (3.1KB)
+  qa-notes.md (5.9KB)
   regression-gap.test.ts (1.9KB)
   smoke.test.ts (0.5KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
   defaults.ts (0.8KB)
-  index.ts (18.7KB)
+  index.ts (18.8KB)
   schema.ts (1.8KB)
   synthetic-logs-data.ts (1.1KB)
   synthetic-logs.ts (3.8KB)
@@ -84,7 +84,8 @@ src/utils/
 
 - `PROJECT_PLAN.md` (15.9KB, 359 lines)
 - `package-lock.json` (123.0KB, 3711 lines)
-- `src/config/index.ts` (18.7KB, 644 lines)
+- `src/__tests__/qa-notes.md` (5.9KB, 251 lines)
+- `src/config/index.ts` (18.8KB, 644 lines)
 - `src/config/prompts/context.md` (10.8KB, 273 lines)
 
 ## File Types
