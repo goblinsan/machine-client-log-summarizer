@@ -1,6 +1,18 @@
 import { defineConfig } from 'vitest/config';
-import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export default defineConfig({
+  test: {
+    environment: 'node',
+    globals: true,
+    include: ['src/**/*.{test,spec}.{ts,js}'],
+    exclude: ['node_modules/**'],
+    setupFiles: ['src/test/setup.ts'],
+  },
+});
 export default defineConfig({
   test: {
     environment: 'jsdom',
@@ -26,3 +38,4 @@ export default defineConfig({
     },
   },
 });
+

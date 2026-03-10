@@ -1,6 +1,7 @@
-# Node
 node_modules/
-/.pnp/
+dist/
+.env
+*.log
 .pnp.js
 
 # Logs
@@ -23,3 +24,4 @@ pnpm-debug.log*
 # Env
 .env
 .env.*
+

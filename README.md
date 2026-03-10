@@ -1,7 +1,13 @@
 # Multi-Agent Log Summarizer
+# Machine Client Log Summarizer
 
-This project provides a multi-agent system for summarizing log files.
+## Testing
 
+Run tests with: `npm test`
+
+## Development
+
+```
 ## Development
 
 Run the development server:
@@ -109,4 +115,5 @@ Create `src/config.json` for persistent configuration:
   "corsOrigins": "*"
 }
 ```
+
 
