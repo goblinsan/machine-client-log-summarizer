@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-10T20:50:16.234Z
+Generated: 2026-03-10T20:59:48.917Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-10T20:50:16.234Z
 
 ## Statistics
 
-- **Total Files**: 44
-- **Total Size**: 237.03 KB
+- **Total Files**: 50
+- **Total Size**: 247.68 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -27,24 +27,25 @@ Generated: 2026-03-10T20:50:16.234Z
   .env.example (0.6KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
-  PROJECT_PLAN.md (15.7KB)
-  README.md (2.5KB)
+  PROJECT_PLAN.md (15.9KB)
+  README.md (2.6KB)
+  SECURITY_GUIDELINES.md (2.2KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
-  package.json (1.0KB)
-  tsconfig.json (0.4KB)
+  package.json (0.3KB)
+  tsconfig.json (0.3KB)
   vite.config.ts (0.2KB)
   vitest.config.ts (0.9KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
-  App.tsx (1.9KB)
-  main.tsx (0.2KB)
+  App.tsx (4.1KB)
+  main.tsx (0.6KB)
 src/__tests__/
   config.test.ts (4.4KB)
-  qa-notes.md (0.8KB)
+  qa-notes.md (3.1KB)
   regression-gap.test.ts (1.9KB)
-  smoke.test.ts (0.4KB)
+  smoke.test.ts (0.6KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
@@ -68,29 +69,34 @@ src/styles/
   _migrated.scss (3.4KB)
   _mixins.scss (0.2KB)
   _utils.scss (0.4KB)
-  main.scss (0.3KB)
+  main.scss (0.4KB)
 src/test/
   setup.ts (0.1KB)
 src/types/
-  index.ts (0.0KB)
+  index.ts (0.4KB)
   logEvent.ts (1.2KB)
+  pathData.ts (0.7KB)
 src/utils/
-  index.ts (0.1KB)
-  logEventNormalizer.ts (4.5KB)
+  hash.test.ts (1.9KB)
+  hash.ts (1.0KB)
+  index.ts (0.0KB)
+  jsonPreviewParser.ts (1.3KB)
+  logEventNormalizer.ts (1.3KB)
+  pathExtractor.ts (1.9KB)
 ```
 
 ## Large Files
 
-- `PROJECT_PLAN.md` (15.7KB, 349 lines)
+- `PROJECT_PLAN.md` (15.9KB, 359 lines)
 - `package-lock.json` (123.0KB, 3711 lines)
 - `src/config/index.ts` (18.7KB, 644 lines)
 - `src/config/prompts/context.md` (16.2KB, 448 lines)
 
 ## File Types
 
-- .ts: 17 files
+- .ts: 22 files
+- .md: 9 files
 - .scss: 9 files
-- .md: 8 files
 - .json: 4 files
 - .tsx: 2 files
 - .example: 1 file
