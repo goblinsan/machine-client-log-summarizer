@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-09T22:16:16.790Z
+Generated: 2026-03-10T06:00:08.552Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-09T22:16:16.790Z
 
 ## Statistics
 
-- **Total Files**: 50
-- **Total Size**: 248.43 KB
+- **Total Files**: 44
+- **Total Size**: 238.07 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -27,23 +27,22 @@ Generated: 2026-03-09T22:16:16.790Z
   .env.example (0.6KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
-  PROJECT_PLAN.md (15.9KB)
+  PROJECT_PLAN.md (15.7KB)
   README.md (2.5KB)
-  SECURITY_GUIDELINES.md (2.2KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
-  package.json (0.3KB)
-  tsconfig.json (0.3KB)
+  package.json (1.0KB)
+  tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
   vitest.config.ts (0.6KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
-  App.tsx (4.1KB)
-  main.tsx (0.6KB)
+  App.tsx (1.9KB)
+  main.tsx (0.2KB)
 src/__tests__/
   config.test.ts (4.4KB)
-  qa-notes.md (3.1KB)
+  qa-notes.md (0.8KB)
   regression-gap.test.ts (1.9KB)
   smoke.test.ts (1.8KB)
   synthetic-logs-data.test.ts (1.4KB)
@@ -69,34 +68,29 @@ src/styles/
   _migrated.scss (3.4KB)
   _mixins.scss (0.2KB)
   _utils.scss (0.4KB)
-  main.scss (0.4KB)
+  main.scss (0.3KB)
 src/test/
   setup.ts (0.1KB)
 src/types/
-  index.ts (0.4KB)
-  logEvent.ts (1.2KB)
-  pathData.ts (0.7KB)
-src/utils/
-  hash.test.ts (1.9KB)
-  hash.ts (1.0KB)
   index.ts (0.0KB)
-  jsonPreviewParser.ts (1.3KB)
-  logEventNormalizer.ts (1.3KB)
-  pathExtractor.ts (1.9KB)
+  logEvent.ts (1.2KB)
+src/utils/
+  index.ts (0.1KB)
+  logEventNormalizer.ts (4.5KB)
 ```
 
 ## Large Files
 
-- `PROJECT_PLAN.md` (15.9KB, 359 lines)
+- `PROJECT_PLAN.md` (15.7KB, 349 lines)
 - `package-lock.json` (123.0KB, 3711 lines)
 - `src/config/index.ts` (18.7KB, 644 lines)
 - `src/config/prompts/context.md` (16.2KB, 448 lines)
 
 ## File Types
 
-- .ts: 22 files
-- .md: 9 files
+- .ts: 17 files
 - .scss: 9 files
+- .md: 8 files
 - .json: 4 files
 - .tsx: 2 files
 - .example: 1 file

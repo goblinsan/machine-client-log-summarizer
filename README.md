@@ -1,13 +1,18 @@
-# Machine Client Log Summarizer
+# Multi-Agent Log Summarizer
+
+This project provides a multi-agent system for summarizing log files.
+
+## Development
+
+Run the development server:
+
+```bash
+npm run dev
+```
 
 ## Testing
 
-Run `npm test` to execute the Vitest test harness.
-
-## Installation
-1. **CLI arguments** (highest priority)
-2. **Config file** (`src/config.json`)
-3. **Environment variables**
+Run tests locally:
 4. **Default values** (lowest priority)
 
 ### Environment Variables
@@ -104,3 +109,4 @@ Create `src/config.json` for persistent configuration:
   "corsOrigins": "*"
 }
 ```
+
