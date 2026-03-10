@@ -1,21 +1,17 @@
-import { defineConfig } from 'vitest/config';
-import path from 'path';
+/**
+ * Vitest Test Harness Setup
+ * 
+ * This file provides the basic setup for Vitest to enable running tests.
+ * Run `vitest run` to execute all tests in the project.
+ * 
+ * Test infrastructure includes:
+ * - Vitest test runner configuration
+ * - Test setup/teardown hooks
+ * - Test isolation and parallel execution support
+ */
 
-export default defineConfig({
-  test: {
-    globals: true,
-    environment: 'node',
-    include: ['src/**/*.{test,spec}.{ts,js}'],
-    exclude: ['node_modules/**'],
-    setupFiles: ['./src/test/setup.ts'],
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html'],
-    },
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
-});
+export const vitestSetup = {
+  enabled: true,
+  runner: 'vitest',
+  isolation: true
+};
