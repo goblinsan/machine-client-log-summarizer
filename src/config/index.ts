@@ -1,13 +1,12 @@
-// Config exports including synthetic log data packs
-export { SyntheticLogSchema } from './synthetic-logs';
+export { loadConfig, validateConfig, ConfigSchema } from './index';
+export { defaultConfig } from './defaults';
+export { syntheticLogs } from './synthetic-logs';
 export { syntheticLogsData } from './synthetic-logs-data';
-import * as fs from 'fs';
-import * as path from 'path';
-
-/**
- * Configuration loader with hierarchical support:
- * 1. Environment variables (highest priority)
- * 2. Config file (src/config.json)
+export { contextPrompt } from './prompts/context';
+export { coordinatorPrompt } from './prompts/coordinator';
+export { leadEngineerPrompt } from './prompts/lead-engineer';
+export { qaPrompt } from './prompts/qa';
+export { securityPrompt } from './prompts/security';
  * 3. CLI flags (lowest priority)
  */
 
@@ -635,6 +634,7 @@ export function loadConfig(): Config {
  * Export default config for use without loading
  */
 export const config = loadConfig();
+
 
 
 
