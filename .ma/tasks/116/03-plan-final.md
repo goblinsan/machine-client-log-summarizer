@@ -1,10 +1,10 @@
 # Plan Iteration 1
 
-Generated: 2026-03-10T20:44:17.726Z
+Generated: 2026-03-10T20:54:22.595Z
 
 ## Implementation Plan
 
-### Step 1: Install Vitest and @types/node as dev dependencies
+### Step 1: Install Vitest and @types/node dependencies
 
 **Files:** `package.json`
 
@@ -12,73 +12,66 @@ Generated: 2026-03-10T20:44:17.726Z
   - npm add -D vitest @types/node
 
 **Acceptance Criteria:**
-  - package.json shows vitest and @types/node in devDependencies
-  - npm install completes successfully
+  - vitest and @types/node appear in package.json devDependencies
+  - npm install completes without errors
 
-### Step 2: Configure vitest.config.ts with jsdom environment and proper paths
+### Step 2: Verify and configure vitest.config.ts with jsdom environment
 
 **Files:** `vitest.config.ts`
 
 **Dependencies:**
-  - Existing vitest.config.ts file
+  - vitest.config.ts must export config with test environment set to 'jsdom'
+  - tsconfig.json paths must be compatible with test imports
 
 **Acceptance Criteria:**
-  - vitest.config.ts exports config with test: { environment: 'jsdom' }
-  - vitest.config.ts includes resolve and include/exclude patterns for src/__tests__
-  - vitest.config.ts uses tsconfig.json paths for type resolution
+  - vitest.config.ts exists with jsdom environment configured
+  - config exports valid TypeScript configuration
 
-### Step 3: Verify smoke test exists and runs successfully
+### Step 3: Create smoke test to verify harness runs
 
 **Files:** `src/__tests__/smoke.test.ts`
 
 **Dependencies:**
-  - vitest.config.ts
-  - src/__tests__/smoke.test.ts
+  - src/__tests__/ directory must exist
+  - test must import from src/config to verify imports work
 
 **Acceptance Criteria:**
-  - smoke.test.ts contains at least one describe/it block
-  - smoke.test.ts imports from src/config/index.ts or src/utils/
-  - npm test exits 0 when smoke test passes
+  - smoke.test.ts exists in src/__tests__/
+  - test passes with npm test
+  - test exits with code 0
 
 ### Step 4: Add test script to package.json
 
 **Files:** `package.json`
 
 **Dependencies:**
-  - vitest installed
-  - vitest.config.ts configured
+  - package.json must have 'test' script invoking vitest
+  - script must use 'npm run test' or 'vitest run' command
 
 **Acceptance Criteria:**
-  - package.json has "test": "vitest" or "test": "vitest run" script
-  - npm test command invokes vitest with correct flags
+  - package.json contains '"test": "vitest run"' or equivalent
+  - npm test command executes successfully
 
 ### Step 5: Update README with test harness instructions
 
 **Files:** `README.md`
 
 **Dependencies:**
-  - vitest harness operational
+  - README.md must document how to run tests
+  - include npm test command in setup instructions
 
 **Acceptance Criteria:**
-  - README.md includes section on running tests
-  - README.md mentions npm test command
-  - README.md documents CI integration for tests
+  - README.md contains 'npm test' command documentation
+  - README.md mentions Vitest harness for QA/CI
 
 ## Risks
 
-1. Existing vitest.config.ts may have incompatible settings that need migration
-2. src/__tests__/smoke.test.ts may not exist or may be incomplete
-3. TypeScript path resolution may fail without proper tsconfig.json configuration
+1. Existing vitest.config.ts may have incompatible settings requiring review
+2. src/__tests__/ directory structure may need adjustment for test discovery
+3. CI configuration may need separate update if using GitHub Actions or similar
 
 ## Open Questions
 
-1. Should vitest use watch mode or run mode for CI?
-2. What specific src modules should smoke tests validate?
-
-## Notes
-
-1. Prioritize src/__tests__ directory over creating new tests/ directory to maintain consistency
-2. Keep vitest.config.ts as .ts file since project uses TypeScript
-3. Ensure all test files use .test.ts extension for clarity
-4. CI integration should use same npm test command as local execution
+1. What CI platform is being used for automated testing (GitHub Actions, GitLab CI, etc.)?
+2. Are there existing test utilities in src/utils/ that should be included in smoke test?
 
