@@ -1,21 +1,14 @@
-import { describe, it, expect, beforeAll } from 'vitest';
-import { config } from 'vitest/config';
+import { describe, it, expect } from 'vitest';
+import { getConfiguration } from '../config';
 
 describe('Smoke Tests', () => {
-  it('should run successfully', () => {
-    expect(true).toBe(true);
-  });
-});
-  it('should export App component', () => {
-    expect(App).toBeDefined();
+  it('should export getConfiguration', () => {
+    expect(typeof getConfiguration).toBe('function');
   });
 
-  it('should have App component with name', () => {
-    expect(App.name).toBe('App');
-  });
-
-  it('should have main entry point', () => {
-    const main = require('../main');
-    expect(main).toBeDefined();
+  it('should return a valid configuration object', () => {
+    const config = getConfiguration();
+    expect(config).toBeDefined();
+    expect(typeof config).toBe('object');
   });
 });

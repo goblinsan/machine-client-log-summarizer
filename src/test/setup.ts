@@ -1,3 +1,4 @@
 // Test setup file for Vitest
-// Can be used to configure global mocks, setup, etc.
-export {};
+// Can be used to configure test environment, mocks, etc.
+
+// Example: Setup any global mocks or configurations here
