@@ -1,5 +1,5 @@
 {
   "status": "fail",
-  "error": "callLMStudio fetch failed for http://127.0.0.1:1234/v1/chat/completions: LM Studio circuit breaker tripped during retries — 2 failures, 2 consecutive aborts",
+  "error": "callLMStudio fetch failed for http://127.0.0.1:1234/v1/chat/completions: LM Studio request aborted after 60000ms",
   "details": "Persona execution failed - check logs for details"
 }
