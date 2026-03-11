@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T21:09:49.079Z
+Generated: 2026-03-11T21:23:01.566Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-11T21:09:49.079Z
 ## Statistics
 
 - **Total Files**: 48
-- **Total Size**: 207.53 KB
+- **Total Size**: 208.14 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -36,7 +36,7 @@ Generated: 2026-03-11T21:09:49.079Z
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
   vitest.config.ts (0.2KB)
-  vitest.harness.ts (0.4KB)
+  vitest.harness.ts (1.0KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
