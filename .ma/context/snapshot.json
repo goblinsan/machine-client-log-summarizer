@@ -1,17 +1,17 @@
 {
-  "timestamp": 1773179384282,
+  "timestamp": 1773197677253,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".env.example",
       "bytes": 1133,
-      "mtime": 1773179383479.2637,
+      "mtime": 1773197676450.92,
       "lines": 33
     },
     {
       "path": ".gitignore",
       "bytes": 206,
-      "mtime": 1773179383479.635,
+      "mtime": 1773197676451.3354,
       "lines": 26
     },
     {
@@ -23,19 +23,19 @@
     {
       "path": "PROJECT_PLAN.md",
       "bytes": 681,
-      "mtime": 1773179378755.071,
+      "mtime": 1773197672271.6218,
       "lines": 26
     },
     {
       "path": "README.md",
       "bytes": 2737,
-      "mtime": 1773179383485.0042,
+      "mtime": 1773197676458.6704,
       "lines": 165
     },
     {
       "path": "SECURITY_GUIDELINES.md",
       "bytes": 2844,
-      "mtime": 1773178293617.031,
+      "mtime": 1773197672272.1094,
       "lines": 125
     },
     {
@@ -47,13 +47,13 @@
     {
       "path": "package-lock.json",
       "bytes": 125965,
-      "mtime": 1772957062284.2668,
+      "mtime": 1773197676459.064,
       "lines": 3711
     },
     {
       "path": "package.json",
       "bytes": 912,
-      "mtime": 1773179383485.1475,
+      "mtime": 1773197676459.2004,
       "lines": 40
     },
     {
@@ -65,31 +65,31 @@
     {
       "path": "src/App.tsx",
       "bytes": 1970,
-      "mtime": 1773179383485.3594,
+      "mtime": 1773197676459.4749,
       "lines": 78
     },
     {
       "path": "src/__tests__/config.test.ts",
       "bytes": 697,
-      "mtime": 1773178884933.9385,
+      "mtime": 1773197676459.8477,
       "lines": 24
     },
     {
       "path": "src/__tests__/qa-notes.md",
       "bytes": 6027,
-      "mtime": 1773177204043.5735,
+      "mtime": 1773197672272.4395,
       "lines": 251
     },
     {
       "path": "src/__tests__/regression-gap.test.ts",
       "bytes": 1969,
-      "mtime": 1773177091252.2756,
+      "mtime": 1773197676460.1323,
       "lines": 52
     },
     {
       "path": "src/__tests__/smoke.test.ts",
       "bytes": 417,
-      "mtime": 1773178884963.8716,
+      "mtime": 1773197676460.4194,
       "lines": 14
     },
     {
@@ -107,67 +107,67 @@
     {
       "path": "src/config/defaults.ts",
       "bytes": 782,
-      "mtime": 1773179383485.7612,
+      "mtime": 1773197676460.7083,
       "lines": 51
     },
     {
       "path": "src/config/index.ts",
       "bytes": 19246,
-      "mtime": 1773177204043.8958,
+      "mtime": 1773197676461.0085,
       "lines": 644
     },
     {
       "path": "src/config/prompts/context.md",
       "bytes": 11080,
-      "mtime": 1773179383486.1665,
+      "mtime": 1773197676461.586,
       "lines": 273
     },
     {
       "path": "src/config/prompts/coordinator.md",
       "bytes": 3076,
-      "mtime": 1773179383486.5,
+      "mtime": 1773197676461.9768,
       "lines": 88
     },
     {
       "path": "src/config/prompts/lead-engineer.md",
       "bytes": 3200,
-      "mtime": 1773179383486.8413,
+      "mtime": 1773197676462.3682,
       "lines": 87
     },
     {
       "path": "src/config/prompts/qa.md",
       "bytes": 3113,
-      "mtime": 1773179383487.0806,
+      "mtime": 1773197676462.5947,
       "lines": 88
     },
     {
       "path": "src/config/prompts/security.md",
       "bytes": 3409,
-      "mtime": 1773179383487.2844,
+      "mtime": 1773197676463.0525,
       "lines": 95
     },
     {
       "path": "src/config/schema.ts",
       "bytes": 1820,
-      "mtime": 1773179383487.429,
+      "mtime": 1773197676463.1716,
       "lines": 58
     },
     {
       "path": "src/config/synthetic-logs-data.ts",
       "bytes": 1168,
-      "mtime": 1773072343453.6963,
+      "mtime": 1773197676463.285,
       "lines": 50
     },
     {
       "path": "src/config/synthetic-logs.ts",
       "bytes": 3859,
-      "mtime": 1773072343453.8943,
+      "mtime": 1773197676463.3984,
       "lines": 149
     },
     {
       "path": "src/main.tsx",
       "bytes": 231,
-      "mtime": 1773179383487.5647,
+      "mtime": 1773197676463.522,
       "lines": 10
     },
     {
@@ -179,7 +179,7 @@
     {
       "path": "src/styles/_components.scss",
       "bytes": 3399,
-      "mtime": 1773179383487.6953,
+      "mtime": 1773197676463.6306,
       "lines": 182
     },
     {
@@ -197,13 +197,13 @@
     {
       "path": "src/styles/_layout.scss",
       "bytes": 978,
-      "mtime": 1773179383487.8052,
+      "mtime": 1773197676463.735,
       "lines": 55
     },
     {
       "path": "src/styles/_migrated.scss",
       "bytes": 3498,
-      "mtime": 1773179383487.9233,
+      "mtime": 1773197676463.8438,
       "lines": 198
     },
     {
@@ -215,49 +215,49 @@
     {
       "path": "src/styles/_utils.scss",
       "bytes": 361,
-      "mtime": 1773179383488.0347,
+      "mtime": 1773197676463.9502,
       "lines": 10
     },
     {
       "path": "src/styles/main.scss",
       "bytes": 313,
-      "mtime": 1773179383488.1445,
+      "mtime": 1773197676464.0708,
       "lines": 22
     },
     {
       "path": "src/test/setup.ts",
       "bytes": 147,
-      "mtime": 1773178884873.6545,
+      "mtime": 1773197676464.3875,
       "lines": 5
     },
     {
       "path": "src/types/index.ts",
       "bytes": 27,
-      "mtime": 1773179383488.2593,
+      "mtime": 1773197676464.527,
       "lines": 1
     },
     {
       "path": "src/types/logEvent.ts",
       "bytes": 1255,
-      "mtime": 1773179383488.3657,
+      "mtime": 1773197676464.6663,
       "lines": 61
     },
     {
       "path": "src/utils/index.ts",
       "bytes": 107,
-      "mtime": 1773179383488.4749,
+      "mtime": 1773197676464.8254,
       "lines": 2
     },
     {
       "path": "src/utils/logEventNormalizer.ts",
       "bytes": 4562,
-      "mtime": 1773179383488.5996,
+      "mtime": 1773197676464.9724,
       "lines": 134
     },
     {
       "path": "tsconfig.json",
       "bytes": 445,
-      "mtime": 1773179383488.7302,
+      "mtime": 1773197676465.0764,
       "lines": 19
     },
     {
@@ -269,13 +269,13 @@
     {
       "path": "vitest.config.ts",
       "bytes": 571,
-      "mtime": 1773179383488.853,
+      "mtime": 1773197676465.2593,
       "lines": 29
     },
     {
       "path": "vitest.harness.ts",
       "bytes": 416,
-      "mtime": 1773179378755.6147,
+      "mtime": 1773197672277.3203,
       "lines": 17
     }
   ],
