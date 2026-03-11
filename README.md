@@ -1,13 +1,15 @@
-# Multi-Agent Log Summarizer
+# Machine Client Log Summarizer
 
-This project is a log summarizer application built with React, TypeScript, and Vitest.
+This is a log summarizer application built with React, Vite, and TypeScript.
 
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js 18+
-- npm 9+
+- npm or pnpm
+
+### Installation
 
 ### Installation
 
@@ -118,6 +120,7 @@ Create `src/config.json` for persistent configuration:
   "corsOrigins": "*"
 }
 ```
+
 
 
 

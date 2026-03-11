@@ -1,10 +1,10 @@
 # Plan Iteration 1
 
-Generated: 2026-03-10T20:54:04.510Z
+Generated: 2026-03-11T00:54:35.980Z
 
 ## Implementation Plan
 
-### Step 1: Install Vitest and @types/node dependencies
+### Step 1: Install Vitest and @types/node as dev dependencies
 
 **Files:** `package.json`
 
@@ -12,66 +12,73 @@ Generated: 2026-03-10T20:54:04.510Z
   - npm add -D vitest @types/node
 
 **Acceptance Criteria:**
-  - vitest and @types/node appear in package.json devDependencies
+  - package.json includes 'vitest' and '@types/node' in devDependencies
   - npm install completes without errors
 
-### Step 2: Verify and configure vitest.config.ts with jsdom environment
+### Step 2: Configure vitest.config.ts with jsdom environment and TypeScript support
 
 **Files:** `vitest.config.ts`
 
 **Dependencies:**
-  - vitest.config.ts must export config with test environment set to 'jsdom'
-  - tsconfig.json paths must be compatible with test imports
+  - vitest.config.ts must import vitest/config
+  - test environment set to 'jsdom' or 'node'
+  - tsconfig paths configured for src/ imports
 
 **Acceptance Criteria:**
-  - vitest.config.ts exists with jsdom environment configured
-  - config exports valid TypeScript configuration
+  - vitest.config.ts exports a valid config object
+  - config includes test: { environment: 'jsdom' }
+  - config includes resolve: { extensions: ['.ts', '.js'] }
 
-### Step 3: Create smoke test to verify harness runs
-
-**Files:** `src/__tests__/smoke.test.ts`
-
-**Dependencies:**
-  - src/__tests__/ directory must exist
-  - test must import from src/config to verify imports work
-
-**Acceptance Criteria:**
-  - smoke.test.ts exists in src/__tests__/
-  - test passes with npm test
-  - test exits with code 0
-
-### Step 4: Add test script to package.json
+### Step 3: Add 'test' script to package.json that invokes Vitest
 
 **Files:** `package.json`
 
 **Dependencies:**
-  - package.json must have 'test' script invoking vitest
-  - script must use 'npm run test' or 'vitest run' command
+  - package.json scripts section
 
 **Acceptance Criteria:**
-  - package.json contains '"test": "vitest run"' or equivalent
-  - npm test command executes successfully
+  - package.json includes '"test": "vitest"' or '"test": "vitest run"'
+  - script exits with non-zero code on test failure
 
-### Step 5: Update README with test harness instructions
+### Step 4: Create smoke test to verify harness runs
+
+**Files:** `src/__tests__/smoke.test.ts`
+
+**Dependencies:**
+  - vitest.config.ts must be valid
+  - package.json must have test script
+
+**Acceptance Criteria:**
+  - smoke.test.ts imports describe/it from vitest
+  - smoke.test.ts contains at least one passing test
+  - npm test exits 0 when smoke test passes
+
+### Step 5: Update README.md with Vitest test instructions
 
 **Files:** `README.md`
 
 **Dependencies:**
-  - README.md must document how to run tests
-  - include npm test command in setup instructions
+  - README.md exists
 
 **Acceptance Criteria:**
-  - README.md contains 'npm test' command documentation
-  - README.md mentions Vitest harness for QA/CI
+  - README.md includes 'npm test' command in setup section
+  - README.md mentions Vitest as the test runner
 
 ## Risks
 
-1. Existing vitest.config.ts may have incompatible settings requiring review
-2. src/__tests__/ directory structure may need adjustment for test discovery
+1. Existing vitest.config.ts may need modification to match app environment
+2. src/__tests__/smoke.test.ts may already exist and need review before modification
 3. CI configuration may need separate update if using GitHub Actions or similar
 
 ## Open Questions
 
-1. What CI platform is being used for automated testing (GitHub Actions, GitLab CI, etc.)?
-2. Are there existing test utilities in src/utils/ that should be included in smoke test?
+1. What is the current content of vitest.config.ts?
+2. What is the current content of package.json scripts section?
+3. Is there a CI configuration file (e.g., .github/workflows/) that needs updating?
+
+## Notes
+
+1. Prioritize src/__tests__/ over tests/ directory to maintain consistency with existing test structure
+2. Keep vitest.config.ts as .ts file to match repo's TypeScript-first approach
+3. Verify all test files use compatible imports before running npm test
 

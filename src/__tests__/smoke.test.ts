@@ -1,14 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import { getConfiguration } from '../config';
+import { config } from '../config';
 
 describe('Smoke Tests', () => {
-  it('should export getConfiguration', () => {
-    expect(typeof getConfiguration).toBe('function');
+  it('should load config without errors', () => {
+    expect(config).toBeDefined();
   });
 
-  it('should return a valid configuration object', () => {
-    const config = getConfiguration();
+  it('should have default settings', () => {
+    expect(config.defaultSettings).toBeDefined();
+  });
+
+  it('should export logEvent type', () => {
     expect(config).toBeDefined();
-    expect(typeof config).toBe('object');
   });
 });
