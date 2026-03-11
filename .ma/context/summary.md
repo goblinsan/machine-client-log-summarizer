@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T02:47:17.829Z
+Generated: 2026-03-11T03:39:52.506Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-11T02:47:17.829Z
 ## Statistics
 
 - **Total Files**: 47
-- **Total Size**: 242.56 KB
+- **Total Size**: 242.75 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -34,7 +34,7 @@ Generated: 2026-03-11T02:47:17.829Z
   package.json (1.0KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
-  vitest.config.ts (0.6KB)
+  vitest.config.ts (0.9KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
@@ -45,7 +45,7 @@ src/__tests__/
   config.test.ts (2.4KB)
   qa-notes.md (0.8KB)
   regression-gap.test.ts (1.8KB)
-  smoke.test.ts (0.7KB)
+  smoke.test.ts (0.5KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
