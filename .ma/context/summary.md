@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T03:39:52.506Z
+Generated: 2026-03-11T04:24:13.148Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-11T03:39:52.506Z
 
 ## Statistics
 
-- **Total Files**: 47
-- **Total Size**: 242.75 KB
+- **Total Files**: 48
+- **Total Size**: 247.03 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -31,7 +31,7 @@ Generated: 2026-03-11T03:39:52.506Z
   README.md (2.7KB)
   index.html (0.3KB)
   package-lock.json (139.9KB)
-  package.json (1.0KB)
+  package.json (1.1KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
   vitest.config.ts (0.9KB)
@@ -51,6 +51,7 @@ src/__tests__/
 src/config/
   cli.ts (1.8KB)
   defaults.ts (0.4KB)
+  guardrails.ts (4.2KB)
   index.ts (0.4KB)
   loader.ts (2.9KB)
   schema.ts (1.2KB)
@@ -90,7 +91,7 @@ src/utils/
 
 ## File Types
 
-- .ts: 20 files
+- .ts: 21 files
 - .scss: 9 files
 - .md: 8 files
 - .json: 4 files
