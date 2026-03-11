@@ -1,7 +1,6 @@
-// Synthetic log data packs for demos, tests, and docs
-import { SyntheticLogSchema } from './synthetic-logs';
+import { SyntheticLogSchema, type LogEntry } from './synthetic-logs';
 
-const okScenario: SyntheticLogSchema = {
+const okScenario: LogEntry = {
   persona: 'lead-engineer',
   workflowId: 'wf-001-ok',
   intent: 'summarize-success',
@@ -9,7 +8,7 @@ const okScenario: SyntheticLogSchema = {
   timestamp: new Date().toISOString(),
 };
 
-const flakyScenario: SyntheticLogSchema = {
+const flakyScenario: LogEntry = {
   persona: 'qa',
   workflowId: 'wf-002-flaky',
   intent: 'investigate-retry',
@@ -17,7 +16,7 @@ const flakyScenario: SyntheticLogSchema = {
   timestamp: new Date().toISOString(),
 };
 
-const failScenario: SyntheticLogSchema = {
+const failScenario: LogEntry = {
   persona: 'security',
   workflowId: 'wf-003-fail',
   intent: 'analyze-failure',
@@ -25,7 +24,7 @@ const failScenario: SyntheticLogSchema = {
   timestamp: new Date().toISOString(),
 };
 
-const timeoutScenario: SyntheticLogSchema = {
+const timeoutScenario: LogEntry = {
   persona: 'coordinator',
   workflowId: 'wf-004-timeout',
   intent: 'handle-timeout',
@@ -40,9 +39,8 @@ export const syntheticLogsData = {
   timeout: timeoutScenario,
 };
 
-// Validate all scenarios
 const validateAll = () => {
-  Object.entries(syntheticLogsData).forEach(([key, log]) => {
+  Object.entries(syntheticLogsData).forEach(([_key, log]) => {
     SyntheticLogSchema.parse(log);
   });
 };

@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T00:51:25.957Z
+Generated: 2026-03-11T02:07:19.347Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-11T00:51:25.957Z
 ## Statistics
 
 - **Total Files**: 44
-- **Total Size**: 237.33 KB
+- **Total Size**: 231.55 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -30,29 +30,29 @@ Generated: 2026-03-11T00:51:25.957Z
   PROJECT_PLAN.md (15.7KB)
   README.md (2.6KB)
   index.html (0.3KB)
-  package-lock.json (123.0KB)
-  package.json (1.0KB)
+  package-lock.json (139.9KB)
+  package.json (0.9KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
-  vitest.config.ts (0.9KB)
+  vitest.config.ts (0.2KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
   App.tsx (1.9KB)
   main.tsx (0.2KB)
 src/__tests__/
-  config.test.ts (4.4KB)
+  config.test.ts (2.4KB)
   qa-notes.md (0.8KB)
-  regression-gap.test.ts (1.9KB)
-  smoke.test.ts (0.6KB)
+  regression-gap.test.ts (1.8KB)
+  smoke.test.ts (0.5KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
-  defaults.ts (1.1KB)
-  index.ts (18.7KB)
+  defaults.ts (0.4KB)
+  index.ts (0.4KB)
   schema.ts (1.2KB)
-  synthetic-logs-data.ts (1.1KB)
-  synthetic-logs.ts (3.8KB)
+  synthetic-logs-data.ts (1.0KB)
+  synthetic-logs.ts (3.1KB)
 src/config/prompts/
   context.md (16.2KB)
   coordinator.md (3.7KB)
@@ -82,8 +82,7 @@ src/utils/
 ## Large Files
 
 - `PROJECT_PLAN.md` (15.7KB, 349 lines)
-- `package-lock.json` (123.0KB, 3711 lines)
-- `src/config/index.ts` (18.7KB, 644 lines)
+- `package-lock.json` (139.9KB, 4202 lines)
 - `src/config/prompts/context.md` (16.2KB, 448 lines)
 
 ## File Types

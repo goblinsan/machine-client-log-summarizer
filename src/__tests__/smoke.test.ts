@@ -6,11 +6,13 @@ describe('Smoke Tests', () => {
     expect(config).toBeDefined();
   });
 
-  it('should have default settings', () => {
-    expect(config.defaultSettings).toBeDefined();
+  it('should have default log settings', () => {
+    expect(config.logPath).toBeDefined();
+    expect(config.logLevel).toBeDefined();
   });
 
-  it('should export logEvent type', () => {
-    expect(config).toBeDefined();
+  it('should have valid app name and version', () => {
+    expect(config.appName).toBe('Multi-Agent Log Summarizer');
+    expect(config.version).toBe('1.0.0');
   });
 });
