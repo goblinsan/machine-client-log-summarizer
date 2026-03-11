@@ -1,10 +1,16 @@
-# Machine Client Log Summarizer
+# Multi-Agent Log Summarizer
 
-A small starter dashboard scaffolded with Vite + React + TypeScript.
+## Development
 
-Getting started
+```bash
+npm install
+npm run dev
+```
 
-1. Install dependencies: npm install
-2. Run dev server: npm run dev
+## Testing
 
-Build: npm run build
+```bash
+npm test
+```
+
+See [PROJECT_PLAN.md](./PROJECT_PLAN.md) for full project details.
