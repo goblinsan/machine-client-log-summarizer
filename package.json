@@ -1,9 +1,11 @@
 {
-  "name": "multi-agent-log-summarizer",
+  "name": "machine-client-log-summarizer",
   "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
+  "dependencies": {
+    "typescript": "^5.4.0"
+  },
+  "devDependencies": {
+
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
@@ -32,3 +34,4 @@
     "vitest": "^3.2.1"
   }
 }
+
