@@ -6,6 +6,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "dev": "vite",
+    "build": "tsc && vite build",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
@@ -38,4 +40,5 @@
     "vitest": "^3.2.1"
   }
 }
+
 
