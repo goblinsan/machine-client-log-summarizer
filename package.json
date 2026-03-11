@@ -10,11 +10,15 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
-    "add-plan": "node scripts/add_project_plan.js",
-    "add-remaining": "node scripts/add_remaining_milestones.js",
-    "lint:css": "stylelint \"src/**/*.scss\""
+{
+  "name": "machine-client-log-summarizer",
+  "version": "1.0.0",
+  "engines": {
+    "node": "16.17.0",
+    "npm": "8.19.2"
   },
   "dependencies": {
+    "typescript": "^5.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zod": "^3.22.4"
@@ -34,6 +38,9 @@
     "vitest": "^3.2.1"
   }
 }
+
+}
+
 
 
 
