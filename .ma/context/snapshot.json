@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773258196976,
+  "timestamp": 1773258720478,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".gitignore",
       "bytes": 206,
-      "mtime": 1773258196205.4563,
+      "mtime": 1773258719691.2983,
       "lines": 26
     },
     {
@@ -17,13 +17,13 @@
     {
       "path": "PROJECT_PLAN.md",
       "bytes": 10758,
-      "mtime": 1773258196206.8047,
+      "mtime": 1773258719691.5935,
       "lines": 144
     },
     {
       "path": "README.md",
       "bytes": 210,
-      "mtime": 1773258196207.0457,
+      "mtime": 1773258719691.7434,
       "lines": 11
     },
     {
@@ -35,13 +35,13 @@
     {
       "path": "package-lock.json",
       "bytes": 125965,
-      "mtime": 1773258196207.9385,
+      "mtime": 1773258719692.588,
       "lines": 3711
     },
     {
       "path": "package.json",
       "bytes": 320,
-      "mtime": 1773258196208.7812,
+      "mtime": 1773258719692.9473,
       "lines": 17
     },
     {
@@ -53,13 +53,13 @@
     {
       "path": "src/App.tsx",
       "bytes": 4233,
-      "mtime": 1773258196209.4365,
+      "mtime": 1773258719693.3289,
       "lines": 147
     },
     {
       "path": "src/main.tsx",
       "bytes": 588,
-      "mtime": 1773258196210.5908,
+      "mtime": 1773258719693.737,
       "lines": 21
     },
     {
@@ -118,15 +118,15 @@
     },
     {
       "path": "src/types/index.ts",
-      "bytes": 401,
-      "mtime": 1773230727970.7102,
-      "lines": 22
+      "bytes": 72,
+      "mtime": 1773258715511.3765,
+      "lines": 1
     },
     {
       "path": "src/types/logEvent.ts",
-      "bytes": 1270,
-      "mtime": 1773230727970.877,
-      "lines": 46
+      "bytes": 695,
+      "mtime": 1773258715511.764,
+      "lines": 38
     },
     {
       "path": "src/types/pathData.ts",
@@ -148,9 +148,9 @@
     },
     {
       "path": "src/utils/index.ts",
-      "bytes": 36,
-      "mtime": 1773230727971.8816,
-      "lines": 1
+      "bytes": 61,
+      "mtime": 1773258715511.9858,
+      "lines": 2
     },
     {
       "path": "src/utils/jsonPreviewParser.ts",
@@ -159,10 +159,16 @@
       "lines": 54
     },
     {
+      "path": "src/utils/logEventNormalizer.test.ts",
+      "bytes": 5207,
+      "mtime": 1773258715512.1636,
+      "lines": 158
+    },
+    {
       "path": "src/utils/logEventNormalizer.ts",
-      "bytes": 1310,
-      "mtime": 1773230727972.3525,
-      "lines": 44
+      "bytes": 3201,
+      "mtime": 1773258715512.346,
+      "lines": 104
     },
     {
       "path": "src/utils/pathExtractor.ts",
@@ -184,8 +190,8 @@
     }
   ],
   "totals": {
-    "files": 30,
-    "bytes": 169319,
+    "files": 31,
+    "bytes": 175538,
     "depth": 10
   }
 }
