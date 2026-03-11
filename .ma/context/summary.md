@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T00:51:25.957Z
+Generated: 2026-03-11T01:02:31.731Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-11T00:51:25.957Z
 ## Statistics
 
 - **Total Files**: 44
-- **Total Size**: 237.33 KB
+- **Total Size**: 237.19 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -44,7 +44,7 @@ src/__tests__/
   config.test.ts (4.4KB)
   qa-notes.md (0.8KB)
   regression-gap.test.ts (1.9KB)
-  smoke.test.ts (0.6KB)
+  smoke.test.ts (0.4KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
