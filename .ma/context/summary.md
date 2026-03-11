@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T04:07:07.245Z
+Generated: 2026-03-11T04:50:08.291Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-11T04:07:07.245Z
 ## Statistics
 
 - **Total Files**: 46
-- **Total Size**: 224.74 KB
+- **Total Size**: 224.94 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -32,7 +32,7 @@ Generated: 2026-03-11T04:07:07.245Z
   SECURITY_GUIDELINES.md (2.8KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
-  package.json (0.9KB)
+  package.json (1.0KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
   vitest.config.ts (0.7KB)
@@ -44,7 +44,7 @@ src/
   main.tsx (0.2KB)
 src/__tests__/
   config.test.ts (0.7KB)
-  qa-notes.md (8.1KB)
+  qa-notes.md (8.0KB)
   regression-gap.test.ts (3.8KB)
   smoke.test.ts (0.4KB)
   synthetic-logs-data.test.ts (2.8KB)
@@ -72,7 +72,7 @@ src/styles/
   _utils.scss (0.4KB)
   main.scss (0.3KB)
 src/test/
-  setup.ts (0.1KB)
+  setup.ts (0.3KB)
 src/types/
   index.ts (0.0KB)
   logEvent.ts (1.2KB)
@@ -84,7 +84,7 @@ src/utils/
 ## Large Files
 
 - `package-lock.json` (123.0KB, 3711 lines)
-- `src/__tests__/qa-notes.md` (8.1KB, 323 lines)
+- `src/__tests__/qa-notes.md` (8.0KB, 323 lines)
 - `src/config/index.ts` (18.8KB, 644 lines)
 - `src/config/prompts/context.md` (10.8KB, 273 lines)
 
