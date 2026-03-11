@@ -12,8 +12,7 @@ describe('Smoke Tests', () => {
     expect(config).toHaveProperty('logLevel');
   });
 
-  it('should export synthetic logs', () => {
-    expect(config).toHaveProperty('syntheticLogs');
-    expect(Array.isArray(config.syntheticLogs)).toBe(true);
+  it('should have valid lmStudioEndpoint', () => {
+    expect(config.lmStudioEndpoint).toMatch(/^https?:\/\//);
   });
 });

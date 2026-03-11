@@ -1,8 +1,10 @@
-export { config } from './loader';
-export { configSchema } from './schema';
+export { schema, parseConfig } from './schema';
+export type { Config } from './schema';
 export { defaults } from './defaults';
 export { getEnvConfig, getDefaults } from './loader';
-export { defaults } from './defaults';
+export { loadConfig as loadConfigFromCli } from './loader';
+export { parseCliArgs, showHelp } from './cli';
+export { GUARDRAILS, ESCALATION_RULES, PERSONA_CONSTRAINTS, GUARDRAIL_CONFIG } from './guardrails';
 
 import { schema } from './schema';
 import type { Config } from './schema';
@@ -12,10 +14,3 @@ export function loadConfig(overrides: Partial<Config> = {}): Config {
 }
 
 export const config = loadConfig();
-
-
-
-
-
-
-

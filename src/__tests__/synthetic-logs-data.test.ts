@@ -63,6 +63,3 @@ describe('syntheticLogsData', () => {
   });
 
 });
-
-  });
-});
