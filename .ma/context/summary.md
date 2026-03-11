@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-09T15:53:13.324Z
+Generated: 2026-03-11T19:43:16.976Z
 
 ## Overview
 
@@ -14,14 +14,10 @@ Generated: 2026-03-09T15:53:13.324Z
   - `npm install --no-package-lock`
   - Evidence: package.json, package-lock.json
 
-## Potential Issues
-
-- No obvious test/spec files detected in scan results
-
 ## Statistics
 
-- **Total Files**: 28
-- **Total Size**: 160.32 KB
+- **Total Files**: 30
+- **Total Size**: 165.35 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -40,7 +36,7 @@ Generated: 2026-03-09T15:53:13.324Z
 scripts/
   replace-colors.js (4.4KB)
 src/
-  App.tsx (2.2KB)
+  App.tsx (4.1KB)
   main.tsx (0.6KB)
 src/styles/
   _base.scss (1.7KB)
@@ -53,10 +49,12 @@ src/styles/
   _utils.scss (0.4KB)
   main.scss (0.4KB)
 src/types/
-  index.ts (0.2KB)
+  index.ts (0.4KB)
   logEvent.ts (1.2KB)
   pathData.ts (0.7KB)
 src/utils/
+  hash.test.ts (1.9KB)
+  hash.ts (1.0KB)
   index.ts (0.0KB)
   jsonPreviewParser.ts (1.3KB)
   logEventNormalizer.ts (1.3KB)
@@ -69,8 +67,8 @@ src/utils/
 
 ## File Types
 
+- .ts: 10 files
 - .scss: 9 files
-- .ts: 8 files
 - .json: 4 files
 - .md: 2 files
 - .tsx: 2 files
