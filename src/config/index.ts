@@ -1,6 +1,7 @@
-export { SyntheticLogSchema, type LogEntry } from './synthetic-logs';
-export { syntheticLogsData } from './synthetic-logs-data';
-export { schema, type Config } from './schema';
+export { config } from './loader';
+export { configSchema } from './schema';
+export { defaults } from './defaults';
+export { getEnvConfig, getDefaults } from './loader';
 export { defaults } from './defaults';
 
 import { schema } from './schema';
@@ -11,6 +12,7 @@ export function loadConfig(overrides: Partial<Config> = {}): Config {
 }
 
 export const config = loadConfig();
+
 
 
 

@@ -1,18 +1,23 @@
-import React, { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import './styles/main.scss';
+import { config } from './config';
+import { LogEvent } from './types';
 
-const App = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [ingestionResult, setIngestionResult] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+function App() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-      processFile(selectedFile);
-    }
-  };
+  const [logs, setLogs] = useState<LogEvent[]>([]);
+  const [summary, setSummary] = useState<string>('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [config, setConfig] = useState(config);
 
+  useEffect(() => {
+    setConfig(config);
+  }, []);
+
+  const handleProcessLogs = async () => {
+    setIsProcessing(true);
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files?.[0];
@@ -75,3 +80,4 @@ const App = () => {
 };
 
 export default App;
+
