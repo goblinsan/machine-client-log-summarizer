@@ -1,12 +1,12 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T04:24:13.148Z
+Generated: 2026-03-11T19:43:16.976Z
 
 ## Overview
 
 - **Primary Language**: TypeScript
 - **Other Languages**: JavaScript
-- **Tooling & Frameworks**: Node.js (package.json), TypeScript compiler (tsconfig.json), Vitest test runner
+- **Tooling & Frameworks**: Node.js (package.json), TypeScript compiler (tsconfig.json)
 
 ## Local Environment Setup
 
@@ -16,53 +16,28 @@ Generated: 2026-03-11T04:24:13.148Z
 
 ## Statistics
 
-- **Total Files**: 48
-- **Total Size**: 247.03 KB
+- **Total Files**: 30
+- **Total Size**: 165.35 KB
 - **Max Depth**: 10
 
 ## Directory Structure
 
 ```
 ./
-  .env.example (0.8KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
-  PROJECT_PLAN.md (15.7KB)
-  README.md (2.7KB)
+  PROJECT_PLAN.md (10.5KB)
+  README.md (0.2KB)
   index.html (0.3KB)
-  package-lock.json (139.9KB)
-  package.json (1.1KB)
-  tsconfig.json (0.4KB)
+  package-lock.json (123.0KB)
+  package.json (0.3KB)
+  tsconfig.json (0.3KB)
   vite.config.ts (0.2KB)
-  vitest.config.ts (0.9KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
-  App.tsx (2.1KB)
+  App.tsx (4.1KB)
   main.tsx (0.6KB)
-src/__tests__/
-  config-loader.test.ts (4.6KB)
-  config.test.ts (2.4KB)
-  qa-notes.md (0.8KB)
-  regression-gap.test.ts (1.8KB)
-  smoke.test.ts (0.5KB)
-  synthetic-logs-data.test.ts (1.4KB)
-  synthetic-logs.test.ts (2.0KB)
-src/config/
-  cli.ts (1.8KB)
-  defaults.ts (0.4KB)
-  guardrails.ts (4.2KB)
-  index.ts (0.4KB)
-  loader.ts (2.9KB)
-  schema.ts (1.2KB)
-  synthetic-logs-data.ts (1.0KB)
-  synthetic-logs.ts (3.1KB)
-src/config/prompts/
-  context.md (16.2KB)
-  coordinator.md (3.7KB)
-  lead-engineer.md (3.9KB)
-  qa.md (3.6KB)
-  security.md (3.9KB)
 src/styles/
   _base.scss (1.7KB)
   _components.scss (3.3KB)
@@ -72,31 +47,31 @@ src/styles/
   _migrated.scss (3.4KB)
   _mixins.scss (0.2KB)
   _utils.scss (0.4KB)
-  main.scss (0.3KB)
-src/test/
-  setup.ts (0.4KB)
+  main.scss (0.4KB)
 src/types/
-  index.ts (0.0KB)
+  index.ts (0.4KB)
   logEvent.ts (1.2KB)
+  pathData.ts (0.7KB)
 src/utils/
-  index.ts (0.1KB)
-  logEventNormalizer.ts (4.5KB)
+  hash.test.ts (1.9KB)
+  hash.ts (1.0KB)
+  index.ts (0.0KB)
+  jsonPreviewParser.ts (1.3KB)
+  logEventNormalizer.ts (1.3KB)
+  pathExtractor.ts (1.9KB)
 ```
 
 ## Large Files
 
-- `PROJECT_PLAN.md` (15.7KB, 349 lines)
-- `package-lock.json` (139.9KB, 4202 lines)
-- `src/config/prompts/context.md` (16.2KB, 448 lines)
+- `package-lock.json` (123.0KB, 3711 lines)
 
 ## File Types
 
-- .ts: 21 files
+- .ts: 10 files
 - .scss: 9 files
-- .md: 8 files
 - .json: 4 files
+- .md: 2 files
 - .tsx: 2 files
-- .example: 1 file
 - (no extension): 1 file
 - .html: 1 file
 - .js: 1 file

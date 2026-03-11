@@ -1,46 +1,38 @@
 /**
- * LogEvent schema for Multi-Agent Log Summarizer
- * Captures all required fields for log event normalization
+ * LogEvent schema for normalized log messages
  */
-
-export type LogLevel = 'info' | 'warn' | 'error' | 'debug';
-
-export type PersonaType = 'worker' | 'request' | 'git' | 'persona_response' | 'persona_apply' | 'persona_completed' | 'unknown';
-
-export type WorkflowIntent = 'prepare' | 'execute' | 'analyze' | 'summarize' | 'unknown';
-
 export interface LogEvent {
-  ts: string; // ISO timestamp
-  level: LogLevel;
-  persona: PersonaType;
-  workflowId: string;
-  intent: WorkflowIntent;
-  repo: string;
-  branch: string;
-  projectId: string;
-  corrId: string;
-  duration_ms: number;
-  preview_raw: string; // JSON string representation of raw message
-  preview_json: Record<string, unknown>; // Parsed JSON object
-  paths: string[]; // File paths involved
-  source: string; // Source of the log event
-  hash: string; // Message hash for deduplication
+  ts: string;
+  level: string;
+  persona?: string;
+  workflowId?: string;
+  intent?: string;
+  repo?: string;
+  branch?: string;
+  projectId?: string;
+  corrId?: string;
+  duration_ms?: number;
+  preview?: string | object;
+  paths?: string[];
+  source?: string;
+  hash?: string;
 }
 
-export type LogEventPreview = {
-  ts: string;
-  level: LogLevel;
-  persona: PersonaType;
-  workflowId: string;
-  intent: WorkflowIntent;
-  repo: string;
-  branch: string;
-  projectId: string;
-  corrId: string;
-  duration_ms: number;
-  preview_raw: string;
-  preview_json: Record<string, unknown>;
-  paths: string[];
-  source: string;
-  hash: string;
-};
+/**
+ * Known event types for classification
+ */
+export type LogEventType =
+  | 'worker_ready'
+  | 'request_started'
+  | 'git_op'
+  | 'persona_response'
+  | 'persona_apply'
+  | 'persona_completed'
+  | 'unknown';
+
+/**
+ * Raw log message structure before normalization
+ */
+export interface RawLogMessage {
+  [key: string]: unknown;
+}
