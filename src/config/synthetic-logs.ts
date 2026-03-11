@@ -1,10 +1,12 @@
-// Synthetic log schema and data pack definitions
-import { z } from 'zod';
+// Synthetic logs generator - regression test coverage
 
+export function generateSyntheticLogs(count: number): any[] {
 export const SyntheticLogSchema = z.object({
- * Synthetic log entry interface for demo/test data
- */
-export interface LogEntry {
+  const logs: any[] = [];
+  for (let i = 0; i < count; i++) {
+    logs.push({ timestamp: `2024-01-01T00:${i.toString().padStart(2, '0')}:00Z`, level: ['info', 'warn', 'error'][i % 3], message: `Log entry ${i}` });
+  }
+  return logs;
   status: 'ok' | 'flaky' | 'fail' | 'timeout';
   persona: string;
   workflowId: string;
@@ -146,3 +148,4 @@ export const timestampRange = {
 export type { LogEntry };
 
 export { syntheticLogs, logsByStatus, personas, workflowIds, intents, totalCount, timestampRange };
+

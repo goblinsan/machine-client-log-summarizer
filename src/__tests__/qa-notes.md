@@ -1,6 +1,6 @@
-# QA Notes - Synthetic Logs Data Tests (Updated)
+# QA Notes - Synthetic Logs Regression Test Coverage
 
-## Test Infrastructure Status
+## Overview
 
 
 1. Events with missing optional fields
@@ -12,7 +12,14 @@
 
 ## Verification Steps
 
-### Step 1: Run Synthetic Logs Data Tests
+### Synthetic Logs Data Regression Test
+1. Run `npm test` or `vitest` to execute the new regression test
+2. Verify the test passes without errors
+3. Check that synthetic logs data structure is validated correctly
+4. Confirm synthetic logs generation logic produces expected output
+5. Review test output for any failures or warnings
+
+## Additional Notes
 
 
 Expected output: All tests should pass with increased coverage metrics.
@@ -312,6 +319,7 @@ Confirm this file exists and contains verification steps.
 ## Validation Plan
 - Run `vitest run` command to execute all tests
 - Verify newly created test file passes without errors
+
 
 
 
