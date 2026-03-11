@@ -1,13 +1,10 @@
 # Machine Client Log Summarizer
 
-This is a log summarizer application built with React, Vite, and TypeScript.
+## Overview
 
-## Getting Started
+A multi-agent system for summarizing client logs with AI assistance.
 
-### Prerequisites
-
-- Node.js 18+
-- npm or pnpm
+## Installation
 
 ### Installation
 
@@ -15,10 +12,18 @@ This is a log summarizer application built with React, Vite, and TypeScript.
 
 ## Development
 
-Run the development server:
+## Testing
 
+Run tests locally:
 ```bash
-npm run dev
+npm test
+```
+
+Tests are run with Vitest and can be executed before code reviews.
+
+## Scripts
+
+## Scripts
 ```
 
 ## Testing
@@ -120,6 +125,7 @@ Create `src/config.json` for persistent configuration:
   "corsOrigins": "*"
 }
 ```
+
 
 
 
