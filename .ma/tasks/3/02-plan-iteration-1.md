@@ -1,51 +1,86 @@
 # Plan Iteration 1
 
-Generated: 2026-03-09T14:57:15.264Z
+Generated: 2026-03-11T04:26:59.537Z
 
 ## Implementation Plan
 
-### Step 1: Review existing synthetic logs implementation to understand current data structure and fields
+### Step 1: Analyze existing synthetic log structure and type definitions to understand current data model
 
-**Files:** `src/config/synthetic-logs.ts`, `src/config/synthetic-logs-data.ts`, `src/types/logEvent.ts`
-
-**Dependencies:**
-
-### Step 2: Define synthetic log data schema with required workflow fields (persona, workflowId, intent, status)
-
-**Files:** `src/config/synthetic-logs-data.ts`
+**Files:** `src/types/logEvent.ts`, `src/config/synthetic-logs.ts`, `src/config/synthetic-logs-data.ts`
 
 **Dependencies:**
-  - Review existing synthetic logs implementation
 
-### Step 3: Create synthetic data generator for each scenario type (ok, flaky, fail, timeout)
+**Acceptance Criteria:**
+  - Understand LogEvent type structure including persona, workflowId, intent fields
+  - Identify existing synthetic log generation patterns
+  - Document current data pack format and limitations
 
-**Files:** `src/config/synthetic-logs-data.ts`
+### Step 2: Create curated synthetic log data pack with 4 status types (ok, flaky, fail, timeout)
 
-**Dependencies:**
-  - Define synthetic log data schema
-
-### Step 4: Update existing synthetic logs test to validate new data structure
-
-**Files:** `src/__tests__/synthetic-logs-data.test.ts`, `src/__tests__/synthetic-logs.test.ts`
+**Files:** `src/config/data-packs/synthetic-log-runs.ts`
 
 **Dependencies:**
-  - Create synthetic data generator
+  - src/types/logEvent.ts
 
-### Step 5: Create usage documentation for synthetic log data packs
+**Acceptance Criteria:**
+  - Data pack exports arrays for each status type (ok, flaky, fail, timeout)
+  - Each log entry includes persona, workflowId, intent fields
+  - Sample sizes are small (5-10 entries per status for demo/test use)
+  - Data is deterministic and reproducible
 
-**Files:** `src/config/prompts/qa.md`, `PROJECT_PLAN.md`
+### Step 3: Add type definitions for data pack exports to ensure type safety
+
+**Files:** `src/types/logEvent.ts`, `src/config/data-packs/synthetic-log-runs.ts`
 
 **Dependencies:**
-  - Update existing synthetic logs test
+  - src/types/logEvent.ts
+
+**Acceptance Criteria:**
+  - Export types defined for data pack return values
+  - Types include LogEvent interface with required workflow fields
+  - Type exports are consistent with existing type patterns
+
+### Step 4: Create unit tests for synthetic log data pack exports
+
+**Files:** `src/__tests__/data-packs.test.ts`
+
+**Dependencies:**
+  - src/config/data-packs/synthetic-log-runs.ts
+
+**Acceptance Criteria:**
+  - Tests verify all 4 status types are exported
+  - Tests validate each log entry has required fields (persona, workflowId, intent)
+  - Tests confirm sample sizes match expected counts
+  - Tests run successfully with Vitest
+
+### Step 5: Update documentation to reference new data pack usage
+
+**Files:** `PROJECT_PLAN.md`, `README.md`
+
+**Dependencies:**
+  - src/config/data-packs/synthetic-log-runs.ts
+
+**Acceptance Criteria:**
+  - README.md includes data pack import examples
+  - PROJECT_PLAN.md documents data pack purpose and usage
+  - Documentation shows how to use data for demos/tests/docs
 
 ## Risks
 
-1. Existing synthetic logs implementation may have hardcoded patterns that conflict with new workflow fields
-2. Schema changes may break downstream consumers expecting specific field names or formats
+1. Existing synthetic-logs.ts may conflict with new data pack approach
+2. Need to ensure data pack doesn't duplicate existing synthetic log functionality
+3. Type definitions must align with existing LogEvent schema
 
 ## Open Questions
 
-1. What specific persona values should be included in synthetic data?
-2. What workflowId format is expected (UUID, string, number)?
-3. What intent values are valid for the agent workflow?
+1. Should data pack be exported as JSON files or TypeScript arrays?
+2. What specific persona/workflowId/intent combinations are needed for demos?
+3. Should data pack include metadata about generation timestamp or version?
+
+## Notes
+
+1. Prefer TypeScript arrays over JSON for type safety and IDE support
+2. Keep sample sizes small (5-10 per status) for demo/test use cases
+3. Ensure deterministic data for reproducible testing
+4. Align with existing src/config/ directory patterns
 
