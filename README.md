@@ -1,8 +1,12 @@
 # Machine Client Log Summarizer
 
-## Overview
+## Testing
 
-A multi-agent system for summarizing client logs with AI assistance.
+Run tests with: `npm test`
+
+## Development
+
+Run the development server:
 
 ## Installation
 
@@ -125,6 +129,7 @@ Create `src/config.json` for persistent configuration:
   "corsOrigins": "*"
 }
 ```
+
 
 
 

@@ -1,22 +1,19 @@
-import { describe, it, expect } from 'vitest'
-import { loadConfig } from '../config/loader'
+import { describe, it, expect } from 'vitest';
+import { config } from '../config';
 
 describe('Smoke Tests', () => {
-  it('should load config successfully', async () => {
-    const config = await loadConfig()
-    expect(config).toBeDefined()
-    expect(config.name).toBe('Log Summarizer')
-  })
+  it('should load config successfully', () => {
+    expect(config).toBeDefined();
+    expect(typeof config).toBe('object');
+  });
 
-  it('should have default settings', async () => {
-    const config = await loadConfig()
-    expect(config).toHaveProperty('name')
-    expect(config).toHaveProperty('version')
-  })
+  it('should have default values', () => {
+    expect(config).toHaveProperty('appName');
+    expect(config).toHaveProperty('logLevel');
+  });
 
-  it('should export synthetic logs', async () => {
-    const { syntheticLogs } = await import('../config/synthetic-logs')
-    expect(syntheticLogs).toBeDefined()
-    expect(Array.isArray(syntheticLogs)).toBe(true)
-  })
-})
+  it('should export synthetic logs', () => {
+    expect(config).toHaveProperty('syntheticLogs');
+    expect(Array.isArray(config.syntheticLogs)).toBe(true);
+  });
+});

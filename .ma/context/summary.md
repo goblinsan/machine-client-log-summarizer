@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T02:40:14.451Z
+Generated: 2026-03-11T02:47:17.829Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-11T02:40:14.451Z
 ## Statistics
 
 - **Total Files**: 47
-- **Total Size**: 241.70 KB
+- **Total Size**: 242.56 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -28,13 +28,13 @@ Generated: 2026-03-11T02:40:14.451Z
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (15.7KB)
-  README.md (2.6KB)
+  README.md (2.7KB)
   index.html (0.3KB)
   package-lock.json (139.9KB)
   package.json (1.0KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
-  vitest.config.ts (0.2KB)
+  vitest.config.ts (0.6KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
@@ -45,7 +45,7 @@ src/__tests__/
   config.test.ts (2.4KB)
   qa-notes.md (0.8KB)
   regression-gap.test.ts (1.8KB)
-  smoke.test.ts (0.5KB)
+  smoke.test.ts (0.7KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
@@ -73,7 +73,7 @@ src/styles/
   _utils.scss (0.4KB)
   main.scss (0.3KB)
 src/test/
-  setup.ts (0.1KB)
+  setup.ts (0.4KB)
 src/types/
   index.ts (0.0KB)
   logEvent.ts (1.2KB)
