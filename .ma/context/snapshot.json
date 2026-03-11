@@ -1,17 +1,17 @@
 {
-  "timestamp": 1773197677253,
+  "timestamp": 1773199216707,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".env.example",
       "bytes": 1133,
-      "mtime": 1773197676450.92,
+      "mtime": 1773199215898.112,
       "lines": 33
     },
     {
       "path": ".gitignore",
       "bytes": 206,
-      "mtime": 1773197676451.3354,
+      "mtime": 1773199215898.5007,
       "lines": 26
     },
     {
@@ -29,7 +29,7 @@
     {
       "path": "README.md",
       "bytes": 2737,
-      "mtime": 1773197676458.6704,
+      "mtime": 1773199215905.5737,
       "lines": 165
     },
     {
@@ -47,13 +47,13 @@
     {
       "path": "package-lock.json",
       "bytes": 125965,
-      "mtime": 1773197676459.064,
+      "mtime": 1773199215905.9666,
       "lines": 3711
     },
     {
       "path": "package.json",
       "bytes": 912,
-      "mtime": 1773197676459.2004,
+      "mtime": 1773199215906.1128,
       "lines": 40
     },
     {
@@ -65,31 +65,31 @@
     {
       "path": "src/App.tsx",
       "bytes": 1970,
-      "mtime": 1773197676459.4749,
+      "mtime": 1773199215906.3057,
       "lines": 78
     },
     {
       "path": "src/__tests__/config.test.ts",
       "bytes": 697,
-      "mtime": 1773197676459.8477,
+      "mtime": 1773199215906.639,
       "lines": 24
     },
     {
       "path": "src/__tests__/qa-notes.md",
-      "bytes": 6027,
-      "mtime": 1773197672272.4395,
-      "lines": 251
+      "bytes": 5982,
+      "mtime": 1773199212381.336,
+      "lines": 248
     },
     {
       "path": "src/__tests__/regression-gap.test.ts",
-      "bytes": 1969,
-      "mtime": 1773197676460.1323,
-      "lines": 52
+      "bytes": 3864,
+      "mtime": 1773199212455.8,
+      "lines": 107
     },
     {
       "path": "src/__tests__/smoke.test.ts",
       "bytes": 417,
-      "mtime": 1773197676460.4194,
+      "mtime": 1773199215906.997,
       "lines": 14
     },
     {
@@ -107,67 +107,67 @@
     {
       "path": "src/config/defaults.ts",
       "bytes": 782,
-      "mtime": 1773197676460.7083,
+      "mtime": 1773199215907.2773,
       "lines": 51
     },
     {
       "path": "src/config/index.ts",
       "bytes": 19246,
-      "mtime": 1773197676461.0085,
+      "mtime": 1773199215908.0793,
       "lines": 644
     },
     {
       "path": "src/config/prompts/context.md",
       "bytes": 11080,
-      "mtime": 1773197676461.586,
+      "mtime": 1773199215908.551,
       "lines": 273
     },
     {
       "path": "src/config/prompts/coordinator.md",
       "bytes": 3076,
-      "mtime": 1773197676461.9768,
+      "mtime": 1773199215908.8967,
       "lines": 88
     },
     {
       "path": "src/config/prompts/lead-engineer.md",
       "bytes": 3200,
-      "mtime": 1773197676462.3682,
+      "mtime": 1773199215909.224,
       "lines": 87
     },
     {
       "path": "src/config/prompts/qa.md",
       "bytes": 3113,
-      "mtime": 1773197676462.5947,
+      "mtime": 1773199215909.4624,
       "lines": 88
     },
     {
       "path": "src/config/prompts/security.md",
       "bytes": 3409,
-      "mtime": 1773197676463.0525,
+      "mtime": 1773199215909.6401,
       "lines": 95
     },
     {
       "path": "src/config/schema.ts",
       "bytes": 1820,
-      "mtime": 1773197676463.1716,
+      "mtime": 1773199215909.7546,
       "lines": 58
     },
     {
       "path": "src/config/synthetic-logs-data.ts",
       "bytes": 1168,
-      "mtime": 1773197676463.285,
+      "mtime": 1773199215909.8586,
       "lines": 50
     },
     {
       "path": "src/config/synthetic-logs.ts",
       "bytes": 3859,
-      "mtime": 1773197676463.3984,
+      "mtime": 1773199215909.966,
       "lines": 149
     },
     {
       "path": "src/main.tsx",
       "bytes": 231,
-      "mtime": 1773197676463.522,
+      "mtime": 1773199215910.0962,
       "lines": 10
     },
     {
@@ -179,7 +179,7 @@
     {
       "path": "src/styles/_components.scss",
       "bytes": 3399,
-      "mtime": 1773197676463.6306,
+      "mtime": 1773199215910.211,
       "lines": 182
     },
     {
@@ -197,13 +197,13 @@
     {
       "path": "src/styles/_layout.scss",
       "bytes": 978,
-      "mtime": 1773197676463.735,
+      "mtime": 1773199215910.3225,
       "lines": 55
     },
     {
       "path": "src/styles/_migrated.scss",
       "bytes": 3498,
-      "mtime": 1773197676463.8438,
+      "mtime": 1773199215910.4377,
       "lines": 198
     },
     {
@@ -215,49 +215,49 @@
     {
       "path": "src/styles/_utils.scss",
       "bytes": 361,
-      "mtime": 1773197676463.9502,
+      "mtime": 1773199215910.545,
       "lines": 10
     },
     {
       "path": "src/styles/main.scss",
       "bytes": 313,
-      "mtime": 1773197676464.0708,
+      "mtime": 1773199215910.6584,
       "lines": 22
     },
     {
       "path": "src/test/setup.ts",
       "bytes": 147,
-      "mtime": 1773197676464.3875,
+      "mtime": 1773199215910.9636,
       "lines": 5
     },
     {
       "path": "src/types/index.ts",
       "bytes": 27,
-      "mtime": 1773197676464.527,
+      "mtime": 1773199215911.0823,
       "lines": 1
     },
     {
       "path": "src/types/logEvent.ts",
       "bytes": 1255,
-      "mtime": 1773197676464.6663,
+      "mtime": 1773199215911.2202,
       "lines": 61
     },
     {
       "path": "src/utils/index.ts",
       "bytes": 107,
-      "mtime": 1773197676464.8254,
+      "mtime": 1773199215911.3574,
       "lines": 2
     },
     {
       "path": "src/utils/logEventNormalizer.ts",
       "bytes": 4562,
-      "mtime": 1773197676464.9724,
+      "mtime": 1773199215911.5186,
       "lines": 134
     },
     {
       "path": "tsconfig.json",
       "bytes": 445,
-      "mtime": 1773197676465.0764,
+      "mtime": 1773199215911.6272,
       "lines": 19
     },
     {
@@ -269,7 +269,7 @@
     {
       "path": "vitest.config.ts",
       "bytes": 571,
-      "mtime": 1773197676465.2593,
+      "mtime": 1773199215911.7788,
       "lines": 29
     },
     {
@@ -281,7 +281,7 @@
   ],
   "totals": {
     "files": 46,
-    "bytes": 224389,
+    "bytes": 226239,
     "depth": 10
   }
 }

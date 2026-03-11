@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T02:54:37.253Z
+Generated: 2026-03-11T03:20:16.707Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-11T02:54:37.253Z
 ## Statistics
 
 - **Total Files**: 46
-- **Total Size**: 219.13 KB
+- **Total Size**: 220.94 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -44,8 +44,8 @@ src/
   main.tsx (0.2KB)
 src/__tests__/
   config.test.ts (0.7KB)
-  qa-notes.md (5.9KB)
-  regression-gap.test.ts (1.9KB)
+  qa-notes.md (5.8KB)
+  regression-gap.test.ts (3.8KB)
   smoke.test.ts (0.4KB)
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
@@ -84,7 +84,7 @@ src/utils/
 ## Large Files
 
 - `package-lock.json` (123.0KB, 3711 lines)
-- `src/__tests__/qa-notes.md` (5.9KB, 251 lines)
+- `src/__tests__/qa-notes.md` (5.8KB, 248 lines)
 - `src/config/index.ts` (18.8KB, 644 lines)
 - `src/config/prompts/context.md` (10.8KB, 273 lines)
 
