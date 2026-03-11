@@ -1,13 +1,14 @@
-import { vi } from 'vitest'
+// Test setup file for Vitest
+// Can be used to configure test environment, mocks, etc.
 
-// Mock console to prevent noise in tests
-vi.spyOn(console, 'log').mockImplementation(() => {})
-vi.spyOn(console, 'error').mockImplementation(() => {})
-vi.spyOn(console, 'warn').mockImplementation(() => {})
+import '@testing-library/jest-dom';
 
-// Mock any external modules that might cause issues
-vi.mock('fs')
-vi.mock('path')
+// Configure test environment
+import { afterEach, beforeEach, vi } from 'vitest';
 
-// Set up test environment
-globalThis.__TEST__ = true
+// Clear mocks after each test
+afterEach(() => {
+  vi.clearAllMocks();
+});
+
+// Setup any global mocks or configurations here

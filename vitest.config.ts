@@ -27,7 +27,11 @@ export default defineConfig({
   resolve: {
     alias: {
 
+  resolve: {
+    alias: {
+
     },
   },
 });
+
 
