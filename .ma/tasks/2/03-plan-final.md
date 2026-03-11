@@ -1,46 +1,43 @@
 # Plan Iteration 2
 
-Generated: 2026-03-09T14:50:15.434Z
+Generated: 2026-03-11T03:43:36.855Z
 
 ## Implementation Plan
 
-### Step 1: Verify existing prompt files in src/config/prompts/ directory and assess completeness against task requirements
+### Step 1: Verify existing prompt files in src/config/prompts/ directory and confirm they contain required persona definitions
 
 **Files:** `src/config/prompts/context.md`, `src/config/prompts/coordinator.md`, `src/config/prompts/lead-engineer.md`, `src/config/prompts/qa.md`, `src/config/prompts/security.md`
 
-### Step 2: Update context.md to include clear scope boundaries and safety limits for model behavior
+**Dependencies:**
 
-**Files:** `src/config/prompts/context.md`
+### Step 2: Enhance each prompt file with scope definitions, escalation rules, and safety limits
 
-### Step 3: Update coordinator.md with escalation rules and coordination scope definitions
+**Files:** `src/config/prompts/context.md`, `src/config/prompts/coordinator.md`, `src/config/prompts/lead-engineer.md`, `src/config/prompts/qa.md`, `src/config/prompts/security.md`
 
-**Files:** `src/config/prompts/coordinator.md`
+**Dependencies:**
+  - Step 1 verification complete
 
-### Step 4: Update lead-engineer.md with technical scope and escalation pathways for engineering decisions
+### Step 3: Create a shared guardrails configuration file to standardize safety limits across all persona prompts
 
-**Files:** `src/config/prompts/lead-engineer.md`
+**Files:** `src/config/guardrails.ts`
 
-### Step 5: Update qa.md with testing scope, bug triage escalation rules, and quality safety limits
+**Dependencies:**
+  - Step 2 enhancement complete
 
-**Files:** `src/config/prompts/qa.md`
+### Step 4: Update package.json to include any new dependencies required for guardrails configuration
 
-### Step 6: Update security.md with security review scope, incident escalation rules, and safety limits for security tasks
+**Files:** `package.json`
 
-**Files:** `src/config/prompts/security.md`
-
-### Step 7: Run smoke tests to verify prompt files are properly integrated and accessible
-
-**Files:** `src/__tests__/smoke.test.ts`
+**Dependencies:**
+  - Step 3 guardrails file created
 
 ## Risks
 
-1. Existing prompt files may already meet requirements - verify before making changes
-2. Prompt content may need to align with existing codebase patterns and conventions
-3. Escalation rules may need to match actual team structure and tooling
+1. Existing prompt files may already contain conflicting guardrails that need reconciliation
+2. TypeScript guardrails file may require additional type definitions not currently in the repo
 
 ## Open Questions
 
-1. What is the current escalation hierarchy for this repository?
-2. Are there existing safety limits or guardrails already defined elsewhere?
-3. What specific scope boundaries should each persona respect?
+1. What specific escalation thresholds should be defined for each persona?
+2. Are there existing safety limit requirements from prior evaluation feedback?
 
