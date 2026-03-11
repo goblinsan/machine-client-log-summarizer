@@ -1,4 +1,13 @@
-// Test setup file for Vitest
-// Can be used to configure test environment, mocks, etc.
+import { vi } from 'vitest'
 
-// Example: Setup any global mocks or configurations here
+// Mock console to prevent noise in tests
+vi.spyOn(console, 'log').mockImplementation(() => {})
+vi.spyOn(console, 'error').mockImplementation(() => {})
+vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+// Mock any external modules that might cause issues
+vi.mock('fs')
+vi.mock('path')
+
+// Set up test environment
+globalThis.__TEST__ = true

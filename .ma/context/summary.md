@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T02:07:19.347Z
+Generated: 2026-03-11T02:40:14.451Z
 
 ## Overview
 
@@ -16,31 +16,32 @@ Generated: 2026-03-11T02:07:19.347Z
 
 ## Statistics
 
-- **Total Files**: 44
-- **Total Size**: 231.55 KB
+- **Total Files**: 47
+- **Total Size**: 241.70 KB
 - **Max Depth**: 10
 
 ## Directory Structure
 
 ```
 ./
-  .env.example (0.6KB)
+  .env.example (0.8KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
   PROJECT_PLAN.md (15.7KB)
   README.md (2.6KB)
   index.html (0.3KB)
   package-lock.json (139.9KB)
-  package.json (0.9KB)
+  package.json (1.0KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
   vitest.config.ts (0.2KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
-  App.tsx (1.9KB)
-  main.tsx (0.2KB)
+  App.tsx (2.1KB)
+  main.tsx (0.6KB)
 src/__tests__/
+  config-loader.test.ts (4.6KB)
   config.test.ts (2.4KB)
   qa-notes.md (0.8KB)
   regression-gap.test.ts (1.8KB)
@@ -48,8 +49,10 @@ src/__tests__/
   synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
+  cli.ts (1.8KB)
   defaults.ts (0.4KB)
   index.ts (0.4KB)
+  loader.ts (2.9KB)
   schema.ts (1.2KB)
   synthetic-logs-data.ts (1.0KB)
   synthetic-logs.ts (3.1KB)
@@ -87,7 +90,7 @@ src/utils/
 
 ## File Types
 
-- .ts: 17 files
+- .ts: 20 files
 - .scss: 9 files
 - .md: 8 files
 - .json: 4 files
