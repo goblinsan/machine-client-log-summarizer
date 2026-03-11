@@ -1,6 +1,6 @@
 # QA Notes - Regression Gap #128
 
-## Reported Gap Summary
+## QA Verification Notes
 
 **Issue #128**: Regression tests were not covering edge cases in log event normalization, leading to QA failures when processing:
 
@@ -13,12 +13,8 @@
 
 ## Verification Steps
 
-### Step 1: Run Regression Tests
+### Step 1: Run Synthetic Logs Data Tests
 
-```bash
-npm install
-npx vitest run src/__tests__/regression-gap.test.ts
-```
 
 Expected output: All tests should pass with increased coverage metrics.
 
@@ -317,6 +313,7 @@ Confirm this file exists and contains verification steps.
 ## Validation Plan
 - Run `vitest run` command to execute all tests
 - Verify newly created test file passes without errors
+
 
 
 

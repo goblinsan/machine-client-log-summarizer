@@ -1,44 +1,33 @@
-import { defineConfig } from 'vitest/config'
 import { defineConfig } from 'vitest/config';
-import path from 'path';
+import { resolve } from 'path';
 
 export default defineConfig({
   test: {
+    environment: 'jsdom',
     globals: true,
-    environment: 'jsdom',
     include: ['src/**/*.{test,spec}.{ts,js}'],
-    exclude: ['node_modules/**', '**/*.d.ts'],
-    setupFiles: ['./src/test/setup.ts'],
-    deps: {
-      interopDefault: true
-    }
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
-  }
-});
-    environment: 'jsdom',
-    include: ['src/**/*.{test,spec}.{ts,js}'],
-    exclude: ['node_modules/**', '**/.git/**'],
-    setupFiles: ['src/test/setup.ts'],
-    testTimeout: 10000,
-    isolate: true,
-    deps: {
-      interopDefault: true
-    }
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src')
-    }
-  }
-})
-    environment: 'node',
-    include: ['src/**/*.{test,spec}.{ts,tsx,js}'],
-    setupFiles: ['src/test/setup.ts'],
-  },
-});
+import { defineConfig } from 'vitest/config';
+import { resolve } from 'path';
 
+export default defineConfig({
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    exclude: ['node_modules', 'dist'],
+    setupFiles: ['./src/test/setup.ts'],
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+      include: ['src/**/*.{ts,tsx}'],
+    },
+  },
+  resolve: {
+    alias: {
+
+    },
+  },
+});
 
