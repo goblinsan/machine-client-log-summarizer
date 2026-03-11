@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T19:43:16.976Z
+Generated: 2026-03-11T19:52:00.478Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-11T19:43:16.976Z
 
 ## Statistics
 
-- **Total Files**: 30
-- **Total Size**: 165.35 KB
+- **Total Files**: 31
+- **Total Size**: 171.42 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -49,15 +49,16 @@ src/styles/
   _utils.scss (0.4KB)
   main.scss (0.4KB)
 src/types/
-  index.ts (0.4KB)
-  logEvent.ts (1.2KB)
+  index.ts (0.1KB)
+  logEvent.ts (0.7KB)
   pathData.ts (0.7KB)
 src/utils/
   hash.test.ts (1.9KB)
   hash.ts (1.0KB)
-  index.ts (0.0KB)
+  index.ts (0.1KB)
   jsonPreviewParser.ts (1.3KB)
-  logEventNormalizer.ts (1.3KB)
+  logEventNormalizer.test.ts (5.1KB)
+  logEventNormalizer.ts (3.1KB)
   pathExtractor.ts (1.9KB)
 ```
 
@@ -67,7 +68,7 @@ src/utils/
 
 ## File Types
 
-- .ts: 10 files
+- .ts: 11 files
 - .scss: 9 files
 - .json: 4 files
 - .md: 2 files
