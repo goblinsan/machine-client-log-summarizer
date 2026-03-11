@@ -1,77 +1,122 @@
-# Plan Iteration 2
+# Plan Iteration 1
 
-Generated: 2026-03-09T13:34:23.731Z
+Generated: 2026-03-11T02:10:18.735Z
 
 ## Implementation Plan
 
-### Step 1: Review existing config structure and schema definitions
+### Step 1: Review existing config module structure and dependencies
 
-**Files:** `src/config/schema.ts`, `src/config/defaults.ts`, `src/config/index.ts`, `.env.example`
+**Files:** `src/config/defaults.ts`, `src/config/schema.ts`, `src/config/index.ts`, `package.json`
 
 **Dependencies:**
 
-### Step 2: Update JSON schema to include log paths, store, and LM Studio endpoint fields
+**Acceptance Criteria:**
+  - Understand current defaults structure
+  - Identify existing schema validation approach
+  - Confirm package.json has required dependencies (zod, dotenv, commander, etc.)
+
+### Step 2: Define JSON schema for config with log paths, store, and LM Studio endpoint
 
 **Files:** `src/config/schema.ts`
 
 **Dependencies:**
-  - Review existing config structure
+  - Step 1
 
-### Step 3: Update defaults.ts with default values for all config fields
+**Acceptance Criteria:**
+  - Schema includes logPaths configuration
+  - Schema includes store configuration
+  - Schema includes lmStudioEndpoint configuration
+  - Schema uses Zod or similar validation library
 
-**Files:** `src/config/defaults.ts`
+### Step 3: Implement hierarchical config loader (CLI > file > env > defaults)
+
+**Files:** `src/config/index.ts`, `src/config/loader.ts`
 
 **Dependencies:**
-  - Update JSON schema
+  - Step 2
 
-### Step 4: Create/update .env.example with all environment variables
+**Acceptance Criteria:**
+  - CLI arguments take precedence over file config
+  - File config takes precedence over env variables
+  - Env variables take precedence over defaults
+  - Loader validates against schema before merging
+  - Returns merged config object
+
+### Step 4: Create .env.example with documented defaults
 
 **Files:** `.env.example`
 
 **Dependencies:**
-  - Update JSON schema
-  - Update defaults.ts
+  - Step 3
 
-### Step 5: Implement hierarchical config loader (CLI > file > env > defaults)
+**Acceptance Criteria:**
+  - Contains LOG_PATHS variable
+  - Contains STORE variable
+  - Contains LM_STUDIO_ENDPOINT variable
+  - Includes comments explaining each variable
+  - File is at repository root
 
-**Files:** `src/config/index.ts`
+### Step 5: Add CLI argument parsing for config options
 
-**Dependencies:**
-  - Update JSON schema
-  - Update defaults.ts
-  - Create .env.example
-
-### Step 6: Add JSON schema validation to config loader
-
-**Files:** `src/config/index.ts`
+**Files:** `src/config/cli.ts`, `package.json`
 
 **Dependencies:**
-  - Implement hierarchical config loader
+  - Step 3
 
-### Step 7: Write unit tests for config loader and validation
+**Acceptance Criteria:**
+  - CLI accepts --log-path, --store, --lm-studio-endpoint flags
+  - CLI arguments passed to config loader
+  - Help text available via --help flag
+  - Dependencies added to package.json if needed
 
-**Files:** `src/__tests__/config.test.ts`
+### Step 6: Write unit tests for config loader and validation
 
-**Dependencies:**
-  - Implement hierarchical config loader
-  - Add JSON schema validation
-
-### Step 8: Update README with config usage documentation
-
-**Files:** `README.md`
+**Files:** `src/__tests__/config.test.ts`, `src/__tests__/config-loader.test.ts`
 
 **Dependencies:**
-  - Write unit tests
+  - Step 3
+  - Step 4
+  - Step 5
+
+**Acceptance Criteria:**
+  - Tests cover default config merging
+  - Tests cover env variable precedence
+  - Tests cover file config precedence
+  - Tests cover CLI argument precedence
+  - Tests cover schema validation errors
+  - Tests pass with Vitest
+
+### Step 7: Update main application to use new config loader
+
+**Files:** `src/App.tsx`, `src/main.tsx`
+
+**Dependencies:**
+  - Step 3
+  - Step 5
+
+**Acceptance Criteria:**
+  - App imports config from loader
+  - App uses validated config values
+  - No hardcoded config values remain
 
 ## Risks
 
-1. Existing config structure may conflict with new hierarchical approach
-2. Schema validation library may not be in package.json dependencies
-3. CLI argument parsing may require additional dependencies
+1. Missing dependencies in package.json (zod, dotenv, commander) may require npm install
+2. Existing config files may conflict with new loader design
+3. Schema validation errors may break existing functionality if not handled gracefully
 
 ## Open Questions
 
-1. What config file format is preferred (JSON, YAML)?
-2. What CLI framework to use (yargs, commander, or native)?
-3. Should validation errors be thrown or logged?
+1. Which validation library to use (zod, yup, ajv)?
+2. Should config file be JSON or TOML?
+3. What file extension for config (config.json, config.yaml)?
+4. Should CLI support short flags (-p) or long flags (--path)?
+
+## Notes
+
+1. Prefer src/config/loader.ts as new file rather than modifying existing index.ts
+2. Keep .env.example at repository root as specified
+3. Use TypeScript for all config-related files
+4. Ensure all config values are typed with proper interfaces
+5. Add JSDoc comments to loader functions for documentation
 
