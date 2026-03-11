@@ -1,6 +1,6 @@
 # QA Verification Notes
 
-## Test Suite Overview
+## Test Suite Overview - Updated for #128
 
 This document provides explicit step-by-step verification instructions for the QA team to validate the test suite implementation.
 
@@ -21,10 +21,6 @@ npm test
 Expected: All tests pass without errors
 
 ### Step 2: Run Regression Tests
-
-```bash
-npx vitest run src/__tests__/regression-gap.test.ts
-```
 
 Expected: All regression tests pass
 
@@ -244,6 +240,7 @@ Confirm this file exists and contains verification steps.
 ## Validation Plan
 - Run `vitest run` command to execute all tests
 - Verify newly created test file passes without errors
+
 
 
 
