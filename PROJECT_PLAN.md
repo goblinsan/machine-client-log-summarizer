@@ -1,26 +1,45 @@
-## Test Infrastructure Implementation
+# Sample Data Packs Documentation
 
-### Overview
-The project now includes a complete Vitest test infrastructure to enable automated testing.
+## Overview
 
-### Components
-1. **vitest.harness.ts** - Core test harness setup with configuration
-2. **vitest.config.ts** - Vitest runner configuration
-3. **src/__tests/** - Test suite directory with test files
+Curated synthetic log runs for demos, tests, and documentation. Each status type (ok, flaky, fail, timeout) has 5-10 deterministic entries reflecting agent workflow fields: persona, workflowId, intent.
 
-### Usage
-Run tests with:
-```bash
-npm test
-# or
-npx vitest run
+## Usage
+
+```typescript
+import { ok, flaky, fail, timeout, allEntries } from './src/config/data-packs/synthetic-log-runs';
+
+// Use for demos
+console.log(ok[0]);
+
+// Use for tests
+describe('flaky scenarios', () => {
+  flaky.forEach((log) => {
+    // test logic
+  });
+});
+
+// Use for docs
+console.log(allEntries);
 ```
 
-### Test Coverage
-The test infrastructure supports:
-- Unit tests for configuration modules
-- Integration tests for log processing
-- Synthetic data generation for testing
+## Data Structure
 
-### Maintenance
-New tests should be added to `src/__tests/` directory following existing patterns.
+Each log entry includes:
+- `status`: 'ok' | 'flaky' | 'fail' | 'timeout'
+- `persona`: agent persona (coordinator, lead-engineer, context, qa, security)
+- `workflowId`: unique workflow identifier
+- `intent`: operation intent
+- `timestamp`: ISO timestamp
+- `durationMs`: optional duration in milliseconds
+- `error`: optional error message
+
+## Files
+
+- `src/config/data-packs/synthetic-log-runs.ts`: Data pack exports
+
+## Related
+
+- `src/config/synthetic-logs.ts`: Existing synthetic log generation
+
+---

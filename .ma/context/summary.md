@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T04:17:06.807Z
+Generated: 2026-03-11T04:24:13.148Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-11T04:17:06.807Z
 
 ## Statistics
 
-- **Total Files**: 55
-- **Total Size**: 249.19 KB
+- **Total Files**: 48
+- **Total Size**: 247.03 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -27,16 +27,14 @@ Generated: 2026-03-11T04:17:06.807Z
   .env.example (0.8KB)
   .gitignore (0.2KB)
   .stylelintrc.json (0.5KB)
-  PROJECT_PLAN.md (0.7KB)
+  PROJECT_PLAN.md (15.7KB)
   README.md (2.7KB)
-  SECURITY_GUIDELINES.md (2.8KB)
   index.html (0.3KB)
   package-lock.json (139.9KB)
-  package.json (1.0KB)
-  tsconfig.json (0.3KB)
+  package.json (1.1KB)
+  tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
-  vitest.config.ts (0.7KB)
-  vitest.harness.ts (0.4KB)
+  vitest.config.ts (0.9KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
@@ -45,10 +43,10 @@ src/
 src/__tests__/
   config-loader.test.ts (4.6KB)
   config.test.ts (2.4KB)
-  qa-notes.md (8.0KB)
-  regression-gap.test.ts (3.8KB)
+  qa-notes.md (0.8KB)
+  regression-gap.test.ts (1.8KB)
   smoke.test.ts (0.5KB)
-  synthetic-logs-data.test.ts (2.8KB)
+  synthetic-logs-data.test.ts (1.4KB)
   synthetic-logs.test.ts (2.0KB)
 src/config/
   cli.ts (1.8KB)
@@ -74,33 +72,28 @@ src/styles/
   _migrated.scss (3.4KB)
   _mixins.scss (0.2KB)
   _utils.scss (0.4KB)
-  main.scss (0.4KB)
+  main.scss (0.3KB)
 src/test/
-  setup.ts (0.3KB)
+  setup.ts (0.4KB)
 src/types/
-  index.ts (0.4KB)
-  logEvent.ts (1.2KB)
-  pathData.ts (0.7KB)
-src/utils/
-  hash.test.ts (1.9KB)
-  hash.ts (1.0KB)
   index.ts (0.0KB)
-  jsonPreviewParser.ts (1.3KB)
-  logEventNormalizer.ts (1.3KB)
-  pathExtractor.ts (1.9KB)
+  logEvent.ts (1.2KB)
+src/utils/
+  index.ts (0.1KB)
+  logEventNormalizer.ts (4.5KB)
 ```
 
 ## Large Files
 
+- `PROJECT_PLAN.md` (15.7KB, 349 lines)
 - `package-lock.json` (139.9KB, 4202 lines)
-- `src/__tests__/qa-notes.md` (8.0KB, 323 lines)
 - `src/config/prompts/context.md` (16.2KB, 448 lines)
 
 ## File Types
 
-- .ts: 27 files
-- .md: 9 files
+- .ts: 21 files
 - .scss: 9 files
+- .md: 8 files
 - .json: 4 files
 - .tsx: 2 files
 - .example: 1 file

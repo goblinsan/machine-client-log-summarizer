@@ -1,221 +1,86 @@
-# Plan: Sample Data Packs for Multi-Agent Log Summarizer
+# Plan Iteration 1
 
-## Overview
+Generated: 2026-03-11T04:27:19.326Z
 
-Create small synthetic log runs that reflect the agent workflow fields (persona, workflowId, intent). These will be used for demos, tests, and documentation.
+## Implementation Plan
 
-## Required Files
+### Step 1: Analyze existing synthetic log structure and type definitions to understand current data model
 
-These files must exist in the diff:
+**Files:** `src/types/logEvent.ts`, `src/config/synthetic-logs.ts`, `src/config/synthetic-logs-data.ts`
 
-- `src/config/synthetic-logs-data.ts` - Contains synthetic log data definitions
-- `src/config/synthetic-logs.ts` - Contains synthetic log generation logic
-- `src/types/logEvent.ts` - Contains log event type definitions
-- `src/__tests__/synthetic-logs-data.test.ts` - Contains tests for synthetic log data
+**Dependencies:**
 
-## Implementation Steps
+**Acceptance Criteria:**
+  - Understand LogEvent type structure including persona, workflowId, intent fields
+  - Identify existing synthetic log generation patterns
+  - Document current data pack format and limitations
 
-### Step 1: Create Type Definitions
+### Step 2: Create curated synthetic log data pack with 4 status types (ok, flaky, fail, timeout)
 
-Create `src/types/logEvent.ts` with the following structure:
+**Files:** `src/config/data-packs/synthetic-log-runs.ts`
 
-```typescript
-export interface LogEvent {
-  timestamp: string;
-  level: 'info' | 'warn' | 'error' | 'debug';
-  message: string;
-  persona?: string;
-  workflowId?: string;
-  intent?: string;
-  duration?: number;
-  status?: 'ok' | 'fail' | 'timeout' | 'flaky';
-  metadata?: Record<string, unknown>;
-}
+**Dependencies:**
+  - src/types/logEvent.ts
 
-export type LogRun = LogEvent[];
+**Acceptance Criteria:**
+  - Data pack exports arrays for each status type (ok, flaky, fail, timeout)
+  - Each log entry includes persona, workflowId, intent fields
+  - Sample sizes are small (5-10 entries per status for demo/test use)
+  - Data is deterministic and reproducible
 
-export type LogRunType = 'ok' | 'fail' | 'timeout' | 'flaky';
-```
+### Step 3: Add type definitions for data pack exports to ensure type safety
 
-### Step 2: Create Synthetic Logs Data
+**Files:** `src/types/logEvent.ts`, `src/config/data-packs/synthetic-log-runs.ts`
 
-Create `src/config/synthetic-logs-data.ts` with predefined log runs:
+**Dependencies:**
+  - src/types/logEvent.ts
 
-```typescript
-import { LogRun, LogRunType } from '../types/logEvent';
+**Acceptance Criteria:**
+  - Export types defined for data pack return values
+  - Types include LogEvent interface with required workflow fields
+  - Type exports are consistent with existing type patterns
 
-export const syntheticLogRuns: Record<LogRunType, LogRun> = {
-  ok: [
-    {
-      timestamp: '2026-03-09T14:54:40.000Z',
-      level: 'info',
-      message: 'Workflow completed successfully',
-      persona: 'coordinator',
-      workflowId: 'wf-001',
-      intent: 'summarize',
-      duration: 1250,
-      status: 'ok',
-      metadata: { agentCount: 3, stepsCompleted: 5 }
-    }
-  ],
-  fail: [
-    {
-      timestamp: '2026-03-09T14:54:40.000Z',
-      level: 'error',
-      message: 'Workflow failed: validation error',
-      persona: 'lead-engineer',
-      workflowId: 'wf-002',
-      intent: 'validate',
-      duration: 450,
-      status: 'fail',
-      metadata: { errorType: 'ValidationError', errorCode: 'E001' }
-    }
-  ],
-  timeout: [
-    {
-      timestamp: '2026-03-09T14:54:40.000Z',
-      level: 'warn',
-      message: 'Workflow timed out after 30s',
-      persona: 'coordinator',
-      workflowId: 'wf-003',
-      intent: 'execute',
-      duration: 30000,
-      status: 'timeout',
-      metadata: { timeoutThreshold: 30000 }
-    }
-  ],
-  flaky: [
-    {
-      timestamp: '2026-03-09T14:54:40.000Z',
-      level: 'warn',
-      message: 'Workflow completed with intermittent failures',
-      persona: 'qa',
-      workflowId: 'wf-004',
-      intent: 'test',
-      duration: 2100,
-      status: 'flaky',
-      metadata: { retryCount: 3, successRate: 0.66 }
-    }
-  ]
-};
-```
+### Step 4: Create unit tests for synthetic log data pack exports
 
-### Step 3: Create Synthetic Logs Generator
+**Files:** `src/__tests__/data-packs.test.ts`
 
-Create `src/config/synthetic-logs.ts` with generation logic:
+**Dependencies:**
+  - src/config/data-packs/synthetic-log-runs.ts
 
-```typescript
-import { LogRun, LogRunType } from '../types/logEvent';
-import { syntheticLogRuns } from './synthetic-logs-data';
+**Acceptance Criteria:**
+  - Tests verify all 4 status types are exported
+  - Tests validate each log entry has required fields (persona, workflowId, intent)
+  - Tests confirm sample sizes match expected counts
+  - Tests run successfully with Vitest
 
-export function getSyntheticLogRun(type: LogRunType): LogRun {
-  return syntheticLogRuns[type];
-}
+### Step 5: Update documentation to reference new data pack usage
 
-export function getAllSyntheticLogRuns(): Record<LogRunType, LogRun> {
-  return syntheticLogRuns;
-}
+**Files:** `PROJECT_PLAN.md`, `README.md`
 
-export function getRandomSyntheticLogRun(): LogRun {
-  const types: LogRunType[] = ['ok', 'fail', 'timeout', 'flaky'];
-  const randomType = types[Math.floor(Math.random() * types.length)];
-  return getSyntheticLogRun(randomType);
-}
+**Dependencies:**
+  - src/config/data-packs/synthetic-log-runs.ts
 
-export function generateSyntheticLogRun(
-  type: LogRunType,
-  customData?: Partial<LogRun>
-): LogRun {
-  const baseRun = getSyntheticLogRun(type);
-  return customData ? baseRun.map((event, i) => ({
-    ...event,
-    ...customData,
-    timestamp: event.timestamp
-  })) : baseRun;
-}
-```
+**Acceptance Criteria:**
+  - README.md includes data pack import examples
+  - PROJECT_PLAN.md documents data pack purpose and usage
+  - Documentation shows how to use data for demos/tests/docs
 
-### Step 4: Create Tests
+## Risks
 
-Create `src/__tests__/synthetic-logs-data.test.ts` with comprehensive tests:
+1. Existing synthetic-logs.ts may conflict with new data pack approach
+2. Need to ensure data pack doesn't duplicate existing synthetic log functionality
+3. Type definitions must align with existing LogEvent schema
 
-```typescript
-import { describe, it, expect } from 'vitest';
-import { syntheticLogRuns } from '../config/synthetic-logs-data';
-import { getSyntheticLogRun, getAllSyntheticLogRuns, getRandomSyntheticLogRun } from '../config/synthetic-logs';
-import { LogRunType } from '../types/logEvent';
+## Open Questions
 
-describe('synthetic-logs-data', () => {
-  it('should have all log run types', () => {
-    const types: LogRunType[] = ['ok', 'fail', 'timeout', 'flaky'];
-    types.forEach(type => {
-      expect(syntheticLogRuns[type]).toBeDefined();
-      expect(Array.isArray(syntheticLogRuns[type])).toBe(true);
-    });
-  });
-
-  it('should have correct structure for ok run', () => {
-    const okRun = syntheticLogRuns.ok;
-    expect(okRun.length).toBeGreaterThan(0);
-    expect(okRun[0].status).toBe('ok');
-    expect(okRun[0].level).toBe('info');
-  });
-
-  it('should have correct structure for fail run', () => {
-    const failRun = syntheticLogRuns.fail;
-    expect(failRun.length).toBeGreaterThan(0);
-    expect(failRun[0].status).toBe('fail');
-    expect(failRun[0].level).toBe('error');
-  });
-
-  it('should have correct structure for timeout run', () => {
-    const timeoutRun = syntheticLogRuns.timeout;
-    expect(timeoutRun.length).toBeGreaterThan(0);
-    expect(timeoutRun[0].status).toBe('timeout');
-    expect(timeoutRun[0].level).toBe('warn');
-  });
-
-  it('should have correct structure for flaky run', () => {
-    const flakyRun = syntheticLogRuns.flaky;
-    expect(flakyRun.length).toBeGreaterThan(0);
-    expect(flakyRun[0].status).toBe('flaky');
-    expect(flakyRun[0].level).toBe('warn');
-  });
-
-  it('should get synthetic log run by type', () => {
-    const okRun = getSyntheticLogRun('ok');
-    expect(okRun.length).toBeGreaterThan(0);
-    expect(okRun[0].status).toBe('ok');
-  });
-
-  it('should get all synthetic log runs', () => {
-    const allRuns = getAllSyntheticLogRuns();
-    expect(allRuns).toHaveProperty('ok');
-    expect(allRuns).toHaveProperty('fail');
-    expect(allRuns).toHaveProperty('timeout');
-    expect(allRuns).toHaveProperty('flaky');
-  });
-
-  it('should get random synthetic log run', () => {
-    const randomRun = getRandomSyntheticLogRun();
-    expect(randomRun.length).toBeGreaterThan(0);
-    expect(['ok', 'fail', 'timeout', 'flaky'].includes(randomRun[0].status)).toBe(true);
-  });
-});
-```
-
-## Validation
-
-After implementation, run:
-
-```bash
-npm run test
-```
-
-Expected: All tests pass
+1. Should data pack be exported as JSON files or TypeScript arrays?
+2. What specific persona/workflowId/intent combinations are needed for demos?
+3. Should data pack include metadata about generation timestamp or version?
 
 ## Notes
 
-- Keep files minimal and focused
-- Ensure all required files exist in the diff
-- Do not modify .git/ or any git internals
+1. Prefer TypeScript arrays over JSON for type safety and IDE support
+2. Keep sample sizes small (5-10 per status) for demo/test use cases
+3. Ensure deterministic data for reproducible testing
+4. Align with existing src/config/ directory patterns
+
