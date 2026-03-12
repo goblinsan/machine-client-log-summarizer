@@ -1,6 +1,7 @@
 {
-  "name": "machine-client-log-summarizer",
+  "name": "multi-agent-log-summarizer",
   "version": "1.0.0",
+  "type": "module",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -22,3 +23,4 @@
     "typescript": "^5.3.3"
   }
 }
+

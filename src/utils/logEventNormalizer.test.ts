@@ -1,6 +1,150 @@
 import { describe, it, expect } from 'vitest';
-import { normalizeLogEvent, getEventType, filterByType, groupByWorkflowId } from './logEventNormalizer';
-import { LogEventType } from '../types/logEvent';
+import { normalizeLogEvent, normalizeLogEventWithPersona } from './logEventNormalizer';
+import { LogEvent } from '../types/logEvent';
+
+describe('LogEventNormalizer', () => {
+  describe('normalizeLogEvent', () => {
+    it('should extract timestamp from ISO format', () => {
+      const raw = 'ts=2026-03-12T07:00:00.000Z level=info';
+      const result = normalizeLogEvent(raw);
+      expect(result.ts).toBe('2026-03-12T07:00:00.000Z');
+    });
+
+    it('should extract duration_ms', () => {
+      const raw = 'duration=1500';
+      const result = normalizeLogEvent(raw);
+      expect(result.duration_ms).toBe(1500);
+    });
+
+    it('should extract hash', () => {
+      const raw = 'hash=abc123def456';
+      const result = normalizeLogEvent(raw);
+      expect(result.hash).toBe('abc123def456');
+    });
+
+    it('should extract paths', () => {
+      const raw = 'paths=src/file.ts,src/file2.ts';
+      const result = normalizeLogEvent(raw);
+      expect(result.paths).toEqual(['src/file.ts', 'src/file2.ts']);
+    });
+
+    it('should extract preview_json', () => {
+      const raw = 'preview={"key":"value"}';
+      const result = normalizeLogEvent(raw);
+      expect(result.preview_json).toEqual({ key: 'value' });
+    });
+
+    it('should extract preview_raw', () => {
+      const raw = 'preview_raw=Hello World';
+      const result = normalizeLogEvent(raw);
+      expect(result.preview_raw).toBe('Hello World');
+    });
+
+    it('should default to unknown event type when no pattern matches', () => {
+      const raw = 'some random message';
+      const result = normalizeLogEvent(raw);
+      expect(result.source).toBe('unknown');
+    });
+  });
+
+  describe('normalizeLogEventWithPersona', () => {
+    it('should extract persona field', () => {
+      const raw = 'persona=code-reviewer';
+      const result = normalizeLogEventWithPersona(raw);
+      expect(result.persona).toBe('code-reviewer');
+    });
+
+    it('should extract workflowId', () => {
+      const raw = 'workflowId=wf-12345';
+      const result = normalizeLogEventWithPersona(raw);
+      expect(result.workflowId).toBe('wf-12345');
+    });
+
+    it('should extract intent', () => {
+      const raw = 'intent=review code';
+      const result = normalizeLogEventWithPersona(raw);
+      expect(result.intent).toBe('review code');
+    });
+
+    it('should extract repo', () => {
+      const raw = 'repo=multi-agent-log-summarizer';
+      const result = normalizeLogEventWithPersona(raw);
+      expect(result.repo).toBe('multi-agent-log-summarizer');
+    });
+
+    it('should extract branch', () => {
+      const raw = 'branch=main';
+      const result = normalizeLogEventWithPersona(raw);
+      expect(result.branch).toBe('main');
+    });
+
+    it('should extract projectId', () => {
+      const raw = 'projectId=proj-001';
+      const result = normalizeLogEventWithPersona(raw);
+      expect(result.projectId).toBe('proj-001');
+    });
+
+    it('should extract corrId', () => {
+      const raw = 'corrId=corr-abc123';
+      const result = normalizeLogEventWithPersona(raw);
+      expect(result.corrId).toBe('corr-abc123');
+    });
+
+    it('should handle all fields together', () => {
+      const raw = `ts=2026-03-12T07:00:00.000Z level=info persona=code-reviewer workflowId=wf-12345 intent=review code repo=multi-agent-log-summarizer branch=main projectId=proj-001 corrId=corr-abc123 duration=1500 hash=abc123def456 paths=src/file.ts,src/file2.ts preview={"status":"success"} preview_raw=Success`;
+      const result = normalizeLogEventWithPersona(raw);
+      expect(result.ts).toBe('2026-03-12T07:00:00.000Z');
+      expect(result.persona).toBe('code-reviewer');
+      expect(result.workflowId).toBe('wf-12345');
+      expect(result.intent).toBe('review code');
+      expect(result.repo).toBe('multi-agent-log-summarizer');
+      expect(result.branch).toBe('main');
+      expect(result.projectId).toBe('proj-001');
+      expect(result.corrId).toBe('corr-abc123');
+      expect(result.duration_ms).toBe(1500);
+      expect(result.hash).toBe('abc123def456');
+      expect(result.paths).toEqual(['src/file.ts', 'src/file2.ts']);
+      expect(result.preview_json).toEqual({ status: 'success' });
+      expect(result.preview_raw).toBe('Success');
+    });
+
+    it('should handle worker_ready event type', () => {
+      const raw = 'worker_ready=initialized';
+      const result = normalizeLogEvent(raw);
+      expect(result.source).toBe('worker_ready');
+    });
+
+    it('should handle request_started event type', () => {
+      const raw = 'request_started=true';
+      const result = normalizeLogEvent(raw);
+      expect(result.source).toBe('request_started');
+    });
+
+    it('should handle git_op event type', () => {
+      const raw = 'git_op=commit';
+      const result = normalizeLogEvent(raw);
+      expect(result.source).toBe('git_op');
+    });
+
+    it('should handle persona_response event type', () => {
+      const raw = 'persona_response=review';
+      const result = normalizeLogEvent(raw);
+      expect(result.source).toBe('persona_response');
+    });
+
+    it('should handle persona_apply event type', () => {
+      const raw = 'persona_apply=applied';
+      const result = normalizeLogEvent(raw);
+      expect(result.source).toBe('persona_apply');
+    });
+
+    it('should handle persona_completed event type', () => {
+      const raw = 'persona_completed=done';
+      const result = normalizeLogEvent(raw);
+      expect(result.source).toBe('persona_completed');
+    });
+  });
+});
 
 describe('LogEventNormalizer', () => {
   describe('normalizeLogEvent', () => {
@@ -212,3 +356,4 @@ describe('LogEventNormalizer', () => {
     });
   });
 });
+
