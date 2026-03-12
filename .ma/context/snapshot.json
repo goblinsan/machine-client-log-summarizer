@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773351462798,
+  "timestamp": 1773352148031,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".gitignore",
       "bytes": 206,
-      "mtime": 1773351462031.054,
+      "mtime": 1773352147275.1685,
       "lines": 26
     },
     {
@@ -17,7 +17,7 @@
     {
       "path": "PROJECT_PLAN.md",
       "bytes": 10758,
-      "mtime": 1773351462037.8103,
+      "mtime": 1773352147285.1296,
       "lines": 144
     },
     {
@@ -35,13 +35,13 @@
     {
       "path": "package-lock.json",
       "bytes": 125965,
-      "mtime": 1773351462038.2102,
+      "mtime": 1773352147285.5,
       "lines": 3711
     },
     {
       "path": "package.json",
       "bytes": 1086,
-      "mtime": 1773351462038.6287,
+      "mtime": 1773352147286.2239,
       "lines": 40
     },
     {
@@ -53,13 +53,13 @@
     {
       "path": "src/App.tsx",
       "bytes": 4233,
-      "mtime": 1773351462039.033,
+      "mtime": 1773352147286.6956,
       "lines": 147
     },
     {
       "path": "src/main.tsx",
       "bytes": 588,
-      "mtime": 1773351462039.3745,
+      "mtime": 1773352147287.1045,
       "lines": 21
     },
     {
@@ -197,7 +197,7 @@
     {
       "path": "vitest.config.ts",
       "bytes": 273,
-      "mtime": 1773351462039.7368,
+      "mtime": 1773352147287.4946,
       "lines": 12
     }
   ],
