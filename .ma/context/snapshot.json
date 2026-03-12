@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773298812762,
+  "timestamp": 1773317828274,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -40,9 +40,9 @@
     },
     {
       "path": "package.json",
-      "bytes": 435,
-      "mtime": 1773298142008.2952,
-      "lines": 25
+      "bytes": 945,
+      "mtime": 1773300077521.5598,
+      "lines": 36
     },
     {
       "path": "scripts/replace-colors.js",
@@ -124,9 +124,9 @@
     },
     {
       "path": "src/types/logEvent.ts",
-      "bytes": 933,
-      "mtime": 1773280111611.0605,
-      "lines": 52
+      "bytes": 1981,
+      "mtime": 1773299256111.961,
+      "lines": 82
     },
     {
       "path": "src/types/pathData.ts",
@@ -160,15 +160,15 @@
     },
     {
       "path": "src/utils/logEventNormalizer.test.ts",
-      "bytes": 7137,
-      "mtime": 1773280111611.579,
-      "lines": 215
+      "bytes": 12429,
+      "mtime": 1773299256120.6614,
+      "lines": 360
     },
     {
       "path": "src/utils/logEventNormalizer.ts",
-      "bytes": 4175,
-      "mtime": 1773280111611.828,
-      "lines": 144
+      "bytes": 8288,
+      "mtime": 1773299256115.4219,
+      "lines": 273
     },
     {
       "path": "src/utils/pathExtractor.ts",
@@ -184,9 +184,9 @@
     },
     {
       "path": "tsconfig.json",
-      "bytes": 260,
-      "mtime": 1773278107431.5635,
-      "lines": 12
+      "bytes": 320,
+      "mtime": 1773299256121.4048,
+      "lines": 15
     },
     {
       "path": "vite.config.ts",
@@ -197,13 +197,13 @@
     {
       "path": "vitest.config.ts",
       "bytes": 273,
-      "mtime": 1773280115109.7983,
+      "mtime": 1773299256123.5857,
       "lines": 12
     }
   ],
   "totals": {
     "files": 33,
-    "bytes": 180567,
+    "bytes": 191590,
     "depth": 10
   }
 }
