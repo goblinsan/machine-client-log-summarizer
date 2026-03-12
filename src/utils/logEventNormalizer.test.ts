@@ -1,359 +1,186 @@
 import { describe, it, expect } from 'vitest';
-import { normalizeLogEvent, normalizeLogEventWithPersona } from './logEventNormalizer';
-import { LogEvent } from '../types/logEvent';
+import { logEventNormalizer } from './logEventNormalizer';
+import { LogEvent, LogEventType } from '../types/logEvent';
 
 describe('LogEventNormalizer', () => {
-  describe('normalizeLogEvent', () => {
-    it('should extract timestamp from ISO format', () => {
-      const raw = 'ts=2026-03-12T07:00:00.000Z level=info';
-      const result = normalizeLogEvent(raw);
-      expect(result.ts).toBe('2026-03-12T07:00:00.000Z');
+  describe('classifyEventType', () => {
+    it('should classify worker_ready events', () => {
+      const raw = {
+        message: 'Agent worker ready',
+        type: 'worker_ready'
+      };
+      const normalized = logEventNormalizer.normalize(raw);
+      expect(normalized.type).toBe('worker_ready');
     });
 
-    it('should extract duration_ms', () => {
-      const raw = 'duration=1500';
-      const result = normalizeLogEvent(raw);
-      expect(result.duration_ms).toBe(1500);
+    it('should classify request_started events', () => {
+      const raw = {
+        message: 'Incoming request received',
+        type: 'request_started'
+      };
+      const normalized = logEventNormalizer.normalize(raw);
+      expect(normalized.type).toBe('request_started');
     });
 
-    it('should extract hash', () => {
-      const raw = 'hash=abc123def456';
-      const result = normalizeLogEvent(raw);
-      expect(result.hash).toBe('abc123def456');
+    it('should classify git_op events', () => {
+      const raw = {
+        message: 'Git commit pushed',
+        type: 'git_op'
+      };
+      const normalized = logEventNormalizer.normalize(raw);
+      expect(normalized.type).toBe('git_op');
     });
 
-    it('should extract paths', () => {
-      const raw = 'paths=src/file.ts,src/file2.ts';
-      const result = normalizeLogEvent(raw);
-      expect(result.paths).toEqual(['src/file.ts', 'src/file2.ts']);
+    it('should classify persona_response events', () => {
+      const raw = {
+        message: 'Persona response generated',
+        type: 'persona_response'
+      };
+      const normalized = logEventNormalizer.normalize(raw);
+      expect(normalized.type).toBe('persona_response');
     });
 
-    it('should extract preview_json', () => {
-      const raw = 'preview={"key":"value"}';
-      const result = normalizeLogEvent(raw);
-      expect(result.preview_json).toEqual({ key: 'value' });
+    it('should classify persona_apply events', () => {
+      const raw = {
+        message: 'Changes applied to files',
+        type: 'persona_apply'
+      };
+      const normalized = logEventNormalizer.normalize(raw);
+      expect(normalized.type).toBe('persona_apply');
     });
 
-    it('should extract preview_raw', () => {
-      const raw = 'preview_raw=Hello World';
-      const result = normalizeLogEvent(raw);
-      expect(result.preview_raw).toBe('Hello World');
+    it('should classify persona_completed events', () => {
+      const raw = {
+        message: 'Workflow completed successfully',
+        type: 'persona_completed'
+      };
+      const normalized = logEventNormalizer.normalize(raw);
+      expect(normalized.type).toBe('persona_completed');
     });
 
-    it('should default to unknown event type when no pattern matches', () => {
-      const raw = 'some random message';
-      const result = normalizeLogEvent(raw);
-      expect(result.source).toBe('unknown');
+    it('should classify unknown events', () => {
+      const raw = {
+        message: 'Unknown event type',
+        type: 'unknown'
+      };
+      const normalized = logEventNormalizer.normalize(raw);
+      expect(normalized.type).toBe('unknown');
     });
   });
 
-  describe('normalizeLogEventWithPersona', () => {
-    it('should extract persona field', () => {
-      const raw = 'persona=code-reviewer';
-      const result = normalizeLogEventWithPersona(raw);
-      expect(result.persona).toBe('code-reviewer');
-    });
-
-    it('should extract workflowId', () => {
-      const raw = 'workflowId=wf-12345';
-      const result = normalizeLogEventWithPersona(raw);
-      expect(result.workflowId).toBe('wf-12345');
-    });
-
-    it('should extract intent', () => {
-      const raw = 'intent=review code';
-      const result = normalizeLogEventWithPersona(raw);
-      expect(result.intent).toBe('review code');
-    });
-
-    it('should extract repo', () => {
-      const raw = 'repo=multi-agent-log-summarizer';
-      const result = normalizeLogEventWithPersona(raw);
-      expect(result.repo).toBe('multi-agent-log-summarizer');
-    });
-
-    it('should extract branch', () => {
-      const raw = 'branch=main';
-      const result = normalizeLogEventWithPersona(raw);
-      expect(result.branch).toBe('main');
-    });
-
-    it('should extract projectId', () => {
-      const raw = 'projectId=proj-001';
-      const result = normalizeLogEventWithPersona(raw);
-      expect(result.projectId).toBe('proj-001');
-    });
-
-    it('should extract corrId', () => {
-      const raw = 'corrId=corr-abc123';
-      const result = normalizeLogEventWithPersona(raw);
-      expect(result.corrId).toBe('corr-abc123');
-    });
-
-    it('should handle all fields together', () => {
-      const raw = `ts=2026-03-12T07:00:00.000Z level=info persona=code-reviewer workflowId=wf-12345 intent=review code repo=multi-agent-log-summarizer branch=main projectId=proj-001 corrId=corr-abc123 duration=1500 hash=abc123def456 paths=src/file.ts,src/file2.ts preview={"status":"success"} preview_raw=Success`;
-      const result = normalizeLogEventWithPersona(raw);
-      expect(result.ts).toBe('2026-03-12T07:00:00.000Z');
-      expect(result.persona).toBe('code-reviewer');
-      expect(result.workflowId).toBe('wf-12345');
-      expect(result.intent).toBe('review code');
-      expect(result.repo).toBe('multi-agent-log-summarizer');
-      expect(result.branch).toBe('main');
-      expect(result.projectId).toBe('proj-001');
-      expect(result.corrId).toBe('corr-abc123');
-      expect(result.duration_ms).toBe(1500);
-      expect(result.hash).toBe('abc123def456');
-      expect(result.paths).toEqual(['src/file.ts', 'src/file2.ts']);
-      expect(result.preview_json).toEqual({ status: 'success' });
-      expect(result.preview_raw).toBe('Success');
-    });
-
-    it('should handle worker_ready event type', () => {
-      const raw = 'worker_ready=initialized';
-      const result = normalizeLogEvent(raw);
-      expect(result.source).toBe('worker_ready');
-    });
-
-    it('should handle request_started event type', () => {
-      const raw = 'request_started=true';
-      const result = normalizeLogEvent(raw);
-      expect(result.source).toBe('request_started');
-    });
-
-    it('should handle git_op event type', () => {
-      const raw = 'git_op=commit';
-      const result = normalizeLogEvent(raw);
-      expect(result.source).toBe('git_op');
-    });
-
-    it('should handle persona_response event type', () => {
-      const raw = 'persona_response=review';
-      const result = normalizeLogEvent(raw);
-      expect(result.source).toBe('persona_response');
-    });
-
-    it('should handle persona_apply event type', () => {
-      const raw = 'persona_apply=applied';
-      const result = normalizeLogEvent(raw);
-      expect(result.source).toBe('persona_apply');
-    });
-
-    it('should handle persona_completed event type', () => {
-      const raw = 'persona_completed=done';
-      const result = normalizeLogEvent(raw);
-      expect(result.source).toBe('persona_completed');
-    });
-  });
-});
-
-describe('LogEventNormalizer', () => {
-  describe('normalizeLogEvent', () => {
-    it('should normalize a worker_ready event', () => {
-      const raw = {
-        ts: '2024-01-01T00:00:00.000Z',
+  describe('normalize', () => {
+    it('should extract all fields from raw message', () => {
+      const raw: any = {
+        ts: '2026-03-12T12:00:00.000Z',
         level: 'info',
-        message: 'Worker initialized and ready',
-        source: 'worker',
-      };
-      const normalized = normalizeLogEvent(raw);
-
-      expect(normalized.ts).toBe('2024-01-01T00:00:00.000Z');
-      expect(normalized.level).toBe('info');
-      expect(normalized._type).toBe('worker_ready');
-    });
-
-    it('should normalize a request_started event', () => {
-      const raw = {
-        ts: '2024-01-01T00:00:01.000Z',
-        level: 'info',
-        message: 'Request started for workflow abc123',
-        workflowId: 'abc123',
-        source: 'orchestrator',
-      };
-      const normalized = normalizeLogEvent(raw);
-
-      expect(normalized.workflowId).toBe('abc123');
-      expect(normalized._type).toBe('request_started');
-    });
-
-    it('should normalize a git_op event', () => {
-      const raw = {
-        ts: '2024-01-01T00:00:02.000Z',
-        level: 'info',
-        message: 'git push origin main',
+        persona: 'code-reviewer',
+        workflowId: 'wf-123',
+        intent: 'Review PR',
         repo: 'my-repo',
         branch: 'main',
-        source: 'git',
+        projectId: 'proj-456',
+        corrId: 'corr-789',
+        duration_ms: 1500,
+        preview_raw: 'Some preview text',
+        preview_json: { key: 'value' },
+        paths: ['file1.ts', 'file2.ts'],
+        source: 'agent',
+        hash: 'abc123'
       };
-      const normalized = normalizeLogEvent(raw);
 
+      const normalized = logEventNormalizer.normalize(raw);
+
+      expect(normalized.ts).toBe('2026-03-12T12:00:00.000Z');
+      expect(normalized.level).toBe('info');
+      expect(normalized.persona).toBe('code-reviewer');
+      expect(normalized.workflowId).toBe('wf-123');
+      expect(normalized.intent).toBe('Review PR');
       expect(normalized.repo).toBe('my-repo');
       expect(normalized.branch).toBe('main');
-      expect(normalized._type).toBe('git_op');
-    });
-
-    it('should normalize a persona_response event', () => {
-      const raw = {
-        ts: '2024-01-01T00:00:03.000Z',
-        level: 'info',
-        message: 'Persona response: The answer is 42',
-        persona: 'assistant',
-        source: 'persona',
-      };
-      const normalized = normalizeLogEvent(raw);
-
-      expect(normalized.persona).toBe('assistant');
-      expect(normalized._type).toBe('persona_response');
-    });
-
-    it('should normalize a persona_apply event', () => {
-      const raw = {
-        ts: '2024-01-01T00:00:04.000Z',
-        level: 'info',
-        message: 'Persona applied changes to file',
-        persona: 'assistant',
-        source: 'persona',
-      };
-      const normalized = normalizeLogEvent(raw);
-
-      expect(normalized.persona).toBe('assistant');
-      expect(normalized._type).toBe('persona_apply');
-    });
-
-    it('should normalize a persona_completed event', () => {
-      const raw = {
-        ts: '2024-01-01T00:00:05.000Z',
-        level: 'info',
-        message: 'Persona completed workflow successfully',
-        persona: 'assistant',
-        workflowId: 'abc123',
-        source: 'persona',
-      };
-      const normalized = normalizeLogEvent(raw);
-
-      expect(normalized.persona).toBe('assistant');
-      expect(normalized.workflowId).toBe('abc123');
-      expect(normalized._type).toBe('persona_completed');
-    });
-
-    it('should default to unknown type for unrecognized events', () => {
-      const raw = {
-        ts: '2024-01-01T00:00:06.000Z',
-        level: 'debug',
-        message: 'Some random debug message',
-        source: 'debugger',
-      };
-      const normalized = normalizeLogEvent(raw);
-
-      expect(normalized._type).toBe('unknown');
+      expect(normalized.projectId).toBe('proj-456');
+      expect(normalized.corrId).toBe('corr-789');
+      expect(normalized.duration_ms).toBe(1500);
+      expect(normalized.preview).toBe('Some preview text');
+      expect(normalized.paths).toEqual(['file1.ts', 'file2.ts']);
+      expect(normalized.source).toBe('agent');
+      expect(normalized.hash).toBe('abc123');
     });
 
     it('should handle missing optional fields gracefully', () => {
-      const raw = {
-        ts: '2024-01-01T00:00:07.000Z',
-        level: 'info',
-        message: 'Minimal event',
+      const raw: any = {
+        ts: '2026-03-12T12:00:00.000Z',
+        level: 'info'
       };
-      const normalized = normalizeLogEvent(raw);
 
-      expect(normalized.ts).toBe('2024-01-01T00:00:07.000Z');
+      const normalized = logEventNormalizer.normalize(raw);
+
+      expect(normalized.ts).toBe('2026-03-12T12:00:00.000Z');
       expect(normalized.level).toBe('info');
-      expect(normalized.preview).toBe('Minimal event');
-      expect(normalized.source).toBe('unknown');
+      expect(normalized.persona).toBeUndefined();
+      expect(normalized.workflowId).toBeUndefined();
+      expect(normalized.intent).toBeUndefined();
+      expect(normalized.repo).toBeUndefined();
+      expect(normalized.branch).toBeUndefined();
+      expect(normalized.projectId).toBeUndefined();
+      expect(normalized.corrId).toBeUndefined();
+      expect(normalized.duration_ms).toBeUndefined();
+      expect(normalized.preview).toBeUndefined();
+      expect(normalized.paths).toBeUndefined();
+      expect(normalized.source).toBeUndefined();
+      expect(normalized.hash).toBeUndefined();
+    });
+
+    it('should handle alternate field names', () => {
+      const raw: any = {
+        timestamp: '2026-03-12T12:00:00.000Z',
+        logLevel: 'warn',
+        agent: 'deployer',
+        workflow_id: 'wf-456',
+        userIntent: 'Deploy',
+        repository: 'deploy-repo',
+        gitBranch: 'deploy',
+        project_id: 'proj-789',
+        correlation_id: 'corr-abc',
+        duration: 2000,
+        preview: 'Preview content',
+        files: ['deploy.sh'],
+        eventSource: 'deployer',
+        correlationHash: 'def456'
+      };
+
+      const normalized = logEventNormalizer.normalize(raw);
+
+      expect(normalized.ts).toBe('2026-03-12T12:00:00.000Z');
+      expect(normalized.level).toBe('warn');
+      expect(normalized.persona).toBe('deployer');
+      expect(normalized.workflowId).toBe('wf-456');
+      expect(normalized.intent).toBe('Deploy');
+      expect(normalized.repo).toBe('deploy-repo');
+      expect(normalized.branch).toBe('deploy');
+      expect(normalized.projectId).toBe('proj-789');
+      expect(normalized.corrId).toBe('corr-abc');
+      expect(normalized.duration_ms).toBe(2000);
+      expect(normalized.preview).toBe('Preview content');
+      expect(normalized.paths).toEqual(['deploy.sh']);
+      expect(normalized.source).toBe('deployer');
+      expect(normalized.hash).toBe('def456');
     });
   });
 
-  describe('getEventType', () => {
-    it('should return the event type from a normalized event', () => {
-      const event = normalizeLogEvent({
-        ts: '2024-01-01T00:00:00.000Z',
-        level: 'info',
-        message: 'Worker initialized',
-      });
-      expect(getEventType(event)).toBe('worker_ready');
-    });
-  });
-
-  describe('filterByType', () => {
-    it('should filter events by type', () => {
-      const events = [
-        normalizeLogEvent({ ts: '1', level: 'info', message: 'Worker ready' }),
-        normalizeLogEvent({ ts: '2', level: 'info', message: 'Request started' }),
-        normalizeLogEvent({ ts: '3', level: 'info', message: 'Git push' }),
+  describe('normalizeBatch', () => {
+    it('should normalize multiple raw messages', () => {
+      const rawMessages: any[] = [
+        { message: 'Ready', type: 'worker_ready' },
+        { message: 'Request received', type: 'request_started' },
+        { message: 'Git push', type: 'git_op' }
       ];
-      const filtered = filterByType(events, 'git_op');
-      expect(filtered.length).toBe(1);
-      expect(filtered[0]._type).toBe('git_op');
-    });
-  });
 
-  describe('groupByWorkflowId', () => {
-    it('should group events by workflowId', () => {
-      const events = [
-        normalizeLogEvent({ ts: '1', level: 'info', message: 'Start', workflowId: 'abc' }),
-        normalizeLogEvent({ ts: '2', level: 'info', message: 'End', workflowId: 'abc' }),
-        normalizeLogEvent({ ts: '3', level: 'info', message: 'Other', workflowId: 'def' }),
-      ];
-      const groups = groupByWorkflowId(events);
-      expect(groups.get('abc')?.length).toBe(2);
-      expect(groups.get('def')?.length).toBe(1);
+      const normalized = logEventNormalizer.normalizeBatch(rawMessages);
+
+      expect(normalized).toHaveLength(3);
+      expect(normalized[0].type).toBe('worker_ready');
+      expect(normalized[1].type).toBe('request_started');
+      expect(normalized[2].type).toBe('git_op');
     });
   });
 });
-
-      expect(normalized._type).toBe('unknown');
-    });
-
-    it('should handle missing optional fields gracefully', () => {
-      const raw = {
-        ts: '2024-01-01T00:00:07.000Z',
-        level: 'info',
-        message: 'Minimal event',
-      };
-      const normalized = normalizeLogEvent(raw);
-
-      expect(normalized.ts).toBe('2024-01-01T00:00:07.000Z');
-      expect(normalized.level).toBe('info');
-      expect(normalized.preview).toBe('Minimal event');
-      expect(normalized.source).toBe('unknown');
-    });
-  });
-
-  describe('getEventType', () => {
-    it('should return the event type from a normalized event', () => {
-      const event = normalizeLogEvent({
-        ts: '2024-01-01T00:00:00.000Z',
-        level: 'info',
-        message: 'Worker initialized',
-      });
-      expect(getEventType(event)).toBe('worker_ready');
-    });
-  });
-
-  describe('filterByType', () => {
-    it('should filter events by type', () => {
-      const events = [
-        normalizeLogEvent({ ts: '1', level: 'info', message: 'Worker ready' }),
-        normalizeLogEvent({ ts: '2', level: 'info', message: 'Request started' }),
-        normalizeLogEvent({ ts: '3', level: 'info', message: 'Git push' }),
-      ];
-      const filtered = filterByType(events, 'git_op');
-      expect(filtered.length).toBe(1);
-      expect(filtered[0]._type).toBe('git_op');
-    });
-  });
-
-  describe('groupByWorkflowId', () => {
-    it('should group events by workflowId', () => {
-      const events = [
-        normalizeLogEvent({ ts: '1', level: 'info', message: 'Start', workflowId: 'abc' }),
-        normalizeLogEvent({ ts: '2', level: 'info', message: 'End', workflowId: 'abc' }),
-        normalizeLogEvent({ ts: '3', level: 'info', message: 'Other', workflowId: 'def' }),
-      ];
-      const groups = groupByWorkflowId(events);
-      expect(groups.get('abc')?.length).toBe(2);
-      expect(groups.get('def')?.length).toBe(1);
-    });
-  });
-});
-
