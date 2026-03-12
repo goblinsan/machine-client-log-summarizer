@@ -31,5 +31,9 @@
     "typescript": "^5.2.2",
     "vite": "^7.1.9",
     "vitest": "^3.2.1"
+  },
+  "exports": {
+    "./types/logEvent": "./src/types/logEvent.ts",
+    "./utils/logEventNormalizer": "./src/utils/logEventNormalizer.ts"
   }
 }
