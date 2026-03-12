@@ -4,7 +4,7 @@
 {"path":"README.md","bytes":183,"lines":16,"mtime":1773278107422.271}
 {"path":"index.html","bytes":306,"lines":13,"mtime":1759790612651.8906}
 {"path":"package-lock.json","bytes":125965,"lines":3711,"mtime":1773280115107.86}
-{"path":"package.json","bytes":320,"lines":17,"mtime":1773280115108.3665}
+{"path":"package.json","bytes":435,"lines":25,"mtime":1773298142008.2952}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1761999627139.7048}
 {"path":"src/App.tsx","bytes":4233,"lines":147,"mtime":1773280115108.965}
 {"path":"src/main.tsx","bytes":588,"lines":21,"mtime":1773280115109.3716}
