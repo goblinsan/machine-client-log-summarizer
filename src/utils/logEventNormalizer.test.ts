@@ -156,3 +156,59 @@ describe('LogEventNormalizer', () => {
     });
   });
 });
+
+      expect(normalized._type).toBe('unknown');
+    });
+
+    it('should handle missing optional fields gracefully', () => {
+      const raw = {
+        ts: '2024-01-01T00:00:07.000Z',
+        level: 'info',
+        message: 'Minimal event',
+      };
+      const normalized = normalizeLogEvent(raw);
+
+      expect(normalized.ts).toBe('2024-01-01T00:00:07.000Z');
+      expect(normalized.level).toBe('info');
+      expect(normalized.preview).toBe('Minimal event');
+      expect(normalized.source).toBe('unknown');
+    });
+  });
+
+  describe('getEventType', () => {
+    it('should return the event type from a normalized event', () => {
+      const event = normalizeLogEvent({
+        ts: '2024-01-01T00:00:00.000Z',
+        level: 'info',
+        message: 'Worker initialized',
+      });
+      expect(getEventType(event)).toBe('worker_ready');
+    });
+  });
+
+  describe('filterByType', () => {
+    it('should filter events by type', () => {
+      const events = [
+        normalizeLogEvent({ ts: '1', level: 'info', message: 'Worker ready' }),
+        normalizeLogEvent({ ts: '2', level: 'info', message: 'Request started' }),
+        normalizeLogEvent({ ts: '3', level: 'info', message: 'Git push' }),
+      ];
+      const filtered = filterByType(events, 'git_op');
+      expect(filtered.length).toBe(1);
+      expect(filtered[0]._type).toBe('git_op');
+    });
+  });
+
+  describe('groupByWorkflowId', () => {
+    it('should group events by workflowId', () => {
+      const events = [
+        normalizeLogEvent({ ts: '1', level: 'info', message: 'Start', workflowId: 'abc' }),
+        normalizeLogEvent({ ts: '2', level: 'info', message: 'End', workflowId: 'abc' }),
+        normalizeLogEvent({ ts: '3', level: 'info', message: 'Other', workflowId: 'def' }),
+      ];
+      const groups = groupByWorkflowId(events);
+      expect(groups.get('abc')?.length).toBe(2);
+      expect(groups.get('def')?.length).toBe(1);
+    });
+  });
+});
