@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-12T01:28:38.523Z
+Generated: 2026-03-12T18:34:59.601Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-12T01:28:38.523Z
 ## Statistics
 
 - **Total Files**: 33
-- **Total Size**: 172.12 KB
+- **Total Size**: 178.57 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -30,9 +30,9 @@ Generated: 2026-03-12T01:28:38.523Z
   README.md (0.2KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
-  package.json (0.3KB)
+  package.json (0.9KB)
   tsconfig.json (0.3KB)
-  vite.config.ts (0.2KB)
+  vite.config.ts (0.6KB)
   vitest.config.ts (0.3KB)
 scripts/
   replace-colors.js (4.4KB)
@@ -51,15 +51,15 @@ src/styles/
   main.scss (0.4KB)
 src/types/
   index.ts (0.1KB)
-  logEvent.ts (0.7KB)
+  logEvent.ts (1.9KB)
   pathData.ts (0.7KB)
 src/utils/
   hash.test.ts (1.9KB)
-  hash.ts (1.0KB)
+  hash.ts (2.0KB)
   index.ts (0.1KB)
   jsonPreviewParser.ts (1.3KB)
-  logEventNormalizer.test.ts (5.1KB)
-  logEventNormalizer.ts (3.1KB)
+  logEventNormalizer.test.ts (6.3KB)
+  logEventNormalizer.ts (4.9KB)
   pathExtractor.ts (1.9KB)
   smoke.test.ts (0.5KB)
 ```
