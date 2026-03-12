@@ -1,4 +1,0 @@
-{
-  "output": "{\"status\":\"fail\",\"summary\":\"Insufficient context for review\",\"findings\":{\"severe\":[{\"file\":\"src/vitest.config.ts\",\"line\":null,\"issue\":\"File not found in repository, unable to review syntax errors\",\"recommendation\":\"Check if the file exists or is correctly referenced\"}],\"high\":[],\"medium\":[],\"low\":[]}}",
-  "duration_ms": 3096
-}

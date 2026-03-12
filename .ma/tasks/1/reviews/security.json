@@ -1,4 +1,0 @@
-{
-  "output": "{\"status\":\"fail\",\"summary\":\"Security Review Findings\",\"findings\":{\"severe\":[{\"category\":\"Insecure Dependencies\",\"file\":\"package-lock.json\",\"line\":null,\"vulnerability\":\"npm-vulnerabilities\",\"impact\":\"Potential RCE via dependency injection\",\"mitigation\":\"Update dependencies to latest versions\"}],\"high\":[],\"medium\":[{\"category\":\"Missing Security Headers\",\"file\":\"index.html\",\"line\":null,\"vulnerability\":\"missing headers\",\"impact\":\"Cross-site scripting (XSS) vulnerability\",\"mitigation\":\"Implement Content-Security-Policy (CSP) and other security headers\"}],\"low\":[{\"category\":\"Hardening Opportunity\",\"file\":\"package.json\",\"line\":null,\"vulnerability\":\"outdated dependencies\",\"impact\":\"Potential security risks\",\"mitigation\":\"Regularly update dependencies to latest versions\"}]}}",
-  "duration_ms": 6625
-}

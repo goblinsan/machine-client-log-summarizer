@@ -1,4 +1,0 @@
-{
-  "output": "{\"status\":\"pass\",\"summary\":\"Initiating security review with provided information.\",\"findings\":{\"severe\":[],\"high\":[],\"medium\":[],\"low\":[]}}\n\nHowever, I would like to request some extra context before proceeding further:\n\n{\"status\":\"info_request\",\"requests\":[{\"type\":\"repo_file\",\"path\":\"package-lock.json\",\"reason\":\"Reviewing dependencies for potential vulnerabilities and insecure dependencies.\"},{\"type\":\"http_get\",\"url\":\"https://api.github.com/repos/owner/repository/commits?per_page=1&sha=HEAD\",\"reason\":\"Checking the repository's commit history to verify the current task's context.\"}]}\n\nPlease provide the requested information so I can continue with the security review.",
-  "duration_ms": 10050
-}

@@ -1,4 +1,0 @@
-{
-  "output": "{\"status\":\"fail\",\"summary\":\"Insufficient context for task implementation, unable to verify plan alignment and language drift due to missing information.\",\"findings\":{\"severe\":[{\"file\":\"src/config/prompts/context.md\",\"line\":null,\"issue\":\"Missing file contents or restricted access prevents verification of task requirements and plan alignment.\",\"recommendation\":\"Ensure local access to the file or retrieve the contents via HTTP.\"},{\"file\":\"unknown\",\"line\":null,\"issue\":\"Unable to verify language drift due to missing information about allowed languages.\",\"recommendation\":\"Provide payload.allowed_languages or context_primary_language and context_secondary_languages for accurate analysis.\"}],\"high\":[],\"medium\":[],\"low\":[]}}\n\nPlease provide additional context by responding with a JSON object containing the necessary information.",
-  "duration_ms": 5809
-}

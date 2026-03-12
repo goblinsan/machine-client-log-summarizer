@@ -1,4 +1,0 @@
-{
-  "output": "{\"status\":\"info_request\",\"requests\":[{\"type\":\"repo_file\",\"path\":\"src/__tests__/regression-gap.test.ts\",\"start\":2,\"end\":-1,\"reason\":\"Understand the test infrastructure setup, specifically the import statements and any relevant configurations.\"},{\"type\":\"http_get\",\"url\":\"https://example.com/task-131-plan-artifact?limit=1000\",\"reason\":\"Fetch the approved plan for task #131 with full content.\"}]",
-  "duration_ms": 3678
-}

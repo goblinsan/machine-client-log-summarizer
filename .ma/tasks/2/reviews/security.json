@@ -1,4 +1,0 @@
-{
-  "output": "{\"status\":\"info_request\",\"requests\":[{\"type\":\"repo_file\",\"path\":\"src/config/prompts/security.md\",\"start\":0,\"end\":-1,\"reason\":\"Review security guidelines and persona definitions for potential vulnerabilities or auth/storage changes.\"},{\"type\":\"http_get\",\"url\":\"https://example.com/latest-security-guidelines\",\"reason\":\"Fetch latest security best practices to inform threat modeling.\"}]",
-  "duration_ms": 8394
-}
