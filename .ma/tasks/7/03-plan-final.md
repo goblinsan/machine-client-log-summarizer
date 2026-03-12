@@ -1,73 +1,74 @@
-# Plan Iteration 3
+# Plan Iteration 1
 
-Generated: 2026-03-09T16:00:39.255Z
+Generated: 2026-03-12T22:10:26.898Z
 
 ## Implementation Plan
 
-### Step 1: Create hash utility function for idempotency computation
+### Step 1: Review existing hash.ts implementation to understand current hashing capabilities and limitations
+
+**Files:** `src/utils/hash.ts`, `src/utils/hash.test.ts`
+
+**Dependencies:**
+
+### Step 2: Extend or create de-duplication hash function that combines the specified fields with a stable algorithm
 
 **Files:** `src/utils/hash.ts`
 
 **Dependencies:**
-  - src/types/index.ts
+  - step_1
 
-**Acceptance Criteria:**
-  - Hash function accepts ts|msg|persona|workflowId|corrId|preview_raw[:512] fields
-  - Output is deterministic for identical inputs
-  - File uses TypeScript with allowed extensions
+### Step 3: Create de-duplication utility that tracks seen hashes and filters duplicate records
 
-### Step 2: Define hash computation types and interfaces
-
-**Files:** `src/types/index.ts`
+**Files:** `src/utils/index.ts`, `src/utils/dedup.ts`
 
 **Dependencies:**
-  - src/utils/hash.ts
+  - step_2
 
-**Acceptance Criteria:**
-  - HashRecord interface defined with required fields
-  - Type definitions use TypeScript
-  - No breaking changes to existing types
+### Step 4: Add integration tests for de-duplication logic with edge cases (empty arrays, all duplicates, no duplicates, large datasets)
 
-### Step 3: Implement deduplication logic in main application
+**Files:** `src/utils/dedup.test.ts`
+
+**Dependencies:**
+  - step_3
+
+### Step 5: Update logEventNormalizer.ts to include de-duplication hash computation in the normalized output
+
+**Files:** `src/utils/logEventNormalizer.ts`
+
+**Dependencies:**
+  - step_2
+  - step_4
+
+### Step 6: Update logEvent.ts types to include the de-duplication hash field in the normalized event interface
+
+**Files:** `src/types/logEvent.ts`
+
+**Dependencies:**
+  - step_5
+
+### Step 7: Update App.tsx to demonstrate de-duplication functionality in the UI
 
 **Files:** `src/App.tsx`
 
 **Dependencies:**
-  - src/utils/hash.ts
-  - src/types/index.ts
+  - step_6
 
-**Acceptance Criteria:**
-  - Hash computed before record processing
-  - Duplicate records suppressed based on hash
-  - Re-ingest produces identical counts
+### Step 8: Run existing test suite to verify no regressions after changes
 
-### Step 4: Add hash validation tests
-
-**Files:** `src/utils/hash.test.ts`
+**Files:** `vitest.config.ts`, `package.json`
 
 **Dependencies:**
-  - src/utils/hash.ts
-
-**Acceptance Criteria:**
-  - Test file uses TypeScript
-  - Tests verify deterministic hash output
-  - Tests verify duplicate suppression
+  - step_7
 
 ## Risks
 
-1. No existing test files detected - tests will be new additions
-2. Hash algorithm choice impacts performance vs collision resistance
-3. Integration with existing App.tsx may require careful refactoring
+1. Hash collision could occur with current algorithm - need to verify hash function strength
+2. preview_raw truncation to 512 chars may lose important data - need to document this behavior
+3. Existing hash.ts may need refactoring to support new field combinations
 
 ## Open Questions
 
-1. Which hash algorithm to use (SHA-256, MD5, or custom)?
-2. Where to store deduplication state (in-memory vs persisted)?
-3. What is the expected record volume for hash cache sizing?
-
-## Notes
-
-1. All deliverables must use TypeScript (.ts) or JavaScript (.js) extensions
-2. Hash function should be pure and deterministic
-3. Consider adding hash to existing logEvent.ts types if applicable
+1. What is the expected maximum size of preview_raw field?
+2. Should de-duplication hash be stored in a separate file or embedded in the event object?
+3. What is the expected volume of records per re-ingest operation?
 
