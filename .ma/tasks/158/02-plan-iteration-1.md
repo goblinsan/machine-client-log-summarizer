@@ -1,64 +1,75 @@
 # Plan Iteration 1
 
-Generated: 2026-03-12T18:53:30.671Z
+Generated: 2026-03-12T19:01:07.650Z
 
 ## Implementation Plan
 
-### Step 1: Create src/types/eventTypes.ts with complete type mapping for all required event types
+### Step 1: Review existing type definitions in src/types/ to understand current structure before adding new event type mappings
+
+**Files:** `src/types/eventTypes.ts`, `src/types/logEvent.ts`
+
+**Dependencies:**
+
+**Acceptance Criteria:**
+  - Understand existing type patterns
+  - Identify what type mappings are missing
+
+### Step 2: Create comprehensive event type mapping in src/types/eventTypes.ts including all required event types (worker_ready, request_started, git_op, persona_response, persona_apply, persona_completed)
 
 **Files:** `src/types/eventTypes.ts`
 
 **Dependencies:**
+  - Step 1 completed
 
 **Acceptance Criteria:**
-  - File src/types/eventTypes.ts exists in repository root
-  - Contains WorkerReadyEvent type with workerId (string) and timestamp (number)
-  - Contains request_started, git_op, persona_response, persona_apply, persona_completed type definitions
-  - All types use TypeScript syntax and follow existing codebase conventions
-  - File uses only allowed extensions (.ts)
+  - All 6 event types defined with proper structure
+  - Types follow existing codebase patterns
+  - File is within repository root
 
-### Step 2: Update src/utils/logEventNormalizer.ts to import and use the new type mapping
+### Step 3: Update src/utils/logEventNormalizer.ts to import and use the new type mappings from src/types/eventTypes.ts
 
-**Files:** `src/utils/logEventNormalizer.ts`
+**Files:** `src/utils/logEventNormalizer.ts`, `src/types/eventTypes.ts`
 
 **Dependencies:**
-  - src/types/eventTypes.ts must exist and be complete
+  - Step 2 completed
 
 **Acceptance Criteria:**
-  - logEventNormalizer.ts imports from src/types/eventTypes
-  - All event types are properly referenced in the normalizer
-  - No TypeScript errors introduced
-  - Existing functionality preserved
+  - Import statement added for eventTypes
+  - Type usage integrated into normalizer logic
+  - No TypeScript compilation errors
 
-### Step 3: Run validation tests to verify implementation
+### Step 4: Run test suite to verify all tests pass after type mapping implementation
 
-**Files:** `package.json`, `vitest.config.ts`
+**Files:** `src/__tests__/*.test.ts`, `package.json`
 
 **Dependencies:**
-  - Both src/types/eventTypes.ts and src/utils/logEventNormalizer.ts must be updated
+  - Step 3 completed
 
 **Acceptance Criteria:**
-  - npm run test command executes successfully
-  - All existing tests pass
+  - npm run test passes
   - No new test failures introduced
-  - TypeScript compilation succeeds
+  - Type checking passes
+
+### Step 5: Final code review to ensure all reviewer requests are addressed and type mappings are complete
+
+**Files:** `src/types/eventTypes.ts`, `src/utils/logEventNormalizer.ts`
+
+**Dependencies:**
+  - Step 4 completed
+
+**Acceptance Criteria:**
+  - All 6 event types implemented
+  - Type imports correct
+  - Code follows repository style guidelines
 
 ## Risks
 
-1. Type definitions may need to match existing event structures in logEventNormalizer.ts
-2. Existing tests may reference event types that need updating
-3. TypeScript strict mode may require additional type annotations
+1. Existing eventTypes.ts may have conflicting type definitions that need resolution
+2. TypeScript compilation may fail if type signatures don't match usage in logEventNormalizer.ts
+3. Tests may fail if normalizer behavior changes unexpectedly
 
 ## Open Questions
 
-1. What is the expected structure for request_started, git_op, persona_response, persona_apply, and persona_completed events?
-2. Are there existing event schemas in the codebase that should be referenced?
-3. What specific fields should each event type contain based on existing usage?
-
-## Notes
-
-1. Review src/utils/logEventNormalizer.ts first to understand current event structures before creating type definitions
-2. Check src/config/synthetic-logs.ts for any existing event patterns that should be followed
-3. Ensure all type definitions are exported for reuse across the codebase
-4. Follow existing TypeScript conventions in the repository (e.g., from src/types/logEvent.ts)
+1. What specific fields should each event type contain based on existing usage patterns?
+2. Are there any schema constraints from src/config/schema.ts that need to be respected?
 
