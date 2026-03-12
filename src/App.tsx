@@ -2,22 +2,24 @@ import { useState, useEffect } from 'react';
 import './styles/main.scss';
 import { config } from './config';
 import { LogEvent } from './types';
+import { SettingsPanel } from './settings-panel';
 
 function App() {
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
+  const [file, setFile] = useState<File | null>(null);
   const [logs, setLogs] = useState<LogEvent[]>([]);
   const [summary, setSummary] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [config, setConfig] = useState(config);
+  const [showSensitiveInfo, setShowSensitiveInfo] = useState(true);
 
-  useEffect(() => {
-    setConfig(config);
-  }, []);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      processFile(selectedFile);
+    }
+  };
 
-  const handleProcessLogs = async () => {
-    setIsProcessing(true);
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files?.[0];
@@ -44,8 +46,51 @@ function App() {
     fileInputRef.current?.click();
   };
 
+  const handleToggleSensitiveInfo = (show: boolean) => {
+    setShowSensitiveInfo(show);
+  };
+
   return (
     <div className="app">
+      <h1>Log Summarizer</h1>
+
+      <SettingsPanel
+        showSensitiveInfo={showSensitiveInfo}
+        onToggleSensitiveInfo={handleToggleSensitiveInfo}
+      />
+
+      <div
+        className="file-drop-zone"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onClick={triggerFileSelect}
+      >
+        <p>Drag & drop a file here or click to select</p>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+        />
+      </div>
+
+      {file && (
+        <div className="file-info">
+          <p>Selected file: {file.name}</p>
+        </div>
+      )}
+
+      {ingestionResult && (
+        <div className="ingestion-result">
+          <h2>Ingestion Result</h2>
+          {ingestionResult}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
       <h1>Log Summarizer</h1>
 
       <div
@@ -80,4 +125,5 @@ function App() {
 };
 
 export default App;
+
 
