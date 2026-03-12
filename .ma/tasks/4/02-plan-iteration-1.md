@@ -1,10 +1,10 @@
 # Plan Iteration 1
 
-Generated: 2026-03-12T07:02:36.988Z
+Generated: 2026-03-12T12:19:19.914Z
 
 ## Implementation Plan
 
-### Step 1: Review existing LogEvent type definitions and normalizer implementation to understand current state
+### Step 1: Review existing LogEvent schema and normalizer implementation to understand current state
 
 **Files:** `src/types/logEvent.ts`, `src/utils/logEventNormalizer.ts`, `src/utils/logEventNormalizer.test.ts`
 
@@ -15,46 +15,38 @@ Generated: 2026-03-12T07:02:36.988Z
 **Files:** `src/types/logEvent.ts`
 
 **Dependencies:**
-  - src/types/logEvent.ts
+  - step 1
 
-### Step 3: Implement message type mapping logic for all 7 types (worker_ready, request_started, git_op, persona_response, persona_apply, persona_completed, unknown)
+### Step 3: Implement type mapping logic to classify raw messages into types (worker_ready, request_started, git_op, persona_response, persona_apply, persona_completed, unknown)
 
 **Files:** `src/utils/logEventNormalizer.ts`
 
 **Dependencies:**
-  - src/types/logEvent.ts
+  - step 2
 
-### Step 4: Add unit tests for each message type mapping scenario
+### Step 4: Add/update tests to cover all message type mappings and edge cases
 
 **Files:** `src/utils/logEventNormalizer.test.ts`
 
 **Dependencies:**
-  - src/utils/logEventNormalizer.ts
-  - src/types/logEvent.ts
+  - step 3
 
-### Step 5: Update package.json if new dependencies are required for schema validation or type checking
+### Step 5: Run tests and verify all mappings work correctly
 
-**Files:** `package.json`
-
-**Dependencies:**
-
-### Step 6: Verify TypeScript compilation and run test suite to confirm implementation
-
-**Files:** `tsconfig.json`, `vitest.config.ts`, `src/utils/logEventNormalizer.ts`, `src/utils/logEventNormalizer.test.ts`
+**Files:** `src/utils/logEventNormalizer.test.ts`, `vite.config.ts`
 
 **Dependencies:**
-  - src/utils/logEventNormalizer.ts
-  - src/utils/logEventNormalizer.test.ts
+  - step 4
 
 ## Risks
 
-1. Existing logEventNormalizer.ts may have partial implementation that conflicts with new schema
-2. Test file may need significant refactoring to cover all 7 message types
-3. Schema changes may break downstream consumers if not versioned properly
+1. Existing schema may conflict with new field requirements
+2. Type mapping logic may need to handle malformed input gracefully
+3. Test coverage may be incomplete for edge cases
 
 ## Open Questions
 
-1. What is the expected format for preview_raw/json field (string vs object)?
-2. Are there any existing raw message samples in the repository to validate against?
-3. Should unknown type include a reason field for debugging?
+1. What is the expected format for preview_raw/json field (stringified JSON or object)?
+2. Are there any existing message type examples in the codebase to reference?
+3. What is the expected source field value (e.g., 'worker', 'api', 'cli')?
 
