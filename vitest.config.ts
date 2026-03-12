@@ -8,5 +8,8 @@ export default defineConfig({
     globals: true,
     include: ['src/**/*.test.ts'],
     exclude: ['node_modules/**'],
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+    },
   },
 });

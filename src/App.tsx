@@ -3,6 +3,11 @@ import { App } from './App';
 import { normalizeLogEvent } from './utils/logEventNormalizer';
 import { computeHash, isDuplicate, markSeen, getSeenCount } from './utils/hash';
 import { HashRecord, PreviewParseResult } from './types';
+import { deduplicationTracker } from './utils/dedup';
+
+function App() {
+  const [file, setFile] = useState<File | null>(null);
+import { HashRecord, PreviewParseResult } from './types';
 
 function App() {
   const [file, setFile] = useState<File | null>(null);
@@ -33,13 +38,7 @@ function App() {
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
-
-  const processFile = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const content = e.target?.result as string;
       const lines = content.split('\n').filter(line => line.trim());
-      const seenHashes = new Set<string>();
       let totalRecords = 0;
       let uniqueRecords = 0;
       let duplicateRecords = 0;
@@ -56,24 +55,51 @@ function App() {
             preview_raw: parsed.preview_raw,
           };
 
-          const hash = computeHash(hashInput);
+          const { isDuplicate, hash } = deduplicationTracker.processRecord(hashInput);
           totalRecords++;
 
-          if (isDuplicate(hash, seenHashes)) {
+          if (isDuplicate) {
             duplicateRecords++;
           } else {
-            markSeen(hash, seenHashes);
             uniqueRecords++;
           }
         } catch (err) {
           // Skip invalid JSON lines
         }
-      });
 
+      lines.forEach((line) => {
+        try {
+          const parsed = JSON.parse(line);
+          const hashInput: HashRecord = {
+            ts: parsed.ts,
+            msg: parsed.msg,
       setDedupStats({
         totalRecords,
         uniqueRecords,
         duplicateRecords,
+      });
+
+      setIngestionResult(
+          const hash = computeHash(hashInput);
+        `Total records: ${totalRecords}\n` +
+        `Unique records: ${uniqueRecords}\n` +
+        `Duplicate records: ${duplicateRecords}\n` +
+        `Deduplication ratio: ${(duplicateRecords / totalRecords * 100).toFixed(1)}%`
+      );
+    };
+    reader.readAsText(file);
+            uniqueRecords++;
+          }
+        } catch (err) {
+          // Skip invalid JSON lines
+        }
+        <h1>Multi-Agent Log Summarizer</h1>
+        <div className="path-info">
+          <span>Windows Path: {normalizedWindowsPath || 'N/A'}</span>
+          <span>Repo URL: {normalizedRepoUrl || 'N/A'}</span>
+        </div>
+      </header>
+      <main>
       });
 
       setIngestionResult(
@@ -86,12 +112,13 @@ function App() {
     };
     reader.readAsText(file);
   };
-
-  const triggerFileSelect = () => {
-    fileInputRef.current?.click();
-  };
-
-  return (
+          {dedupStats.totalRecords > 0 && (
+            <div className="dedup-stats">
+              <h2>Deduplication Statistics</h2>
+              <p>Total: {dedupStats.totalRecords}</p>
+              <p>Unique: {dedupStats.uniqueRecords}</p>
+              <p>Duplicates: {dedupStats.duplicateRecords}</p>
+            </div>
     <div className="app">
       <header>
         <h1>Multi-Agent Log Summarizer</h1>
