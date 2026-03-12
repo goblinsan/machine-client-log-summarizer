@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { logEventNormalizer } from './logEventNormalizer';
-import { LogEvent, LogEventType } from '../types/logEvent';
+import { LogEvent } from '../types/logEvent';
 
 describe('LogEventNormalizer', () => {
   describe('classifyEventType', () => {
