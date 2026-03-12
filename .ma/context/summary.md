@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-12T12:17:08.274Z
+Generated: 2026-03-12T18:34:59.601Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-12T12:17:08.274Z
 ## Statistics
 
 - **Total Files**: 33
-- **Total Size**: 187.10 KB
+- **Total Size**: 178.57 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -32,7 +32,7 @@ Generated: 2026-03-12T12:17:08.274Z
   package-lock.json (123.0KB)
   package.json (0.9KB)
   tsconfig.json (0.3KB)
-  vite.config.ts (0.2KB)
+  vite.config.ts (0.6KB)
   vitest.config.ts (0.3KB)
 scripts/
   replace-colors.js (4.4KB)
@@ -58,8 +58,8 @@ src/utils/
   hash.ts (2.0KB)
   index.ts (0.1KB)
   jsonPreviewParser.ts (1.3KB)
-  logEventNormalizer.test.ts (12.1KB)
-  logEventNormalizer.ts (8.1KB)
+  logEventNormalizer.test.ts (6.3KB)
+  logEventNormalizer.ts (4.9KB)
   pathExtractor.ts (1.9KB)
   smoke.test.ts (0.5KB)
 ```
@@ -67,8 +67,6 @@ src/utils/
 ## Large Files
 
 - `package-lock.json` (123.0KB, 3711 lines)
-- `src/utils/logEventNormalizer.test.ts` (12.1KB, 360 lines)
-- `src/utils/logEventNormalizer.ts` (8.1KB, 273 lines)
 
 ## File Types
 

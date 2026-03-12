@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773317828274,
+  "timestamp": 1773340499601,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -124,9 +124,9 @@
     },
     {
       "path": "src/types/logEvent.ts",
-      "bytes": 1981,
-      "mtime": 1773299256111.961,
-      "lines": 82
+      "bytes": 1978,
+      "mtime": 1773321923073.6396,
+      "lines": 86
     },
     {
       "path": "src/types/pathData.ts",
@@ -160,15 +160,15 @@
     },
     {
       "path": "src/utils/logEventNormalizer.test.ts",
-      "bytes": 12429,
-      "mtime": 1773299256120.6614,
-      "lines": 360
+      "bytes": 6456,
+      "mtime": 1773321923075.4124,
+      "lines": 186
     },
     {
       "path": "src/utils/logEventNormalizer.ts",
-      "bytes": 8288,
-      "mtime": 1773299256115.4219,
-      "lines": 273
+      "bytes": 5067,
+      "mtime": 1773321923074.1099,
+      "lines": 193
     },
     {
       "path": "src/utils/pathExtractor.ts",
@@ -190,9 +190,9 @@
     },
     {
       "path": "vite.config.ts",
-      "bytes": 194,
-      "mtime": 1772979282796.1333,
-      "lines": 11
+      "bytes": 658,
+      "mtime": 1773321923076.6016,
+      "lines": 30
     },
     {
       "path": "vitest.config.ts",
@@ -203,7 +203,7 @@
   ],
   "totals": {
     "files": 33,
-    "bytes": 191590,
+    "bytes": 182857,
     "depth": 10
   }
 }
