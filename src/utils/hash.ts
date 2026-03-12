@@ -1,12 +1,39 @@
-import crypto from 'crypto';
+import { createHash } from 'crypto';
 
-export interface HashInput {
-  ts?: string;
-  msg?: string;
-  persona?: string;
-  workflowId?: string;
-  corrId?: string;
-  preview_raw?: string;
+/**
+ * Generates a deterministic hash from input data
+ * @param data - The data to hash (string or object)
+ * @returns Hexadecimal hash string
+ */
+export function hash(data: string | object): string {
+  const hash = createHash('sha256');
+  const input = typeof data === 'string' ? data : JSON.stringify(data);
+  hash.update(input);
+  return hash.digest('hex');
+}
+
+/**
+ * Generates a hash from a LogEvent object
+ * @param event - The LogEvent to hash
+ * @returns Hexadecimal hash string
+ */
+export function hashLogEvent(event: { ts: string; level: string; persona?: string; workflowId?: string; intent?: string; repo?: string; branch?: string; projectId?: string; corrId?: string; duration_ms?: number; preview?: string | object; paths?: string[]; source?: string }): string {
+  const eventStr = JSON.stringify({
+    ts: event.ts,
+    level: event.level,
+    persona: event.persona,
+    workflowId: event.workflowId,
+    intent: event.intent,
+    repo: event.repo,
+    branch: event.branch,
+    projectId: event.projectId,
+    corrId: event.corrId,
+    duration_ms: event.duration_ms,
+    preview: event.preview,
+    paths: event.paths,
+    source: event.source,
+  });
+  return hash(eventStr);
 }
 
 export function computeHash(input: HashInput): string {

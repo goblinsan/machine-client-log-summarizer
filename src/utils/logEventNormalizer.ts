@@ -7,7 +7,7 @@ export function normalizeLogEvent(raw: RawLogMessage): LogEvent {
   const event: LogEvent = {
     ts: raw.ts || raw.timestamp || new Date().toISOString(),
     level: raw.level || 'info',
-    preview: raw.preview || raw.json || raw.message,
+    preview: raw.preview || raw.json || raw.message || '',
     source: raw.source || 'unknown',
     hash: raw.hash,
   };
@@ -63,6 +63,45 @@ function classifyEventType(raw: RawLogMessage): LogEventType {
 
   // persona_apply
   if (persona && (message.includes('apply') || message.includes('applied'))) {
+    return 'persona_apply';
+  }
+
+  // persona_completed
+  if (level === 'info' && (message.includes('completed') || message.includes('finished') || message.includes('done'))) {
+    return 'persona_completed';
+  }
+
+  return 'unknown';
+}
+
+/**
+ * Extracts the event type from a normalized LogEvent
+ */
+export function getEventType(event: LogEvent): LogEventType {
+  return event._type || 'unknown';
+}
+
+/**
+ * Filters events by type
+ */
+export function filterByType(events: LogEvent[], type: LogEventType): LogEvent[] {
+  return events.filter(e => getEventType(e) === type);
+}
+
+/**
+ * Groups events by workflowId
+ */
+export function groupByWorkflowId(events: LogEvent[]): Map<string, LogEvent[]> {
+  const groups = new Map<string, LogEvent[]>();
+  for (const event of events) {
+    const workflowId = event.workflowId || 'unknown';
+    if (!groups.has(workflowId)) {
+      groups.set(workflowId, []);
+    }
+    groups.get(workflowId)!.push(event);
+  }
+  return groups;
+}
     return 'persona_apply';
   }
 

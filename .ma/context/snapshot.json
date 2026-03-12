@@ -1,17 +1,11 @@
 {
-  "timestamp": 1773264181566,
+  "timestamp": 1773278918523,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
-      "path": ".env.example",
-      "bytes": 1133,
-      "mtime": 1773264180158.3694,
-      "lines": 33
-    },
-    {
       "path": ".gitignore",
       "bytes": 206,
-      "mtime": 1773264180158.6865,
+      "mtime": 1773278917776.773,
       "lines": 26
     },
     {
@@ -22,21 +16,15 @@
     },
     {
       "path": "PROJECT_PLAN.md",
-      "bytes": 681,
-      "mtime": 1773264180164.158,
-      "lines": 26
+      "bytes": 10758,
+      "mtime": 1773278917778.1775,
+      "lines": 144
     },
     {
       "path": "README.md",
-      "bytes": 2737,
-      "mtime": 1773264180164.4307,
-      "lines": 165
-    },
-    {
-      "path": "SECURITY_GUIDELINES.md",
-      "bytes": 2844,
-      "mtime": 1773259394498.0454,
-      "lines": 125
+      "bytes": 183,
+      "mtime": 1773278107422.271,
+      "lines": 16
     },
     {
       "path": "index.html",
@@ -47,14 +35,14 @@
     {
       "path": "package-lock.json",
       "bytes": 125965,
-      "mtime": 1773264180164.7866,
+      "mtime": 1773278917779.0378,
       "lines": 3711
     },
     {
       "path": "package.json",
-      "bytes": 873,
-      "mtime": 1773264180165.087,
-      "lines": 42
+      "bytes": 320,
+      "mtime": 1773278917779.3752,
+      "lines": 17
     },
     {
       "path": "scripts/replace-colors.js",
@@ -64,123 +52,15 @@
     },
     {
       "path": "src/App.tsx",
-      "bytes": 1970,
-      "mtime": 1773264180165.2964,
-      "lines": 78
-    },
-    {
-      "path": "src/__tests__/config-loader.test.ts",
-      "bytes": 1968,
-      "mtime": 1773259394501.161,
-      "lines": 61
-    },
-    {
-      "path": "src/__tests__/config.test.ts",
-      "bytes": 697,
-      "mtime": 1773264180165.6692,
-      "lines": 24
-    },
-    {
-      "path": "src/__tests__/qa-notes.md",
-      "bytes": 8511,
-      "mtime": 1773262207394.1016,
-      "lines": 331
-    },
-    {
-      "path": "src/__tests__/regression-gap.test.ts",
-      "bytes": 1771,
-      "mtime": 1773262069942.9666,
-      "lines": 51
-    },
-    {
-      "path": "src/__tests__/smoke.test.ts",
-      "bytes": 512,
-      "mtime": 1773259394503.1047,
-      "lines": 19
-    },
-    {
-      "path": "src/__tests__/synthetic-logs-data.test.ts",
-      "bytes": 2835,
-      "mtime": 1773259394503.5676,
-      "lines": 66
-    },
-    {
-      "path": "src/__tests__/synthetic-logs.test.ts",
-      "bytes": 2094,
-      "mtime": 1773259394503.7498,
-      "lines": 76
-    },
-    {
-      "path": "src/config/defaults.ts",
-      "bytes": 782,
-      "mtime": 1773264180165.9707,
-      "lines": 51
-    },
-    {
-      "path": "src/config/index.ts",
-      "bytes": 609,
-      "mtime": 1773259394505.7666,
-      "lines": 17
-    },
-    {
-      "path": "src/config/loader.ts",
-      "bytes": 1235,
-      "mtime": 1773259394505.988,
-      "lines": 39
-    },
-    {
-      "path": "src/config/prompts/context.md",
-      "bytes": 11080,
-      "mtime": 1773264180166.3352,
-      "lines": 273
-    },
-    {
-      "path": "src/config/prompts/coordinator.md",
-      "bytes": 3076,
-      "mtime": 1773264180166.631,
-      "lines": 88
-    },
-    {
-      "path": "src/config/prompts/lead-engineer.md",
-      "bytes": 3200,
-      "mtime": 1773264180166.9353,
-      "lines": 87
-    },
-    {
-      "path": "src/config/prompts/qa.md",
-      "bytes": 3113,
-      "mtime": 1773264180167.2034,
-      "lines": 88
-    },
-    {
-      "path": "src/config/prompts/security.md",
-      "bytes": 3409,
-      "mtime": 1773264180167.393,
-      "lines": 95
-    },
-    {
-      "path": "src/config/schema.ts",
-      "bytes": 1820,
-      "mtime": 1773264180167.5095,
-      "lines": 58
-    },
-    {
-      "path": "src/config/synthetic-logs-data.ts",
-      "bytes": 1168,
-      "mtime": 1773264180167.6255,
-      "lines": 50
-    },
-    {
-      "path": "src/config/synthetic-logs.ts",
-      "bytes": 4051,
-      "mtime": 1773262207429.8994,
-      "lines": 152
+      "bytes": 4233,
+      "mtime": 1773278917779.9614,
+      "lines": 147
     },
     {
       "path": "src/main.tsx",
-      "bytes": 231,
-      "mtime": 1773264180167.7673,
-      "lines": 10
+      "bytes": 588,
+      "mtime": 1773278917780.3418,
+      "lines": 21
     },
     {
       "path": "src/styles/_base.scss",
@@ -190,9 +70,9 @@
     },
     {
       "path": "src/styles/_components.scss",
-      "bytes": 3399,
-      "mtime": 1773264180167.9045,
-      "lines": 182
+      "bytes": 3335,
+      "mtime": 1773278107427.0295,
+      "lines": 184
     },
     {
       "path": "src/styles/_extras.scss",
@@ -208,15 +88,15 @@
     },
     {
       "path": "src/styles/_layout.scss",
-      "bytes": 978,
-      "mtime": 1773264180168.0256,
-      "lines": 55
+      "bytes": 982,
+      "mtime": 1773278107427.3015,
+      "lines": 57
     },
     {
       "path": "src/styles/_migrated.scss",
-      "bytes": 3498,
-      "mtime": 1773264180168.1643,
-      "lines": 198
+      "bytes": 3440,
+      "mtime": 1773278107427.5974,
+      "lines": 200
     },
     {
       "path": "src/styles/_mixins.scss",
@@ -226,51 +106,87 @@
     },
     {
       "path": "src/styles/_utils.scss",
-      "bytes": 361,
-      "mtime": 1773264180168.2712,
-      "lines": 10
+      "bytes": 359,
+      "mtime": 1773278107427.8992,
+      "lines": 12
     },
     {
       "path": "src/styles/main.scss",
-      "bytes": 313,
-      "mtime": 1773264180168.3828,
-      "lines": 22
-    },
-    {
-      "path": "src/test/setup.ts",
-      "bytes": 85,
-      "mtime": 1773259394509.6895,
-      "lines": 6
+      "bytes": 363,
+      "mtime": 1773278107428.1226,
+      "lines": 24
     },
     {
       "path": "src/types/index.ts",
-      "bytes": 27,
-      "mtime": 1773264180168.5017,
+      "bytes": 72,
+      "mtime": 1773278107428.3896,
       "lines": 1
     },
     {
       "path": "src/types/logEvent.ts",
-      "bytes": 1255,
-      "mtime": 1773264180168.609,
-      "lines": 61
+      "bytes": 695,
+      "mtime": 1773278107428.6763,
+      "lines": 38
+    },
+    {
+      "path": "src/types/pathData.ts",
+      "bytes": 767,
+      "mtime": 1773278107428.9136,
+      "lines": 29
+    },
+    {
+      "path": "src/utils/hash.test.ts",
+      "bytes": 1939,
+      "mtime": 1773278107429.1797,
+      "lines": 57
+    },
+    {
+      "path": "src/utils/hash.ts",
+      "bytes": 1024,
+      "mtime": 1773278107429.5432,
+      "lines": 39
     },
     {
       "path": "src/utils/index.ts",
-      "bytes": 107,
-      "mtime": 1773264180168.7239,
+      "bytes": 61,
+      "mtime": 1773278107430.0908,
       "lines": 2
     },
     {
+      "path": "src/utils/jsonPreviewParser.ts",
+      "bytes": 1359,
+      "mtime": 1773278107430.3923,
+      "lines": 54
+    },
+    {
+      "path": "src/utils/logEventNormalizer.test.ts",
+      "bytes": 5207,
+      "mtime": 1773278107430.6125,
+      "lines": 158
+    },
+    {
       "path": "src/utils/logEventNormalizer.ts",
-      "bytes": 4562,
-      "mtime": 1773264180168.86,
-      "lines": 134
+      "bytes": 3201,
+      "mtime": 1773278107430.8794,
+      "lines": 104
+    },
+    {
+      "path": "src/utils/pathExtractor.ts",
+      "bytes": 1926,
+      "mtime": 1773278107431.1123,
+      "lines": 60
+    },
+    {
+      "path": "src/utils/smoke.test.ts",
+      "bytes": 470,
+      "mtime": 1773278107431.3784,
+      "lines": 16
     },
     {
       "path": "tsconfig.json",
-      "bytes": 445,
-      "mtime": 1773264180168.9778,
-      "lines": 19
+      "bytes": 260,
+      "mtime": 1773278107431.5635,
+      "lines": 12
     },
     {
       "path": "vite.config.ts",
@@ -280,20 +196,14 @@
     },
     {
       "path": "vitest.config.ts",
-      "bytes": 230,
-      "mtime": 1773262069943.7537,
-      "lines": 11
-    },
-    {
-      "path": "vitest.harness.ts",
-      "bytes": 1039,
-      "mtime": 1773263985623.6125,
-      "lines": 48
+      "bytes": 273,
+      "mtime": 1773278917780.7847,
+      "lines": 12
     }
   ],
   "totals": {
-    "files": 48,
-    "bytes": 213138,
+    "files": 33,
+    "bytes": 176254,
     "depth": 10
   }
 }

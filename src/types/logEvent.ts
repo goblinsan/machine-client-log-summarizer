@@ -36,3 +36,16 @@ export type LogEventType =
 export interface RawLogMessage {
   [key: string]: unknown;
 }
+  | 'request_started'
+  | 'git_op'
+  | 'persona_response'
+  | 'persona_apply'
+  | 'persona_completed'
+  | 'unknown';
+
+/**
+ * Raw log message structure before normalization
+ */
+export interface RawLogMessage {
+  [key: string]: unknown;
+}
