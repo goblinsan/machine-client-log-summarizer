@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-12T21:59:08.693Z
+Generated: 2026-03-12T22:07:30.043Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-12T21:59:08.693Z
 
 ## Statistics
 
-- **Total Files**: 33
-- **Total Size**: 182.35 KB
+- **Total Files**: 34
+- **Total Size**: 182.53 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -60,6 +60,7 @@ src/utils/
   jsonPreviewParser.ts (1.0KB)
   logEventNormalizer.test.ts (6.3KB)
   logEventNormalizer.ts (4.9KB)
+  pathExtractor.test.ts (0.1KB)
   pathExtractor.ts (1.9KB)
   smoke.test.ts (0.5KB)
 ```
@@ -71,7 +72,7 @@ src/utils/
 
 ## File Types
 
-- .ts: 13 files
+- .ts: 14 files
 - .scss: 9 files
 - .json: 4 files
 - .md: 2 files

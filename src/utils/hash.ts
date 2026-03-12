@@ -1,9 +1,6 @@
 import { createHash } from 'crypto';
 
 /**
- * Generates a deterministic hash from input data
- * @param data - The data to hash (string or object)
- * @returns Hexadecimal hash string
  */
 export function hash(data: string | object): string {
   const hash = createHash('sha256');
@@ -53,6 +50,17 @@ export function computeHash(input: HashInput): string {
   return crypto.createHash('sha256').update(combined).digest('hex');
 }
 
+export interface HashInput {
+  ts?: string;
+  msg?: string;
+  persona?: string;
+  workflowId?: string;
+  corrId?: string;
+  preview_raw?: string;
+}
+
+export type HashRecord = HashInput;
+
 export function isDuplicate(hash: string, seenHashes: Set<string>): boolean {
   return seenHashes.has(hash);
 }
@@ -64,3 +72,4 @@ export function markSeen(hash: string, seenHashes: Set<string>): void {
 export function getSeenCount(seenHashes: Set<string>): number {
   return seenHashes.size;
 }
+
