@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T21:44:23.410Z
+Generated: 2026-03-12T18:51:12.001Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-11T21:44:23.410Z
 
 ## Statistics
 
-- **Total Files**: 48
-- **Total Size**: 214.61 KB
+- **Total Files**: 49
+- **Total Size**: 232.95 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -31,7 +31,7 @@ Generated: 2026-03-11T21:44:23.410Z
   README.md (2.7KB)
   SECURITY_GUIDELINES.md (2.8KB)
   index.html (0.3KB)
-  package-lock.json (123.0KB)
+  package-lock.json (139.9KB)
   package.json (0.9KB)
   tsconfig.json (0.4KB)
   vite.config.ts (0.2KB)
@@ -50,6 +50,7 @@ src/__tests__/
   smoke.test.ts (0.5KB)
   synthetic-logs-data.test.ts (2.8KB)
   synthetic-logs.test.ts (2.0KB)
+  validation-plan.ts (1.4KB)
 src/config/
   defaults.ts (0.8KB)
   index.ts (0.6KB)
@@ -85,14 +86,14 @@ src/utils/
 
 ## Large Files
 
-- `package-lock.json` (123.0KB, 3711 lines)
+- `package-lock.json` (139.9KB, 4202 lines)
 - `src/__tests__/config-loader.test.ts` (7.8KB, 223 lines)
 - `src/__tests__/qa-notes.md` (8.3KB, 331 lines)
 - `src/config/prompts/context.md` (10.8KB, 273 lines)
 
 ## File Types
 
-- .ts: 20 files
+- .ts: 21 files
 - .md: 9 files
 - .scss: 9 files
 - .json: 4 files
