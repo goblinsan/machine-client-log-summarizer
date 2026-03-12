@@ -1,12 +1,12 @@
 # Repository Context Summary
 
-Generated: 2026-03-11T19:52:00.478Z
+Generated: 2026-03-12T01:28:38.523Z
 
 ## Overview
 
 - **Primary Language**: TypeScript
 - **Other Languages**: JavaScript
-- **Tooling & Frameworks**: Node.js (package.json), TypeScript compiler (tsconfig.json)
+- **Tooling & Frameworks**: Node.js (package.json), TypeScript compiler (tsconfig.json), Vitest test runner
 
 ## Local Environment Setup
 
@@ -16,8 +16,8 @@ Generated: 2026-03-11T19:52:00.478Z
 
 ## Statistics
 
-- **Total Files**: 31
-- **Total Size**: 171.42 KB
+- **Total Files**: 33
+- **Total Size**: 172.12 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -33,6 +33,7 @@ Generated: 2026-03-11T19:52:00.478Z
   package.json (0.3KB)
   tsconfig.json (0.3KB)
   vite.config.ts (0.2KB)
+  vitest.config.ts (0.3KB)
 scripts/
   replace-colors.js (4.4KB)
 src/
@@ -60,6 +61,7 @@ src/utils/
   logEventNormalizer.test.ts (5.1KB)
   logEventNormalizer.ts (3.1KB)
   pathExtractor.ts (1.9KB)
+  smoke.test.ts (0.5KB)
 ```
 
 ## Large Files
@@ -68,7 +70,7 @@ src/utils/
 
 ## File Types
 
-- .ts: 11 files
+- .ts: 13 files
 - .scss: 9 files
 - .json: 4 files
 - .md: 2 files
