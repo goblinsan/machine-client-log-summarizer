@@ -1,59 +1,83 @@
 # Plan Iteration 1
 
-Generated: 2026-03-09T15:21:19.505Z
+Generated: 2026-03-12T21:54:13.023Z
 
 ## Implementation Plan
 
-### Step 1: Create JSON preview parser utility function in src/utils/
+### Step 1: Analyze existing log event parsing and preview handling patterns in the codebase to determine implementation location
 
-**Files:** `src/utils/jsonPreviewParser.ts`
-
-**Dependencies:**
-  - src/utils/index.ts
-
-**Acceptance Criteria:**
-  - Function parses JSON from fenced (```json) and bare JSON content
-  - Returns preview_json object with status (pass|fail) on valid parse
-  - Returns preview_raw string on invalid parse
-  - Type-safe TypeScript implementation with proper error handling
-
-### Step 2: Export new utility from utils index barrel file
-
-**Files:** `src/utils/index.ts`
+**Files:** `src/types/logEvent.ts`, `src/utils/logEventNormalizer.ts`, `src/utils/logEventNormalizer.test.ts`
 
 **Dependencies:**
-  - src/utils/jsonPreviewParser.ts
+  - context_analysis/summary
 
 **Acceptance Criteria:**
-  - jsonPreviewParser exported from index.ts
-  - No breaking changes to existing exports
+  - Identify existing preview parsing patterns
+  - Confirm no existing preview_json handling exists
+  - Determine if new utility or existing normalizer should be modified
 
-### Step 3: Add TypeScript type definitions for preview data structures
+### Step 2: Implement preview parsing logic that handles both ```json fenced and bare JSON content
 
-**Files:** `src/types/index.ts`
+**Files:** `src/utils/logEventNormalizer.ts`
 
 **Dependencies:**
-  - src/utils/jsonPreviewParser.ts
+  - step 1 completion
 
 **Acceptance Criteria:**
-  - PreviewJson interface defined with status field
-  - PreviewRaw type for raw string content
-  - Types exported from index.ts
+  - Function parses ```json fenced JSON correctly
+  - Function parses bare JSON correctly
+  - Function returns preview_json on valid parse
+  - Function extracts status (pass|fail) from parsed JSON
+  - Function retains preview_raw on invalid parse
+
+### Step 3: Add unit tests for preview parsing edge cases
+
+**Files:** `src/utils/logEventNormalizer.test.ts`
+
+**Dependencies:**
+  - step 2 completion
+
+**Acceptance Criteria:**
+  - Test fenced JSON parsing
+  - Test bare JSON parsing
+  - Test invalid JSON handling
+  - Test status extraction (pass/fail)
+  - Test empty/null preview handling
+
+### Step 4: Update TypeScript types to include preview_json and preview_raw fields
+
+**Files:** `src/types/logEvent.ts`
+
+**Dependencies:**
+  - step 2 completion
+
+**Acceptance Criteria:**
+  - preview_json type defined
+  - preview_raw type defined
+  - status field (pass|fail) typed
+
+### Step 5: Run tests and verify implementation
+
+**Files:** `src/utils/logEventNormalizer.test.ts`, `vitest.config.ts`
+
+**Dependencies:**
+  - step 3 completion
+  - step 4 completion
+
+**Acceptance Criteria:**
+  - All tests pass with vitest
+  - No TypeScript compilation errors
+  - Preview parsing works end-to-end
 
 ## Risks
 
-1. JSON parsing edge cases with malformed content
-2. Nested JSON structures with status at different levels
+1. Preview JSON structure may vary across different log events
+2. Status field naming may differ (e.g., 'status', 'result', 'outcome')
+3. Existing code may already handle preview parsing in unexpected locations
 
 ## Open Questions
 
-1. Should the parser handle minified vs pretty-printed JSON?
-2. What status values are valid beyond pass/fail?
-
-## Notes
-
-1. Must handle both fenced (```json) and bare JSON formats
-2. Keep implementation small and focused on parsing logic
-3. Follow existing TypeScript patterns in src/utils/
-4. No .ma/ or automation artifacts as deliverables
+1. What is the expected structure of preview JSON content?
+2. Are there existing preview-related fields in logEvent.ts that need to be preserved?
+3. Should preview parsing be synchronous or async?
 
