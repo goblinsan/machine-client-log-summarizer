@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-12T21:49:08.031Z
+Generated: 2026-03-12T21:59:08.693Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-12T21:49:08.031Z
 ## Statistics
 
 - **Total Files**: 33
-- **Total Size**: 182.70 KB
+- **Total Size**: 182.35 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -57,7 +57,7 @@ src/utils/
   hash.test.ts (1.9KB)
   hash.ts (2.0KB)
   index.ts (0.1KB)
-  jsonPreviewParser.ts (1.3KB)
+  jsonPreviewParser.ts (1.0KB)
   logEventNormalizer.test.ts (6.3KB)
   logEventNormalizer.ts (4.9KB)
   pathExtractor.ts (1.9KB)

@@ -1,6 +1,5 @@
 export interface PathData {
-  windowsPath?: string;
-  repoUrl?: string;
+
   normalizedWindowsPath?: string;
   normalizedRepoUrl?: string;
 }

@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773352148031,
+  "timestamp": 1773352748693,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".gitignore",
       "bytes": 206,
-      "mtime": 1773352147275.1685,
+      "mtime": 1773352747936.4492,
       "lines": 26
     },
     {
@@ -17,7 +17,7 @@
     {
       "path": "PROJECT_PLAN.md",
       "bytes": 10758,
-      "mtime": 1773352147285.1296,
+      "mtime": 1773352747942.0022,
       "lines": 144
     },
     {
@@ -35,13 +35,13 @@
     {
       "path": "package-lock.json",
       "bytes": 125965,
-      "mtime": 1773352147285.5,
+      "mtime": 1773352747942.4053,
       "lines": 3711
     },
     {
       "path": "package.json",
       "bytes": 1086,
-      "mtime": 1773352147286.2239,
+      "mtime": 1773352747942.7708,
       "lines": 40
     },
     {
@@ -53,13 +53,13 @@
     {
       "path": "src/App.tsx",
       "bytes": 4233,
-      "mtime": 1773352147286.6956,
+      "mtime": 1773352747943.2952,
       "lines": 147
     },
     {
       "path": "src/main.tsx",
       "bytes": 588,
-      "mtime": 1773352147287.1045,
+      "mtime": 1773352747943.614,
       "lines": 21
     },
     {
@@ -125,7 +125,7 @@
     {
       "path": "src/types/logEvent.ts",
       "bytes": 6080,
-      "mtime": 1773351458497.4348,
+      "mtime": 1773352667886.332,
       "lines": 216
     },
     {
@@ -148,26 +148,26 @@
     },
     {
       "path": "src/utils/index.ts",
-      "bytes": 61,
-      "mtime": 1773350192972.7512,
+      "bytes": 74,
+      "mtime": 1773352744418.0115,
       "lines": 2
     },
     {
       "path": "src/utils/jsonPreviewParser.ts",
-      "bytes": 1359,
-      "mtime": 1773350192972.991,
-      "lines": 54
+      "bytes": 987,
+      "mtime": 1773352744418.2275,
+      "lines": 42
     },
     {
       "path": "src/utils/logEventNormalizer.test.ts",
       "bytes": 6443,
-      "mtime": 1773351233515.5918,
+      "mtime": 1773352667888.1863,
       "lines": 187
     },
     {
       "path": "src/utils/logEventNormalizer.ts",
       "bytes": 5067,
-      "mtime": 1773351233514.6912,
+      "mtime": 1773352667887.3835,
       "lines": 193
     },
     {
@@ -197,13 +197,13 @@
     {
       "path": "vitest.config.ts",
       "bytes": 273,
-      "mtime": 1773352147287.4946,
+      "mtime": 1773352747943.9175,
       "lines": 12
     }
   ],
   "totals": {
     "files": 33,
-    "bytes": 187087,
+    "bytes": 186728,
     "depth": 10
   }
 }

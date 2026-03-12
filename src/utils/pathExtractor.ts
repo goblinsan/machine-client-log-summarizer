@@ -1,6 +1,7 @@
 import { PathData, normalizeWindowsPath, normalizeRepoUrl, isWindowsPath, isRepoUrl } from '../types/pathData';
 
 export function extractPathsFromMeta(meta: Record<string, unknown>): PathData {
+
   const paths: PathData = {};
 
   // Extract file paths from various meta fields
