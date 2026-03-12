@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773340499601,
+  "timestamp": 1773341311357,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".gitignore",
       "bytes": 206,
-      "mtime": 1773280115106.712,
+      "mtime": 1773341310579.643,
       "lines": 26
     },
     {
@@ -17,7 +17,7 @@
     {
       "path": "PROJECT_PLAN.md",
       "bytes": 10758,
-      "mtime": 1773280115106.941,
+      "mtime": 1773341310580.0698,
       "lines": 144
     },
     {
@@ -35,7 +35,7 @@
     {
       "path": "package-lock.json",
       "bytes": 125965,
-      "mtime": 1773280115107.86,
+      "mtime": 1773341310580.9294,
       "lines": 3711
     },
     {
@@ -53,13 +53,13 @@
     {
       "path": "src/App.tsx",
       "bytes": 4233,
-      "mtime": 1773280115108.965,
+      "mtime": 1773341310581.5754,
       "lines": 147
     },
     {
       "path": "src/main.tsx",
       "bytes": 588,
-      "mtime": 1773280115109.3716,
+      "mtime": 1773341310581.9087,
       "lines": 21
     },
     {
@@ -124,9 +124,9 @@
     },
     {
       "path": "src/types/logEvent.ts",
-      "bytes": 1978,
-      "mtime": 1773321923073.6396,
-      "lines": 86
+      "bytes": 1668,
+      "mtime": 1773341307221.5215,
+      "lines": 68
     },
     {
       "path": "src/types/pathData.ts",
@@ -160,14 +160,14 @@
     },
     {
       "path": "src/utils/logEventNormalizer.test.ts",
-      "bytes": 6456,
-      "mtime": 1773321923075.4124,
-      "lines": 186
+      "bytes": 6443,
+      "mtime": 1773341307221.8096,
+      "lines": 187
     },
     {
       "path": "src/utils/logEventNormalizer.ts",
       "bytes": 5067,
-      "mtime": 1773321923074.1099,
+      "mtime": 1773341307222.122,
       "lines": 193
     },
     {
@@ -185,25 +185,25 @@
     {
       "path": "tsconfig.json",
       "bytes": 320,
-      "mtime": 1773299256121.4048,
+      "mtime": 1773341307222.4373,
       "lines": 15
     },
     {
       "path": "vite.config.ts",
       "bytes": 658,
-      "mtime": 1773321923076.6016,
+      "mtime": 1773341307222.7468,
       "lines": 30
     },
     {
       "path": "vitest.config.ts",
       "bytes": 273,
-      "mtime": 1773299256123.5857,
+      "mtime": 1773341310582.259,
       "lines": 12
     }
   ],
   "totals": {
     "files": 33,
-    "bytes": 182857,
+    "bytes": 182534,
     "depth": 10
   }
 }
