@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-12T21:23:23.482Z
+Generated: 2026-03-12T21:37:42.798Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-12T21:23:23.482Z
 ## Statistics
 
 - **Total Files**: 33
-- **Total Size**: 178.26 KB
+- **Total Size**: 182.70 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -30,7 +30,7 @@ Generated: 2026-03-12T21:23:23.482Z
   README.md (0.2KB)
   index.html (0.3KB)
   package-lock.json (123.0KB)
-  package.json (0.9KB)
+  package.json (1.1KB)
   tsconfig.json (0.3KB)
   vite.config.ts (0.6KB)
   vitest.config.ts (0.3KB)
@@ -51,7 +51,7 @@ src/styles/
   main.scss (0.4KB)
 src/types/
   index.ts (0.1KB)
-  logEvent.ts (1.6KB)
+  logEvent.ts (5.9KB)
   pathData.ts (0.7KB)
 src/utils/
   hash.test.ts (1.9KB)
@@ -67,6 +67,7 @@ src/utils/
 ## Large Files
 
 - `package-lock.json` (123.0KB, 3711 lines)
+- `src/types/logEvent.ts` (5.9KB, 216 lines)
 
 ## File Types
 

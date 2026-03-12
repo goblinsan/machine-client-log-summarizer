@@ -1,11 +1,11 @@
 {
-  "timestamp": 1773350603482,
+  "timestamp": 1773351462798,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
       "path": ".gitignore",
       "bytes": 206,
-      "mtime": 1773350602715.9387,
+      "mtime": 1773351462031.054,
       "lines": 26
     },
     {
@@ -17,7 +17,7 @@
     {
       "path": "PROJECT_PLAN.md",
       "bytes": 10758,
-      "mtime": 1773350602727.4768,
+      "mtime": 1773351462037.8103,
       "lines": 144
     },
     {
@@ -35,14 +35,14 @@
     {
       "path": "package-lock.json",
       "bytes": 125965,
-      "mtime": 1773350602727.8582,
+      "mtime": 1773351462038.2102,
       "lines": 3711
     },
     {
       "path": "package.json",
-      "bytes": 945,
-      "mtime": 1773350602728.3625,
-      "lines": 36
+      "bytes": 1086,
+      "mtime": 1773351462038.6287,
+      "lines": 40
     },
     {
       "path": "scripts/replace-colors.js",
@@ -53,13 +53,13 @@
     {
       "path": "src/App.tsx",
       "bytes": 4233,
-      "mtime": 1773350602728.8582,
+      "mtime": 1773351462039.033,
       "lines": 147
     },
     {
       "path": "src/main.tsx",
       "bytes": 588,
-      "mtime": 1773350602729.3503,
+      "mtime": 1773351462039.3745,
       "lines": 21
     },
     {
@@ -124,9 +124,9 @@
     },
     {
       "path": "src/types/logEvent.ts",
-      "bytes": 1668,
-      "mtime": 1773350192971.782,
-      "lines": 68
+      "bytes": 6080,
+      "mtime": 1773351458497.4348,
+      "lines": 216
     },
     {
       "path": "src/types/pathData.ts",
@@ -161,13 +161,13 @@
     {
       "path": "src/utils/logEventNormalizer.test.ts",
       "bytes": 6443,
-      "mtime": 1773350192973.2344,
+      "mtime": 1773351233515.5918,
       "lines": 187
     },
     {
       "path": "src/utils/logEventNormalizer.ts",
       "bytes": 5067,
-      "mtime": 1773350192973.5112,
+      "mtime": 1773351233514.6912,
       "lines": 193
     },
     {
@@ -197,13 +197,13 @@
     {
       "path": "vitest.config.ts",
       "bytes": 273,
-      "mtime": 1773350602730.1096,
+      "mtime": 1773351462039.7368,
       "lines": 12
     }
   ],
   "totals": {
     "files": 33,
-    "bytes": 182534,
+    "bytes": 187087,
     "depth": 10
   }
 }
