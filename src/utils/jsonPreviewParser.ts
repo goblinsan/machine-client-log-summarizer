@@ -1,54 +1,42 @@
-import { extractPathsFromMeta } from './pathExtractor';
+/**
+ * Parses JSON content from preview fields
+ * Handles both fenced and bare JSON content
+ */
 
-export interface JsonPreview {
-  content: string;
-  meta: Record<string, unknown>;
-  paths: Record<string, unknown>;
+export interface ParsedPreview {
+  status?: 'pass' | 'fail';
+  [key: string]: unknown;
 }
 
-export function parseJsonPreview(jsonString: string): JsonPreview {
-  try {
-    const parsed = JSON.parse(jsonString);
-    const meta = parsed.meta || {};
-    const paths = extractPathsFromMeta(meta);
-
-    return {
-      content: jsonString,
-      meta: meta,
-      paths: {
-        windowsPath: paths.windowsPath,
-        normalizedWindowsPath: paths.normalizedWindowsPath,
-        repoUrl: paths.repoUrl,
-        normalizedRepoUrl: paths.normalizedRepoUrl,
-      },
-    };
-  } catch (error) {
-    return {
-      content: jsonString,
-      meta: {},
-      paths: {
-        windowsPath: undefined,
-        normalizedWindowsPath: undefined,
-        repoUrl: undefined,
-        normalizedRepoUrl: undefined,
-      },
-    };
+/**
+ * Parses JSON content and extracts status field
+ * Returns undefined if parsing fails
+ */
+export function parseJSON(content: unknown): ParsedPreview | undefined {
+  if (typeof content !== 'string') {
+    return undefined;
   }
-}
 
-export function extractPathsFromJsonPreview(jsonString: string): Record<string, unknown> {
   try {
-    const parsed = JSON.parse(jsonString);
-    const meta = parsed.meta || {};
-    const paths = extractPathsFromMeta(meta);
-
-    return {
-      windowsPath: paths.windowsPath,
-      normalizedWindowsPath: paths.normalizedWindowsPath,
-      repoUrl: paths.repoUrl,
-      normalizedRepoUrl: paths.normalizedRepoUrl,
-    };
+    const parsed = JSON.parse(content);
+    const result = parsed as ParsedPreview;
+    return result;
   } catch {
-    return {};
+    return undefined;
   }
+}
+
+/**
+ * Extracts status from parsed preview
+ * Supports various status field names
+ */
+export function extractStatus(parsed: ParsedPreview): 'pass' | 'fail' | undefined {
+  const statusFields = ['status', 'result', 'outcome', 'success', 'error'];
+  for (const field of statusFields) {
+    const value = parsed[field];
+    if (value === 'pass' || value === 'fail') {
+      return value;
+    }
+  }
+  return undefined;
 }
