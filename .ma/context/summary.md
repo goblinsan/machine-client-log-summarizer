@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-12T18:51:12.001Z
+Generated: 2026-03-12T18:58:34.722Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-12T18:51:12.001Z
 
 ## Statistics
 
-- **Total Files**: 49
-- **Total Size**: 232.95 KB
+- **Total Files**: 50
+- **Total Size**: 238.11 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -77,11 +77,12 @@ src/styles/
 src/test/
   setup.ts (0.1KB)
 src/types/
+  eventTypes.ts (0.6KB)
   index.ts (0.0KB)
   logEvent.ts (1.2KB)
 src/utils/
   index.ts (0.1KB)
-  logEventNormalizer.ts (4.5KB)
+  logEventNormalizer.ts (9.0KB)
 ```
 
 ## Large Files
@@ -90,10 +91,11 @@ src/utils/
 - `src/__tests__/config-loader.test.ts` (7.8KB, 223 lines)
 - `src/__tests__/qa-notes.md` (8.3KB, 331 lines)
 - `src/config/prompts/context.md` (10.8KB, 273 lines)
+- `src/utils/logEventNormalizer.ts` (9.0KB, 271 lines)
 
 ## File Types
 
-- .ts: 21 files
+- .ts: 22 files
 - .md: 9 files
 - .scss: 9 files
 - .json: 4 files
