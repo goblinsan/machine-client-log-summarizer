@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-14T17:55:03.000Z
+Generated: 2026-03-14T23:13:56.680Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-14T17:55:03.000Z
 
 ## Statistics
 
-- **Total Files**: 69
-- **Total Size**: 308.07 KB
+- **Total Files**: 75
+- **Total Size**: 321.17 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -44,12 +44,14 @@ src/
   main.tsx (0.6KB)
   settings-panel.tsx (1.1KB)
 src/__tests__/
+  batched-writer.test.ts (1.8KB)
   config-loader.test.ts (7.8KB)
   config.test.ts (2.4KB)
   data-packs.test.ts (1.6KB)
   event-store-schema.test.ts (3.0KB)
   qa-notes.md (8.3KB)
   regression-gap.test.ts (1.7KB)
+  retention-engine.test.ts (2.4KB)
   settings-panel.test.tsx (1.5KB)
   smoke.test.ts (0.5KB)
   synthetic-logs-data.test.ts (2.8KB)
@@ -57,12 +59,15 @@ src/__tests__/
   validation-plan.ts (1.4KB)
 src/config/
   cli.ts (1.8KB)
+  compaction-job.ts (2.0KB)
   defaults.ts (0.4KB)
   event-store-config.ts (2.1KB)
   guardrails.ts (4.2KB)
   index.ts (0.6KB)
   loader.ts (1.8KB)
-  schema.ts (1.2KB)
+  metrics-export.ts (2.2KB)
+  retention-engine.ts (2.7KB)
+  schema.ts (1.6KB)
   synthetic-logs-data.ts (1.0KB)
   synthetic-logs.ts (4.0KB)
 src/config/data-packs/
@@ -93,6 +98,7 @@ src/types/
   logEvent.ts (1.6KB)
   pathData.ts (0.7KB)
 src/utils/
+  batched-writer.ts (1.7KB)
   dedup.test.ts (4.1KB)
   dedup.ts (1.7KB)
   hash.test.ts (1.9KB)
@@ -116,7 +122,7 @@ src/utils/
 
 ## File Types
 
-- .ts: 39 files
+- .ts: 45 files
 - .md: 9 files
 - .scss: 9 files
 - .json: 4 files
