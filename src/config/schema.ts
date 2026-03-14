@@ -24,12 +24,21 @@ export const schema = z.object({
   batchSize: z.number().positive().default(10),
   maxRetries: z.number().positive().default(3),
 
-  // Environment
-  env: z.enum(['development', 'production', 'test']).default('development'),
+  allowCors: z.boolean().default(true),
+  corsOrigins: z.string().default('*'),
+
+  // Retention Policy
+  maxBytes: z.number().positive().optional(),
+  maxEvents: z.number().positive().optional(),
+  retentionDays: z.number().nonnegative().default(30),
+  ttlSeconds: z.number().positive().optional(),
+  enableCompaction: z.boolean().default(false),
+  compactionSchedule: z.string().regex(/^(\*|\d+(?:,\d+)*(?:-\d+)?(?:/\d+)?)$/.source).optional(),
 
   // Features
   enableStreaming: z.boolean().default(true),
   enableCache: z.boolean().default(true),
+
 
   // Security
   allowCors: z.boolean().default(true),
