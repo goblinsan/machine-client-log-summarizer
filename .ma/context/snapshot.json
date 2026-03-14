@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773478040759,
+  "timestamp": 1773478503556,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -87,6 +87,12 @@
       "lines": 65
     },
     {
+      "path": "src/__tests__/event-store-schema.test.ts",
+      "bytes": 3037,
+      "mtime": 1773478499393.1199,
+      "lines": 76
+    },
+    {
       "path": "src/__tests__/qa-notes.md",
       "bytes": 8511,
       "mtime": 1773406478527.6548,
@@ -147,6 +153,12 @@
       "lines": 20
     },
     {
+      "path": "src/config/event-store-config.ts",
+      "bytes": 2190,
+      "mtime": 1773478499393.263,
+      "lines": 65
+    },
+    {
       "path": "src/config/guardrails.ts",
       "bytes": 4331,
       "mtime": 1773406478528.911,
@@ -163,6 +175,12 @@
       "bytes": 1802,
       "mtime": 1773406478529.1304,
       "lines": 70
+    },
+    {
+      "path": "src/config/migrations/001_create_event_tables.ts",
+      "bytes": 1753,
+      "mtime": 1773478499393.6243,
+      "lines": 65
     },
     {
       "path": "src/config/prompts/context.md",
@@ -298,9 +316,9 @@
     },
     {
       "path": "src/types/logEvent.ts",
-      "bytes": 838,
-      "mtime": 1773406478531.9314,
-      "lines": 21
+      "bytes": 1599,
+      "mtime": 1773478499393.875,
+      "lines": 48
     },
     {
       "path": "src/types/pathData.ts",
@@ -400,8 +418,8 @@
     }
   ],
   "totals": {
-    "files": 66,
-    "bytes": 287631,
+    "files": 69,
+    "bytes": 295372,
     "depth": 10
   }
 }

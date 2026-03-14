@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-14T08:47:20.759Z
+Generated: 2026-03-14T08:55:03.556Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-03-14T08:47:20.759Z
 
 ## Statistics
 
-- **Total Files**: 66
-- **Total Size**: 280.89 KB
+- **Total Files**: 69
+- **Total Size**: 288.45 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -47,6 +47,7 @@ src/__tests__/
   config-loader.test.ts (7.8KB)
   config.test.ts (2.4KB)
   data-packs.test.ts (1.6KB)
+  event-store-schema.test.ts (3.0KB)
   qa-notes.md (8.3KB)
   regression-gap.test.ts (1.7KB)
   settings-panel.test.tsx (1.5KB)
@@ -57,6 +58,7 @@ src/__tests__/
 src/config/
   cli.ts (1.8KB)
   defaults.ts (0.4KB)
+  event-store-config.ts (2.1KB)
   guardrails.ts (4.2KB)
   index.ts (0.6KB)
   loader.ts (1.8KB)
@@ -65,6 +67,8 @@ src/config/
   synthetic-logs.ts (4.0KB)
 src/config/data-packs/
   synthetic-log-runs.ts (6.1KB)
+src/config/migrations/
+  001_create_event_tables.ts (1.7KB)
 src/config/prompts/
   context.md (16.2KB)
   coordinator.md (3.7KB)
@@ -86,7 +90,7 @@ src/test/
 src/types/
   eventTypes.ts (0.6KB)
   index.ts (0.1KB)
-  logEvent.ts (0.8KB)
+  logEvent.ts (1.6KB)
   pathData.ts (0.7KB)
 src/utils/
   dedup.test.ts (4.1KB)
@@ -112,7 +116,7 @@ src/utils/
 
 ## File Types
 
-- .ts: 36 files
+- .ts: 39 files
 - .md: 9 files
 - .scss: 9 files
 - .json: 4 files
