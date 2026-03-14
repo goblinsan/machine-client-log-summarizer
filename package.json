@@ -15,14 +15,15 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "zod": "^3.22.4",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^5.0.4",
+    "jsdom": "^28.1.0",
     "sass": "^1.76.1",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.0",
@@ -37,4 +38,3 @@
     "./utils/logEventNormalizer": "./src/utils/logEventNormalizer.ts"
   }
 }
-
