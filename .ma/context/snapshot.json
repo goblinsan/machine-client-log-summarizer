@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773510903000,
+  "timestamp": 1773530036680,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -69,6 +69,12 @@
       "lines": 175
     },
     {
+      "path": "src/__tests__/batched-writer.test.ts",
+      "bytes": 1838,
+      "mtime": 1773530032538.428,
+      "lines": 61
+    },
+    {
       "path": "src/__tests__/config-loader.test.ts",
       "bytes": 7992,
       "mtime": 1773499428131.7954,
@@ -103,6 +109,12 @@
       "bytes": 1771,
       "mtime": 1773406478527.7893,
       "lines": 51
+    },
+    {
+      "path": "src/__tests__/retention-engine.test.ts",
+      "bytes": 2432,
+      "mtime": 1773530032538.6904,
+      "lines": 79
     },
     {
       "path": "src/__tests__/settings-panel.test.tsx",
@@ -141,6 +153,12 @@
       "lines": 62
     },
     {
+      "path": "src/config/compaction-job.ts",
+      "bytes": 2052,
+      "mtime": 1773530032538.9736,
+      "lines": 74
+    },
+    {
       "path": "src/config/data-packs/synthetic-log-runs.ts",
       "bytes": 6223,
       "mtime": 1773406478528.6785,
@@ -173,8 +191,14 @@
     {
       "path": "src/config/loader.ts",
       "bytes": 1802,
-      "mtime": 1773406478529.1304,
+      "mtime": 1773529916613.5642,
       "lines": 70
+    },
+    {
+      "path": "src/config/metrics-export.ts",
+      "bytes": 2228,
+      "mtime": 1773530032539.2646,
+      "lines": 59
     },
     {
       "path": "src/config/migrations/001_create_event_tables.ts",
@@ -213,10 +237,16 @@
       "lines": 117
     },
     {
+      "path": "src/config/retention-engine.ts",
+      "bytes": 2764,
+      "mtime": 1773530032539.53,
+      "lines": 102
+    },
+    {
       "path": "src/config/schema.ts",
-      "bytes": 1266,
-      "mtime": 1773406478529.9321,
-      "lines": 49
+      "bytes": 1620,
+      "mtime": 1773530032539.9375,
+      "lines": 59
     },
     {
       "path": "src/config/synthetic-logs-data.ts",
@@ -327,6 +357,12 @@
       "lines": 29
     },
     {
+      "path": "src/utils/batched-writer.ts",
+      "bytes": 1747,
+      "mtime": 1773530032540.249,
+      "lines": 71
+    },
+    {
       "path": "src/utils/dedup.test.ts",
       "bytes": 4242,
       "mtime": 1773406478532.2212,
@@ -418,8 +454,8 @@
     }
   ],
   "totals": {
-    "files": 69,
-    "bytes": 315468,
+    "files": 75,
+    "bytes": 328883,
     "depth": 10
   }
 }
