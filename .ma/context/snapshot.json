@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773530036680,
+  "timestamp": 1773531069674,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -76,9 +76,9 @@
     },
     {
       "path": "src/__tests__/config-loader.test.ts",
-      "bytes": 7992,
-      "mtime": 1773499428131.7954,
-      "lines": 223
+      "bytes": 8438,
+      "mtime": 1773531065525.0637,
+      "lines": 247
     },
     {
       "path": "src/__tests__/config.test.ts",
@@ -100,9 +100,9 @@
     },
     {
       "path": "src/__tests__/qa-notes.md",
-      "bytes": 8511,
-      "mtime": 1773510058300.3735,
-      "lines": 331
+      "bytes": 11378,
+      "mtime": 1773531065525.3716,
+      "lines": 408
     },
     {
       "path": "src/__tests__/regression-gap.test.ts",
@@ -455,7 +455,7 @@
   ],
   "totals": {
     "files": 75,
-    "bytes": 328883,
+    "bytes": 332196,
     "depth": 10
   }
 }
