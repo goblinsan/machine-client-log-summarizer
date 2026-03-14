@@ -1,3 +1,5 @@
+# QA Notes - Schema Syntax Error Fix (Task #46)
+# QA Notes - Schema Syntax Error Fix (Task #46)
 # QA Notes - Synthetic Logs Regression Test Coverage
 # QA Notes - Config Loader Brace Balance Fix
 # QA Notes - Config Loader Brace Balance Fix
@@ -5,16 +7,61 @@
 # Overview
 This document tracks the fix for the Unexpected '}' syntax error at line 205 in config-loader.test.ts and provides verification steps.
 
+# Schema Syntax Error Fix (Task #46)
+
+## Overview
+This document tracks the fix for duplicate field definitions causing syntax errors in src/config/schema.ts.
+
+## Root Cause Analysis
+
+### Issue Description
+- **Error**: Duplicate field definitions (allowCors, corsOrigins) at lines 35-36
+- **File**: src/config/schema.ts
+- **Type**: Syntax error from duplicate Zod schema field definitions
+
+### Root Cause
+The configuration schema contained two sets of `allowCors` and `corsOrigins` definitions. The second set (lines 35-36) caused TypeScript compilation failure due to duplicate property names in the Zod object schema.
+
+### Fix Applied
+- Removed duplicate allowCors and corsOrigins definitions from lines 35-36
+- Ensured each configuration field is defined only once in the schema
+- Added regression test to validate no duplicate fields exist
+
+# Verification Steps
+
+### Step 1: Run TypeScript compiler validation
+```bash
+npx tsc --noEmit && echo 'Build OK'
+```
+
+Expected: TypeScript compiler reports zero errors for src/config/schema.ts
+
 # Root Cause Analysis
 
-## Issue Description
-- **Error**: Unexpected '}' syntax error at line 205
+## Root Cause Analysis
+
+### Issue Description
+- **Error**: Duplicate field definitions (allowCors, corsOrigins) at lines 35-36
+- **File**: src/config/schema.ts
+- **Type**: Syntax error from duplicate Zod schema field definitions
+
+### Root Cause
+The configuration schema contained two sets of `allowCors` and `corsOrigins` definitions. The second set (lines 35-36) caused TypeScript compilation failure due to duplicate property names in the Zod object schema.
+
+### Fix Applied
+- Removed duplicate allowCors and corsOrigins definitions from lines 35-36
+- Ensured each configuration field is defined only once in the schema
+- Added regression test to validate no duplicate fields exist
+
+# Verification Steps
+
+### Step 1: Run TypeScript compiler validation
+
 - **File**: src/__tests__/config-loader.test.ts
 - **Type**: Mismatched braces / orphaned closing brace
 
 ## Root Cause
 The test file contained duplicate describe blocks starting around line 195. After the first complete set of tests (including getEnvConfig and getDefaults describe blocks), there was an unexpected second set of incomplete/overlapping describe blocks that caused the parser to encounter orphaned closing braces at line 205.
-
 ## Fix Applied
 - Removed duplicate/orphaned describe block content starting at line 195
 - Ensured all describe/it blocks have matching opening and closing braces
@@ -23,11 +70,6 @@ The test file contained duplicate describe blocks starting around line 195. Afte
 # Verification Steps
 
 ### Step 1: Run config-loader tests specifically
-```bash
-npm run vitest -- src/__tests__/config-loader.test.ts
-# or
-npx vitest run src/__tests__/config-loader.test.ts
-```
 
 Expected: All tests pass without 'Unexpected }' error at line 205
 
@@ -394,6 +436,8 @@ Confirm this file exists and contains verification steps.
 ## Validation Plan
 - Run `vitest run` command to execute all tests
 - Verify newly created test file passes without errors
+
+
 
 
 
