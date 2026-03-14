@@ -5,15 +5,15 @@
 {"path":"README.md","bytes":183,"lines":16,"mtime":1773406478525.5063}
 {"path":"SECURITY_GUIDELINES.md","bytes":2844,"lines":125,"mtime":1773406478525.6213}
 {"path":"index.html","bytes":306,"lines":13,"mtime":1759790612651.8906}
-{"path":"package-lock.json","bytes":143235,"lines":4202,"mtime":1773406478525.9854}
-{"path":"package.json","bytes":1087,"lines":41,"mtime":1773406478526.6006}
+{"path":"package-lock.json","bytes":163367,"lines":4765,"mtime":1773498072501.853}
+{"path":"package.json","bytes":1110,"lines":41,"mtime":1773498072502.0354}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1773406478526.773}
 {"path":"src/App.tsx","bytes":5342,"lines":175,"mtime":1773406478527.064}
-{"path":"src/__tests__/config-loader.test.ts","bytes":7992,"lines":223,"mtime":1773406478527.2354}
+{"path":"src/__tests__/config-loader.test.ts","bytes":7992,"lines":223,"mtime":1773499428131.7954}
 {"path":"src/__tests__/config.test.ts","bytes":2504,"lines":70,"mtime":1773406478527.3513}
 {"path":"src/__tests__/data-packs.test.ts","bytes":1632,"lines":65,"mtime":1773406478527.476}
 {"path":"src/__tests__/event-store-schema.test.ts","bytes":3037,"lines":76,"mtime":1773478499393.1199}
-{"path":"src/__tests__/qa-notes.md","bytes":8511,"lines":331,"mtime":1773406478527.6548}
+{"path":"src/__tests__/qa-notes.md","bytes":8511,"lines":331,"mtime":1773510058300.3735}
 {"path":"src/__tests__/regression-gap.test.ts","bytes":1771,"lines":51,"mtime":1773406478527.7893}
 {"path":"src/__tests__/settings-panel.test.tsx","bytes":1552,"lines":53,"mtime":1773406478527.9001}
 {"path":"src/__tests__/smoke.test.ts","bytes":512,"lines":19,"mtime":1773406478528.0125}
@@ -23,7 +23,7 @@
 {"path":"src/config/cli.ts","bytes":1863,"lines":62,"mtime":1773406478528.4988}
 {"path":"src/config/data-packs/synthetic-log-runs.ts","bytes":6223,"lines":245,"mtime":1773406478528.6785}
 {"path":"src/config/defaults.ts","bytes":440,"lines":20,"mtime":1773406478528.7869}
-{"path":"src/config/event-store-config.ts","bytes":2190,"lines":65,"mtime":1773478499393.263}
+{"path":"src/config/event-store-config.ts","bytes":2190,"lines":65,"mtime":1773510064453.2615}
 {"path":"src/config/guardrails.ts","bytes":4331,"lines":179,"mtime":1773406478528.911}
 {"path":"src/config/index.ts","bytes":609,"lines":17,"mtime":1773406478529.0205}
 {"path":"src/config/loader.ts","bytes":1802,"lines":70,"mtime":1773406478529.1304}
@@ -50,7 +50,7 @@
 {"path":"src/test/setup.ts","bytes":85,"lines":6,"mtime":1773406478531.5234}
 {"path":"src/types/eventTypes.ts","bytes":663,"lines":37,"mtime":1773406478531.6936}
 {"path":"src/types/index.ts","bytes":74,"lines":3,"mtime":1773406478531.8062}
-{"path":"src/types/logEvent.ts","bytes":1599,"lines":48,"mtime":1773478499393.875}
+{"path":"src/types/logEvent.ts","bytes":1599,"lines":48,"mtime":1773510064453.507}
 {"path":"src/types/pathData.ts","bytes":725,"lines":29,"mtime":1773406478532.048}
 {"path":"src/utils/dedup.test.ts","bytes":4242,"lines":124,"mtime":1773406478532.2212}
 {"path":"src/utils/dedup.ts","bytes":1697,"lines":72,"mtime":1773406478532.3772}
@@ -63,7 +63,7 @@
 {"path":"src/utils/pathExtractor.test.ts","bytes":150,"lines":4,"mtime":1773406478533.4673}
 {"path":"src/utils/pathExtractor.ts","bytes":1928,"lines":62,"mtime":1773406478533.5925}
 {"path":"src/utils/smoke.test.ts","bytes":470,"lines":16,"mtime":1773406478533.7341}
-{"path":"tsconfig.json","bytes":320,"lines":15,"mtime":1773406478533.9126}
+{"path":"tsconfig.json","bytes":261,"lines":13,"mtime":1773498072503.9307}
 {"path":"vite.config.ts","bytes":658,"lines":30,"mtime":1773406478534.1072}
 {"path":"vitest.config.ts","bytes":339,"lines":16,"mtime":1773406478534.263}
 {"path":"vitest.harness.ts","bytes":1039,"lines":48,"mtime":1773406478534.408}

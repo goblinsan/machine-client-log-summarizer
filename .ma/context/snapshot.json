@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773478503556,
+  "timestamp": 1773510903000,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -46,14 +46,14 @@
     },
     {
       "path": "package-lock.json",
-      "bytes": 143235,
-      "mtime": 1773406478525.9854,
-      "lines": 4202
+      "bytes": 163367,
+      "mtime": 1773498072501.853,
+      "lines": 4765
     },
     {
       "path": "package.json",
-      "bytes": 1087,
-      "mtime": 1773406478526.6006,
+      "bytes": 1110,
+      "mtime": 1773498072502.0354,
       "lines": 41
     },
     {
@@ -71,7 +71,7 @@
     {
       "path": "src/__tests__/config-loader.test.ts",
       "bytes": 7992,
-      "mtime": 1773406478527.2354,
+      "mtime": 1773499428131.7954,
       "lines": 223
     },
     {
@@ -95,7 +95,7 @@
     {
       "path": "src/__tests__/qa-notes.md",
       "bytes": 8511,
-      "mtime": 1773406478527.6548,
+      "mtime": 1773510058300.3735,
       "lines": 331
     },
     {
@@ -155,7 +155,7 @@
     {
       "path": "src/config/event-store-config.ts",
       "bytes": 2190,
-      "mtime": 1773478499393.263,
+      "mtime": 1773510064453.2615,
       "lines": 65
     },
     {
@@ -317,7 +317,7 @@
     {
       "path": "src/types/logEvent.ts",
       "bytes": 1599,
-      "mtime": 1773478499393.875,
+      "mtime": 1773510064453.507,
       "lines": 48
     },
     {
@@ -394,9 +394,9 @@
     },
     {
       "path": "tsconfig.json",
-      "bytes": 320,
-      "mtime": 1773406478533.9126,
-      "lines": 15
+      "bytes": 261,
+      "mtime": 1773498072503.9307,
+      "lines": 13
     },
     {
       "path": "vite.config.ts",
@@ -419,7 +419,7 @@
   ],
   "totals": {
     "files": 69,
-    "bytes": 295372,
+    "bytes": 315468,
     "depth": 10
   }
 }
