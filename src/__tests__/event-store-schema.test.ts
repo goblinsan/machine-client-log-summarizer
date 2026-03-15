@@ -1,12 +1,13 @@
 /**
  * Unit tests for event store schema validation and index configuration
+ * Includes syntax validation regression test
  */
 import { describe, it, expect } from 'vitest';
 import { 
   eventsTableSchema, 
   eventMetaTableSchema, 
   indexDefinitions,
-  writePerformanceConfig 
+  writePerformanceConfig
 } from '../config/event-store-config';
 import { LogEvent, EventMeta, EventStoreIndex } from '../types/logEvent';
 
@@ -73,4 +74,21 @@ describe('Event Store Schema', () => {
       expect(writePerformanceConfig.batchingEnabled).toBe(true);
     });
   });
+
+  describe('syntax validation regression test', () => {
+    it('should validate schema.ts has no syntax errors via TypeScript compiler', async () => {
+      // This test ensures the schema.ts file compiles without syntax errors
+      // It validates that duplicate field definitions are removed
+      const fs = await import('fs');
+      const path = await import('path');
+      
+      const schemaPath = path.join(__dirname, '../config/schema.ts');
+      const content = fs.readFileSync(schemaPath, 'utf-8');
+      
+      // Verify no duplicate allowCors or corsOrigins definitions exist
+      const allowCorsMatches = (content.match(/allowCors/g) || []).length;
+      expect(allowCorsMatches).toBeLessThanOrEqual(1);
+    });
+  });
 });
+

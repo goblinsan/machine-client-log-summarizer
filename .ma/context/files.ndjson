@@ -10,11 +10,11 @@
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1773406478526.773}
 {"path":"src/App.tsx","bytes":5342,"lines":175,"mtime":1773406478527.064}
 {"path":"src/__tests__/batched-writer.test.ts","bytes":1838,"lines":61,"mtime":1773530032538.428}
-{"path":"src/__tests__/config-loader.test.ts","bytes":7992,"lines":223,"mtime":1773499428131.7954}
+{"path":"src/__tests__/config-loader.test.ts","bytes":8438,"lines":247,"mtime":1773531065525.0637}
 {"path":"src/__tests__/config.test.ts","bytes":2504,"lines":70,"mtime":1773406478527.3513}
 {"path":"src/__tests__/data-packs.test.ts","bytes":1632,"lines":65,"mtime":1773406478527.476}
 {"path":"src/__tests__/event-store-schema.test.ts","bytes":3037,"lines":76,"mtime":1773478499393.1199}
-{"path":"src/__tests__/qa-notes.md","bytes":8511,"lines":331,"mtime":1773510058300.3735}
+{"path":"src/__tests__/qa-notes.md","bytes":11378,"lines":408,"mtime":1773531065525.3716}
 {"path":"src/__tests__/regression-gap.test.ts","bytes":1771,"lines":51,"mtime":1773406478527.7893}
 {"path":"src/__tests__/retention-engine.test.ts","bytes":2432,"lines":79,"mtime":1773530032538.6904}
 {"path":"src/__tests__/settings-panel.test.tsx","bytes":1552,"lines":53,"mtime":1773406478527.9001}
