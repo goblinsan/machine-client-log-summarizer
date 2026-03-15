@@ -9,12 +9,12 @@
 {"path":"package.json","bytes":1110,"lines":41,"mtime":1773498072502.0354}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1773406478526.773}
 {"path":"src/App.tsx","bytes":5342,"lines":175,"mtime":1773406478527.064}
-{"path":"src/__tests__/batched-writer.test.ts","bytes":1838,"lines":61,"mtime":1773530032538.428}
+{"path":"src/__tests__/batched-writer.test.ts","bytes":1838,"lines":61,"mtime":1773532748995.703}
 {"path":"src/__tests__/config-loader.test.ts","bytes":8438,"lines":247,"mtime":1773531065525.0637}
 {"path":"src/__tests__/config.test.ts","bytes":2504,"lines":70,"mtime":1773406478527.3513}
 {"path":"src/__tests__/data-packs.test.ts","bytes":1632,"lines":65,"mtime":1773406478527.476}
-{"path":"src/__tests__/event-store-schema.test.ts","bytes":3037,"lines":76,"mtime":1773478499393.1199}
-{"path":"src/__tests__/qa-notes.md","bytes":11378,"lines":408,"mtime":1773531065525.3716}
+{"path":"src/__tests__/event-store-schema.test.ts","bytes":3818,"lines":95,"mtime":1773532933553.2798}
+{"path":"src/__tests__/qa-notes.md","bytes":13072,"lines":452,"mtime":1773532933553.5083}
 {"path":"src/__tests__/regression-gap.test.ts","bytes":1771,"lines":51,"mtime":1773406478527.7893}
 {"path":"src/__tests__/retention-engine.test.ts","bytes":2432,"lines":79,"mtime":1773530032538.6904}
 {"path":"src/__tests__/settings-panel.test.tsx","bytes":1552,"lines":53,"mtime":1773406478527.9001}
@@ -38,7 +38,7 @@
 {"path":"src/config/prompts/qa.md","bytes":3698,"lines":110,"mtime":1773406478529.7073}
 {"path":"src/config/prompts/security.md","bytes":4026,"lines":117,"mtime":1773406478529.8198}
 {"path":"src/config/retention-engine.ts","bytes":2764,"lines":102,"mtime":1773530032539.53}
-{"path":"src/config/schema.ts","bytes":1620,"lines":59,"mtime":1773530032539.9375}
+{"path":"src/config/schema.ts","bytes":317,"lines":16,"mtime":1773532933553.7175}
 {"path":"src/config/synthetic-logs-data.ts","bytes":1064,"lines":49,"mtime":1773406478530.0498}
 {"path":"src/config/synthetic-logs.ts","bytes":4051,"lines":152,"mtime":1773406478530.1663}
 {"path":"src/main.tsx","bytes":626,"lines":27,"mtime":1773406478530.3232}
@@ -72,4 +72,4 @@
 {"path":"tsconfig.json","bytes":261,"lines":13,"mtime":1773498072503.9307}
 {"path":"vite.config.ts","bytes":658,"lines":30,"mtime":1773406478534.1072}
 {"path":"vitest.config.ts","bytes":339,"lines":16,"mtime":1773406478534.263}
-{"path":"vitest.harness.ts","bytes":1039,"lines":48,"mtime":1773406478534.408}
+{"path":"vitest.harness.ts","bytes":1039,"lines":48,"mtime":1773532748994.8843}
