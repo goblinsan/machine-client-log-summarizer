@@ -1,7 +1,9 @@
 # QA Notes - Schema Syntax Error Fix (Task #46)
 # QA Notes - Schema Syntax Error Fix (Task #46)
 # QA Notes - Synthetic Logs Regression Test Coverage
-# QA Notes - Config Loader Brace Balance Fix
+# QA Notes - Schema Syntax Error Fix (Task #46)
+# QA Notes - Schema Syntax Error Fix (Task #46)
+# QA Notes - Synthetic Logs Module Configuration Fix (Task #47)
 # QA Notes - Config Loader Brace Balance Fix
 
 # Overview
@@ -10,14 +12,49 @@ This document tracks the fix for the Unexpected '}' syntax error at line 205 in 
 # Schema Syntax Error Fix (Task #46)
 
 ## Overview
-This document tracks the fix for duplicate field definitions causing syntax errors in src/config/schema.ts.
-
 ## Root Cause Analysis
 
 ### Issue Description
+- **Error**: Syntax errors and parsing failures in synthetic-logs.ts
+- **File**: src/config/synthetic-logs.ts
+- **Type**: Corrupted file structure with mixed export statements
+
+### Root Cause
+The file had multiple export statements, function definitions, and type interfaces interleaved incorrectly, causing TypeScript parser to fail.
+
+### Fix Applied
+- Reorganized file structure with proper TypeScript syntax
+- Moved interface and schema definitions to top of file
+- Separated function implementations from data exports
+- Added proper import for zod library
+
+# Verification Steps
+
+### Step 1: Run Vitest tests for synthetic-logs
+```bash
+npx vitest run src/__tests__/synthetic-logs.test.ts
+```
+
+Expected: All tests pass without 'Unexpected export' errors
+
+### Issue Description
 - **Error**: Duplicate field definitions (allowCors, corsOrigins) at lines 35-36
-- **File**: src/config/schema.ts
-- **Type**: Syntax error from duplicate Zod schema field definitions
+- **File**: src/config/synthetic-logs.ts
+- **Type**: Corrupted file structure with mixed export statements
+
+### Root Cause
+The file had multiple export statements, function definitions, and type interfaces interleaved incorrectly, causing TypeScript parser to fail.
+
+### Fix Applied
+- Reorganized file structure with proper TypeScript syntax
+- Moved interface and schema definitions to top of file
+- Separated function implementations from data exports
+- Added proper import for zod library
+
+# Verification Steps
+
+### Step 1: Run Vitest tests for synthetic-logs
+
 
 ### Root Cause
 The configuration schema contained two sets of `allowCors` and `corsOrigins` definitions. The second set (lines 35-36) caused TypeScript compilation failure due to duplicate property names in the Zod object schema.
@@ -93,10 +130,13 @@ Expected: Test assertion `expect(braceCount).toBe(0)` passes
 - [x] New test assertion added to validate proper brace nesting in describe/it blocks
 - [x] QA notes document the fix and validation commands
 
-# Known Issues
+## Known Issues
 None currently known.
 
-# Previous QA Notes
+## Previous QA Notes
+This task addresses synthetic logs module configuration and export handling issues.
+
+# QA Notes - Synthetic Logs Regression Test Coverage
 
 # QA Notes - Synthetic Logs Regression Test Coverage
 
@@ -436,6 +476,8 @@ Confirm this file exists and contains verification steps.
 ## Validation Plan
 - Run `vitest run` command to execute all tests
 - Verify newly created test file passes without errors
+
+
 
 
 
