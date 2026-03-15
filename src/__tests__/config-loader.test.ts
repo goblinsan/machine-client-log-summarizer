@@ -195,6 +195,7 @@ describe('Config Loader', () => {
   describe('getDefaults', () => {
     it('should return default config', () => {
       const config = getDefaults();
+      expect(config).toBeDefined();
     });
   });
 });
@@ -241,6 +242,7 @@ describe('Brace Balance Validation', () => {
     expect(braceCount).toBe(0);
   });
 });
+
 
 
 

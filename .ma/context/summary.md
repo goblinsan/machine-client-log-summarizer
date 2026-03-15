@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-15T00:02:17.756Z
+Generated: 2026-03-15T00:13:50.139Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-15T00:02:17.756Z
 ## Statistics
 
 - **Total Files**: 75
-- **Total Size**: 325.55 KB
+- **Total Size**: 327.01 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -35,7 +35,7 @@ Generated: 2026-03-15T00:02:17.756Z
   package.json (1.1KB)
   tsconfig.json (0.3KB)
   vite.config.ts (0.6KB)
-  vitest.config.ts (0.3KB)
+  vitest.config.ts (0.4KB)
   vitest.harness.ts (1.0KB)
 scripts/
   replace-colors.js (4.4KB)
@@ -49,7 +49,7 @@ src/__tests__/
   config.test.ts (2.4KB)
   data-packs.test.ts (1.6KB)
   event-store-schema.test.ts (3.7KB)
-  qa-notes.md (12.8KB)
+  qa-notes.md (14.1KB)
   regression-gap.test.ts (1.7KB)
   retention-engine.test.ts (2.4KB)
   settings-panel.test.tsx (1.5KB)
@@ -116,7 +116,7 @@ src/utils/
 
 - `package-lock.json` (159.5KB, 4765 lines)
 - `src/__tests__/config-loader.test.ts` (8.2KB, 247 lines)
-- `src/__tests__/qa-notes.md` (12.8KB, 452 lines)
+- `src/__tests__/qa-notes.md` (14.1KB, 494 lines)
 - `src/config/data-packs/synthetic-log-runs.ts` (6.1KB, 245 lines)
 - `src/config/prompts/context.md` (16.2KB, 448 lines)
 
