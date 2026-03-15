@@ -1,5 +1,5 @@
 {
-  "timestamp": 1773531069674,
+  "timestamp": 1773532937756,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -71,7 +71,7 @@
     {
       "path": "src/__tests__/batched-writer.test.ts",
       "bytes": 1838,
-      "mtime": 1773530032538.428,
+      "mtime": 1773532748995.703,
       "lines": 61
     },
     {
@@ -94,15 +94,15 @@
     },
     {
       "path": "src/__tests__/event-store-schema.test.ts",
-      "bytes": 3037,
-      "mtime": 1773478499393.1199,
-      "lines": 76
+      "bytes": 3818,
+      "mtime": 1773532933553.2798,
+      "lines": 95
     },
     {
       "path": "src/__tests__/qa-notes.md",
-      "bytes": 11378,
-      "mtime": 1773531065525.3716,
-      "lines": 408
+      "bytes": 13072,
+      "mtime": 1773532933553.5083,
+      "lines": 452
     },
     {
       "path": "src/__tests__/regression-gap.test.ts",
@@ -244,9 +244,9 @@
     },
     {
       "path": "src/config/schema.ts",
-      "bytes": 1620,
-      "mtime": 1773530032539.9375,
-      "lines": 59
+      "bytes": 317,
+      "mtime": 1773532933553.7175,
+      "lines": 16
     },
     {
       "path": "src/config/synthetic-logs-data.ts",
@@ -449,13 +449,13 @@
     {
       "path": "vitest.harness.ts",
       "bytes": 1039,
-      "mtime": 1773406478534.408,
+      "mtime": 1773532748994.8843,
       "lines": 48
     }
   ],
   "totals": {
     "files": 75,
-    "bytes": 332196,
+    "bytes": 333368,
     "depth": 10
   }
 }
