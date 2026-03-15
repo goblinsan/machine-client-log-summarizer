@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-03-15T00:13:50.139Z
+Generated: 2026-03-15T00:25:17.550Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-03-15T00:13:50.139Z
 ## Statistics
 
 - **Total Files**: 75
-- **Total Size**: 327.01 KB
+- **Total Size**: 327.04 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -45,7 +45,7 @@ src/
   settings-panel.tsx (1.1KB)
 src/__tests__/
   batched-writer.test.ts (1.8KB)
-  config-loader.test.ts (8.2KB)
+  config-loader.test.ts (8.3KB)
   config.test.ts (2.4KB)
   data-packs.test.ts (1.6KB)
   event-store-schema.test.ts (3.7KB)
@@ -115,7 +115,7 @@ src/utils/
 ## Large Files
 
 - `package-lock.json` (159.5KB, 4765 lines)
-- `src/__tests__/config-loader.test.ts` (8.2KB, 247 lines)
+- `src/__tests__/config-loader.test.ts` (8.3KB, 249 lines)
 - `src/__tests__/qa-notes.md` (14.1KB, 494 lines)
 - `src/config/data-packs/synthetic-log-runs.ts` (6.1KB, 245 lines)
 - `src/config/prompts/context.md` (16.2KB, 448 lines)
