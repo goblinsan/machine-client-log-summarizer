@@ -1,20 +1,18 @@
 # Plan Evaluation - Iteration 1
 
-Generated: 2026-07-07T23:52:09.168Z
+Generated: 2026-07-08T01:59:28.773Z
 
-**Status:** pass
+**Status:** fail
 
 ## Evaluation Details
 
-{
-  "status": "pass"
-}
+{ "status": "fail", "reason": "Plan lists ambiguous key files for step 4: vitest.harness.ts vs src/vitest.harness.ts" }
 
 ## Structured Feedback
 
 ```json
 {
-  "output": "{\n  \"status\": \"pass\"\n}",
-  "duration_ms": 7971
+  "output": "{ \"status\": \"fail\", \"reason\": \"Plan lists ambiguous key files for step 4: vitest.harness.ts vs src/vitest.harness.ts\" }",
+  "duration_ms": 3511
 }
 ```
