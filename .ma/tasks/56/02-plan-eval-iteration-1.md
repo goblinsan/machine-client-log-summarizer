@@ -1,18 +1,18 @@
 # Plan Evaluation - Iteration 1
 
-Generated: 2026-07-08T02:26:03.029Z
+Generated: 2026-07-08T02:49:31.727Z
 
-**Status:** pass
+**Status:** fail
 
 ## Evaluation Details
 
-{ "status": "pass" }
+{ "status": "fail", "reason": "Step 2 key_files lists both 'src/config/loader.ts' and 'src/config/data-packs/synthetic-log-runs.ts' for the same deliverable" }
 
 ## Structured Feedback
 
 ```json
 {
-  "output": "{ \"status\": \"pass\" }",
-  "duration_ms": 7685
+  "output": "{ \"status\": \"fail\", \"reason\": \"Step 2 key_files lists both 'src/config/loader.ts' and 'src/config/data-packs/synthetic-log-runs.ts' for the same deliverable\" }",
+  "duration_ms": 9187
 }
 ```
