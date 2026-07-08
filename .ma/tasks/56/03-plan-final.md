@@ -1,6 +1,6 @@
-# Plan Iteration 1
+# Plan Iteration 4
 
-Generated: 2026-07-08T02:26:04.248Z
+Generated: 2026-07-08T02:51:54.361Z
 
 ## Implementation Plan
 
@@ -8,65 +8,58 @@ Generated: 2026-07-08T02:26:04.248Z
 
 **Files:** `src/config/loader.ts`
 
-**Owners:** Lead Engineer, QA
-
 **Dependencies:**
 
 **Acceptance Criteria:**
-  - Identify the specific syntax error at line 45 (Unexpected 'export')
-  - Identify the remaining TypeScript compile errors
-  - Determine if this is a file corruption issue or a structural logic error
+  - Identify the specific line causing the 'Unexpected export' error.
+  - Determine if this is a syntax error (e.g., missing braces, semicolons) or an incorrect module declaration.
+  - Check if the file is importing/exporting from a non-existent or misconfigured module.
 
-### Step 2: Fix the syntax corruption in src/config/loader.ts
+### Step 2: Fix the syntax error at line 45 and any cascading errors
 
 **Files:** `src/config/loader.ts`
-
-**Owners:** Lead Engineer
 
 **Dependencies:**
   - Step 1: Diagnosis complete
 
 **Acceptance Criteria:**
-  - Remove or correct the invalid 'export' statement at line 45
-  - Resolve any cascading errors caused by the syntax fix
-  - Ensure no new syntax errors are introduced
+  - Remove or correct the malformed export statement at line 45.
+  - Ensure all TypeScript compilation errors (5 total) are resolved.
+  - Verify that the file structure remains valid JavaScript/TypeScript.
 
 ### Step 3: Verify the fix by running the TypeScript compiler
 
 **Files:** `src/config/loader.ts`
 
-**Owners:** QA, Lead Engineer
-
 **Dependencies:**
-  - Step 2: Fix applied
+  - Step 2: Syntax fix complete
 
 **Acceptance Criteria:**
-  - npx tsc --noEmit reports zero errors for src/config/loader.ts
+  - npx tsc --noEmit reports zero errors for src/config/loader.ts.
 
 ### Step 4: Verify that dependent tests can now execute
 
-**Files:** `config-loader.test.ts`, `config.test.ts`
-
-**Owners:** QA
+**Files:** `src/__tests__/config-loader.test.ts`, `src/config/loader.ts`
 
 **Dependencies:**
-  - Step 3: TypeScript verification passed
+  - Step 3: TS verification complete
 
 **Acceptance Criteria:**
-  - config-loader.test.ts executes (pass or fail on assertions, not parse)
-  - config.test.ts executes (pass or fail on assertions, not parse)
+  - config-loader.test.ts and config.test.ts execute (pass or fail on assertions, not on parse).
+  - Verify that smoke.test.ts can also load successfully.
 
 ## Risks
 
-1. The syntax error at line 45 might be a symptom of a deeper structural issue (e.g., missing imports or incorrect module resolution) that requires more than just fixing the 'export' keyword.
-2. Fixing a syntax error might inadvertently change the runtime behavior if the 'export' was part of a specific (albeit broken) logic flow.
+1. The syntax error might be caused by a missing `export` keyword in an ES module declaration, or conversely, an extra one. The fix must be precise to avoid breaking the module type.
+2. The error might stem from a circular dependency or an import statement pointing to a file that doesn't exist in the `src/config` directory.
+3. Fixing the syntax error might expose other underlying logic errors in the loader that were previously hidden by the parse failure.
 
 ## Open Questions
 
-1. Is the 'export' at line 45 a copy-paste error from another file, or is it an attempt to export something that shouldn't be exported (e.g., a private helper function)?
+1. What is the intended functionality of the code block around line 45? Is it meant to be a named export, a default export, or part of the class definition?
 
 ## Notes
 
-1. The task explicitly states to keep the public API unchanged. The fix must only address the syntax corruption.
-2. The plan prioritizes diagnosis before modification to ensure we don't fix the wrong thing.
+1. The plan prioritizes fixing the source file first. Once the syntax is valid, the dependent tests should be able to run.
+2. I will ensure that no changes are made to the public API of the loader as per the acceptance criteria.
 
