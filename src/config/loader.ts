@@ -41,6 +41,17 @@ export function loadConfig(cliArgs: Record<string, string> = {}): Config {
   }
 
   const cliConfig: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(cliArgs)) {
+    const envKey = key.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+    if (envConfig[envKey] !== undefined) {
+      cliConfig[key] = value;
+    }
+  }
+
+  const merged: Partial<Config> = { ...defaults, ...filtered, ...cliConfig };
+
+  return schema.parse(merged) as Config;
+}
 
 export function getEnvConfig(): Partial<Config> {
   return Object.fromEntries(
@@ -58,12 +69,3 @@ export function getEnvConfig(): Partial<Config> {
 export function getDefaults(): Partial<Config> {
   return { ...defaults };
 }
-      lmStudioEndpoint: process.env.LM_STUDIO_ENDPOINT,
-    }).filter(([, v]) => v !== undefined),
-  );
-}
-
-export function getDefaults(): Partial<Config> {
-  return { ...defaults };
-}
-
