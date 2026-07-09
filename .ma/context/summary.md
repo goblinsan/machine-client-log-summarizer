@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-07-09T02:43:03.803Z
+Generated: 2026-07-09T02:50:39.974Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-07-09T02:43:03.803Z
 
 ## Statistics
 
-- **Total Files**: 76
-- **Total Size**: 333.19 KB
+- **Total Files**: 77
+- **Total Size**: 335.05 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -26,6 +26,7 @@ Generated: 2026-07-09T02:43:03.803Z
 .DS_Store (6.0KB)
 .env.example (0.8KB)
 .gitignore (0.2KB)
+.ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json (2.5KB)
 .stylelintrc.json (0.5KB)
 index.html (0.3KB)
 package-lock.json (159.5KB)
@@ -47,7 +48,7 @@ src/__tests__/smoke.test.ts (0.5KB)
 src/__tests__/synthetic-logs-data.test.ts (2.8KB)
 src/__tests__/synthetic-logs.test.ts (2.0KB)
 src/__tests__/validation-plan.ts (1.4KB)
-src/App.tsx (5.2KB)
+src/App.tsx (4.5KB)
 src/config/cli.ts (1.8KB)
 src/config/compaction-job.ts (2.0KB)
 src/config/data-packs/synthetic-log-runs.ts (6.1KB)
@@ -114,7 +115,7 @@ vitest.harness.ts (1.0KB)
 - .ts: 45 files
 - .md: 9 files
 - .scss: 9 files
-- .json: 4 files
+- .json: 5 files
 - .tsx: 4 files
 - (no extension): 2 files
 - .example: 1 file
@@ -124,24 +125,6 @@ vitest.harness.ts (1.0KB)
 ## Compilation Diagnostics
 
 ```
-src/App.tsx(82,7): error TS1005: ',' expected.
-src/App.tsx(83,11): error TS1359: Identifier expected. 'const' is a reserved word that cannot be used here.
-src/App.tsx(83,17): error TS1005: ',' expected.
-src/App.tsx(83,46): error TS1005: ',' expected.
-src/App.tsx(84,9): error TS1005: ',' expected.
-src/App.tsx(88,7): error TS1128: Declaration or statement expected.
-src/App.tsx(89,6): error TS1005: ')' expected.
-src/App.tsx(93,11): error TS1005: 'try' expected.
-src/App.tsx(96,9): error TS2657: JSX expressions must have one parent element.
-src/App.tsx(101,7): error TS1128: Declaration or statement expected.
-src/App.tsx(102,8): error TS17008: JSX element 'main' has no corresponding closing tag.
-src/App.tsx(103,7): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
-src/App.tsx(112,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
-src/App.tsx(114,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
-src/App.tsx(116,13): error TS2657: JSX expressions must have one parent element.
-src/App.tsx(171,4): error TS1005: '}' expected.
-src/App.tsx(172,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
-src/App.tsx(175,1): error TS1005: '</' expected.
 src/config/schema.ts(2,14): error TS1005: ';' expected.
 src/config/schema.ts(7,1): error TS1109: Expression expected.
 src/config/synthetic-logs.ts(5,9): error TS1005: ':' expected.

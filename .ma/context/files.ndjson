@@ -1,6 +1,7 @@
 {"path":".DS_Store","bytes":6148,"lines":3,"mtime":1783551461379.6226}
 {"path":".env.example","bytes":829,"lines":49,"mtime":1773406478518.702}
 {"path":".gitignore","bytes":210,"lines":28,"mtime":1773406478518.9275}
+{"path":".ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json","bytes":2601,"lines":47,"mtime":1783565435406.5532}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1773406478525.139}
 {"path":"PROJECT_PLAN.md","bytes":1087,"lines":45,"mtime":1773406478525.3335}
 {"path":"README.md","bytes":183,"lines":16,"mtime":1773406478525.5063}
@@ -9,7 +10,7 @@
 {"path":"package-lock.json","bytes":163367,"lines":4765,"mtime":1773498072501.853}
 {"path":"package.json","bytes":1110,"lines":41,"mtime":1773498072502.0354}
 {"path":"scripts/replace-colors.js","bytes":4475,"lines":146,"mtime":1773406478526.773}
-{"path":"src/App.tsx","bytes":5342,"lines":175,"mtime":1783562079642.7488}
+{"path":"src/App.tsx","bytes":4649,"lines":161,"mtime":1783565435408.4966}
 {"path":"src/__tests__/batched-writer.test.ts","bytes":1838,"lines":61,"mtime":1773532748995.703}
 {"path":"src/__tests__/config-loader.test.ts","bytes":8475,"lines":249,"mtime":1783550396019.4385}
 {"path":"src/__tests__/config.test.ts","bytes":2504,"lines":70,"mtime":1773406478527.3513}
