@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-07-09T04:02:11.693Z
+Generated: 2026-07-09T04:09:28.166Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-07-09T04:02:11.693Z
 ## Statistics
 
 - **Total Files**: 79
-- **Total Size**: 335.96 KB
+- **Total Size**: 338.25 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -69,7 +69,7 @@ src/config/prompts/security.md (3.9KB)
 src/config/retention-engine.ts (2.7KB)
 src/config/schema.ts (0.7KB)
 src/config/synthetic-logs-data.ts (1.0KB)
-src/config/synthetic-logs.ts (1.7KB)
+src/config/synthetic-logs.ts (4.0KB)
 src/main.tsx (0.6KB)
 src/settings-panel.tsx (1.1KB)
 src/styles/_base.scss (1.7KB)
@@ -125,15 +125,6 @@ vitest.harness.ts (1.0KB)
 - .js: 1 file
 
 ## Compilation Diagnostics
-
-### File: src/config/synthetic-logs.ts
-- Line 12, Col 46: error TS1005: ',' expected.
-- Line 13, Col 18: error TS1005: ',' expected.
-- Line 14, Col 21: error TS1005: ',' expected.
-- Line 15, Col 17: error TS1005: ',' expected.
-- Line 16, Col 20: error TS1005: ',' expected.
-- Line 17, Col 21: error TS1005: ',' expected.
-- Line 18, Col 17: error TS1005: ',' expected.
 
 ### File: src/main.tsx
 - Line 24, Col 1: error TS1128: Declaration or statement expected.

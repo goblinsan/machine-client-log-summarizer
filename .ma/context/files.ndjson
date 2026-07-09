@@ -44,7 +44,7 @@
 {"path":"src/config/retention-engine.ts","bytes":2764,"lines":102,"mtime":1773530032539.53}
 {"path":"src/config/schema.ts","bytes":676,"lines":36,"mtime":1783569144098.3218}
 {"path":"src/config/synthetic-logs-data.ts","bytes":1064,"lines":49,"mtime":1773406478530.0498}
-{"path":"src/config/synthetic-logs.ts","bytes":1695,"lines":66,"mtime":1783569726900.7498}
+{"path":"src/config/synthetic-logs.ts","bytes":4048,"lines":154,"mtime":1783569906997.3726}
 {"path":"src/main.tsx","bytes":626,"lines":27,"mtime":1783562079643.3484}
 {"path":"src/settings-panel.tsx","bytes":1092,"lines":43,"mtime":1773406478530.433}
 {"path":"src/styles/_base.scss","bytes":1700,"lines":79,"mtime":1773406478530.5388}
