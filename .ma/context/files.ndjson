@@ -5,6 +5,9 @@
 {"path":".ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json","bytes":2601,"lines":47,"mtime":1783565435406.5532}
 {"path":".ma/base_qa_cache_8c321e52cf1e671280f4ec538775247f9975badf.json","bytes":1512,"lines":29,"mtime":1783569144096.2673}
 {"path":".ma/base_qa_cache_d1a1298107efe5236c2b4649401a454f74e87ef5.json","bytes":1407,"lines":27,"mtime":1783569726898.9412}
+{"path":".ma/context/files.ndjson","bytes":7119,"lines":81,"mtime":1783572693584.0256}
+{"path":".ma/context/snapshot.json","bytes":10673,"lines":491,"mtime":1783572693583.5676}
+{"path":".ma/context/summary.md","bytes":17322,"lines":209,"mtime":1783572693583.7883}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1773406478525.139}
 {"path":"PROJECT_PLAN.md","bytes":1087,"lines":45,"mtime":1773406478525.3335}
 {"path":"README.md","bytes":183,"lines":16,"mtime":1773406478525.5063}
@@ -46,7 +49,7 @@
 {"path":"src/config/schema.ts","bytes":676,"lines":36,"mtime":1783569144098.3218}
 {"path":"src/config/synthetic-logs-data.ts","bytes":1064,"lines":49,"mtime":1773406478530.0498}
 {"path":"src/config/synthetic-logs.ts","bytes":3947,"lines":152,"mtime":1783571142549.127}
-{"path":"src/main.tsx","bytes":502,"lines":19,"mtime":1783571134436.6653}
+{"path":"src/main.tsx","bytes":506,"lines":19,"mtime":1783573217365.2969}
 {"path":"src/settings-panel.tsx","bytes":1092,"lines":43,"mtime":1773406478530.433}
 {"path":"src/styles/_base.scss","bytes":1700,"lines":79,"mtime":1773406478530.5388}
 {"path":"src/styles/_components.scss","bytes":3335,"lines":184,"mtime":1773406478530.661}
