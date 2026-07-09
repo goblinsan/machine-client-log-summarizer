@@ -149,5 +149,3 @@ export const timestampRange = {
   start: syntheticLogs[0].timestamp,
   end: syntheticLogs[syntheticLogs.length - 1].timestamp,
 };
-
-export { syntheticLogs, logsByStatus, personas, workflowIds, intents, totalCount, timestampRange };
