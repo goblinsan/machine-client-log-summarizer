@@ -1,5 +1,5 @@
 {
-  "timestamp": 1783567425287,
+  "timestamp": 1783569022469,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -31,6 +31,24 @@
       "bytes": 1512,
       "mtime": 1783566935602.533,
       "lines": 29
+    },
+    {
+      "path": ".ma/context/files.ndjson",
+      "bytes": 6864,
+      "mtime": 1783567425741.949,
+      "lines": 79
+    },
+    {
+      "path": ".ma/context/snapshot.json",
+      "bytes": 10334,
+      "mtime": 1783567425741.5337,
+      "lines": 479
+    },
+    {
+      "path": ".ma/context/summary.md",
+      "bytes": 4911,
+      "mtime": 1783567425741.7297,
+      "lines": 154
     },
     {
       "path": ".stylelintrc.json",
@@ -263,7 +281,7 @@
     {
       "path": "src/config/schema.ts",
       "bytes": 676,
-      "mtime": 1783566935622.2734,
+      "mtime": 1783569022372.731,
       "lines": 36
     },
     {
@@ -472,8 +490,8 @@
     }
   ],
   "totals": {
-    "files": 78,
-    "bytes": 344967,
+    "files": 81,
+    "bytes": 367076,
     "depth": 10
   }
 }

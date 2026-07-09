@@ -3,6 +3,9 @@
 {"path":".gitignore","bytes":210,"lines":28,"mtime":1773406478518.9275}
 {"path":".ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json","bytes":2601,"lines":47,"mtime":1783565435406.5532}
 {"path":".ma/base_qa_cache_8c321e52cf1e671280f4ec538775247f9975badf.json","bytes":1512,"lines":29,"mtime":1783566935602.533}
+{"path":".ma/context/files.ndjson","bytes":6864,"lines":79,"mtime":1783567425741.949}
+{"path":".ma/context/snapshot.json","bytes":10334,"lines":479,"mtime":1783567425741.5337}
+{"path":".ma/context/summary.md","bytes":4911,"lines":154,"mtime":1783567425741.7297}
 {"path":".stylelintrc.json","bytes":469,"lines":17,"mtime":1773406478525.139}
 {"path":"PROJECT_PLAN.md","bytes":1087,"lines":45,"mtime":1773406478525.3335}
 {"path":"README.md","bytes":183,"lines":16,"mtime":1773406478525.5063}
@@ -41,7 +44,7 @@
 {"path":"src/config/prompts/qa.md","bytes":3698,"lines":110,"mtime":1773406478529.7073}
 {"path":"src/config/prompts/security.md","bytes":4026,"lines":117,"mtime":1773406478529.8198}
 {"path":"src/config/retention-engine.ts","bytes":2764,"lines":102,"mtime":1773530032539.53}
-{"path":"src/config/schema.ts","bytes":676,"lines":36,"mtime":1783566935622.2734}
+{"path":"src/config/schema.ts","bytes":676,"lines":36,"mtime":1783569022372.731}
 {"path":"src/config/synthetic-logs-data.ts","bytes":1064,"lines":49,"mtime":1773406478530.0498}
 {"path":"src/config/synthetic-logs.ts","bytes":4051,"lines":152,"mtime":1783562079643.2458}
 {"path":"src/main.tsx","bytes":626,"lines":27,"mtime":1783562079643.3484}
