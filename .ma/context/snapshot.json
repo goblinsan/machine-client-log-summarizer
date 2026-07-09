@@ -1,5 +1,5 @@
 {
-  "timestamp": 1783570699206,
+  "timestamp": 1783572692652,
   "repoPath": "/Users/jamescoghlan/code/machine-client-log-summarizer",
   "files": [
     {
@@ -22,9 +22,9 @@
     },
     {
       "path": ".ma/base_qa_cache_4a6bc79e29c7fd26e303f8a335e34faf19dee381.json",
-      "bytes": 512,
-      "mtime": 1783570545532.578,
-      "lines": 13
+      "bytes": 18423,
+      "mtime": 1783571173045.3552,
+      "lines": 100
     },
     {
       "path": ".ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json",
@@ -286,14 +286,14 @@
     },
     {
       "path": "src/config/synthetic-logs.ts",
-      "bytes": 4048,
-      "mtime": 1783570545548.4575,
-      "lines": 154
+      "bytes": 3947,
+      "mtime": 1783571142549.127,
+      "lines": 152
     },
     {
       "path": "src/main.tsx",
       "bytes": 502,
-      "mtime": 1783570545548.6484,
+      "mtime": 1783571134436.6653,
       "lines": 19
     },
     {
@@ -460,9 +460,9 @@
     },
     {
       "path": "tsconfig.json",
-      "bytes": 261,
-      "mtime": 1783562079643.468,
-      "lines": 13
+      "bytes": 285,
+      "mtime": 1783571127517.8423,
+      "lines": 14
     },
     {
       "path": "vite.config.ts",
@@ -485,7 +485,7 @@
   ],
   "totals": {
     "files": 80,
-    "bytes": 346759,
+    "bytes": 364593,
     "depth": 10
   }
 }

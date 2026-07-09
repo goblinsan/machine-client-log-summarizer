@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-07-09T04:18:19.206Z
+Generated: 2026-07-09T04:51:32.652Z
 
 ## Overview
 
@@ -17,7 +17,7 @@ Generated: 2026-07-09T04:18:19.206Z
 ## Statistics
 
 - **Total Files**: 80
-- **Total Size**: 338.63 KB
+- **Total Size**: 356.05 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -26,7 +26,7 @@ Generated: 2026-07-09T04:18:19.206Z
 .DS_Store (6.0KB)
 .env.example (0.8KB)
 .gitignore (0.2KB)
-.ma/base_qa_cache_4a6bc79e29c7fd26e303f8a335e34faf19dee381.json (0.5KB)
+.ma/base_qa_cache_4a6bc79e29c7fd26e303f8a335e34faf19dee381.json (18.0KB)
 .ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json (2.5KB)
 .ma/base_qa_cache_8c321e52cf1e671280f4ec538775247f9975badf.json (1.5KB)
 .ma/base_qa_cache_d1a1298107efe5236c2b4649401a454f74e87ef5.json (1.4KB)
@@ -70,7 +70,7 @@ src/config/prompts/security.md (3.9KB)
 src/config/retention-engine.ts (2.7KB)
 src/config/schema.ts (0.7KB)
 src/config/synthetic-logs-data.ts (1.0KB)
-src/config/synthetic-logs.ts (4.0KB)
+src/config/synthetic-logs.ts (3.9KB)
 src/main.tsx (0.5KB)
 src/settings-panel.tsx (1.1KB)
 src/styles/_base.scss (1.7KB)
