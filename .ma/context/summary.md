@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-07-09T03:52:28.793Z
+Generated: 2026-07-09T04:00:17.742Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-07-09T03:52:28.793Z
 
 ## Statistics
 
-- **Total Files**: 78
-- **Total Size**: 336.88 KB
+- **Total Files**: 81
+- **Total Size**: 356.17 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -28,6 +28,9 @@ Generated: 2026-07-09T03:52:28.793Z
 .gitignore (0.2KB)
 .ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json (2.5KB)
 .ma/base_qa_cache_8c321e52cf1e671280f4ec538775247f9975badf.json (1.5KB)
+.ma/context/files.ndjson (6.7KB)
+.ma/context/snapshot.json (10.1KB)
+.ma/context/summary.md (4.8KB)
 .stylelintrc.json (0.5KB)
 index.html (0.3KB)
 package-lock.json (159.5KB)
@@ -68,7 +71,7 @@ src/config/prompts/security.md (3.9KB)
 src/config/retention-engine.ts (2.7KB)
 src/config/schema.ts (0.7KB)
 src/config/synthetic-logs-data.ts (1.0KB)
-src/config/synthetic-logs.ts (4.0KB)
+src/config/synthetic-logs.ts (1.7KB)
 src/main.tsx (0.6KB)
 src/settings-panel.tsx (1.1KB)
 src/styles/_base.scss (1.7KB)
@@ -105,6 +108,7 @@ vitest.harness.ts (1.0KB)
 
 ## Large Files
 
+- `.ma/context/snapshot.json` (10.1KB, 479 lines)
 - `package-lock.json` (159.5KB, 4765 lines)
 - `src/__tests__/config-loader.test.ts` (8.3KB, 249 lines)
 - `src/__tests__/qa-notes.md` (14.1KB, 494 lines)
@@ -114,39 +118,26 @@ vitest.harness.ts (1.0KB)
 ## File Types
 
 - .ts: 45 files
-- .md: 9 files
+- .md: 10 files
 - .scss: 9 files
-- .json: 6 files
+- .json: 7 files
 - .tsx: 4 files
 - (no extension): 2 files
 - .example: 1 file
+- .ndjson: 1 file
 - .html: 1 file
 - .js: 1 file
 
 ## Compilation Diagnostics
 
 ### File: src/config/synthetic-logs.ts
-- Line 5, Col 9: error TS1005: ':' expected.
-- Line 5, Col 13: error TS1005: ',' expected.
-- Line 5, Col 18: error TS1005: ',' expected.
-- Line 5, Col 19: error TS1109: Expression expected.
-- Line 5, Col 21: error TS1005: ':' expected.
-- Line 5, Col 25: error TS1005: ',' expected.
-- Line 6, Col 12: error TS1005: ',' expected.
-- Line 6, Col 17: error TS1005: ',' expected.
-- Line 6, Col 19: error TS1005: ',' expected.
-- Line 6, Col 28: error TS1005: ',' expected.
-- Line 6, Col 30: error TS1005: ',' expected.
-- Line 6, Col 31: error TS1005: ',' expected.
-- Line 6, Col 35: error TS1005: ',' expected.
-- Line 7, Col 9: error TS1005: ',' expected.
-- Line 7, Col 14: error TS1005: ',' expected.
-- Line 16, Col 9: error TS1109: Expression expected.
-- Line 17, Col 1: error TS1128: Declaration or statement expected.
-- Line 19, Col 1: error TS1109: Expression expected.
-- Line 19, Col 2: error TS1128: Declaration or statement expected.
-- Line 22, Col 2: error TS1109: Expression expected.
-- Line 22, Col 3: error TS1161: Unterminated regular expression literal.
+- Line 12, Col 46: error TS1005: ',' expected.
+- Line 13, Col 18: error TS1005: ',' expected.
+- Line 14, Col 21: error TS1005: ',' expected.
+- Line 15, Col 17: error TS1005: ',' expected.
+- Line 16, Col 20: error TS1005: ',' expected.
+- Line 17, Col 21: error TS1005: ',' expected.
+- Line 18, Col 17: error TS1005: ',' expected.
 
 ### File: src/main.tsx
 - Line 24, Col 1: error TS1128: Declaration or statement expected.
