@@ -1,0 +1,13 @@
+{
+  "typecheckErrors": [
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/main.tsx:TS1128:Declaration or statement expected."
+  ],
+  "testFailures": []
+}
