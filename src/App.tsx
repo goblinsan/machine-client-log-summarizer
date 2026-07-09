@@ -7,10 +7,6 @@ import { deduplicationTracker } from './utils/dedup';
 
 function App() {
   const [file, setFile] = useState<File | null>(null);
-import { HashRecord, PreviewParseResult } from './types';
-
-function App() {
-  const [file, setFile] = useState<File | null>(null);
   const [ingestionResult, setIngestionResult] = useState<string | null>(null);
   const [dedupStats, setDedupStats] = useState({
     totalRecords: 0,
@@ -38,6 +34,15 @@ function App() {
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
+
+  const triggerFileSelect = () => {
+    fileInputRef.current?.click();
+  };
+
+  const processFile = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const content = String(reader.result);
       const lines = content.split('\n').filter(line => line.trim());
       let totalRecords = 0;
       let uniqueRecords = 0;
@@ -66,40 +71,12 @@ function App() {
         } catch (err) {
           // Skip invalid JSON lines
         }
+      });
 
-      lines.forEach((line) => {
-        try {
-          const parsed = JSON.parse(line);
-          const hashInput: HashRecord = {
-            ts: parsed.ts,
-            msg: parsed.msg,
       setDedupStats({
         totalRecords,
         uniqueRecords,
         duplicateRecords,
-      });
-
-      setIngestionResult(
-          const hash = computeHash(hashInput);
-        `Total records: ${totalRecords}\n` +
-        `Unique records: ${uniqueRecords}\n` +
-        `Duplicate records: ${duplicateRecords}\n` +
-        `Deduplication ratio: ${(duplicateRecords / totalRecords * 100).toFixed(1)}%`
-      );
-    };
-    reader.readAsText(file);
-            uniqueRecords++;
-          }
-        } catch (err) {
-          // Skip invalid JSON lines
-        }
-        <h1>Multi-Agent Log Summarizer</h1>
-        <div className="path-info">
-          <span>Windows Path: {normalizedWindowsPath || 'N/A'}</span>
-          <span>Repo URL: {normalizedRepoUrl || 'N/A'}</span>
-        </div>
-      </header>
-      <main>
       });
 
       setIngestionResult(
@@ -112,13 +89,20 @@ function App() {
     };
     reader.readAsText(file);
   };
-          {dedupStats.totalRecords > 0 && (
-            <div className="dedup-stats">
-              <h2>Deduplication Statistics</h2>
-              <p>Total: {dedupStats.totalRecords}</p>
-              <p>Unique: {dedupStats.uniqueRecords}</p>
-              <p>Duplicates: {dedupStats.duplicateRecords}</p>
-            </div>
+
+  const handleReset = () => {
+    setFile(null);
+    setIngestionResult(null);
+    setDedupStats({ totalRecords: 0, uniqueRecords: 0, duplicateRecords: 0 });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const normalizedWindowsPath = normalizeLogEvent(file)?.windows_path;
+  const normalizedRepoUrl = normalizeLogEvent(file)?.repo_url;
+
+  return (
     <div className="app">
       <header>
         <h1>Multi-Agent Log Summarizer</h1>
@@ -166,9 +150,11 @@ function App() {
             </div>
           )}
         </div>
+
+        <button onClick={handleReset}>Reset</button>
       </main>
     </div>
   );
-};
+}
 
 export default App;
