@@ -1,0 +1,27 @@
+{
+  "typecheckErrors": [
+    "src/config/synthetic-logs.ts:TS1005:':' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1109:Expression expected.",
+    "src/config/synthetic-logs.ts:TS1005:':' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1005:',' expected.",
+    "src/config/synthetic-logs.ts:TS1109:Expression expected.",
+    "src/config/synthetic-logs.ts:TS1128:Declaration or statement expected.",
+    "src/config/synthetic-logs.ts:TS1109:Expression expected.",
+    "src/config/synthetic-logs.ts:TS1128:Declaration or statement expected.",
+    "src/config/synthetic-logs.ts:TS1109:Expression expected.",
+    "src/config/synthetic-logs.ts:TS1161:Unterminated regular expression literal.",
+    "src/main.tsx:TS1128:Declaration or statement expected."
+  ],
+  "testFailures": []
+}
