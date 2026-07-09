@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-07-09T03:15:19.747Z
+Generated: 2026-07-09T03:23:45.287Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-07-09T03:15:19.747Z
 
 ## Statistics
 
-- **Total Files**: 80
-- **Total Size**: 357.07 KB
+- **Total Files**: 78
+- **Total Size**: 336.88 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -27,9 +27,7 @@ Generated: 2026-07-09T03:15:19.747Z
 .env.example (0.8KB)
 .gitignore (0.2KB)
 .ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json (2.5KB)
-.ma/context/files.ndjson (6.6KB)
-.ma/context/snapshot.json (9.9KB)
-.ma/context/summary.md (5.2KB)
+.ma/base_qa_cache_8c321e52cf1e671280f4ec538775247f9975badf.json (1.5KB)
 .stylelintrc.json (0.5KB)
 index.html (0.3KB)
 package-lock.json (159.5KB)
@@ -107,7 +105,6 @@ vitest.harness.ts (1.0KB)
 
 ## Large Files
 
-- `.ma/context/snapshot.json` (9.9KB, 473 lines)
 - `package-lock.json` (159.5KB, 4765 lines)
 - `src/__tests__/config-loader.test.ts` (8.3KB, 249 lines)
 - `src/__tests__/qa-notes.md` (14.1KB, 494 lines)
@@ -117,40 +114,40 @@ vitest.harness.ts (1.0KB)
 ## File Types
 
 - .ts: 45 files
-- .md: 10 files
+- .md: 9 files
 - .scss: 9 files
 - .json: 6 files
 - .tsx: 4 files
 - (no extension): 2 files
 - .example: 1 file
-- .ndjson: 1 file
 - .html: 1 file
 - .js: 1 file
 
 ## Compilation Diagnostics
 
-```
-src/config/synthetic-logs.ts(5,9): error TS1005: ':' expected.
-src/config/synthetic-logs.ts(5,13): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(5,18): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(5,19): error TS1109: Expression expected.
-src/config/synthetic-logs.ts(5,21): error TS1005: ':' expected.
-src/config/synthetic-logs.ts(5,25): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(6,12): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(6,17): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(6,19): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(6,28): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(6,30): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(6,31): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(6,35): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(7,9): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(7,14): error TS1005: ',' expected.
-src/config/synthetic-logs.ts(16,9): error TS1109: Expression expected.
-src/config/synthetic-logs.ts(17,1): error TS1128: Declaration or statement expected.
-src/config/synthetic-logs.ts(19,1): error TS1109: Expression expected.
-src/config/synthetic-logs.ts(19,2): error TS1128: Declaration or statement expected.
-src/config/synthetic-logs.ts(22,2): error TS1109: Expression expected.
-src/config/synthetic-logs.ts(22,3): error TS1161: Unterminated regular expression literal.
-src/main.tsx(24,1): error TS1128: Declaration or statement expected.
+### File: src/config/synthetic-logs.ts
+- Line 5, Col 9: error TS1005: ':' expected.
+- Line 5, Col 13: error TS1005: ',' expected.
+- Line 5, Col 18: error TS1005: ',' expected.
+- Line 5, Col 19: error TS1109: Expression expected.
+- Line 5, Col 21: error TS1005: ':' expected.
+- Line 5, Col 25: error TS1005: ',' expected.
+- Line 6, Col 12: error TS1005: ',' expected.
+- Line 6, Col 17: error TS1005: ',' expected.
+- Line 6, Col 19: error TS1005: ',' expected.
+- Line 6, Col 28: error TS1005: ',' expected.
+- Line 6, Col 30: error TS1005: ',' expected.
+- Line 6, Col 31: error TS1005: ',' expected.
+- Line 6, Col 35: error TS1005: ',' expected.
+- Line 7, Col 9: error TS1005: ',' expected.
+- Line 7, Col 14: error TS1005: ',' expected.
+- Line 16, Col 9: error TS1109: Expression expected.
+- Line 17, Col 1: error TS1128: Declaration or statement expected.
+- Line 19, Col 1: error TS1109: Expression expected.
+- Line 19, Col 2: error TS1128: Declaration or statement expected.
+- Line 22, Col 2: error TS1109: Expression expected.
+- Line 22, Col 3: error TS1161: Unterminated regular expression literal.
 
-```
+### File: src/main.tsx
+- Line 24, Col 1: error TS1128: Declaration or statement expected.
+
