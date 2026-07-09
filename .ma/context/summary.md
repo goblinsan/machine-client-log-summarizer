@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-07-09T02:50:39.974Z
+Generated: 2026-07-09T03:15:19.747Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-07-09T02:50:39.974Z
 
 ## Statistics
 
-- **Total Files**: 77
-- **Total Size**: 335.05 KB
+- **Total Files**: 80
+- **Total Size**: 357.07 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -27,6 +27,9 @@ Generated: 2026-07-09T02:50:39.974Z
 .env.example (0.8KB)
 .gitignore (0.2KB)
 .ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json (2.5KB)
+.ma/context/files.ndjson (6.6KB)
+.ma/context/snapshot.json (9.9KB)
+.ma/context/summary.md (5.2KB)
 .stylelintrc.json (0.5KB)
 index.html (0.3KB)
 package-lock.json (159.5KB)
@@ -65,7 +68,7 @@ src/config/prompts/lead-engineer.md (3.9KB)
 src/config/prompts/qa.md (3.6KB)
 src/config/prompts/security.md (3.9KB)
 src/config/retention-engine.ts (2.7KB)
-src/config/schema.ts (0.3KB)
+src/config/schema.ts (0.7KB)
 src/config/synthetic-logs-data.ts (1.0KB)
 src/config/synthetic-logs.ts (4.0KB)
 src/main.tsx (0.6KB)
@@ -104,6 +107,7 @@ vitest.harness.ts (1.0KB)
 
 ## Large Files
 
+- `.ma/context/snapshot.json` (9.9KB, 473 lines)
 - `package-lock.json` (159.5KB, 4765 lines)
 - `src/__tests__/config-loader.test.ts` (8.3KB, 249 lines)
 - `src/__tests__/qa-notes.md` (14.1KB, 494 lines)
@@ -113,20 +117,19 @@ vitest.harness.ts (1.0KB)
 ## File Types
 
 - .ts: 45 files
-- .md: 9 files
+- .md: 10 files
 - .scss: 9 files
-- .json: 5 files
+- .json: 6 files
 - .tsx: 4 files
 - (no extension): 2 files
 - .example: 1 file
+- .ndjson: 1 file
 - .html: 1 file
 - .js: 1 file
 
 ## Compilation Diagnostics
 
 ```
-src/config/schema.ts(2,14): error TS1005: ';' expected.
-src/config/schema.ts(7,1): error TS1109: Expression expected.
 src/config/synthetic-logs.ts(5,9): error TS1005: ':' expected.
 src/config/synthetic-logs.ts(5,13): error TS1005: ',' expected.
 src/config/synthetic-logs.ts(5,18): error TS1005: ',' expected.
