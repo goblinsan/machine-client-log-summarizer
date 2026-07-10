@@ -25,13 +25,14 @@ export async function runTests(): Promise<{ testResults: any }> {
   // Run tests and capture results
   const { state, mode } = await vitest.run({ watch: false });
 
-  // Extract detailed test results
+  // Extract detailed test results from the Vitest API response
   const testResults = {
     passed: state?.passed || 0,
     failed: state?.failed || 0,
     skipped: state?.skipped || 0,
     tests: state?.tests || [],
     errors: state?.errors || [],
+    duration: state?.duration || 0,
   };
 
   return { testResults };
