@@ -1,6 +1,6 @@
 # Repository Context Summary
 
-Generated: 2026-07-09T05:00:18.725Z
+Generated: 2026-07-10T01:23:10.747Z
 
 ## Overview
 
@@ -16,8 +16,8 @@ Generated: 2026-07-09T05:00:18.725Z
 
 ## Statistics
 
-- **Total Files**: 83
-- **Total Size**: 390.34 KB
+- **Total Files**: 81
+- **Total Size**: 356.16 KB
 - **Max Depth**: 10
 
 ## Directory Structure
@@ -26,13 +26,11 @@ Generated: 2026-07-09T05:00:18.725Z
 .DS_Store (6.0KB)
 .env.example (0.8KB)
 .gitignore (0.2KB)
+.ma/base_qa_cache_0d5c4f82a534db163e9938fff950d8963206d610.json (0.1KB)
 .ma/base_qa_cache_4a6bc79e29c7fd26e303f8a335e34faf19dee381.json (18.0KB)
 .ma/base_qa_cache_50d830e05dd17924200c5ed8c43476ae9c851ba5.json (2.5KB)
 .ma/base_qa_cache_8c321e52cf1e671280f4ec538775247f9975badf.json (1.5KB)
 .ma/base_qa_cache_d1a1298107efe5236c2b4649401a454f74e87ef5.json (1.4KB)
-.ma/context/files.ndjson (7.0KB)
-.ma/context/snapshot.json (10.4KB)
-.ma/context/summary.md (16.9KB)
 .stylelintrc.json (0.5KB)
 index.html (0.3KB)
 package-lock.json (159.5KB)
@@ -110,8 +108,6 @@ vitest.harness.ts (1.0KB)
 
 ## Large Files
 
-- `.ma/context/snapshot.json` (10.4KB, 491 lines)
-- `.ma/context/summary.md` (16.9KB, 209 lines)
 - `package-lock.json` (159.5KB, 4765 lines)
 - `src/__tests__/config-loader.test.ts` (8.3KB, 249 lines)
 - `src/__tests__/qa-notes.md` (14.1KB, 494 lines)
@@ -121,13 +117,12 @@ vitest.harness.ts (1.0KB)
 ## File Types
 
 - .ts: 45 files
-- .md: 10 files
 - .json: 9 files
+- .md: 9 files
 - .scss: 9 files
 - .tsx: 4 files
 - (no extension): 2 files
 - .example: 1 file
-- .ndjson: 1 file
 - .html: 1 file
 - .js: 1 file
 
