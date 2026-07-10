@@ -57,7 +57,7 @@ export function getEnvConfig(): Partial<Config> {
   return Object.fromEntries(
     Object.entries({
       logPath: process.env.LOG_PATH,
-      logLevel: process.env.LOG_LEVEL,
+      logLevel: process.env.LOG_LEVEL as Config['logLevel'],
       lmStudioEndpoint: process.env.LM_STUDIO_ENDPOINT,
     }).map(([key, value]) => {
       const validated = validateEnvValue(key, value);
