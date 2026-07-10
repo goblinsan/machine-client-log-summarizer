@@ -1,15 +1,3 @@
-/**
- * Vitest Test Harness Setup
- * 
- * This file provides the basic setup for Vitest to enable running tests.
- * Run `vitest run` to execute all tests in the project.
- * 
- * Test infrastructure includes:
- * - Vitest test runner configuration
- * - Test setup/teardown hooks
- * - Test isolation and parallel execution support
- */
-
 import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -29,12 +17,24 @@ export default defineConfig({
 });
 
 /**
- * Run all tests in the project
+ * Run all tests in the project and return detailed results.
  */
-export function runTests(): Promise<void> {
-  return import('vitest').then((vitest) => {
-    return vitest.run();
-  });
+export async function runTests(): Promise<{ testResults: any }> {
+  const vitest = await import('vitest');
+
+  // Run tests and capture results
+  const { state, mode } = await vitest.run({ watch: false });
+
+  // Extract detailed test results
+  const testResults = {
+    passed: state?.passed || 0,
+    failed: state?.failed || 0,
+    skipped: state?.skipped || 0,
+    tests: state?.tests || [],
+    errors: state?.errors || [],
+  };
+
+  return { testResults };
 }
 
 export const vitestSetup = {
@@ -43,5 +43,8 @@ export const vitestSetup = {
   isolation: true
 };
 
+export default {
+  enabled: true,
+  runner: 'vitest',
   isolation: true
 };
