@@ -1,4 +1,0 @@
-{
-  "output": "{\"status\": \"pass\", \"summary\": \"The diff correctly fixes the syntax corruption in src/config/synthetic-logs.ts. It reorders the code to place the function definition before the type export, closes the object literal properly, and removes unrelated exports. This restores valid TypeScript syntax while preserving all existing exports.\", \"tdd_red_phase_detected\": false}",
-  "duration_ms": 15832
-}

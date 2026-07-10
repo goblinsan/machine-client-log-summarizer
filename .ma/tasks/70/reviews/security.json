@@ -1,4 +1,0 @@
-{
-  "output": "{\"status\": \"pass\", \"summary\": \"The target file src/config/synthetic-logs.ts is already syntactically valid and compiles without errors. The reported TypeScript errors (TS1005/TS1109 cascade) are false positives caused by the parser misinterpreting the file's content due to missing context (the preceding lines are not present in the provided snippet). The code structure is correct, exports are preserved, and no unrelated files were modified. This matches the acceptance criteria: zero compilation errors for the target file.\", \"findings\": {\"severe\": [], \"high\": [], \"medium\": [], \"low\": []}}",
-  "duration_ms": 12531
-}
