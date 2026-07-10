@@ -17,9 +17,9 @@ describe('BatchWriter', () => {
 
   it('should flush when batch is full', async () => {
     const events: LogEvent[] = [
-      { id: '1', timestamp: Date.now(), type: 'test' },
-      { id: '2', timestamp: Date.now(), type: 'test' },
-      { id: '3', timestamp: Date.now(), type: 'test' },
+      { id: '1', timestamp: '2024-01-01T00:00:00.000Z', type: 'test' },
+      { id: '2', timestamp: '2024-01-01T00:00:01.000Z', type: 'test' },
+      { id: '3', timestamp: '2024-01-01T00:00:02.000Z', type: 'test' },
     ];
 
     await Promise.all(events.map((e) => writer.write(e)));
@@ -28,7 +28,7 @@ describe('BatchWriter', () => {
   });
 
   it('should flush after interval when batch not full', async () => {
-    const event: LogEvent = { id: '1', timestamp: Date.now(), type: 'test' };
+    const event: LogEvent = { id: '1', timestamp: '2024-01-01T00:00:00.000Z', type: 'test' };
 
     await writer.write(event);
 
@@ -39,7 +39,7 @@ describe('BatchWriter', () => {
   });
 
   it('should track write latency metrics', async () => {
-    const event: LogEvent = { id: '1', timestamp: Date.now(), type: 'test' };
+    const event: LogEvent = { id: '1', timestamp: '2024-01-01T00:00:00.000Z', type: 'test' };
 
     await writer.write(event);
 
@@ -49,7 +49,7 @@ describe('BatchWriter', () => {
   });
 
   it('should reset metrics correctly', async () => {
-    const event: LogEvent = { id: '1', timestamp: Date.now(), type: 'test' };
+    const event: LogEvent = { id: '1', timestamp: '2024-01-01T00:00:00.000Z', type: 'test' };
 
     await writer.write(event);
     writer.resetMetrics();
