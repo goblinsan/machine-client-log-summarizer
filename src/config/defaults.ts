@@ -2,10 +2,10 @@ import type { Config } from './schema';
 
 export const defaults: Partial<Config> = {
   logPath: './logs',
-  logLevel: 'info',
-  timeout: 30000,
-  storePath: './data',
-  storeType: 'json',
+  export: {
+    type: 'file' as const,
+    path: './data',
+  },
   lmStudioEndpoint: 'http://localhost:1234/v1',
   appName: 'Multi-Agent Log Summarizer',
   version: '1.0.0',
@@ -17,3 +17,5 @@ export const defaults: Partial<Config> = {
   allowCors: true,
   corsOrigins: '*',
 };
+
+export default defaults;
