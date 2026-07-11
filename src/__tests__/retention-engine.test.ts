@@ -6,10 +6,9 @@ import type { LogEvent } from '../types/logEvent';
 describe('RetentionEngine', () => {
   let engine: RetentionEngine;
   const baseConfig: Partial<Config> = {
-    retentionDays: 30,
-    ttlSeconds: undefined,
-    maxBytes: undefined,
-    maxEvents: undefined,
+    enableStreaming: false,
+    enableCache: false,
+    export: undefined,
   };
 
   beforeEach(() => {
@@ -19,8 +18,8 @@ describe('RetentionEngine', () => {
   it('should enforce time-based retention', () => {
     const now = Date.now();
     const events: LogEvent[] = [
-      { ts: '2024-01-01T00:00:00Z', level: 'info', type: 'log' },
-      { ts: '2024-01-08T00:00:00Z', level: 'info', type: 'log' },
+      { ts: '2024-01-01T00:00:00Z', level: 'info' as const, type: 'log' },
+      { ts: '2024-01-08T00:00:00Z', level: 'info' as const, type: 'log' },
     ];
 
     const result = engine.enforceRetention(events);
@@ -31,8 +30,8 @@ describe('RetentionEngine', () => {
   it('should enforce TTL-based retention', () => {
     const now = Date.now();
     const events: LogEvent[] = [
-      { ts: '2024-01-01T00:00:00Z', level: 'info', type: 'log' },
-      { ts: '2024-01-08T00:00:00Z', level: 'info', type: 'log' },
+      { ts: '2024-01-01T00:00:00Z', level: 'info' as const, type: 'log' },
+      { ts: '2024-01-08T00:00:00Z', level: 'info' as const, type: 'log' },
     ];
 
     const config: Config = { ...baseConfig, ttlSeconds: 60 } as Config;
@@ -47,7 +46,7 @@ describe('RetentionEngine', () => {
     const now = Date.now();
     const events: LogEvent[] = Array.from({ length: 5 }, (_, i) => ({
       ts: `2024-01-${(i + 1).toString().padStart(2, '0')}`,
-      level: 'info',
+      level: 'info' as const,
       type: 'log' as const,
     }));
 
@@ -64,7 +63,7 @@ describe('RetentionEngine', () => {
     const now = Date.now();
     const events: LogEvent[] = Array.from({ length: 10 }, (_, i) => ({
       ts: `2024-01-${(i + 1).toString().padStart(2, '0')}`,
-      level: 'info',
+      level: 'info' as const,
       type: 'log' as const,
     }));
 
