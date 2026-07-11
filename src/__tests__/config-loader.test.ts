@@ -1,8 +1,12 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { loadConfig, getEnvConfig, getDefaults } from '../config/loader';
 
 describe('Config Loader', () => {
   const origEnv = { ...process.env };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   afterEach(() => {
     process.env = { ...origEnv };
