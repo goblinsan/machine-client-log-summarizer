@@ -12,7 +12,7 @@ export type EnvError = {
 
 export function validateEnvValue(
   key: string,
-  value: string | undefined,
+  value: unknown,
 ): string | undefined {
   if (value === undefined) return undefined;
 
@@ -43,7 +43,7 @@ export function loadConfig(cliArgs: Record<string, string> = {}): Config {
   const cliConfig: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(cliArgs)) {
     const envKey = key.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
-    if (envConfig[envKey] !== undefined) {
+    if (envConfig[envKey as keyof Config] !== undefined) {
       cliConfig[key] = value;
     }
   }
