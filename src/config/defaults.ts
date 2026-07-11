@@ -1,7 +1,6 @@
 import type { Config } from './schema';
 
 export const defaults: Partial<Config> = {
-  logPath: './logs',
   export: {
     type: 'file' as const,
     path: './data',
