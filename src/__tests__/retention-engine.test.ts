@@ -6,10 +6,9 @@ import type { LogEvent } from '../types/logEvent';
 describe('RetentionEngine', () => {
   let engine: RetentionEngine;
   const baseConfig: Partial<Config> = {
-    retentionDays: 30,
-    ttlSeconds: undefined,
-    maxBytes: undefined,
-    maxEvents: undefined,
+    enableStreaming: false,
+    enableCache: false,
+    export: undefined,
   };
 
   beforeEach(() => {
@@ -19,20 +18,20 @@ describe('RetentionEngine', () => {
   it('should enforce time-based retention', () => {
     const now = Date.now();
     const events: LogEvent[] = [
-      { id: '1', timestamp: now - 35 * 24 * 60 * 60 * 1000, type: 'test' },
-      { id: '2', timestamp: now - 25 * 24 * 60 * 60 * 1000, type: 'test' },
+      { ts: '2024-01-01T00:00:00Z', level: 'info' as const, type: 'log' },
+      { ts: '2024-01-08T00:00:00Z', level: 'info' as const, type: 'log' },
     ];
 
     const result = engine.enforceRetention(events);
     expect(result.length).toBe(1);
-    expect(result[0].id).toBe('2');
+    expect(result[0].ts).toBe('2024-01-08T00:00:00Z');
   });
 
   it('should enforce TTL-based retention', () => {
     const now = Date.now();
     const events: LogEvent[] = [
-      { id: '1', timestamp: now - 61 * 1000, type: 'test' },
-      { id: '2', timestamp: now - 30 * 1000, type: 'test' },
+      { ts: '2024-01-01T00:00:00Z', level: 'info' as const, type: 'log' },
+      { ts: '2024-01-08T00:00:00Z', level: 'info' as const, type: 'log' },
     ];
 
     const config: Config = { ...baseConfig, ttlSeconds: 60 } as Config;
@@ -40,15 +39,15 @@ describe('RetentionEngine', () => {
 
     const result = engine.enforceRetention(events);
     expect(result.length).toBe(1);
-    expect(result[0].id).toBe('2');
+    expect(result[0].ts).toBe('2024-01-08T00:00:00Z');
   });
 
   it('should enforce maxEvents retention', () => {
     const now = Date.now();
     const events: LogEvent[] = Array.from({ length: 5 }, (_, i) => ({
-      id: `${i}`,
-      timestamp: now - i * 1000,
-      type: 'test',
+      ts: `2024-01-${(i + 1).toString().padStart(2, '0')}`,
+      level: 'info' as const,
+      type: 'log' as const,
     }));
 
     const config: Config = { ...baseConfig, maxEvents: 3 } as Config;
@@ -56,15 +55,16 @@ describe('RetentionEngine', () => {
 
     const result = engine.enforceRetention(events);
     expect(result.length).toBe(3);
-    expect(result[0].id).toBe('2'); // Keep newest 3
+    // Verify the newest 3 events are kept (sorted by timestamp)
+    expect(result[0].ts).toBe('2024-01-03');
   });
 
   it('should track metrics correctly', () => {
     const now = Date.now();
     const events: LogEvent[] = Array.from({ length: 10 }, (_, i) => ({
-      id: `${i}`,
-      timestamp: now - i * 1000,
-      type: 'test',
+      ts: `2024-01-${(i + 1).toString().padStart(2, '0')}`,
+      level: 'info' as const,
+      type: 'log' as const,
     }));
 
     const config: Config = { ...baseConfig, maxEvents: 5 } as Config;

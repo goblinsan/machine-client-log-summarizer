@@ -13,11 +13,27 @@ export const schema = z.object({
   export: z.object({
     type: z.enum(['console', 'file']).default('console'),
     path: z.string().optional(),
-  }),
+  }).optional(),
 
-  /**
-   * Parse and validate configuration object
-   */
+  logPath: z.string().optional(),
+  logLevel: z.string().optional(),
+  timeout: z.number().optional(),
+  storePath: z.string().optional(),
+  storeType: z.string().optional(),
+  lmStudioEndpoint: z.string().optional(),
+  appName: z.string().optional(),
+  version: z.string().optional(),
+  batchSize: z.number().optional(),
+  maxRetries: z.number().optional(),
+  env: z.string().optional(),
+  allowCors: z.boolean().optional(),
+  corsOrigins: z.string().optional(),
+  enableCompaction: z.boolean().optional(),
+  compactionSchedule: z.string().optional(),
+  retentionDays: z.number().optional(),
+  ttlSeconds: z.number().optional(),
+  maxBytes: z.number().optional(),
+  maxEvents: z.number().optional(),
 });
 
 /**

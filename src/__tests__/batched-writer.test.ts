@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { BatchWriter } from '../utils/batched-writer';
-import type { LogEvent } from '../types/logEvent';
+import type { LogEvent, LogEventType } from '../types/logEvent';
 
 describe('BatchWriter', () => {
   let writer: BatchWriter;
@@ -17,9 +17,9 @@ describe('BatchWriter', () => {
 
   it('should flush when batch is full', async () => {
     const events: LogEvent[] = [
-      { id: '1', timestamp: '2024-01-01T00:00:00.000Z', type: 'test' },
-      { id: '2', timestamp: '2024-01-01T00:00:01.000Z', type: 'test' },
-      { id: '3', timestamp: '2024-01-01T00:00:02.000Z', type: 'test' },
+      { ts: '2024-01-01T00:00:00.000Z', level: 'info' as const, type: 'log' as const },
+      { ts: '2024-01-01T00:00:01.000Z', level: 'info' as const, type: 'log' as const },
+      { ts: '2024-01-01T00:00:02.000Z', level: 'info' as const, type: 'log' as const },
     ];
 
     await Promise.all(events.map((e) => writer.write(e)));
@@ -28,7 +28,7 @@ describe('BatchWriter', () => {
   });
 
   it('should flush after interval when batch not full', async () => {
-    const event: LogEvent = { id: '1', timestamp: '2024-01-01T00:00:00.000Z', type: 'test' };
+    const event: LogEvent = { ts: '2024-01-01T00:00:00.000Z', level: 'info' as const, type: 'log' as const };
 
     await writer.write(event);
 
@@ -39,7 +39,7 @@ describe('BatchWriter', () => {
   });
 
   it('should track write latency metrics', async () => {
-    const event: LogEvent = { id: '1', timestamp: '2024-01-01T00:00:00.000Z', type: 'test' };
+    const event: LogEvent = { ts: '2024-01-01T00:00:00.000Z', level: 'info' as const, type: 'log' as const };
 
     await writer.write(event);
 
@@ -49,7 +49,7 @@ describe('BatchWriter', () => {
   });
 
   it('should reset metrics correctly', async () => {
-    const event: LogEvent = { id: '1', timestamp: '2024-01-01T00:00:00.000Z', type: 'test' };
+    const event: LogEvent = { ts: '2024-01-01T00:00:00.000Z', level: 'info' as const, type: 'log' as const };
 
     await writer.write(event);
     writer.resetMetrics();

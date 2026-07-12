@@ -1,2 +1,1 @@
-export type { LogEvent, LogEventType, RawLogMessage } from './logEvent';
-
+export type { LogEvent, LogEventType } from './logEvent';

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { App } from './App';
+import { App as AppComponent } from './App';
 import { normalizeLogEvent } from './utils/logEventNormalizer';
 import { computeHash, isDuplicate, markSeen, getSeenCount } from './utils/hash';
 import { HashRecord, PreviewParseResult } from './types';
