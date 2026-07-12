@@ -57,9 +57,9 @@ describe('Config Loader', () => {
     });
 
     it('should handle null environment variables', () => {
-      process.env.LOG_PATH = null;
-      process.env.LOG_LEVEL = null;
-      process.env.LM_STUDIO_ENDPOINT = null;
+      process.env.LOG_PATH = '';
+      process.env.LOG_LEVEL = '';
+      process.env.LM_STUDIO_ENDPOINT = '';
 
       const config = loadConfig({});
       
@@ -192,9 +192,9 @@ describe('Config Loader', () => {
     });
 
     it('should handle null environment variables', () => {
-      process.env.LOG_PATH = null;
-      process.env.LOG_LEVEL = null;
-      process.env.LM_STUDIO_ENDPOINT = null;
+      process.env.LOG_PATH = '';
+      process.env.LOG_LEVEL = '';
+      process.env.LM_STUDIO_ENDPOINT = '';
       const config = getEnvConfig();
       expect(Object.keys(config).length).toBe(0);
     });
