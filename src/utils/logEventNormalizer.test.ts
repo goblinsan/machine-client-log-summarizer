@@ -74,18 +74,11 @@ describe('LogEventNormalizer', () => {
         ts: '2026-03-12T12:00:00.000Z',
         level: 'info',
         persona: 'code-reviewer',
-        workflowId: 'wf-123',
-        intent: 'Review PR',
-        repo: 'my-repo',
-        branch: 'main',
+        workflow_id: 'wf-123',
         projectId: 'proj-456',
         corrId: 'corr-789',
-        duration_ms: 1500,
-        preview_raw: 'Some preview text',
-        preview_json: { key: 'value' },
-        paths: ['file1.ts', 'file2.ts'],
-        source: 'agent',
-        hash: 'abc123'
+        hash: 'abc123',
+        type: 'log'
       };
 
       const normalized = logEventNormalizer.normalize(raw);
@@ -93,16 +86,9 @@ describe('LogEventNormalizer', () => {
       expect(normalized.ts).toBe('2026-03-12T12:00:00.000Z');
       expect(normalized.level).toBe('info');
       expect(normalized.persona).toBe('code-reviewer');
-      expect(normalized.workflowId).toBe('wf-123');
-      expect(normalized.intent).toBe('Review PR');
-      expect(normalized.repo).toBe('my-repo');
-      expect(normalized.branch).toBe('main');
+      expect(normalized.workflow_id).toBe('wf-123');
       expect(normalized.projectId).toBe('proj-456');
       expect(normalized.corrId).toBe('corr-789');
-      expect(normalized.duration_ms).toBe(1500);
-      expect(normalized.preview).toBe('Some preview text');
-      expect(normalized.paths).toEqual(['file1.ts', 'file2.ts']);
-      expect(normalized.source).toBe('agent');
       expect(normalized.hash).toBe('abc123');
     });
 
@@ -117,16 +103,9 @@ describe('LogEventNormalizer', () => {
       expect(normalized.ts).toBe('2026-03-12T12:00:00.000Z');
       expect(normalized.level).toBe('info');
       expect(normalized.persona).toBeUndefined();
-      expect(normalized.workflowId).toBeUndefined();
-      expect(normalized.intent).toBeUndefined();
-      expect(normalized.repo).toBeUndefined();
-      expect(normalized.branch).toBeUndefined();
+      expect(normalized.workflow_id).toBeUndefined();
       expect(normalized.projectId).toBeUndefined();
       expect(normalized.corrId).toBeUndefined();
-      expect(normalized.duration_ms).toBeUndefined();
-      expect(normalized.preview).toBeUndefined();
-      expect(normalized.paths).toBeUndefined();
-      expect(normalized.source).toBeUndefined();
       expect(normalized.hash).toBeUndefined();
     });
 
@@ -136,16 +115,10 @@ describe('LogEventNormalizer', () => {
         logLevel: 'warn',
         agent: 'deployer',
         workflow_id: 'wf-456',
-        userIntent: 'Deploy',
-        repository: 'deploy-repo',
-        gitBranch: 'deploy',
-        project_id: 'proj-789',
-        correlation_id: 'corr-abc',
-        duration: 2000,
-        preview: 'Preview content',
-        files: ['deploy.sh'],
-        eventSource: 'deployer',
-        correlationHash: 'def456'
+        projectId: 'proj-789',
+        correlationId: 'corr-abc',
+        hash: 'def456',
+        type: 'metric'
       };
 
       const normalized = logEventNormalizer.normalize(raw);
@@ -153,16 +126,9 @@ describe('LogEventNormalizer', () => {
       expect(normalized.ts).toBe('2026-03-12T12:00:00.000Z');
       expect(normalized.level).toBe('warn');
       expect(normalized.persona).toBe('deployer');
-      expect(normalized.workflowId).toBe('wf-456');
-      expect(normalized.intent).toBe('Deploy');
-      expect(normalized.repo).toBe('deploy-repo');
-      expect(normalized.branch).toBe('deploy');
+      expect(normalized.workflow_id).toBe('wf-456');
       expect(normalized.projectId).toBe('proj-789');
       expect(normalized.corrId).toBe('corr-abc');
-      expect(normalized.duration_ms).toBe(2000);
-      expect(normalized.preview).toBe('Preview content');
-      expect(normalized.paths).toEqual(['deploy.sh']);
-      expect(normalized.source).toBe('deployer');
       expect(normalized.hash).toBe('def456');
     });
   });
