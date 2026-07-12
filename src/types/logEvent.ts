@@ -7,6 +7,7 @@ export interface LogEvent {
   level: string;           // Log level (info, warn, error, debug)
   persona?: string;        // Agent persona name
   workflow_id?: string;    // Workflow identifier for grouping events
+  intent?: string;         // User intent or query being processed by the agent
   projectId?: string;      // Project identifier
   corrId?: string;         // Correlation ID for tracing
   hash?: string;           // Hash for deduplication
@@ -43,5 +44,3 @@ export interface EventStoreIndex {
   fields: (keyof LogEvent | keyof EventMeta)[]; // Indexed fields
   composite?: boolean;     // Whether this is a composite index
 }
-
-
