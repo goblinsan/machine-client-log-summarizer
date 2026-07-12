@@ -15,6 +15,9 @@ export const defaults: Partial<Config> = {
   enableCache: true,
   allowCors: true,
   corsOrigins: '*',
+  logPath: '',
+  logLevel: '',
+  timeout: undefined,
 };
 
 export default defaults;
