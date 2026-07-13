@@ -11,6 +11,7 @@ export interface LogEvent {
   projectId?: string;      // Project identifier
   corrId?: string;         // Correlation ID for tracing
   hash?: string;           // Hash for deduplication
+  repo?: string;           // Repository identifier (optional)
   type: LogEventType;      // Event type classification
 }
 

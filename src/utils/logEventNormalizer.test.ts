@@ -131,6 +131,44 @@ describe('LogEventNormalizer', () => {
       expect(normalized.corrId).toBe('corr-abc');
       expect(normalized.hash).toBe('def456');
     });
+
+    it('should extract repo field from raw message', () => {
+      const raw: any = {
+        ts: '2026-03-12T12:00:00.000Z',
+        level: 'info',
+        repo: 'github.com/owner/repo',
+        type: 'git_op'
+      };
+
+      const normalized = logEventNormalizer.normalize(raw);
+
+      expect(normalized.repo).toBe('github.com/owner/repo');
+    });
+
+    it('should handle missing repo field gracefully', () => {
+      const raw: any = {
+        ts: '2026-03-12T12:00:00.000Z',
+        level: 'info',
+        type: 'log'
+      };
+
+      const normalized = logEventNormalizer.normalize(raw);
+
+      expect(normalized.repo).toBeUndefined();
+    });
+
+    it('should handle alternate repo field names', () => {
+      const raw: any = {
+        ts: '2026-03-12T12:00:00.000Z',
+        level: 'info',
+        repository: 'github.com/owner/repo',
+        type: 'git_op'
+      };
+
+      const normalized = logEventNormalizer.normalize(raw);
+
+      expect(normalized.repo).toBe('github.com/owner/repo');
+    });
   });
 
   describe('normalizeBatch', () => {
