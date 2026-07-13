@@ -1,4 +1,48 @@
-import { LogEvent, LogEventType, RawLogMessage } from '../types/logEvent';
+import { LogEvent, LogEventType } from '../types/logEvent';
+
+/**
+ * Raw log message type - defined locally to avoid circular dependencies
+ */
+export interface RawLogMessage {
+  message?: string;
+  msg?: string;
+  content?: string;
+  body?: string;
+  data?: Record<string, unknown>;
+  preview_raw?: string;
+  preview?: string | object;
+  preview_json?: object;
+  ts?: string;
+  timestamp?: string;
+  time?: string;
+  level?: string;
+  logLevel?: string;
+  persona?: string;
+  agent?: string;
+  workflowId?: string;
+  workflow_id?: string;
+  requestId?: string;
+  intent?: string;
+  userIntent?: string;
+  user_intent?: string;
+  repo?: string;
+  repository?: string;
+  branch?: string;
+  gitBranch?: string;
+  projectId?: string;
+  project_id?: string;
+  corrId?: string;
+  correlationId?: string;
+  correlation_id?: string;
+  duration_ms?: number;
+  duration?: number;
+  paths?: string[];
+  files?: string[];
+  source?: string;
+  eventSource?: string;
+  hash?: string;
+  correlationHash?: string;
+}
 
 /**
  * Normalizes raw log messages into typed LogEvent objects
@@ -142,7 +186,7 @@ export class LogEventNormalizer {
     const branch = raw.branch || raw.gitBranch || undefined;
 
     // Extract projectId
-    const projectId = raw.projectId || raw.project_id || raw.projectId || undefined;
+    const projectId = raw.projectId || raw.project_id || undefined;
 
     // Extract corrId
     const corrId = raw.corrId || raw.correlationId || raw.correlation_id || undefined;
@@ -177,7 +221,7 @@ export class LogEventNormalizer {
       paths,
       source,
       hash,
-      type: eventType
+      type: eventType as LogEventType // Cast to satisfy TypeScript strictness
     };
   }
 
